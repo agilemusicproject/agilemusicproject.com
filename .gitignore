@@ -1,3 +1,4 @@
 .gitconfig
 logs/
 .vim*
+.ssh/
