@@ -9,12 +9,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
-$app->get('/hello/{name}', function($name) use($app) { 
-    return 'Hello '.$app->escape($name); 
-});
-
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html'); 
+    return $app['twig']->render('index.twig'); 
 });
 
 $app->run(); 
