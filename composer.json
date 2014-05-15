@@ -2,5 +2,10 @@
     "require": {
         "silex/silex": "~1.2",
 		"twig/twig": "~1.15"
+    },
+    "require-dev": {
+        "behat/behat": "3.0.*@dev",
+        "behat/mink": "1.6.*@dev",
+        "phpunit/phpunit": "3.7.37"
     }
 }
