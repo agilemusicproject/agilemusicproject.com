@@ -47,7 +47,40 @@ class FeatureContext implements SnippetAcceptingContext
                 . ' instead of 200.'
             );
         }
-        //var_dump($this->_session->getPage()->getContent());
+		
+		/* content testing
+        $site_content = $this->_session->getPage()->getContent());
+    	if(strpos($site_content, 'index')===false) {
+			throw new Exception(
+                'Status code was ' . $this->_session->getStatusCode()
+                . ' instead of 200.'
+            );
+            
+		}
+		*/	
+    }
+	
+	/**
+     * @Then the web address should contain :arg1
+     */
+    public function addressShouldContain($arg1)
+    {
+        //var_dump($this->_session->getCurrentUrl());
+        if (200 != $this->_session->getStatusCode()) {
+            throw new Exception(
+                'Status code was ' . $this->_session->getStatusCode()
+                . ' instead of 200.'
+            );
+        }
+		
+		// address testing
+		if (strpos($this->_session->getCurrentUrl(), '/') === false) {
+			throw new Exception(
+				'Address is incorrect: ' . $this->_session->getCurrentUrl()
+			);
+		}
+			
     }
 
 }
+

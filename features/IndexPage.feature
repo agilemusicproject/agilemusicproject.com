@@ -6,3 +6,7 @@ Feature: AMP Web Site Index Page
 Scenario: Visit Index Page
   Given I go to the AMP index page
   Then I should see "index"
+
+Scenario: Look at Web Address
+  Given I go to the AMP index page
+  Then the web address should contain "/"
