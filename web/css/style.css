@@ -1,0 +1,14 @@
+/*.postcard 
+{
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: url(../images/sticky-notes.bmp);
+}
+
+.postcard text
+{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100%;
+}*/

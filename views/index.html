@@ -1,6 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+  <head>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <!--<meta http-equiv="refresh" content="5;url=http://www.improvingenterprises.com/" /> -->
+  </head>
   <body>
     <a href="/music">Music</a>
     <a href="/agile">What is Agile?</a>
@@ -9,5 +13,30 @@
     <a href="/blog">Blog</a>
     <a href="/contactus">Contact Us</a>
     <a href="/about">About Us</a>
+    
+    <div>
+      <a href="music">
+        <canvas id="postcard">  
+        </canvas>
+      </a>
+    </div>
   </body>
+  <script>
+    window.onload = function()
+    {
+      var width = 610;
+      var height = 458;
+      var canvas = document.getElementById("postcard");
+      canvas.width = width;
+      canvas.height = height;
+      var context = canvas.getContext("2d");
+      var imageObj = new Image();
+      imageObj.onload = function(){
+        context.drawImage(imageObj, 10, 10, width, height);
+        context.font = "20pt Calibri";
+        context.fillText("Music", width/2, height/2);
+      };
+      imageObj.src = "images/sticky-notes.bmp"; 
+    };
+  </script>
 </html>
