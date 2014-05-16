@@ -110,6 +110,32 @@ class FeatureContext implements SnippetAcceptingContext
             }
         }
     }
+  
+    /**
+   * @Given there should be a link to :arg1 by clicking :arg2 on canvas :arg3
+   */
+    public function thereShouldBeALinkToByClickingOnCanvas($arg1, $arg2, $arg3)
+    {
+        $page = $this->_session->getPage();
+		$link = $page->findLink($arg2);
+		if(is_null($link)) {
+			throw new Exception(
+					'Link not found called ' . $arg2
+				);
+        }
+		else {
+			if(strcmp($link->getAttribute('href'), '$arg1')===0) {
+				throw new Exception(
+						'Link found called ' . $arg2 . ' but does not go to ' . $arg1
+					);
+            }
+            if(strpos($link->getHtml(), $arg3) === false) {
+                throw new Exception(
+						'Canvas not found ' . $arg3
+					);
+            }
+        }
+    }
     
     /**
      * @Given there should be a link to :arg1 by clicking :arg2
