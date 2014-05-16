@@ -12,3 +12,4 @@ Scenario: Visit Index Page
   And there should be a link to "/music" called "Music"
   And there should be a link to "/photos" called "Photos"
   And there should be a link to "/agile" called "What is Agile?"
+  And there should be a link to "/dne" called "Doesnt Exist"
