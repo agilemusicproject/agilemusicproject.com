@@ -34,6 +34,24 @@ class FeatureContext implements SnippetAcceptingContext
         $this->_session->visit('http://amp.local/');
 
     }
+    
+     /**
+     * @Given I go to the AMP about page
+     */
+    public function iGoToTheAmpAboutPage()
+    {
+        $this->_session->visit('http://amp.local/about');
+
+    }
+    
+     /**
+     * @Given I go to the AMP music page
+     */
+    public function iGoToTheAmpMusicPage()
+    {
+        $this->_session->visit('http://amp.local/music');
+
+    }
 
      /**
     * @Given there should be a link to :arg1 called :arg2
@@ -42,6 +60,7 @@ class FeatureContext implements SnippetAcceptingContext
     {
       	$page = $this->_session->getPage();
 		$link = $page->findLink($arg2)->getAttribute('href');
+        var_dump($link);
 		if(is_null($link))
 			throw new Exception(
 					'Link not found called ' . $arg2

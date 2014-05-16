@@ -17,6 +17,10 @@ $app->get('/blog', function () use ($app) {
     return $app['twig']->render('blog.twig'); 
 });
 
+$app->get('/about', function () use ($app) {
+    return $app['twig']->render('about.twig'); 
+});
+
 $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig'); 
 });
