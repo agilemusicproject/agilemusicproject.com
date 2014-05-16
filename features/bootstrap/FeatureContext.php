@@ -35,10 +35,23 @@ class FeatureContext implements SnippetAcceptingContext
 
     }
 
-    /**
-     * @Then I should see :arg1
+     /**
+    * @Given there should be a link to :arg1 called :arg2
+    */
+    public function thereShouldBeALinkToCalled($arg1, $arg2)
+    {
+      	$page = $this->_session->getPage();
+        var_dump($page->findLink('named', array('link', 'blog'))[0]);
+    	throw new Exception(
+                'Link not found '
+            );
+    }
+
+	
+	/**
+     * @Then I should be on :arg1
      */
-    public function iShouldSee($arg1)
+    public function beOn($arg1)
     {
         //var_dump($this->_session->getCurrentUrl());
         if (200 != $this->_session->getStatusCode()) {
@@ -47,7 +60,15 @@ class FeatureContext implements SnippetAcceptingContext
                 . ' instead of 200.'
             );
         }
-        //var_dump($this->_session->getPage()->getContent());
+		
+		// address testing
+		if (strpos($this->_session->getCurrentUrl(), $arg1) === false) {
+			throw new Exception(
+				'Address is incorrect: ' . $this->_session->getCurrentUrl()
+			);
+		}
+			
     }
 
 }
+
