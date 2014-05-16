@@ -41,7 +41,7 @@ class FeatureContext implements SnippetAcceptingContext
     public function thereShouldBeALinkToCalled($arg1, $arg2)
     {
       	$page = $this->_session->getPage();
-        var_dump($page->findLink('named', array('link', 'blog'))[0]);
+		var_dump($page->findLink('Blog')->getTagName());
     	throw new Exception(
                 'Link not found '
             );
