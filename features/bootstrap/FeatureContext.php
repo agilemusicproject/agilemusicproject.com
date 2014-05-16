@@ -162,7 +162,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
 	public function beOn($arg1)
 	{
-		//var_dump($this->_session->getCurrentUrl());
+		// check to make sure site is ok status
 		if (200 != $this->_session->getStatusCode()) {
 			throw new Exception(
 				'Status code was ' . $this->_session->getStatusCode()
@@ -172,9 +172,7 @@ class FeatureContext implements SnippetAcceptingContext
 
 		// address testing
 		if (strpos($this->_session->getCurrentUrl(), $arg1) === false) {
-			throw new Exception(
-				'Address is incorrect: ' . $this->_session->getCurrentUrl()
-			);
+			throw new Exception('Address is incorrect: ' . $this->_session->getCurrentUrl());
 		}
 
 	}

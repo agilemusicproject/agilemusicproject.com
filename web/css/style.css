@@ -1,0 +1,59 @@
+#indexAMP-Logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+  width: auto;
+  height: 400px;
+}
+
+html {
+  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
+  <!--background: linear-gradient(to bottom right, #fafafa, #d0d0d0) no-repeat center center fixed;-->
+  background-size: cover;
+}
+
+body {
+  padding: 10px 0 0 10px;
+}
+
+/* ALL WHITEBOARD STUFF 
+#top, #bottom, #left, #right {
+  position: fixed;
+}
+
+#left, #right {
+  top: 0; bottom: 0;
+  width: 15px;
+}
+
+#left { 
+  background: linear-gradient(to right, #383838 , silver) no-repeat;
+  background-size: cover;
+  left: 0; 
+}
+
+#right { 
+  background: linear-gradient(to left, #383838 , silver) no-repeat;
+  background-size: cover;
+  right: 0; 
+}
+
+#top, #bottom {
+  left: 0; right: 0;
+  height: 15px;
+}
+
+#top { 
+  background: linear-gradient(to bottom, #383838 , silver) no-repeat;
+  background-size: cover;
+  top: 0;
+}
+
+#bottom {
+  background: linear-gradient(to top, #383838 , silver) no-repeat;
+  background-size: cover;
+  bottom: 0; 
+}
+*/
