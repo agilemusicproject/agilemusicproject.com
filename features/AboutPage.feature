@@ -6,3 +6,4 @@ Feature: AMP Web Site About Page
 Scenario: Visit About Page
   Given I go to the AMP about page
   Then I should be on "/about"
+  And there should be a link to "/" by clicking "AMP Logo"

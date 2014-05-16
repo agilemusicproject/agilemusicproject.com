@@ -6,3 +6,4 @@ Feature: AMP Web Site Music Page
 Scenario: Visit Music Page
   Given I go to the AMP music page
   Then I should be on "/music"
+  And there should be a link to "/" by clicking "AMP Logo"
