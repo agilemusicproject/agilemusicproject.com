@@ -10,30 +10,30 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html'); 
+    return $app['twig']->render('index.twig'); 
 });
 
-$app->get('/blog.html', function () use ($app) {
+$app->get('/blog', function () use ($app) {
     return $app['twig']->render('blog.twig'); 
 });
 
-$app->get('/music.html', function () use ($app) {
+$app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig'); 
 });
 
-$app->get('/contactus.html', function () use ($app) {
+$app->get('/contactus', function () use ($app) {
     return $app['twig']->render('contact.twig'); 
 });
 
-$app->get('/agile.html', function () use ($app) {
+$app->get('/agile', function () use ($app) {
     return $app['twig']->render('agile.twig'); 
 });
 
-$app->get('/photos.html', function () use ($app) {
+$app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig'); 
 });
 
-$app->get('/meetTheBand.html', function () use ($app) {
+$app->get('/meetTheBand', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig'); 
 });
 
