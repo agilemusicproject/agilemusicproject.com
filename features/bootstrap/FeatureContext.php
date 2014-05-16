@@ -62,7 +62,7 @@ class FeatureContext implements SnippetAcceptingContext
         }
 		
 		// address testing
-		if (strpos($this->_session->getCurrentUrl(), '/') === false) {
+		if (strpos($this->_session->getCurrentUrl(), $arg1) === false) {
 			throw new Exception(
 				'Address is incorrect: ' . $this->_session->getCurrentUrl()
 			);
