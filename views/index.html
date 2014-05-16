@@ -3,6 +3,7 @@
 <html>
   <head>
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script type="text/javascript" src="js/post-note.js"></script>
     <!--<meta http-equiv="refresh" content="5;url=http://www.improvingenterprises.com/" /> -->
   </head>
   <body>
@@ -16,7 +17,37 @@
     
     <div>
       <a href="music">
-        <canvas id="postcard">  
+        <canvas id="musicpostcard">  
+        </canvas>
+      </a>
+    
+      <a href="agile">
+        <canvas id="agilepostcard">  
+        </canvas>
+      </a>
+   
+      <a href="meetTheBand">
+        <canvas id="meetTheBandpostcard">  
+        </canvas>
+      </a>
+      
+      <a href="photos">
+        <canvas id="photospostcard">  
+        </canvas>
+      </a>
+      
+      <a href="blog">
+        <canvas id="blogpostcard">  
+        </canvas>
+      </a>
+      
+      <a href="contactus">
+        <canvas id="contactuspostcard">
+        </canvas>
+      </a>
+      
+      <a href="about">
+        <canvas id="aboutpostcard">
         </canvas>
       </a>
     </div>
@@ -24,19 +55,13 @@
   <script>
     window.onload = function()
     {
-      var width = 610;
-      var height = 458;
-      var canvas = document.getElementById("postcard");
-      canvas.width = width;
-      canvas.height = height;
-      var context = canvas.getContext("2d");
-      var imageObj = new Image();
-      imageObj.onload = function(){
-        context.drawImage(imageObj, 10, 10, width, height);
-        context.font = "20pt Calibri";
-        context.fillText("Music", width/2, height/2);
-      };
-      imageObj.src = "images/sticky-notes.bmp"; 
+      drawPostNote( "musicpostcard", 10, 10, "Music");
+      drawPostNote( "agilepostcard", 10, 10, "Agile");
+      drawPostNote( "meetTheBandpostcard", 10, 10, "The Band");
+      drawPostNote( "photospostcard", 10, 10, "Photos");
+      drawPostNote( "blogpostcard", 10, 10, "Blog");     
+      drawPostNote( "contactuspostcard", 10, 10, "Contact Us");
+      drawPostNote( "aboutpostcard", 10, 10, "About us");
     };
   </script>
 </html>
