@@ -9,7 +9,7 @@
 }
 
 html {
-  background: url(../images/whiteboard.png) no-repeat center center fixed;
+  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
   <!--background: linear-gradient(to bottom right, #fafafa, #d0d0d0) no-repeat center center fixed;-->
   background-size: cover;
 }
