@@ -4,21 +4,18 @@
 
   <head>
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script type="text/javascript" src="js/base.js"></script>
     <!--<meta http-equiv="refresh" content="5;url=http://www.improvingenterprises.com/" /> -->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  
-<head>
-  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-  <!--<meta http-equiv="refresh" content="5;url=http://www.improvingenterprises.com/" /> -->
-</head>
-<body>
-  <nav>
-    <a href="/">
-      <img src="images/AMP-Logo.png" width="120px" alt="AMP Logo" />
-    </a>
-  </nav>
-  {% block content %} {% endblock %}
-</body>
+  <body>
+    <nav>
+      <a href="/">
+        <img src="images/AMP-Logo.png" width="200px" alt="AMP Logo" />
+      </a>
+      <!--<button onclick="visitMembersPage();" id="meetBandButton" type="button">Band Members Only!</button>-->
+    </nav>
+    {% block content %} {% endblock %}
+  </body>
 
 </html>
