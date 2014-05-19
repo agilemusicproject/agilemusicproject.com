@@ -1,3 +1,4 @@
+//the width and height of the image. Use to make the width and heigth of the canvas
 var width = 610;
 var height = 458;
 
@@ -14,5 +15,5 @@ function drawPostNote(idName, Xcoordinate, Ycoordinate, text)
     context.fillText(text, canvas.width/3, canvas.height/3);
     context.textAlign = 'center';
   };
-  imageObj.src = "images/sticky-notes.bmp";
+  imageObj.src = "images/sticky-notes.png";
 }
