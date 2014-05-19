@@ -1,3 +1,4 @@
+
 .clearer {
   clear: both;
 }
@@ -18,4 +19,24 @@
   margin: 0px auto;
   margin-top: 10px;
   float: right;
+}
+
+#indexAMP-Logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+  width: auto;
+  height: 400px;
+}
+
+html {
+  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
+  <!--background: linear-gradient(to bottom right, #fafafa, #d0d0d0) no-repeat center center fixed;-->
+  background-size: cover;
+}
+
+body {
+  padding: 10px 0 0 10px;
 }
