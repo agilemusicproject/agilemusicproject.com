@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <div class="indexWrapper cellLeft">
+      <div>
+        <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
+      </div>
+      <div>
+        <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
+      </div>
     <div id="menu_parent">
 		<img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo"></img>
         <div id="menu">
@@ -17,5 +24,36 @@
             <img src="images/AMP-Logo.png" id="postit2" class="postit"></img>
         </div>
 	</div>
+      <div>
+        <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
+      </div>
+    </div>
+    
+    <div class="cellRight"> 
+      <div>
+        <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
+      </div>
+      <div>
+        <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
+      </div>
+      <div>
+        <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
+      </div>
+      <div>
+        <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
+      </div>
+    </div>
   </body>
+  <script>
+    window.onload = function()
+    {
+      drawPostNote( "musicpostcard", "Music", 0);
+      drawPostNote( "agilepostcard", "Agile", 0);
+      drawPostNote( "meetTheBandpostcard", "The Band", 0);
+      drawPostNote( "photospostcard", "Photos", 0);
+      drawPostNote( "blogpostcard", "Blog", 0);     
+      drawPostNote( "contactuspostcard", "Contact Us", 0);
+      drawPostNote( "aboutpostcard", "About us", 0);
+    };
+  </script>
 </html>
