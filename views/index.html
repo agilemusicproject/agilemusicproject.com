@@ -10,32 +10,12 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <div>
-      <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
-    
-      <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
-   
-      <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
-      
-      <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
-      
-      <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
-      
-      <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
-      
-      <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
-    </div>
+    <div id="menu_parent">
+		<img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo"></img>
+        <div id="menu">
+            <img src="images/AMP-Logo.png" id="postit1" class="postit"></img>
+            <img src="images/AMP-Logo.png" id="postit2" class="postit"></img>
+        </div>
+	</div>
   </body>
-  <script>
-    window.onload = function()
-    {
-      drawPostNote( "musicpostcard", 10, 10, "Music");
-      drawPostNote( "agilepostcard", 10, 10, "Agile");
-      drawPostNote( "meetTheBandpostcard", 10, 10, "The Band");
-      drawPostNote( "photospostcard", 10, 10, "Photos");
-      drawPostNote( "blogpostcard", 10, 10, "Blog");     
-      drawPostNote( "contactuspostcard", 10, 10, "Contact Us");
-      drawPostNote( "aboutpostcard", 10, 10, "About us");
-    };
-  </script>
 </html>
