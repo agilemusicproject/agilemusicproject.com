@@ -18,5 +18,5 @@ function drawPostNote(idName, text, degrees)
     context.fillText(text, canvas.width/3, canvas.height/3);
     context.textAlign = 'center';
   };
-  imageObj.src = "images/sticky-notes.png";
+  imageObj.src = "images/sticky-notes_v2.png";
 }
