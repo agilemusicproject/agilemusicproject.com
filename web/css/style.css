@@ -21,6 +21,15 @@
   float: right;
 }
 
+.aboutText {
+  width: 900px;
+}
+
+#meetBandButton {
+    float: right;
+    margin: 50px 50px 100px 50px;
+}
+
 #indexAMP-Logo {
   position: fixed;
   top: 50%;
