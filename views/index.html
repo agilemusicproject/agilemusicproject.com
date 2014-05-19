@@ -7,32 +7,40 @@
     <!--<meta http-equiv="refresh" content="5;url=http://www.improvingenterprises.com/" /> -->
   </head>
   <body>
-    <div>
-      <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
-    
-      <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
-   
-      <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
-      
-      <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
-      
-      <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
-      
-      <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
-      
-      <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
+    <div class="indexWrapper">
+      <div class="cellLeft">
+        <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
+      </div>
+      <div class="cellLeft">
+        <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
+      </div>
+      <div class="cellLeft">
+        <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
+      </div>
+      <div class="cellLeft">
+        <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
+      </div>
+      <div class="cellRight">
+        <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
+      </div>
+      <div class="cellRight">
+        <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
+      </div>
+      <div class="cellRight">
+        <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
+      </div>
     </div>
   </body>
   <script>
     window.onload = function()
     {
-      drawPostNote( "musicpostcard", 10, 10, "Music");
-      drawPostNote( "agilepostcard", 10, 10, "Agile");
-      drawPostNote( "meetTheBandpostcard", 10, 10, "The Band");
-      drawPostNote( "photospostcard", 10, 10, "Photos");
-      drawPostNote( "blogpostcard", 10, 10, "Blog");     
-      drawPostNote( "contactuspostcard", 10, 10, "Contact Us");
-      drawPostNote( "aboutpostcard", 10, 10, "About us");
+      drawPostNote( "musicpostcard", 10, 10, "Music", 0);
+      drawPostNote( "agilepostcard", 10, 10, "Agile", 0);
+      drawPostNote( "meetTheBandpostcard", 10, 10, "The Band", 0);
+      drawPostNote( "photospostcard", 10, 10, "Photos", 0);
+      drawPostNote( "blogpostcard", 10, 10, "Blog", 0);     
+      drawPostNote( "contactuspostcard", 10, 10, "Contact Us", 0);
+      drawPostNote( "aboutpostcard", 10, 10, "About us", 0);
     };
   </script>
 </html>
