@@ -97,11 +97,17 @@ class FeatureContext implements SnippetAcceptingContext
 	{
 		$page = $this->_session->getPage();
 		$link = $page->findLink($arg2);
-		if(is_null($link))
+		if (is_null($link)) {
 			throw new Exception('Link not found called ' . $arg2);
-		else
-			if(strcmp($link->getAttribute('href'), '$arg1')===0)
-			throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
+		} else {
+			if (strcmp($link->getAttribute('href'), '$arg1') === 0) {
+				throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
+			}
+			$link->click();
+			if ($this->_session->getCurrentUrl() !== 'http://amp.local' . $arg1) {
+				throw new Exception('Clicking link does not go to ' . $arg1);
+			}
+		}
 	}
   
     /**
@@ -111,22 +117,19 @@ class FeatureContext implements SnippetAcceptingContext
     {
         $page = $this->_session->getPage();
 		$link = $page->findLink($arg2);
-		if(is_null($link)) {
-			throw new Exception(
-					'Link not found called ' . $arg2
-				);
-        }
-		else {
-			if(strcmp($link->getAttribute('href'), '$arg1')===0) {
-				throw new Exception(
-						'Link found called ' . $arg2 . ' but does not go to ' . $arg1
-					);
+		if (is_null($link)) {
+			throw new Exception('Link not found called ' . $arg2);
+        } else {
+			if (strcmp($link->getAttribute('href'), '$arg1') === 0) {
+				throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
+           	}
+            if (strpos($link->getHtml(), $arg3) === false) {
+                throw new Exception('Canvas not found ' . $arg3);
             }
-            if(strpos($link->getHtml(), $arg3) === false) {
-                throw new Exception(
-						'Canvas not found ' . $arg3
-					);
-            }
+			$link->click();
+			if ($this->_session->getCurrentUrl() !== 'http://amp.local' . $arg1) {
+				throw new Exception('Clicking link does not go to ' . $arg1);
+			}
         }
     }
     
@@ -137,22 +140,19 @@ class FeatureContext implements SnippetAcceptingContext
     {
         $page = $this->_session->getPage();
 		$link = $page->findLink($arg2);
-		if(is_null($link)) {
-			throw new Exception(
-					'Link not found called ' . $arg2
-				);
-        }
-		else {
-			if(strcmp($link->getAttribute('href'), '$arg1')===0) {
-				throw new Exception(
-						'Link found called ' . $arg2 . ' but does not go to ' . $arg1
-					);
+		if (is_null($link)) {
+			throw new Exception('Link not found called ' . $arg2);
+		} else {
+			if (strcmp($link->getAttribute('href'), '$arg1') === 0) {
+				throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
             }
-            if(strpos($link->getHtml(), $arg2) === false) {
-                throw new Exception(
-						'Image not found ' . $arg2
-					);
+            if (strpos($link->getHtml(), $arg2) === false) {
+                throw new Exception('Image not found ' . $arg2);
             }
+			$link->click();
+			if ($this->_session->getCurrentUrl() !== 'http://amp.local' . $arg1) {
+				throw new Exception('Clicking link does not go to ' . $arg1);
+			}
         }
     }
     
@@ -162,20 +162,13 @@ class FeatureContext implements SnippetAcceptingContext
      */
 	public function beOn($arg1)
 	{
-		// check to make sure site is ok status
 		if (200 != $this->_session->getStatusCode()) {
-			throw new Exception(
-				'Status code was ' . $this->_session->getStatusCode()
-				. ' instead of 200.'
-			);
+			throw new Exception('Status code was ' . $this->_session->getStatusCode() . ' instead of 200.');
 		}
 
-		// address testing
 		if (strpos($this->_session->getCurrentUrl(), $arg1) === false) {
 			throw new Exception('Address is incorrect: ' . $this->_session->getCurrentUrl());
 		}
-
 	}
-
 }
 
