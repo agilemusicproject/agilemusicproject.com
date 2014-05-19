@@ -101,7 +101,7 @@ class FeatureContext implements SnippetAcceptingContext
 			throw new Exception('Link not found called ' . $arg2);
 		else
 			if(strcmp($link->getAttribute('href'), '$arg1')===0)
-				throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
+			throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
 	}
   
     /**
