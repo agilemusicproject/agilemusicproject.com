@@ -41,4 +41,8 @@ $app->get('/meetTheBand', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig'); 
 });
 
+$app->get('/bandMembers', function () use ($app) {
+    return $app['twig']->render('bandMembers.twig'); 
+});
+
 $app->run(); 

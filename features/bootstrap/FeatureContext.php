@@ -158,6 +158,24 @@ class FeatureContext implements SnippetAcceptingContext
 			$this->_session->back();
         }
     }
+  
+    /**
+    * @Given a button for Band Members Only that is a link to :arg1
+    */
+   public function aButtonForBandMembersOnlyThatIsALinkTo($arg1)
+   {
+       $page = $this->_session->getPage();
+       $button = $page->findButton('meetBandButton');
+       if (is_null($button)) {
+           throw new Exception('Button could not be found called Band Members Only');
+       } else {
+           $button->click();
+           if (strcmp($this->_session->getCurrentUrl(), ('http://amp.local' . $arg1)) !== 0) {
+				throw new Exception('Clicking link does not go to ' . $arg1);
+			}
+			$this->_session->back();
+       }
+   }
     
 
 	/**
