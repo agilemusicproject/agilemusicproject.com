@@ -4,6 +4,6 @@ Feature: AMP Web Site MeetTheBand Page
   I need to have an MeetTheBand page
 
 Scenario: Visit MeetTheBand Page
-  Given I go to the AMP MeetTheBand page
-  Then I should be on "/meetTheBand"
-  And there should be a link to "/" by clicking "AMP Logo"
+  Given I am on the AMP "/meettheband" page
+  Then I should be on "/meettheband"
+  And there should be a link to "/" called "AMP Logo"

@@ -4,6 +4,6 @@ Feature: AMP Web Site Contact Page
   I need to have an contact page
 
 Scenario: Visit Contact Page
-  Given I go to the AMP contact page
-  Then I should be on "/contact"
-  And there should be a link to "/" by clicking "AMP Logo"
+  Given I am on the AMP "/contactus" page
+  Then I should be on "/contactus"
+  And there should be a link to "/" called "AMP Logo"

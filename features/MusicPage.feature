@@ -4,6 +4,6 @@ Feature: AMP Web Site Music Page
   I need to have an music page
 
 Scenario: Visit Music Page
-  Given I go to the AMP music page
+  Given I am on the AMP "/music" page
   Then I should be on "/music"
-  And there should be a link to "/" by clicking "AMP Logo"
+  And there should be a link to "/" called "AMP Logo"

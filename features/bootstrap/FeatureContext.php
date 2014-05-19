@@ -27,67 +27,11 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given I go to the AMP index page
-     */
-    public function iGoToTheAmpIndexPage()
+    * @Given I am on the AMP :arg1 page
+    */
+    public function iAmOnTheAmpPage($arg1)
     {
-        $this->_session->visit('http://amp.local/');
-    }
-
-    /**
-     * @Given I go to the AMP about page
-     */
-    public function iGoToTheAmpAboutPage()
-    {
-        $this->_session->visit('http://amp.local/about');
-    }
-
-    /**
-     * @Given I go to the AMP music page
-     */
-    public function iGoToTheAmpMusicPage()
-    {
-        $this->_session->visit('http://amp.local/music');
-    }
-
-    /**
-     * @Given I go to the AMP agile page
-     */
-    public function iGoToTheAmpAgilePage()
-    {
-        $this->_session->visit('http://amp.local/agile');
-    }
-
-    /**
-     * @Given I go to the AMP blog page
-     */
-    public function iGoToTheAmpBlogPage()
-    {
-        $this->_session->visit('http://amp.local/blog');
-    }
-
-    /**
-     * @Given I go to the AMP contact page
-     */
-    public function iGoToTheAmpContactPage()
-    {
-        $this->_session->visit('http://amp.local/contactus');
-    }
-
-    /**
-     * @Given I go to the AMP MeetTheBand page
-     */
-    public function iGoToTheAmpMeetthebandPage()
-    {
-        $this->_session->visit('http://amp.local/meetTheBand');
-    }
-
-    /**
-     * @Given I go to the AMP photos page
-     */
-    public function iGoToTheAmpPhotosPage()
-    {
-        $this->_session->visit('http://amp.local/photos');
+        $this->_session->visit('http://amp.local' . $arg1);
     }
 
     /**
@@ -96,68 +40,29 @@ class FeatureContext implements SnippetAcceptingContext
     public function thereShouldBeALinkToCalled($arg1, $arg2)
     {
         $page = $this->_session->getPage();
-        $link = $page->findLink($arg2);
+        $link = $page->find('xpath', '//a[@href="' . $arg1 . '"]');
         if (is_null($link)) {
-            throw new Exception('Link not found called ' . $arg2);
+            throw new Exception('Link not found that goes to to ' . $arg1);
         } else {
-            if (strcmp($link->getAttribute('href'), $arg1) !== 0) {
-                throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
-            }
-            $link->click();
-            if (strcmp($this->_session->getCurrentUrl(), ('http://amp.local' . $arg1)) !== 0) {
-                throw new Exception('Clicking link does not go to ' . $arg1);
-            }
-            $this->_session->back();
+            if (strcmp($link->getAttribute('alt'), $arg2) !== 0) {
+                throw new Exception('Link found that goes to ' . $arg1 . ' but does not have alt tag of ' . $arg2);
+            } 
         }
     }
 
     /**
-	* @Given there should be a link to :arg1 by clicking :arg2 on canvas :arg3
-   	*/
-    public function thereShouldBeALinkToByClickingOnCanvas($arg1, $arg2, $arg3)
+    * @When I click on the :arg1 link
+    */
+    public function iClickOnTheLink($arg1)
     {
         $page = $this->_session->getPage();
-        $link = $page->findLink($arg2);
+        $link = $page->find('xpath', '//a[@alt="' . $arg1 . '"]');
         if (is_null($link)) {
-            throw new Exception('Link not found called ' . $arg2);
+            throw new Exception('Link not found called ' . $arg1);
         } else {
-            if (strcmp($link->getAttribute('href'), $arg1) !== 0) {
-                throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
-            }
-            if (strpos($link->getHtml(), $arg3) === false) {
-                throw new Exception('Canvas not found ' . $arg3);
-            }
             $link->click();
-            if (strcmp($this->_session->getCurrentUrl(), ('http://amp.local' . $arg1)) !== 0) {
-                throw new Exception('Clicking link does not go to ' . $arg1);
-            }
-            $this->_session->back();
         }
     }
-
-    /**
- 	* @Given there should be a link to :arg1 by clicking :arg2
- 	*/
-    public function thereShouldBeALinkToByClicking($arg1, $arg2)
-    {
-        $page = $this->_session->getPage();
-        $link = $page->findLink($arg2);
-        if (is_null($link)) {
-            throw new Exception('Link not found called ' . $arg2);
-        } else {
-            if (strcmp($link->getAttribute('href'), $arg1) !== 0) {
-                throw new Exception('Link found called ' . $arg2 . ' but does not go to ' . $arg1);
-            }
-            if (strpos($link->getHtml(), $arg2) === false) {
-                throw new Exception('Image not found ' . $arg2);
-            }
-            $link->click();
-            if (strcmp($this->_session->getCurrentUrl(), ('http://amp.local' . $arg1)) !== 0) {
-                throw new Exception('Clicking link does not go to ' . $arg1);
-            }
-            $this->_session->back();
-        }
-    }    
 
     /**
      * @Then I should be on :arg1
@@ -167,7 +72,6 @@ class FeatureContext implements SnippetAcceptingContext
         if (200 != $this->_session->getStatusCode()) {
             throw new Exception('Status code was ' . $this->_session->getStatusCode() . ' instead of 200.');
         }
-
         if (strpos($this->_session->getCurrentUrl(), $arg1) === false) {
             throw new Exception('Address is incorrect: ' . $this->_session->getCurrentUrl());
         }

@@ -4,6 +4,6 @@ Feature: AMP Web Site Agile Page
   I need to have an Agile page
 
 Scenario: Visit Agile Page
-  Given I go to the AMP agile page
+  Given I am on the AMP "/agile" page
   Then I should be on "/agile"
-  And there should be a link to "/" by clicking "AMP Logo"
+  And there should be a link to "/" called "AMP Logo"

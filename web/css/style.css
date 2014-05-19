@@ -2,24 +2,6 @@
   clear: both;
 }
 
-.indexWrapper {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
-.cellLeft {
-  margin: 0px auto;
-  margin-top: 10px;
-  float: left;
-}
-
-.cellRight {
-  margin: 0px auto;
-  margin-top: 10px;
-  float: right;
-}
-
 .aboutText {
   width: 900px;
 }
@@ -39,18 +21,14 @@
   height: 400px;
 }
 
-html {
-  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
-  <!--background: linear-gradient(to bottom right, #fafafa, #d0d0d0) no-repeat center center fixed;-->
-  background-size: cover;
-}
-
 body {
-  min-width: 1000px
+  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
+  background-size: cover;
+  min-width: 1000px;
 }
 
 #index_body {
-  padding: 5% 0 0 0;
+  padding-top: 5%;
 }
 
 #menu_parent {

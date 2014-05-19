@@ -37,7 +37,7 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig'); 
 });
 
-$app->get('/meetTheBand', function () use ($app) {
+$app->get('/meettheband', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig'); 
 });
 
