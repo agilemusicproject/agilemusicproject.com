@@ -1,4 +1,3 @@
-
 .clearer {
   clear: both;
 }
@@ -38,8 +37,11 @@ html {
 }
 
 body {
+  min-width: 1000px
+}
+
+#index_body {
   padding: 5% 0 0 0;
-  min-width: 750px
 }
 
 #menu_parent {
@@ -56,18 +58,46 @@ body {
 
 .postit {
   display: block;
-  max-width: 10%;
-  min-width: 100px
+  width: 15%;
+  min-width: 150px;
   display: inline-block;
   position: absolute;
   top: 0;
 }
 
-#postit1 {
-  right: 5%;
+#musicpostcard {
+  top: 100%;
+  right: 13%;
 }
 
-#postit2 {
-  top: 50%;
+#agilepostcard {
+  top: 15%;
   left: 10%;
 }
+
+#meetTheBandpostcard {
+  top: 100%;
+  left: 15%;
+}
+
+#photospostcard {
+  top: 15%;
+  right: 10%;
+}
+
+#blogpostcard {
+  top: 165%;
+  left: 43%;
+}
+
+#contactuspostcard {
+  top: 140%;
+  left: 28%;
+}
+
+#aboutpostcard {
+  top: 140%;
+  right: 28%;
+}
+
+

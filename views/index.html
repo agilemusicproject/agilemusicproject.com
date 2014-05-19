@@ -9,51 +9,30 @@
     <title>Index</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <div class="indexWrapper cellLeft">
-      <div>
-        <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
-      </div>
-      <div>
-        <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
-      </div>
+  <body id="index_body">
     <div id="menu_parent">
-		<img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo"></img>
-        <div id="menu">
-            <img src="images/AMP-Logo.png" id="postit1" class="postit"></img>
-            <img src="images/AMP-Logo.png" id="postit2" class="postit"></img>
-        </div>
-	</div>
-      <div>
-        <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
-      </div>
-    </div>
-    
-    <div class="cellRight"> 
-      <div>
-        <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
-      </div>
-      <div>
-        <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
-      </div>
-      <div>
-        <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
-      </div>
-      <div>
-        <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
+      <img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo"></img>
+      <div id="menu">
+        <a id="musiclink" href="/music"><canvas id="musicpostcard" class="postit"></canvas></a>
+        <a id="agilelink" href="/agile"><canvas id="agilepostcard" class="postit"></canvas></a>
+        <a id="meetTheBandlink" href="/meetTheBand" ><canvas id="meetTheBandpostcard" class="postit"></canvas></a>
+        <a id="photoslink" href="/photos"><canvas id="photospostcard" class="postit"></canvas></a>
+        <a id="bloglink" href="/blog"><canvas id="blogpostcard" class="postit"></canvas></a>
+        <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard" class="postit"></canvas></a>
+        <a id="aboutlink" href="/about"><canvas id="aboutpostcard" class="postit"></canvas></a>
       </div>
     </div>
   </body>
   <script>
     window.onload = function()
     {
-      drawPostNote( "musicpostcard", "Music", 0);
-      drawPostNote( "agilepostcard", "Agile", 0);
-      drawPostNote( "meetTheBandpostcard", "The Band", 0);
-      drawPostNote( "photospostcard", "Photos", 0);
-      drawPostNote( "blogpostcard", "Blog", 0);     
-      drawPostNote( "contactuspostcard", "Contact Us", 0);
-      drawPostNote( "aboutpostcard", "About us", 0);
+      drawPostNote( "musicpostcard", "Music", -10);
+      drawPostNote( "agilepostcard", "Agile", -7);
+      drawPostNote( "meetTheBandpostcard", "The Band", 15);
+      drawPostNote( "photospostcard", "Photos", 17);
+      drawPostNote( "blogpostcard", "Blog", 4.5);     
+      drawPostNote( "contactuspostcard", "Contact Us", -7);
+      drawPostNote( "aboutpostcard", "About us", 17);
     };
   </script>
 </html>
