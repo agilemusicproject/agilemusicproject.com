@@ -4,6 +4,6 @@ Feature: AMP Web Site About Page
   I need to have an about page
 
 Scenario: Visit About Page
-  Given I go to the AMP about page
+  Given I am on the AMP "/about" page
   Then I should be on "/about"
-  And there should be a link to "/" by clicking "AMP Logo"
+  And there should be a link to "/" called "AMP Logo"
