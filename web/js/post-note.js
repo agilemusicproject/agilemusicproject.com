@@ -2,7 +2,7 @@
 var width = 610;
 var height = 458;
 
-function drawPostNote(idName, Xcoordinate, Ycoordinate, text, degrees)
+function drawPostNote(idName, text, degrees)
 {
   var canvas = document.getElementById( idName );
   canvas.width = width/2;

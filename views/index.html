@@ -10,26 +10,29 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <div class="indexWrapper">
-      <div class="cellLeft">
+    <div class="indexWrapper cellLeft">
+      <div>
         <a id="musiclink" href="/music"><canvas id="musicpostcard"></canvas></a>
       </div>
-      <div class="cellLeft">
+      <div>
         <a id="agilelink" href="/agile"><canvas id="agilepostcard"></canvas></a>
       </div>
-      <div class="cellLeft">
+      <div>
         <a id="meetTheBandlink" href="/meetTheBand"><canvas id="meetTheBandpostcard"></canvas></a>
       </div>
-      <div class="cellLeft">
+    </div>
+    
+    <div class="cellRight"> 
+      <div>
         <a id="photoslink" href="/photos"><canvas id="photospostcard"></canvas></a>
       </div>
-      <div class="cellRight">
+      <div>
         <a id="bloglink" href="/blog"><canvas id="blogpostcard"></canvas></a>
       </div>
-      <div class="cellRight">
+      <div>
         <a id="contactuslink" href="/contactus"><canvas id="contactuspostcard"></canvas></a>
       </div>
-      <div class="cellRight">
+      <div>
         <a id="aboutlink" href="/about"><canvas id="aboutpostcard"></canvas></a>
       </div>
     </div>
@@ -37,13 +40,13 @@
   <script>
     window.onload = function()
     {
-      drawPostNote( "musicpostcard", 10, 10, "Music", 0);
-      drawPostNote( "agilepostcard", 10, 10, "Agile", 0);
-      drawPostNote( "meetTheBandpostcard", 10, 10, "The Band", 0);
-      drawPostNote( "photospostcard", 10, 10, "Photos", 0);
-      drawPostNote( "blogpostcard", 10, 10, "Blog", 0);     
-      drawPostNote( "contactuspostcard", 10, 10, "Contact Us", 0);
-      drawPostNote( "aboutpostcard", 10, 10, "About us", 0);
+      drawPostNote( "musicpostcard", "Music", 0);
+      drawPostNote( "agilepostcard", "Agile", 0);
+      drawPostNote( "meetTheBandpostcard", "The Band", 0);
+      drawPostNote( "photospostcard", "Photos", 0);
+      drawPostNote( "blogpostcard", "Blog", 0);     
+      drawPostNote( "contactuspostcard", "Contact Us", 0);
+      drawPostNote( "aboutpostcard", "About us", 0);
     };
   </script>
 </html>
