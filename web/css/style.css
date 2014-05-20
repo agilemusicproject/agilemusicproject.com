@@ -53,38 +53,38 @@ body {
 }
 
 #musicpostcard {
-  top: 100%;
-  right: 13%;
+  top: 30%;
+  right: 3%;
 }
 
 #agilepostcard {
-  top: 15%;
-  left: 10%;
+  top: -20%;
+  left: 20%;
 }
 
 #meetTheBandpostcard {
-  top: 100%;
-  left: 15%;
+  top: 80%;
+  left: 5%;
 }
 
 #photospostcard {
-  top: 15%;
-  right: 10%;
+  top: 5%;
+  right: 22%;
 }
 
 #blogpostcard {
-  top: 165%;
-  left: 43%;
+  top: 170%;
+  left: 42%;
 }
 
 #contactuspostcard {
-  top: 140%;
-  left: 28%;
+  top: 130%;
+  left: 23%;
 }
 
 #aboutpostcard {
   top: 140%;
-  right: 28%;
+  right: 20%;
 }
 
 

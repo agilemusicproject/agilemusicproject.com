@@ -24,7 +24,7 @@ function drawIndexPage()
     drawPostNote( "musicpostcard", "Music", -10);
     drawPostNote( "agilepostcard", "Agile", -7);
     drawPostNote( "meetTheBandpostcard", "The Band", 15);
-    drawPostNote( "photospostcard", "Photos", 17);
+    drawPostNote( "photospostcard", "Photos", 4.5);
     drawPostNote( "blogpostcard", "Blog", 4.5);     
     drawPostNote( "contactuspostcard", "Contact Us", -7);
     drawPostNote( "aboutpostcard", "About us", 17);
