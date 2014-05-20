@@ -1,9 +1,12 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Nunito);
+
 .clearer {
   clear: both;
 }
 
-.aboutText {
-  width: 900px;
+.pageText {
+  max-width: 900px;
 }
 
 #meetBandButton {
@@ -11,20 +14,47 @@
   margin: 50px 50px 100px 50px;
 }
 
-#indexAMP-Logo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
-  width: auto;
-  height: 400px;
+#navLogo {
+  max-width: 100px;
+  min-width: 100px;
+}
+
+div.headernav {
+  display: inline-block;
+
+}
+
+#logocontainer.headernav {
+  float: left;
+  padding-left: 10px;
+}
+
+#postitcontainer.headernav {
+  float: right;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 body {
   background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
-  min-width: 1000px;
+  min-width: 900px;
+  font-family:  'Nunito', 'Calibri', 'Open Sans','Cambria', sans-serif;
+}
+
+.pageText, .title {
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+}
+
+.pageText > h1 {
+  
+}
+
+.title {
+  padding-top: 50px;
+  text-align: center;
 }
 
 #index_body {
@@ -46,7 +76,7 @@ body {
 .postit {
   display: block;
   width: 15%;
-  min-width: 150px;
+  min-width: 175px;
   display: inline-block;
   position: absolute;
   top: 0;
@@ -69,22 +99,84 @@ body {
 
 #photospostcard {
   top: 5%;
-  right: 22%;
-}
-
-#blogpostcard {
-  top: 170%;
-  left: 42%;
-}
-
-#contactuspostcard {
-  top: 130%;
-  left: 23%;
-}
-
-#aboutpostcard {
-  top: 140%;
   right: 20%;
 }
 
+#blogpostcard {
+  top: 100%;
+  right: 30%;
+}
 
+#contactuspostcard {
+  top: 120%;
+  left: 23%;
+}
+
+#aboutpostcard.postitheader {
+  width: 200px;
+}
+
+#aboutpostcard {
+  top: 130%;
+  right: 12%;
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    min-width: 500px;
+  }
+
+  #bgLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30%;
+    min-width: 150px;
+    top: 10px;
+  }
+
+  .postit {
+    display: block;
+    width: 20%;
+    min-width: 150px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  #musicpostcard {
+    top: 80%;
+    right: 10%;
+  }
+
+  #agilepostcard {
+    top: -20%;
+    left: 10%;
+  }
+
+  #meetTheBandpostcard {
+    top: 80%;
+    left: 10%;
+  }
+
+  #photospostcard {
+    top: -20%;
+    right: 10%;
+  }
+
+  #blogpostcard {
+    top: 180%;
+    left: 35%;
+    margin-left: 2.5%;
+  }
+
+  #contactuspostcard {
+    top: 180%;
+    left: 10%;
+  }
+
+  #aboutpostcard {
+    top: 180%;
+    right: 10%;
+  }
+}

@@ -11,8 +11,8 @@ Scenario: Visit Index Page
   And there should be a link to "/meettheband" called "Meet the Band"
   And there should be a link to "/music" called "Music"
   And there should be a link to "/photos" called "Photos"
-  And there should be a link to "/agile" called "Agile"
-  And there should be a link to "/about" called "About"
+  And there should be a link to "/agile" called "About Agile"
+  And there should be a link to "/about" called "About Us"
 
 Scenario: Click Blog Link
   Given I am on the AMP "/" page
@@ -44,7 +44,7 @@ Scenario: Click Agile Link
   When I click on the "Agile" link
   Then I should be on "/agile"
 
-Scenario: Click About Link
+Scenario: Click About Us Link
   Given I am on the AMP "/" page
-  When I click on the "About" link
+  When I click on the "About Us" link
   Then I should be on "/about"

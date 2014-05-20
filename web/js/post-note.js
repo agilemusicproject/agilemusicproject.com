@@ -16,16 +16,52 @@ function drawPostNote(idName, text, degrees)
         context.fillText(text, canvas.width/3, canvas.height/3);
         context.textAlign = 'center';
     };
-    imageObj.src = "images/sticky-notes.png";
+    imageObj.src = "images/sticky-notes_v2.png";
 }
 
 function drawIndexPage()
 {
+    drawMusicPostNote();
+    drawAgilePostNote();
+    drawBandPostNote();
+    drawPhotoPostNote();
+    drawBlogPostNote();
+    drawContactPostNote();
+    drawAboutPostNote();
+}
+
+function drawMusicPostNote()
+{
     drawPostNote( "musicpostcard", "Music", -10);
+}
+
+function drawAgilePostNote()
+{
     drawPostNote( "agilepostcard", "Agile", -7);
+}
+
+function drawBandPostNote()
+{
     drawPostNote( "meetTheBandpostcard", "The Band", 15);
+}
+
+function drawPhotoPostNote()
+{
     drawPostNote( "photospostcard", "Photos", 4.5);
-    drawPostNote( "blogpostcard", "Blog", 4.5);     
+}
+
+function drawBlogPostNote()
+{
+    drawPostNote( "blogpostcard", "Blog", 4.5); 
+}
+
+function drawContactPostNote()
+{
     drawPostNote( "contactuspostcard", "Contact Us", -7);
+}
+
+function drawAboutPostNote()
+{
     drawPostNote( "aboutpostcard", "About us", 17);
 }
+

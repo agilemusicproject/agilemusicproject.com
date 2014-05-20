@@ -44,8 +44,10 @@ class FeatureContext implements SnippetAcceptingContext
         if (is_null($link)) {
             throw new Exception('Link not found that goes to to ' . $arg1);
         } else {
-            if (strcmp($link->getAttribute('title'), $arg2) !== 0) {
-                throw new Exception('Link found that goes to ' . $arg1 . ' but does not have title tag of ' . $arg2);
+            $link2 = $page->findLink($arg2);
+            if ($link == $link2) {
+                var_dump($link->getText());
+                throw new Exception('Link found that goes to ' . $arg1 . ' but does not have text of ' . $arg2);
             } 
         }
     }
@@ -56,9 +58,9 @@ class FeatureContext implements SnippetAcceptingContext
     public function iClickOnTheLink($arg1)
     {
         $page = $this->_session->getPage();
-        $link = $page->find('xpath', '//a[@title="' . $arg1 . '"]');
+        $link = $page->findLink($arg1);
         if (is_null($link)) {
-            throw new Exception('Link not found called ' . $arg1);
+            throw new Exception('Link not found with text of ' . $arg1);
         } else {
             $link->click();
         }
@@ -77,4 +79,3 @@ class FeatureContext implements SnippetAcceptingContext
         }
     }
 }
-
