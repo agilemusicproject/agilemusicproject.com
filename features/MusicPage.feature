@@ -7,3 +7,8 @@ Scenario: Visit Music Page
   Given I am on the AMP "/music" page
   Then I should be on "/music"
   And there should be a link to "/" called "AMP Logo"
+
+Scenario: Click AMP Logo
+  Given I am on the AMP "/music" page
+  When I click on the "Index Page" link
+  Then I should be on "/"
