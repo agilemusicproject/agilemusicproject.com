@@ -3,3 +3,6 @@ logs/
 .vim*
 .ssh/
 vendor/
+.bash*
+.composer/
+qa/
