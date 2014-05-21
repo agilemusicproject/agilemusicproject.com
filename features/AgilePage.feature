@@ -7,7 +7,10 @@ Scenario: Visit Agile Page
   Given I am on the AMP "/agile" page
   Then I should be on "/agile"
   And there should be a link to "/" called "Index Page"
+<<<<<<< HEAD
   And there should be a canvas called "agilepostcard" with alt text "About Agile"
+=======
+>>>>>>> integration
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/agile" page

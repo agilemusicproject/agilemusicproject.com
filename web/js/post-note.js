@@ -24,7 +24,7 @@ function drawIndexPage()
     drawMusicPostNote();
     drawAgilePostNote();
     drawBandPostNote();
-    drawPhotoPostNote();
+    drawPhotosPostNote();
     drawBlogPostNote();
     drawContactPostNote();
     drawAboutPostNote();
@@ -45,7 +45,7 @@ function drawBandPostNote()
     drawPostNote( "meetTheBandpostcard", "The Band", 15);
 }
 
-function drawPhotoPostNote()
+function drawPhotosPostNote()
 {
     drawPostNote( "photospostcard", "Photos", 4.5);
 }

@@ -48,13 +48,13 @@ body {
   text-align: center;
 }
 
-.pageText > h1 {
-  
-}
-
 .title {
   padding-top: 50px;
   text-align: center;
+}
+
+.postitheader {
+  width: 200px;
 }
 
 #index_body {
@@ -110,10 +110,6 @@ body {
 #contactuspostcard {
   top: 120%;
   left: 23%;
-}
-
-#aboutpostcard.postitheader {
-  width: 200px;
 }
 
 #aboutpostcard {
