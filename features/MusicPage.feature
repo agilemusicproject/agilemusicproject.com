@@ -7,10 +7,7 @@ Scenario: Visit Music Page
   Given I am on the AMP "/music" page
   Then I should be on "/music"
   And there should be a link to "/" called "Index Page"
-<<<<<<< HEAD
   And there should be a canvas called "musicpostcard" with alt text "Music"
-=======
->>>>>>> integration
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/music" page

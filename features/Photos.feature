@@ -7,10 +7,7 @@ Scenario: Visit Photos Page
   Given I am on the AMP "/photos" page
   Then I should be on "/photos"
   And there should be a link to "/" called "Index Page"
-<<<<<<< HEAD
   And there should be a canvas called "photospostcard" with alt text "Photos"
-=======
->>>>>>> integration
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/photos" page

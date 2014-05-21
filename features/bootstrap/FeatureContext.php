@@ -45,12 +45,6 @@ class FeatureContext implements SnippetAcceptingContext
             throw new Exception('Link not found that goes to to ' . $arg1);
         } else {
             $link2 = $page->findLink($arg2);
-<<<<<<< HEAD
-            if ($link !== $link2) {
-                var_dump($link->getText());
-                throw new Exception('Link found that goes to ' . $arg1 . ' but does not have text of ' . $arg2);
-            } 
-=======
             if (is_null($link2)) {
                 throw new Exception('Link not found with text of ' . $arg2);
             } else { 
@@ -58,7 +52,6 @@ class FeatureContext implements SnippetAcceptingContext
                     throw new Exception('Link found that goes to ' . $arg1 . ' but does not have text of ' . $arg2);
                 }
             }
->>>>>>> integration
         }
     }
 
@@ -75,7 +68,7 @@ class FeatureContext implements SnippetAcceptingContext
             $link->click();
         }
     }
-    
+
     /**
     * @Given there should be a canvas called :arg1 with alt text :arg2
     */
@@ -87,7 +80,7 @@ class FeatureContext implements SnippetAcceptingContext
             throw new Exception('Canvas with id ' . $agr1 . ' was not found');
         } else {
             if($canvas->getHtml() !== $arg2) {
-                throw new Exception('Canvas found with id ' . $agr1 . ' but does not have alt text ' . $arg2); 
+                throw new Exception('Canvas found with id ' . $arg1 . ' but does not have alt text ' . $arg2); 
             }
         }
     }

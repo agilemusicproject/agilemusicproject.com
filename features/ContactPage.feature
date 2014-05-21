@@ -7,10 +7,7 @@ Scenario: Visit Contact Page
   Given I am on the AMP "/contactus" page
   Then I should be on "/contactus"
   And there should be a link to "/" called "Index Page"
-<<<<<<< HEAD
   And there should be a canvas called "contactuspostcard" with alt text "Contact Us"
-=======
->>>>>>> integration
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/contactus" page
