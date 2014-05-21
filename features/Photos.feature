@@ -6,7 +6,8 @@ Feature: AMP Web Site Photos Page
 Scenario: Visit Photos Page
   Given I am on the AMP "/photos" page
   Then I should be on "/photos"
-  And there should be a link to "/" called "AMP Logo"
+  And there should be a link to "/" called "Index Page"
+  And there should be a canvas called "photospostcard" with alt text "Photos"
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/photos" page
