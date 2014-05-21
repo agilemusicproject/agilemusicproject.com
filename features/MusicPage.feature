@@ -4,12 +4,11 @@ Feature: AMP Web Site Music Page
   I need to have an music page
 
 Scenario: Visit Music Page
-  Given I am on the AMP "/music" page
-  Then I should be on "/music"
-  And there should be a link to "/" called "Index Page"
-  And there should be a canvas called "musicpostcard" with alt text "Music"
+  Given I am on "/music"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#musicpostcard" element should contain "Music"
 
 Scenario: Click AMP Logo
-  Given I am on the AMP "/music" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/music"
+  When I follow "Index Page"
+  Then I should be on the homepage

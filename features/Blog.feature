@@ -4,12 +4,11 @@ Feature: AMP Web Site Blog Page
   I need to have an blog page
 
 Scenario: Visit Blog Page
-  Given I am on the AMP "/blog" page
-  Then I should be on "/blog"
-  And there should be a link to "/" called "Index Page"
-  And there should be a canvas called "blogpostcard" with alt text "Blog"
+  Given I am on "/blog"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#blogpostcard" element should contain "Blog"
 
 Scenario: Click AMP Logo
-  Given I am on the AMP "/blog" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/blog"
+  When I follow "Index Page"
+  Then I should be on the homepage
