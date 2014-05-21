@@ -4,12 +4,11 @@ Feature: AMP Web Site Photos Page
   I need to have an photos page
 
 Scenario: Visit Photos Page
-  Given I am on the AMP "/photos" page
-  Then I should be on "/photos"
-  And there should be a link to "/" called "Index Page"
-  And there should be a canvas called "photospostcard" with alt text "Photos"
+  Given I am on "/photos"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#photospostcard" element should contain "Photos"
 
 Scenario: Click AMP Logo
-  Given I am on the AMP "/photos" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/photos"
+  When I follow "Index Page"
+  Then I should be on the homepage

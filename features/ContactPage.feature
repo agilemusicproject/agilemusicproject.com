@@ -4,12 +4,11 @@ Feature: AMP Web Site Contact Page
   I need to have an contact page
 
 Scenario: Visit Contact Page
-  Given I am on the AMP "/contactus" page
-  Then I should be on "/contactus"
-  And there should be a link to "/" called "Index Page"
-  And there should be a canvas called "contactuspostcard" with alt text "Contact Us"
+  Given I am on "/contactus"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#contactuspostcard" element should contain "Contact Us"
 
 Scenario: Click AMP Logo
-  Given I am on the AMP "/contactus" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/contactus"
+  When I follow "Index Page"
+  Then I should be on the homepage
