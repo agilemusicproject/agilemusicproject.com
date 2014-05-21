@@ -35,7 +35,7 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
-    * @Given there should be a link to :arg1 called :arg2
+    * @Then there should be a link to :arg1 called :arg2
     */
     public function thereShouldBeALinkToCalled($arg1, $arg2)
     {
@@ -44,13 +44,8 @@ class FeatureContext implements SnippetAcceptingContext
         if (is_null($link)) {
             throw new Exception('Link not found that goes to to ' . $arg1);
         } else {
-            $link2 = $page->findLink($arg2);
-            if (is_null($link2)) {
-                throw new Exception('Link not found with text of ' . $arg2);
-            } else { 
-                if ($link->getAttribute('id') !== $link2->getAttribute('id')) {
-                    throw new Exception('Link found that goes to ' . $arg1 . ' but does not have text of ' . $arg2);
-                }
+            if (strpos($link->getHtml(), $arg2) === false) {
+                throw new Exception('Link found that goes to ' . $arg1 . ' but does not have text of ' . $arg2);
             }
         }
     }
