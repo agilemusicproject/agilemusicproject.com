@@ -1,6 +1,10 @@
 {% extends "base.twig" %}
 
-{% block title %}Contact Us{% endblock %}
+{% block onload %} drawContactPostNote() {% endblock %}
+
+{% block title %} Contact Us {% endblock %}
+
+{% block postit %}<canvas id="contactuspostcard" class="postitheader">Contact Us</canvas>{% endblock %}
 
 {% block content %}
 {% endblock %}

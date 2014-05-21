@@ -1,6 +1,10 @@
 {% extends "base.twig" %}
 
-{% block title %}Agile{% endblock %}
+{% block onload %} drawAgilePostNote() {% endblock %}
+
+{% block title %} Agile {% endblock %}
+
+{% block postit %}<canvas id="agilepostcard" class="postitheader">Agile</canvas>{% endblock %}
 
 {% block content %}
 {% endblock %}

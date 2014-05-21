@@ -6,4 +6,4 @@ Feature: AMP Web Site About Page
 Scenario: Visit About Page
   Given I am on the AMP "/about" page
   Then I should be on "/about"
-  And there should be a link to "/" called "AMP Logo"
+  And there should be a link to "/" called "Index Page"

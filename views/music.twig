@@ -1,6 +1,10 @@
 {% extends "base.twig" %}
 
-{% block title %}Music{% endblock %}
+{% block onload %} drawMusicPostNote() {% endblock %}
+
+{% block title %} Music {% endblock %}
+
+{% block postit %}<canvas id="musicpostcard" class="postitheader">Music</canvas>{% endblock %}
 
 {% block content %}
 {% endblock %}

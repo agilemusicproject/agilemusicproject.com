@@ -6,7 +6,7 @@ Feature: AMP Web Site Blog Page
 Scenario: Visit Blog Page
   Given I am on the AMP "/blog" page
   Then I should be on "/blog"
-  And there should be a link to "/" called "AMP Logo"
+  And there should be a link to "/" called "Index Page"
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/blog" page

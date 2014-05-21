@@ -6,7 +6,7 @@ Feature: AMP Web Site Agile Page
 Scenario: Visit Agile Page
   Given I am on the AMP "/agile" page
   Then I should be on "/agile"
-  And there should be a link to "/" called "AMP Logo"
+  And there should be a link to "/" called "Index Page"
 
 Scenario: Click AMP Logo
   Given I am on the AMP "/agile" page
