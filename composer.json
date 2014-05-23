@@ -1,7 +1,11 @@
 {
     "require": {
         "silex/silex": "~1.2",
-		"twig/twig": "~1.15"
+		"twig/twig": "~1.15",
+        "symfony/twig-bridge": "~2.3",
+        "symfony/form": "~2.3",
+        "symfony/security": "~2.3",
+        "symfony/security-csrf": "~2.4"
     },
     "require-dev": {
         "behat/behat": "2.5.3",

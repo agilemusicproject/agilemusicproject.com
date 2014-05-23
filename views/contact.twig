@@ -15,31 +15,22 @@
 <p class="pageText">To contact <a id="infoemail" href="mailto:info@agilemusicproject.com">The Agile Music Project</a>
   email us at info@agilemusicproject.com
 </p>
+<div id="contactBand">
 
-<p class="pageHeader">To contact the Band Members</p>
+  <p class="pageHeader">To contact the Band Members</p>
 
-<p class="aboutPageText">Drums:<br/>
-  <a id="brianemail" href="mailto:TheDrummer@agilemusicproject.com">Brian Zwahr</a><br/>
-  TheDrummer@agilemusicproject.com
-</p>
+  {% for row in table %}
+  <p class="contactPageText">{{ row.Instrument }}:</br> 
+    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.firstName }}  {{ row.lastName }}</a></br>
+    {{ row.Email }}
+  </p>
+  {% endfor %}
+</div>
 
-<p class="aboutPageText">Lead Guitar:<br/>
-  <a id="joshemail" href="mailto:TheGuitarGuy@agilemusicproject.com">Josh Rizzo</a><br/>
-  TheGuitarGuy@agilemusicproject.com
-</p>
-
-<p class="aboutPageText">Rhythm Guitar:<br/>
-  <a id="mikeemail" href="mailto:info@agilemusicproject.com">Mike Abney</a><br/>
-  @agilemusicproject.com
-</p>
-
-<p class="aboutPageText">Bass:<br/>
-  <a id="edemail" href="mailto:PapaEd@agilemusicproject.com">Ed (Papa Ed) Grannan</a><br/>
-  PapaEd@agilemusicproject.com
-</p>
-
-<p class="aboutPageText">Bass:<br/>
-  <a id="budemail" href="mailto:TheOtherBassist@agilemusicproject.com">Bud</a><br/>
-  TheOtherBassist@agilemusicproject.com
-</p>
+<div id="contactForm">
+  <form class="contactPageText" onSubmit="return createContact()" method="post" enctype="text/plain">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+  </form>
+</div>
 {% endblock %}
