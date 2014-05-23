@@ -4,11 +4,11 @@ Feature: AMP Web Site Agile Page
   I need to have an Agile page
 
 Scenario: Visit Agile Page
-  Given I am on the AMP "/agile" page
-  Then I should be on "/agile"
-  And there should be a link to "/" called "Index Page"
+  Given I am on "/agile"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#agilepostcard" element should contain "About Agile"
 
 Scenario: Click AMP Logo
-  Given I am on the AMP "/agile" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/agile"
+  When I follow "Index Page"
+  Then I should be on the homepage

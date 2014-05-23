@@ -4,11 +4,11 @@ Feature: AMP Web Site About Page
   I need to have an about page
 
 Scenario: Visit About Page
-  Given I am on the AMP "/about" page
-  Then I should be on "/about"
-  And there should be a link to "/" called "Index Page"
+  Given I am on "/about"
+  Then the ".headernav a" element should contain "Index Page"
+  And the "#aboutpostcard" element should contain "About AMP"
   
 Scenario: Click AMP Logo
-  Given I am on the AMP "/about" page
-  When I click on the "Index Page" link
-  Then I should be on "/"
+  Given I am on "/about"
+  When I follow "Index Page"
+  Then I should be on the homepage 
