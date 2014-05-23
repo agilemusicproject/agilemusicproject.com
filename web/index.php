@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 $app = new Silex\Application(); 
 
 $app['debug'] = true;
-$app['upload_folder']=__DIR__ . '/photos';
+$app['upload_folder']=__DIR__ . '/images/photos';
 
 $ini_array = parse_ini_file("../config/amp.ini", true);
 
