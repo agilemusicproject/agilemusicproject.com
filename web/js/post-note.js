@@ -1,5 +1,5 @@
 //Draws a single post-it note graphic on the canvas "idName", puts "text on the note, and rotates the note by "degrees"
-function drawPostNote(idName, text, degrees)
+function drawPostNote(idName, textArray, degrees)
 {
     //the width and height of the image. Use to make the width and heigth of the canvas
     var canvas = document.getElementById(idName);
@@ -13,7 +13,10 @@ function drawPostNote(idName, text, degrees)
     imageObj.onload = function() {
         context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
         context.font = "20pt Calibri";
-        context.fillText(text, canvas.width/3, canvas.height/3);
+        for (i=0; i<textArray.length; i++)
+        {
+            context.fillText(textArray[i], canvas.width/3, canvas.height/3 + (i*30));
+        }
         context.textAlign = 'center';
     };
     imageObj.src = "images/sticky-notes_v2.png";
@@ -32,36 +35,36 @@ function drawIndexPage()
 
 function drawMusicPostNote()
 {
-    drawPostNote( "musicpostcard", "Music", -10);
+    drawPostNote( "musicpostcard", ["Music"], -10);
 }
 
 function drawAgilePostNote()
 {
-    drawPostNote( "agilepostcard", "Agile", -7);
+    drawPostNote( "agilepostcard", ["Agile"], -7);
 }
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", "The Band", 15);
+    drawPostNote( "meetTheBandpostcard", ["Meet", "The Band"], 15);
 }
 
 function drawPhotosPostNote()
 {
-    drawPostNote( "photospostcard", "Photos", 4.5);
+    drawPostNote( "photospostcard", ["Photos"], 4.5);
 }
 
 function drawBlogPostNote()
 {
-    drawPostNote( "blogpostcard", "Blog", 4.5); 
+    drawPostNote( "blogpostcard", ["Blog"], 4.5); 
 }
 
 function drawContactPostNote()
 {
-    drawPostNote( "contactuspostcard", "Contact Us", -7);
+    drawPostNote( "contactuspostcard", ["Contact Us"], -7);
 }
 
 function drawAboutPostNote()
 {
-    drawPostNote( "aboutpostcard", "About us", 17);
+    drawPostNote( "aboutpostcard", ["About Us"], 17);
 }
 
