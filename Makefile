@@ -1,4 +1,4 @@
-test: lint phpcs behat
+test: lint phpcs phpunit behat
 
 lint:
 	php -l web/index.php
@@ -14,3 +14,8 @@ phpunit:
 
 behat:
 	./vendor/bin/behat
+
+test-ci: lint phpcs phpunit behat-ci
+
+behat-ci:
+	./vendor/bin/behat --profile=ci
