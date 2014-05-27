@@ -84,12 +84,12 @@ $app->match('/contactus', function (Request $request) use ($app) {
 
         //connect to database
         $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-        $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         //get the table from the database
         $statement = $dbh->prepare("SELECT * FROM contactband");
         $statement->execute();
-        $table = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         //disconnect from database
         $dbh = null;
@@ -154,8 +154,10 @@ $app->match('/contactus', function (Request $request) use ($app) {
             var_dump($form->getErrorsAsString());
         }
     }
+    
+    
 
-    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'table' => $table));
+    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
 });
 
 $app->run(); 

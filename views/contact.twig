@@ -19,10 +19,10 @@
 
   <p class="pageHeader">To contact the Band Members</p>
 
-  {% for row in table %}
+  {% for row in results %}
   <p class="contactPageText">{{ row.Instrument }}:</br> 
-    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.firstName }} {{ row.lastName }}</a></br>
-    {{ row.Email }}
+    {{ row.firstName }} {{ row.lastName }}</br>
+    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.Email }}</a>
   </p>
   {% endfor %}
 </div>
