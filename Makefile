@@ -15,6 +15,17 @@ phpunit:
 behat:
 	./vendor/bin/behat
 
+test-cyg: lint phpcs-cyg phpunit-cyg behat-cyg
+
+phpcs-cyg:
+	./vendor/bin/phpcs.bat --standard=PSR2 --ignore=vendor,coverage .
+
+phpunit-cyg:
+	if [ -e test ]; then cd test && ../vendor/bin/phpunit.bat; fi
+
+behat-cyg:
+	./vendor/bin/behat.bat
+
 test-ci: lint phpcs phpunit behat-ci
 
 behat-ci:
