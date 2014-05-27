@@ -21,16 +21,17 @@
 
   {% for row in table %}
   <p class="contactPageText">{{ row.Instrument }}:</br> 
-    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.firstName }}  {{ row.lastName }}</a></br>
+    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.firstName }} {{ row.lastName }}</a></br>
     {{ row.Email }}
   </p>
   {% endfor %}
 </div>
 
 <div id="contactForm">
-  <form class="contactPageText" onSubmit="return createContact()" method="post" enctype="text/plain">
+  <form class="contactPageText" method="post" enctype="text/plain">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
+    {{ form_rest(form) }}
   </form>
 </div>
 {% endblock %}

@@ -6,8 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
-//use Symfony\Component\Validator\Constraints\NotBlank;
-//use Symfony\Component\Validator\Constraints\Type;
+//use Symfony\Component\Validator;
 
 $app = new Silex\Application(); 
 
@@ -77,8 +76,8 @@ $app->get('/bandMembers', function () use ($app) {
     return $app['twig']->render('bandMembers.twig'); 
 });
 
-$app->post('/contactus', function () use ($app) {
-
+$app->match('/contactus', function (Request $request) use ($app) {
+    
     try {
         $user= 'root';
         $pass = '';
@@ -106,96 +105,57 @@ $app->post('/contactus', function () use ($app) {
         'instrument' => 'You play??'
     );
 
-    $form = $app['form.factory']->createBuilder('form', $formDefault)
+    $form = $app['form.factory']->createBuilder('form',$formDefault, array('csrf_protection' => false))
         ->add('first_name')
         ->add('last_name')
         ->add('email')
         ->add('instrument')
         ->add('submit', 'submit')
-//        ->add('task', 'text', array(
-//        'constraints' => new NotBlank(),
-//    ))
         ->getForm();
-    
-    $request = Request::createFromGlobals();
-    
-    $form->handleRequest($request);
-    
-    if ($form->isValid()) {
-        $formDefault = $form->getData();
 
-        try {
-            $user= 'root';
-            $pass = '';
-            $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-            $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    if( $request->getMethod() === 'POST' )
+    {
+        var_dump($request->request->all());
+        var_dump($request->getContent());
+        $form->submit($request);
 
-            $statement = $dbh->prepare("INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
-                                       "(:first, :last, :email, :instrument )");
-            
-            $statement->bindParam(':first', $formDefault['first_name']);
-            $statement->bindParam(':last', $formDefault['last_name']);
-            $statement->bindParam(':email', $formDefault['email']);
-            $statement->bindParam(':instrument', $formDefault['instrument']);
+        if ($form->isValid()) {
+            $formDefault = $form->getData();
+            var_dump($formDefault);
 
-            $success = $statement->execute();
-            
-            if( !$success ) {
-                print_r($dbh->errorInfo());
+            try {
+                $user= 'root';
+                $pass = '';
+                $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
+                $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+                $statement = $dbh->prepare("INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
+                                           "(:first, :last, :email, :instrument )");
+
+                $statement->bindParam(':first', $formDefault['first_name']);
+                $statement->bindParam(':last', $formDefault['last_name']);
+                $statement->bindParam(':email', $formDefault['email']);
+                $statement->bindParam(':instrument', $formDefault['instrument']);
+
+                $success = $statement->execute();
+
+                if( !$success ) {
+                    print_r($dbh->errorInfo());
+                    die();
+                }
+                $dbh = null;
+            } catch (PDOException $e) {
+                print "Error! " . $e->getMessage(). "<br/>";
                 die();
             }
-            $dbh = null;
-        } catch (PDOException $e) {
-            print "Error! " . $e->getMessage(). "<br/>";
-            die();
+
+            return $app->redirect('/contactus');
+        } else { 
+            var_dump($form->getErrorsAsString());
         }
-
-        return $app->redirect('/contactus');
-    } else { 
-        var_dump($form->getErrorsAsString());
     }
 
     return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'table' => $table));
-});
-
-$app->get('/contactus', function () use ($app) {
-
-    try {
-        $user= 'root';
-        $pass = '';
-
-        //connect to database
-        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-        $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-
-        $statement = $dbh->prepare("SELECT * FROM contactband");
-        $statement->execute();
-        $table = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        //disconnect from database
-        $dbh = null;
-    } catch (PDOException $e) {
-        print "Error! " . $e->getMessage(). "<br/>";
-        die();
-    }
-
-    $formDefault = array(
-        'first_name' => 'Your first name',
-        'last_name' => 'Your last name',
-        'email' => 'Your email',
-        'instrument' => 'You play??'
-    );
-
-    $form = $app['form.factory']->createBuilder('form', $formDefault)
-        ->add('first_name')
-        ->add('last_name')
-        ->add('email')
-        ->add('instrument')
-        ->add('submit', 'submit')
-        ->getForm();
-
-    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'table' => $table));
-
 });
 
 $app->run(); 
