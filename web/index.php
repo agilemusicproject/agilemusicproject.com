@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 $app = new Silex\Application(); 
 
 $app['debug'] = true;
-$app['upload_folder']=__DIR__ . '/images/photos';
+$app['upload_folder'] = __DIR__ . '/images/photos';
+$app['config'] = parse_ini_file(__DIR__ . '/../config/amp.ini', true);
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
@@ -39,28 +40,20 @@ $app->get('/agile', function () use ($app) {
 });
 
 $app->get('/photos', function () use ($app) {
-    $ini_array = parse_ini_file("../config/amp.ini", true);
-    
     try {
-        
-        $dsn = 'mysql:host=' . $ini_array['MySQL']['host'] . '; dbname=' . $ini_array['MySQL']['database'];
-        $dbh = new PDO($dsn, $ini_array['MySQL']['username'], $ini_array['MySQL']['password']);
-        
+        $dsn = 'mysql:host=' . $app['config']['MySQL']['host'] . '; dbname=' . $app['config']['MySQL']['database'];
+        $dbh = new PDO($dsn, $app['config']['MySQL']['username'], $app['config']['MySQL']['password']);
+        $dbh->setAttributes(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT filename FROM photos";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
-        
         $results = $stmt->fetchAll();
-        
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-    
     $dbh = null;
-    
     return $app['twig']->render('photos.twig', array('results' => $results));
-    
 });
 
 $app->get('/meettheband', function () use ($app) {
@@ -89,34 +82,27 @@ EOF;
     return $upload_form;
 });
 
-$app->post('/upload', function( Request $request ) use ( $app ) {
-    $ini_array = parse_ini_file("../config/amp.ini", true);
+$app->post('/upload', function(Request $request) use ($app) {
     $file_bag = $request->files;
-
-    if ( $file_bag->has('image') )
-    {
+    if ($file_bag->has('image')) {
         $image = $file_bag->get('image');
         $image->move($app['upload_folder'], $image->getClientOriginalName());
     }
-    
     try {
         
-        $dsn = 'mysql:host=' . $ini_array['MySQL']['host'] . '; dbname=' . $ini_array['MySQL']['database'];
-        $dbh = new PDO($dsn, $ini_array['MySQL']['username'], $ini_array['MySQL']['password']);
+        $dsn = 'mysql:host=' . $app['config']['MySQL']['host'] . '; dbname=' . $app['config']['MySQL']['database'];
+        $dbh = new PDO($dsn, $app['config']['MySQL']['username'], $app['config']['MySQL']['password']);
         
         $sql = "INSERT INTO photos (filename) VALUES (:filename)";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':filename', $filename);
         $filename = $image->getClientOriginalName();
-        $stmt->execute();
-        
+        $stmt->bindParam(':filename', $filename);
+        $stmt->execute();   
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-    
     $dbh = null;
-
     return $app->redirect('/photos');
 });
 
