@@ -64,4 +64,3 @@ function drawAboutPostNote()
 {
     drawPostNote( "aboutpostcard", "About us", 17);
 }
-
