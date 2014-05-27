@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
+namespace AMP;
 
 use Behat\MinkExtension\Context\MinkContext;
 
