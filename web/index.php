@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+
 //use Symfony\Component\Validator;
 
 $app = new Silex\Application();
@@ -27,7 +28,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'pattern' => '^/admin/',
             'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
             'users' => array(
-                'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+                'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods
+                6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
             ),
         ),
     )
@@ -85,7 +87,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
         'instrument' => 'You play??'
     );
 
-    $form = $app['form.factory']->createBuilder('form',$formDefault, array('csrf_protection' => false))
+    $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
         ->add('first_name')
         ->add('last_name')
         ->add('email')
@@ -93,7 +95,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
         ->add('submit', 'submit')
         ->getForm();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
@@ -103,10 +105,9 @@ $app->match('/contactus', function (Request $request) use ($app) {
                 $pass = '';
                 $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $statement = $dbh->prepare("INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
-                                           "(:first, :last, :email, :instrument )");
-
+                $insertQuery = "INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
+                    "(:first, :last, :email, :instrument )";
+                $statement = $dbh->prepare($insertQuery);
                 $statement->bindParam(':first', $formDefault['first_name']);
                 $statement->bindParam(':last', $formDefault['last_name']);
                 $statement->bindParam(':email', $formDefault['email']);
@@ -114,7 +115,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
 
                 $success = $statement->execute();
 
-                if(!$success) {
+                if (!$success) {
                     print_r($dbh->errorInfo());
                     die();
                 }
@@ -149,4 +150,4 @@ $app->match('/contactus', function (Request $request) use ($app) {
     return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
 });
 
-$app->run(); 
+$app->run();
