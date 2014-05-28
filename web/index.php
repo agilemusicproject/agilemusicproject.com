@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__.'/../vendor/autoload.php'; 
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-$app = new Silex\Application(); 
+$app = new Silex\Application();
 
 $app['debug'] = true;
 $app['upload_folder'] = __DIR__ . '/images/photos';
@@ -16,34 +16,34 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html'); 
+    return $app['twig']->render('index.html');
 });
 
 $app->get('/blog', function () use ($app) {
-    return $app['twig']->render('blog.twig'); 
+    return $app['twig']->render('blog.twig');
 });
 
 $app->get('/about', function () use ($app) {
-    return $app['twig']->render('about.twig'); 
+    return $app['twig']->render('about.twig');
 });
 
 $app->get('/music', function () use ($app) {
-    return $app['twig']->render('music.twig'); 
+    return $app['twig']->render('music.twig');
 });
 
 $app->get('/contactus', function () use ($app) {
-    return $app['twig']->render('contact.twig'); 
+    return $app['twig']->render('contact.twig');
 });
 
 $app->get('/agile', function () use ($app) {
-    return $app['twig']->render('agile.twig'); 
+    return $app['twig']->render('agile.twig');
 });
 
 $app->get('/photos', function () use ($app) {
     try {
         $dsn = 'mysql:host=' . $app['config']['MySQL']['host'] . '; dbname=' . $app['config']['MySQL']['database'];
         $dbh = new PDO($dsn, $app['config']['MySQL']['username'], $app['config']['MySQL']['password']);
-        $dbh->setAttributes(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT filename FROM photos";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -57,11 +57,11 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->get('/meettheband', function () use ($app) {
-    return $app['twig']->render('meetTheBand.twig'); 
+    return $app['twig']->render('meetTheBand.twig');
 });
 
 $app->get('/bandmembers', function () use ($app) {
-    return $app['twig']->render('bandMembers.twig'); 
+    return $app['twig']->render('bandMembers.twig');
 });
 
 $app->get( '/upload', function() {
@@ -89,15 +89,15 @@ $app->post('/upload', function(Request $request) use ($app) {
         $image->move($app['upload_folder'], $image->getClientOriginalName());
     }
     try {
-        
+
         $dsn = 'mysql:host=' . $app['config']['MySQL']['host'] . '; dbname=' . $app['config']['MySQL']['database'];
         $dbh = new PDO($dsn, $app['config']['MySQL']['username'], $app['config']['MySQL']['password']);
-        
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO photos (filename) VALUES (:filename)";
         $stmt = $dbh->prepare($sql);
         $filename = $image->getClientOriginalName();
         $stmt->bindParam(':filename', $filename);
-        $stmt->execute();   
+        $stmt->execute();
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
@@ -106,4 +106,4 @@ $app->post('/upload', function(Request $request) use ($app) {
     return $app->redirect('/photos');
 });
 
-$app->run(); 
+$app->run();
