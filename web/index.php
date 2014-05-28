@@ -56,15 +56,9 @@ $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig');
 });
 
-<<<<<<< HEAD
-$app->get('/contactus', function () use ($app) {
-    return $app['twig']->render('contact.twig');
-});
-=======
 //$app->get('/contactus', function () use ($app) {
 //    return $app['twig']->render('contact.twig'); 
 //});
->>>>>>> local_chris
 
 $app->get('/agile', function () use ($app) {
     return $app['twig']->render('agile.twig');
@@ -82,9 +76,6 @@ $app->get('/bandMembers', function () use ($app) {
     return $app['twig']->render('bandMembers.twig');
 });
 
-<<<<<<< HEAD
-$app->run();
-=======
 $app->match('/contactus', function (Request $request) use ($app) {
 
     $formDefault = array(
@@ -138,25 +129,24 @@ $app->match('/contactus', function (Request $request) use ($app) {
         }
     }
 
-        try {
-            $user= 'root';
-            $pass = '';
+    try {
+        $user= 'root';
+        $pass = '';
 
-            $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $statement = $dbh->prepare("SELECT * FROM contactband");
-            $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $dbh->prepare("SELECT * FROM contactband");
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            $dbh = null;
-        } catch (PDOException $e) {
-            print "Error! " . $e->getMessage(). "<br/>";
-            die();
-        }
+        $dbh = null;
+    } catch (PDOException $e) {
+        print "Error! " . $e->getMessage(). "<br/>";
+        die();
+    }
 
-        return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
-    });
+    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
+});
 
-    $app->run(); 
->>>>>>> local_chris
+$app->run(); 
