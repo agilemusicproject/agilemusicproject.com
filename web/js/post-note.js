@@ -13,8 +13,7 @@ function drawPostNote(idName, textArray, degrees)
     imageObj.onload = function() {
         context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
         context.font = "20pt Calibri";
-        for (i=0; i<textArray.length; i++)
-        {
+        for (i=0; i<textArray.length; i++) {
             context.fillText(textArray[i], canvas.width/3, canvas.height/3 + (i*30));
         }
         context.textAlign = 'center';
@@ -55,7 +54,7 @@ function drawPhotosPostNote()
 
 function drawBlogPostNote()
 {
-    drawPostNote( "blogpostcard", ["Blog"], 4.5); 
+    drawPostNote( "blogpostcard", ["Blog"], 4.5);
 }
 
 function drawContactPostNote()
