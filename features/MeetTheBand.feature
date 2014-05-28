@@ -12,7 +12,7 @@ Scenario: Visit MeetTheBand Page
   And the "#Joshbio" element should contain "Josh Rizzo"
   And the "#Joshemail" element should contain "TheGuitarGuy@agilemusicproject.com"
   And the "#Mikebio" element should contain "Mike Abney"
-  And the "#Mikeemail" element should contain "info@agilemusicproject.com"
+  And the "#Mikeemail" element should contain "mike@agilemusicproject.com"
   And the "#Edbio" element should contain "Ed (Papa Ed) Grannan"
   And the "#Edemail" element should contain "PapaEd@agilemusicproject.com"
   And the "#Budbio" element should contain "Bud"

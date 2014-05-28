@@ -12,7 +12,7 @@ Scenario: Visit Contact Page
   And the "#Joshcontact" element should contain "Josh Rizzo"
   And the "#Joshemail" element should contain "TheGuitarGuy@agilemusicproject.com"
   And the "#Mikecontact" element should contain "Mike Abney"
-  And the "#Mikeemail" element should contain "info@agilemusicproject.com"
+  And the "#Mikeemail" element should contain "mike@agilemusicproject.com"
   And the "#Edcontact" element should contain "Ed (Papa Ed) Grannan"
   And the "#Edemail" element should contain "PapaEd@agilemusicproject.com"
   And the "#Budcontact" element should contain "Bud"
