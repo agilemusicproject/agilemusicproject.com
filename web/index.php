@@ -78,26 +78,6 @@ $app->get('/bandMembers', function () use ($app) {
 
 $app->match('/contactus', function (Request $request) use ($app) {
     
-    try {
-        $user= 'root';
-        $pass = '';
-
-        //connect to database
-        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        //get the table from the database
-        $statement = $dbh->prepare("SELECT * FROM contactband");
-        $statement->execute();
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        //disconnect from database
-        $dbh = null;
-    } catch (PDOException $e) {
-        print "Error! " . $e->getMessage(). "<br/>";
-        die();
-    }
-
     $formDefault = array(
         'first_name' => 'Your first name',
         'last_name' => 'Your last name',
@@ -113,21 +93,18 @@ $app->match('/contactus', function (Request $request) use ($app) {
         ->add('submit', 'submit')
         ->getForm();
 
-    if( $request->getMethod() === 'POST' )
-    {
-        var_dump($request->request->all());
-        var_dump($request->getContent());
+    if( $request->getMethod() === 'POST' ) {
+        var_dump($_POST);
         $form->submit($request);
 
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            var_dump($formDefault);
 
             try {
                 $user= 'root';
                 $pass = '';
                 $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-                $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $statement = $dbh->prepare("INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
                                            "(:first, :last, :email, :instrument )");
@@ -148,14 +125,28 @@ $app->match('/contactus', function (Request $request) use ($app) {
                 print "Error! " . $e->getMessage(). "<br/>";
                 die();
             }
-
             return $app->redirect('/contactus');
         } else { 
             var_dump($form->getErrorsAsString());
         }
     }
     
-    
+    try {
+        $user= 'root';
+        $pass = '';
+
+        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $statement = $dbh->prepare("SELECT * FROM contactband");
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $dbh = null;
+    } catch (PDOException $e) {
+        print "Error! " . $e->getMessage(). "<br/>";
+        die();
+    }
 
     return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
 });
