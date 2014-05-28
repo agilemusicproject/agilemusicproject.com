@@ -1,48 +1,48 @@
 <?php
-require_once __DIR__.'/../vendor/autoload.php'; 
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Response;
 
-$app = new Silex\Application(); 
+$app = new Silex\Application();
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html'); 
+    return $app['twig']->render('index.html');
 });
 
 $app->get('/blog', function () use ($app) {
-    return $app['twig']->render('blog.twig'); 
+    return $app['twig']->render('blog.twig');
 });
 
 $app->get('/about', function () use ($app) {
-    return $app['twig']->render('about.twig'); 
+    return $app['twig']->render('about.twig');
 });
 
 $app->get('/music', function () use ($app) {
-    return $app['twig']->render('music.twig'); 
+    return $app['twig']->render('music.twig');
 });
 
 $app->get('/contactus', function () use ($app) {
-    return $app['twig']->render('contact.twig'); 
+    return $app['twig']->render('contact.twig');
 });
 
 $app->get('/agile', function () use ($app) {
-    return $app['twig']->render('agile.twig'); 
+    return $app['twig']->render('agile.twig');
 });
 
 $app->get('/photos', function () use ($app) {
-    return $app['twig']->render('photos.twig'); 
+    return $app['twig']->render('photos.twig');
 });
 
 $app->get('/meettheband', function () use ($app) {
-    return $app['twig']->render('meetTheBand.twig'); 
+    return $app['twig']->render('meetTheBand.twig');
 });
 
-$app->get('/bandmembers', function () use ($app) {
-    return $app['twig']->render('bandMembers.twig'); 
+$app->get('/bandMembers', function () use ($app) {
+    return $app['twig']->render('bandMembers.twig');
 });
 
-$app->run(); 
+$app->run();

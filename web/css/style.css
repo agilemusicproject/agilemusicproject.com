@@ -9,9 +9,24 @@
   max-width: 900px;
 }
 
+.aboutPageText {
+  margin-left:auto;
+  margin-right:auto;
+  text-align: left;
+  max-width: 900px;
+}
+
+.meetBandPageText {
+  margin-left:auto;
+  margin-right:auto;
+  text-align: left;
+  max-width: 900px;
+}
+
 .pageHeader {
   max-width: 900px;
   font-size: 20px;
+  text-align: left;
 }
 
 #meetBandButton {
