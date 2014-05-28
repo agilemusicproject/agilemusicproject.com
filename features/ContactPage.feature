@@ -8,11 +8,11 @@ Scenario: Visit Contact Page
   Then the ".headernav a" element should contain "Index Page"
   And the "#contactuspostcard" element should contain "Contact Us"
   And the "#infoemail" element should contain "The Agile Music Project"
-  And the "#Brianemail" element should contain "Brian Zwahr"
-  And the "#Joshemail" element should contain "Josh Rizzo"
-  And the "#Mikeemail" element should contain "Mike Abney"
-  And the "#Edemail" element should contain "Ed (Papa Ed) Grannan"
-  And the "#Budemail" element should contain "Bud"
+  And the "#Brianemail" element should contain "TheDrummer@agilemusicproject.com"
+  And the "#Joshemail" element should contain "TheGuitarGuy@agilemusicproject.com"
+  And the "#Mikeemail" element should contain "info@agilemusicproject.com"
+  And the "#Edemail" element should contain "PapaEd@agilemusicproject.com"
+  And the "#Budemail" element should contain "TheOtherBassist@agilemusicproject.com"
 
 Scenario: Click AMP Logo
   Given I am on "/contactus"

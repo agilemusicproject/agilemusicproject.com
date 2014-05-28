@@ -20,7 +20,7 @@
   <p class="pageHeader">To contact the Band Members</p>
 
   {% for row in results %}
-  <p class="contactPageText">{{ row.Instrument }}:</br> 
+  <p id="{{ row.firstName }}contact" class="contactPageText">{{ row.Instrument }}:</br> 
     {{ row.firstName }} {{ row.lastName }}</br>
     <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.Email }}</a>
   </p>
@@ -29,27 +29,9 @@
 
 <div id="contactForm">
   <form class="contactPageText" method="POST" enctype="multipart/form-data">
-    <div>
-      <div>
-        <label for="form_first_name" class="required">First name</label>
-        <input type="text" id="form_first_name" name="first_name" required="required" value="Your first name"/>
-      </div>
-      <div>
-        <label for="form_last_name" class="required">Last name</label>
-        <input type="text" id="form_last_name" name="last_name" required="required" value="Your last name"/>
-      </div>
-      <div>
-        <label for="form_email" class="required">Email</label>
-        <input type="text" id="form_email" name="email" required="required" value="Your email"/>
-      </div>
-      <div>
-        <label for="form_instrument" class="required">Instrument</label>
-        <input type="text" id="form_instrument" name="instrument" required="required" value="You play??"/>
-      </div>
-      <div>
-        <input type="submit" name="Submit" id="form_submit" value="Submit"/>
-      </div>
-    </div>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
   </form>
 </div>
 {% endblock %}
