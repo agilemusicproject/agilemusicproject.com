@@ -6,3 +6,4 @@ vendor/
 .bash*
 .composer/
 qa/
+vendor - backup

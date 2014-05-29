@@ -5,9 +5,33 @@ use Symfony\Component\HttpFoundation\Response;
 
 $app = new Silex\Application();
 
+$app['debug'] = true;
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'default' => array(
+            'wsse' => true,
+
+            // ...
+        ),
+    ),
+));
+
+$app['security.firewalls'] = array(
+    'admin' => array(
+        'pattern' => '^/photos$',
+        'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
+        'logout' => array('logout_path' => '/admin/logout'),
+        'users' => array(
+            // raw password is foo
+            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+        ),
+    ),
+);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -41,8 +65,11 @@ $app->get('/meettheband', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig');
 });
 
-$app->get('/bandMembers', function () use ($app) {
-    return $app['twig']->render('bandMembers.twig');
+$app->get('/login', function(Request $request) use ($app) {
+    return $app['twig']->render('login.html', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
 });
 
 $app->run();
