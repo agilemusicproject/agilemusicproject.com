@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Silex\Application\UrlGeneratorTrait;
 
 $app = new Silex\Application();
 
@@ -20,6 +22,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
     ),
 ));
+
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app['security.firewalls'] = array(
     'admin' => array(
@@ -66,9 +70,8 @@ $app->get('/meettheband', function () use ($app) {
 });
 
 $app->get('/login', function(Request $request) use ($app) {
-    return $app['twig']->render('login.html', array(
+    return $app['twig']->render('login.twig', array(
         'error'         => $app['security.last_error']($request),
-        'last_username' => $app['session']->get('_security.last_username'),
     ));
 });
 
