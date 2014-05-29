@@ -17,7 +17,7 @@ Scenario: Click Blog Link
   Given I am on the homepage
   When I follow "Blog"
   Then I should be on "/blog"
-  
+
 Scenario: Click Contact Us Link
   Given I am on the homepage
   When I follow "Contact Us"
@@ -30,7 +30,7 @@ Scenario: Click Meet the Band Link
 
 Scenario: Click Music Link
   Given I am on the homepage
-  When I follow "Music"
+  When I follow "Our Music"
   Then I should be on "/music"
 
 Scenario: Click Photos Link

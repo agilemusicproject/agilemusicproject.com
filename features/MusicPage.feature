@@ -6,7 +6,7 @@ Feature: AMP Web Site Music Page
 Scenario: Visit Music Page
   Given I am on "/music"
   Then the ".headernav a" element should contain "Index Page"
-  And the "#musicpostcard" element should contain "Music"
+  And the "#musicpostcard" element should contain "Our Music"
 
 Scenario: Click AMP Logo
   Given I am on "/music"

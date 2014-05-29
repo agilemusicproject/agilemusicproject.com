@@ -34,7 +34,7 @@ function drawIndexPage()
 
 function drawMusicPostNote()
 {
-    drawPostNote( "musicpostcard", ["Music"], -10);
+    drawPostNote( "musicpostcard", ["Our Music"], -10);
 }
 
 function drawAgilePostNote()
