@@ -12,3 +12,5 @@ Scenario: Click AMP Logo
   Given I am on "/meettheband"
   When I follow "Index Page"
   Then I should be on the homepage
+
+# make navigation feature with scenario outlines for above two scenarios for all pages
