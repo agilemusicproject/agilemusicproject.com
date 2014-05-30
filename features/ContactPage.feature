@@ -16,8 +16,7 @@ Scenario: Click AMP Logo
 Scenario: Submit contact form
   Given I am on "/contactus"
   Then I should see a "form" element
-  When I fill in "First name" with "Spud"
-  And I fill in "Last name" with "Curtis"
+  When I fill in "Name" with "Spud"
   And I fill in "Email" with "anemail@whoknows.com"
-  And I fill in "Instrument" with "Drums"
+  And I fill in "Message" with "You Rock!"
   And I press "Submit"

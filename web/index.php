@@ -26,7 +26,7 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'unsecured' => array (
-            'anonymous' => true 
+            'anonymous' => true
         ),
         'admin' => array(
             'pattern' => '^/admin/',
@@ -38,19 +38,6 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
     )
 ));
-
-//$app->loadFromExtension('security', array());
-
-$app->get('/login', function(Request $request) use ($app) {
-    $token = $app['security']->getToken();
-    $user = $token->getUser();
-    var_dump($token);
-    return $app['twig']->render('login.twig');
-//    return $app['twig']->render('login.twig', array(
-//        'error'         => $app['security.last_error']($request),
-//        'last_username' => $app['session']->get('_security.last_username'),
-//    ));
-});
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -87,17 +74,15 @@ $app->get('/bandmembers', function () use ($app) {
 $app->match('/contactus', function (Request $request) use ($app) {
 
     $formDefault = array(
-        'first_name' => 'Your first name',
-        'last_name' => 'Your last name',
+        'name' => 'Your name',
         'email' => 'Your email',
-        'instrument' => 'You play??'
+        'message' => 'Your message'
     );
 
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
-        ->add('first_name')
-        ->add('last_name')
+        ->add('name')
         ->add('email')
-        ->add('instrument')
+        ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;')))
         ->add('submit', 'submit')
         ->getForm();
 
@@ -106,30 +91,8 @@ $app->match('/contactus', function (Request $request) use ($app) {
         if ($form->isValid()) {
             $formDefault = $form->getData();
 
-            try {
-                $user= 'root';
-                $pass = '';
-                $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $insertQuery = "INSERT INTO contactband (firstName, lastName, Email, Instrument) VALUES ".
-                    "(:first, :last, :email, :instrument )";
-                $statement = $dbh->prepare($insertQuery);
-                $statement->bindParam(':first', $formDefault['first_name']);
-                $statement->bindParam(':last', $formDefault['last_name']);
-                $statement->bindParam(':email', $formDefault['email']);
-                $statement->bindParam(':instrument', $formDefault['instrument']);
 
-                $success = $statement->execute();
 
-                if (!$success) {
-                    print_r($dbh->errorInfo());
-                    die();
-                }
-                $dbh = null;
-            } catch (PDOException $e) {
-                print "Error! " . $e->getMessage(). "<br/>";
-                die();
-            }
             return $app->redirect('/contactus');
         } else {
             var_dump($form->getErrorsAsString());
