@@ -18,7 +18,7 @@ function drawPostNote(idName, textArray, degrees)
         }
         context.textAlign = 'center';
     };
-    imageObj.src = "images/sticky-notes_v2.png";
+    imageObj.src = "/images/sticky-notes_v2.png";
 }
 
 function drawIndexPage()
