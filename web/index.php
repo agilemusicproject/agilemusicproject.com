@@ -13,28 +13,13 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\FormServiceProvider());
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../views',
-));
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
 ));
 
-$app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-        'unsecured' => array (
-            'anonymous' => true
-        ),
-        'admin' => array(
-            'pattern' => '^/admin/',
-            'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
-            'users' => array(
-                'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods
-                6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
-            ),
-        ),
-    )
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../views',
 ));
 
 $app->get('/', function () use ($app) {
@@ -66,36 +51,6 @@ $app->get('/meettheband', function () use ($app) {
 });
 
 $app->get('/meettheband/update', function () use ($app) {
-    $app->match('/form', function (Request $request) use ($app) {
-    // some default data for when the form is displayed the first time
-    $data = array(
-        'name' => 'Your name',
-        'email' => 'Your email',
-    );
-
-    $form = $app['form.factory']->createBuilder('form', $data)
-        ->add('name')
-        ->add('email')
-        ->add('gender', 'choice', array(
-            'choices' => array(1 => 'male', 2 => 'female'),
-            'expanded' => true,
-        ))
-        ->getForm();
-
-    $form->handleRequest($request);
-
-    if ($form->isValid()) {
-        $data = $form->getData();
-
-        // do something with the data
-
-        // redirect somewhere
-        return $app->redirect('...');
-    }
-
-    // display the form
-    return $app['twig']->render('index.twig', array('form' => $form->createView()));
-});
     return $app['twig']->render('meetTheBandUpdate.twig');
 });
 
@@ -104,13 +59,11 @@ $app->get('/bandMembers', function () use ($app) {
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
-
     $formDefault = array(
         'name' => 'Your name',
         'email' => 'Your email',
         'message' => 'Your message'
     );
-
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
         ->add('name')
         ->add('email')
@@ -118,37 +71,15 @@ $app->match('/contactus', function (Request $request) use ($app) {
                                            'attr' => array('cols' => '20', 'rows' => '10')))
         ->add('submit', 'submit')
         ->getForm();
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-
-
-
             return $app->redirect('/contactus');
         } else {
             var_dump($form->getErrorsAsString());
         }
     }
-
-//    try {
-//        $user= 'root';
-//        $pass = '';
-//
-//        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-//        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//
-//        $statement = $dbh->prepare("SELECT * FROM contactband");
-//        $statement->execute();
-//        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        $dbh = null;
-//    } catch (PDOException $e) {
-//        print "Error! " . $e->getMessage(). "<br/>";
-//        die();
-//    }
-
     return $app['twig']->render('contact.twig', array('form' => $form->createView()));
 });
 
