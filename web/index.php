@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 //use Symfony\Component\Validator;
 
@@ -24,6 +25,9 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
+        'unsecured' => array (
+            'anonymous' => true 
+        ),
         'admin' => array(
             'pattern' => '^/admin/',
             'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
@@ -35,12 +39,18 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     )
 ));
 
-//$app->get('/login', function(Request $request) use ($app) {
+//$app->loadFromExtension('security', array());
+
+$app->get('/login', function(Request $request) use ($app) {
+    $token = $app['security']->getToken();
+    $user = $token->getUser();
+    var_dump($token);
+    return $app['twig']->render('login.twig');
 //    return $app['twig']->render('login.twig', array(
 //        'error'         => $app['security.last_error']($request),
 //        'last_username' => $app['session']->get('_security.last_username'),
 //    ));
-//});
+});
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -57,10 +67,6 @@ $app->get('/about', function () use ($app) {
 $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig');
 });
-
-//$app->get('/contactus', function () use ($app) {
-//    return $app['twig']->render('contact.twig'); 
-//});
 
 $app->get('/agile', function () use ($app) {
     return $app['twig']->render('agile.twig');
