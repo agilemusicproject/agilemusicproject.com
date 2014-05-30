@@ -3,10 +3,12 @@
 {% block title %}Band Members Page{% endblock %}
 
 {% block content %}
-<form action="{{ path('admin_login_check') }}" method="post">
+{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+  <form action="{{ path('photos_login_check') }}" method="post">
     {{ error }}
     <input type="text" name="_username" value="" />
     <input type="password" name="_password" value="" />
     <input type="submit" />
-</form>
+  </form>
+{% endif %}
 {% endblock %}

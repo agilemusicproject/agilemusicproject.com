@@ -12,6 +12,9 @@
       <div class="headernav" id="logocontainer">
         <a href="/"><img src="images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
       </div>
+      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('photos_logout') }}">Logout</a>
+      {% endif %}
       <!--<button onclick="visitMembersPage();" id="meetBandButton" type="button">Band Members Only!</button>-->
     </nav>
     <div class="headernav" id="postitcontainer">

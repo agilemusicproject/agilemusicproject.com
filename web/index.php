@@ -9,33 +9,31 @@ $app = new Silex\Application();
 
 $app['debug'] = true;
 
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+$app->register(new Silex\Provider\SessionServiceProvider());
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
-        'default' => array(
-            'wsse' => true,
-
-            // ...
+        'general' => array(
+            'anonymous' => 'true',
+            'pattern' => '^/',
+            'form' => array('login_path' => '/login', 'check_path' => '/photos/login_check'),
+            'logout' => array('logout_path' => '/photos/logout'),
+            'users' => array(
+                // raw password is foo
+                'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+            ),
         ),
+    ),
+    'security.access_rules' => array(
+        array('^/photos', 'ROLE_ADMIN')
     ),
 ));
-
-$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
-$app['security.firewalls'] = array(
-    'admin' => array(
-        'pattern' => '^/photos$',
-        'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
-        'logout' => array('logout_path' => '/admin/logout'),
-        'users' => array(
-            // raw password is foo
-            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
-        ),
-    ),
-);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
