@@ -8,8 +8,6 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 
-//use Symfony\Component\Validator;
-
 $app = new Silex\Application();
 
 $app['debug'] = true;
@@ -100,24 +98,24 @@ $app->match('/contactus', function (Request $request) use ($app) {
         }
     }
 
-    try {
-        $user= 'root';
-        $pass = '';
+//    try {
+//        $user= 'root';
+//        $pass = '';
+//
+//        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
+//        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//
+//        $statement = $dbh->prepare("SELECT * FROM contactband");
+//        $statement->execute();
+//        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+//
+//        $dbh = null;
+//    } catch (PDOException $e) {
+//        print "Error! " . $e->getMessage(). "<br/>";
+//        die();
+//    }
 
-        $dbh = new PDO('mysql:host=localhost;dbname=amp', $user, $pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $statement = $dbh->prepare("SELECT * FROM contactband");
-        $statement->execute();
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        $dbh = null;
-    } catch (PDOException $e) {
-        print "Error! " . $e->getMessage(). "<br/>";
-        die();
-    }
-
-    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'results' => $results));
+    return $app['twig']->render('contact.twig', array('form' => $form->createView()));
 });
 
 $app->run();
