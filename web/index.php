@@ -80,7 +80,7 @@ $app->get('/meettheband', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig');
 });
 
-$app->get('/bandMembers', function () use ($app) {
+$app->get('/bandmembers', function () use ($app) {
     return $app['twig']->render('bandMembers.twig');
 });
 
