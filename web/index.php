@@ -82,7 +82,8 @@ $app->match('/contactus', function (Request $request) use ($app) {
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
         ->add('name')
         ->add('email')
-        ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;')))
+        ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
+                                           'attr' => array('cols' => '20', 'rows' => '10')))
         ->add('submit', 'submit')
         ->getForm();
 

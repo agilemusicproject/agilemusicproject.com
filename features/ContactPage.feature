@@ -5,6 +5,7 @@ Feature: AMP Web Site Contact Page
 
 Scenario: Visit Contact Page
   Given I am on "/contactus"
+  Then print last response
   Then the ".headernav a" element should contain "Index Page"
   And the "#contactuspostcard" element should contain "Contact Us"
 
@@ -12,7 +13,7 @@ Scenario: Click AMP Logo
   Given I am on "/contactus"
   When I follow "Index Page"
   Then I should be on the homepage
-  
+
 Scenario: Submit contact form
   Given I am on "/contactus"
   Then I should see a "form" element

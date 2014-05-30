@@ -6,25 +6,35 @@
 
 {% block postit %}<canvas id="contactuspostcard" class="postitheader">Contact Us</canvas>{% endblock %}
 
-{% block header %}Contact The AMP Band Members{%endblock%}
+{% block header %}Contact AMP{%endblock%}
 
 {% block content %}
 
 <br/>
 
-<p class="pageText">To contact <a id="infoemail" href="mailto:info@agilemusicproject.com">The Agile Music Project</a>
-  email us at info@agilemusicproject.com
-</p>
+<p class="pageText">To contact The Agile Music Project email us at info@agilemusicproject.com</p>
 <div id="contactBand">
-
   <p class="pageHeader">To contact the Band Members</p>
-
-  {% for row in results %}
-  <p id="{{ row.firstName }}contact" class="contactPageText">{{ row.Instrument }}:</br> 
-    {{ row.firstName }} {{ row.lastName }}</br>
-    <a id="{{ row.firstName }}email" href="mailto:{{row.Email}}">{{ row.Email }}</a>
+  <p id="Briancontact" class="contactPageText">Drums:<br> 
+    Brian Zwahr<br>
+    TheDrummer@agilemusicproject.com
   </p>
-{% endfor %}
+  <p id="Joshcontact" class="contactPageText">Lead Guitar:<br> 
+    Josh Rizzo<br>
+    TheGuitarGuy@agilemusicproject.com
+  </p>
+  <p id="Mikecontact" class="contactPageText">Rhythm Guitar:<br> 
+    Mike Abney<br>
+    mike@agilemusicproject.com
+  </p>
+  <p id="Edcontact" class="contactPageText">Bass:<br> 
+    Ed (Papa Ed) Grannan<br>
+    PapaEd@agilemusicproject.com
+  </p>
+  <p id="Budcontact" class="contactPageText">Bass:<br> 
+    Bud <br>
+    TheOtherBassist@agilemusicproject.com
+  </p>
 </div>
 
 <div id="contactForm">
