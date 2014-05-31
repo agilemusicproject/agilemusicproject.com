@@ -62,11 +62,14 @@ $app->match('/contactus', function (Request $request) use ($app) {
     $formDefault = array(
         'name' => 'Your name',
         'email' => 'Your email',
-        'message' => 'Your message'
+        'subject' => 'Subject',
+        'message' => 'What would you like to say?',
     );
+    $formSubmit = null;
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
         ->add('name')
         ->add('email')
+        ->add('subject')
         ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
                                            'attr' => array('cols' => '20', 'rows' => '10')))
         ->add('submit', 'submit')
@@ -75,13 +78,21 @@ $app->match('/contactus', function (Request $request) use ($app) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            mail('info@agilemusicproject.com','test',$formDefault['message'],'none');
-            return $app->redirect('/contactus');
+            $formatMessage = 'From: ' . $formDefault['name'] . PHP_EOL;
+            $formatMessage .= 'Email: ' . $formDefault['email'] . PHP_EOL . PHP_EOL;
+            $formatMessage .= $formDefault['message'] . PHP_EOL;
+            $formSubmit = mail('info@agilemusicproject.com', $formDefault['subject'], $formatMessage, null);
+            if ($formSubmit) {
+                $formSubmit = "Your message was sent successfully!";
+            } else {
+                $formSubmit = "Your message had a error while sending";
+            }
         } else {
-            var_dump($form->getErrorsAsString());
+            //var_dump($form->getErrorsAsString());
+            $formSubmit = "The form is invalid";
         }
     }
-    return $app['twig']->render('contact.twig', array('form' => $form->createView()));
+    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'formSubmit' => $formSubmit));
 });
 
 $app->run();
