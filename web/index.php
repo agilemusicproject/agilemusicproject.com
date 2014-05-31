@@ -75,6 +75,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
+            mail('info@agilemusicproject.com','test',$formDefault['message'],'none');
             return $app->redirect('/contactus');
         } else {
             var_dump($form->getErrorsAsString());
