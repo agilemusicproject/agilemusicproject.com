@@ -6,40 +6,42 @@
 
 {% block postit %}<canvas id="contactuspostcard" class="postitheader">Contact Us</canvas>{% endblock %}
 
-{% block header %}Contact The AMP Band Members{%endblock%}
+{% block header %}Contact AMP{%endblock%}
 
 {% block content %}
 
 <br/>
 
-<p class="pageText">To contact <a id="infoemail" href="mailto:info@agilemusicproject.com">The Agile Music Project</a>
-  email us at info@agilemusicproject.com
-</p>
+<p class="pageText">To contact The Agile Music Project email us at info@agilemusicproject.com</p>
+<div id="contactBand">
+  <p class="pageHeader">To contact the Band Members</p>
+  <p id="Briancontact" class="contactPageText">Drums:<br> 
+    Brian Zwahr<br>
+    TheDrummer@agilemusicproject.com
+  </p>
+  <p id="Joshcontact" class="contactPageText">Lead Guitar:<br> 
+    Josh Rizzo<br>
+    TheGuitarGuy@agilemusicproject.com
+  </p>
+  <p id="Mikecontact" class="contactPageText">Rhythm Guitar:<br> 
+    Mike Abney<br>
+    mike@agilemusicproject.com
+  </p>
+  <p id="Edcontact" class="contactPageText">Bass:<br> 
+    Ed (Papa Ed) Grannan<br>
+    PapaEd@agilemusicproject.com
+  </p>
+  <p id="Budcontact" class="contactPageText">Bass:<br> 
+    Bud <br>
+    TheOtherBassist@agilemusicproject.com
+  </p>
+</div>
 
-<p class="pageHeader">To contact the Band Members</p>
-
-<p id="Briancontact" class="aboutPageText">Drums:<br/>
-  Brian Zwahr<br/>
-  <a id="Brianemail" href="mailto:TheDrummer@agilemusicproject.com">TheDrummer@agilemusicproject.com</a>
-</p>
-
-<p id="Joshcontact" class="aboutPageText">Lead Guitar:<br/>
-  Josh Rizzo<br/>
-  <a id="Joshemail" href="mailto:TheGuitarGuy@agilemusicproject.com">TheGuitarGuy@agilemusicproject.com</a>
-</p>
-
-<p id="Mikecontact" class="aboutPageText">Rhythm Guitar:<br/>
-  Mike Abney<br/>
-  <a id="Mikeemail" href="mailto:mike@agilemusicproject.com">mike@agilemusicproject.com</a>
-</p>
-
-<p id="Edcontact" class="aboutPageText">Bass:<br/>
-  Ed (Papa Ed) Grannan<br/>
-  <a id="Edemail" href="mailto:PapaEd@agilemusicproject.com">PapaEd@agilemusicproject.com</a>
-</p>
-
-<p id="Budcontact" class="aboutPageText">Bass:<br/>
-  Bud<br/>
-  <a id="Budemail" href="mailto:TheOtherBassist@agilemusicproject.com">TheOtherBassist@agilemusicproject.com</a>
-</p>
+<div id="contactForm">
+  <form class="contactPageText" method="POST" enctype="multipart/form-data">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+  </form>
+</div>
 {% endblock %}

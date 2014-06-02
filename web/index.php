@@ -3,16 +3,25 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Silex\Provider\FormServiceProvider;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 $app = new Silex\Application();
 
-$app->register(new FormServiceProvider());
+$app['debug'] = true;
 
 $app['debug'] = true;
 $app['upload_folder'] = __DIR__ . '/images/photos';
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
+
+$app->register(new Silex\Provider\FormServiceProvider());
+
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'translator.messages' => array(),
+));
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
@@ -32,10 +41,6 @@ $app->get('/about', function () use ($app) {
 
 $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig');
-});
-
-$app->get('/contactus', function () use ($app) {
-    return $app['twig']->render('contact.twig');
 });
 
 $app->get('/agile', function () use ($app) {
