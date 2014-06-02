@@ -13,7 +13,7 @@ Scenario: Click AMP Logo
   When I follow "Index Page"
   Then I should be on the homepage
 
-Scenario: Submit contact form
+Scenario: Fill out contact form
   Given I am on "/contactus"
   Then I should see a "form" element
   When I fill in "Name" with "Spud"

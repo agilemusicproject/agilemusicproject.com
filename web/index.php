@@ -7,6 +7,7 @@ use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Validator\Constraints as Assert;
 
 $app = new Silex\Application();
 
@@ -14,6 +15,7 @@ $app['debug'] = true;
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\SwiftmailerServiceProvider());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
@@ -68,26 +70,34 @@ $app->match('/contactus', function (Request $request) use ($app) {
     );
     $formSubmit = null;
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
-        ->add('name')
-        ->add('email')
-        ->add('subject')
-        ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
-                                           'attr' => array('cols' => '30', 'rows' => '10')))
+        ->add('name', 'text', array(
+            'constraints' => new Assert\NotBlank()
+        ))
+        ->add('email', 'text', array(
+            'constraints' => new Assert\Email()
+        ))
+        ->add('subject', 'text')
+        ->add('message', 'textarea', array(
+            'label_attr' => array('style' => 'vertical-align: top;'),
+            'attr' => array('cols' => '30', 'rows' => '10'),
+            'constraints' => new Assert\NotBlank()
+        ))
         ->add('submit', 'submit')
         ->getForm();
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            $formatMessage = 'From: ' . $formDefault['name'] . PHP_EOL;
-            $formatMessage .= 'Email: ' . $formDefault['email'] . PHP_EOL . PHP_EOL;
+            $formatMessage = 'From: ' . $formDefault['name'] . PHP_EOL . PHP_EOL;
             $formatMessage .= $formDefault['message'] . PHP_EOL;
-            $formSubmit = mail('info@agilemusicproject.com', $formDefault['subject'], $formatMessage, null);
-            if ($formSubmit) {
-                $formSubmit = "Your message was sent successfully!";
-            } else {
-                $formSubmit = "Your message had a error while sending";
-            }
+            $message = \Swift_Message::newInstance()
+                ->setSubject($formDefault['subject'])
+                ->setFrom(array($formDefault['email']))
+                ->setTo(array('info@agilemusicproject.com'))
+                ->setBody($formatMessage);
+
+            $results = $app['mailer']->send($message);
         } else {
             //var_dump($form->getErrorsAsString());
             $formSubmit = "The form is invalid";
