@@ -9,17 +9,17 @@
   max-width: 900px;
 }
 
-.aboutPageText {
-  margin-left:auto;
-  margin-right:auto;
+.pageText, .title, .photosPage, .meetBandPageText, .aboutPageText, .pageHeader {
+  margin-left: auto;
+  margin-right: auto;
   text-align: left;
+}
+
+.aboutPageText {
   max-width: 900px;
 }
 
 .meetBandPageText {
-  margin-left:auto;
-  margin-right:auto;
-  text-align: left;
   max-width: 900px;
 }
 
@@ -62,12 +62,6 @@ body {
   background-size: cover;
   min-width: 900px;
   font-family:  'Nunito', 'Calibri', 'Open Sans','Cambria', sans-serif;
-}
-
-.pageText, .title, .photosPage {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
 }
 
 .photosPage {

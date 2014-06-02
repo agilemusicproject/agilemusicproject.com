@@ -44,7 +44,7 @@ function drawAgilePostNote()
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", "Meet The Band", 15);
+    drawPostNote( "meetTheBandpostcard", ["Meet", "The Band"], 15);
 }
 
 function drawPhotosPostNote()
