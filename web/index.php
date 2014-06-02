@@ -54,8 +54,32 @@ $app->get('/meettheband', function () use ($app) {
     return $app['twig']->render('meetTheBand.twig');
 });
 
-$app->get('/bandmembers', function () use ($app) {
-    return $app['twig']->render('bandMembers.twig');
+$app->get('/meettheband/update', function () use ($app) {
+    $formDefault = array(
+        'first_name' => 'first name',
+        'last_name' => 'last name',
+        'roles' => 'roles',
+        'bio' => 'bio'
+    );
+    $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
+        ->add('first_name')
+        ->add('last_name')
+        ->add('roles')
+        ->add('photo', 'file')
+        ->add('bio', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
+                                           'attr' => array('cols' => '100', 'rows' => '20')))
+        ->add('submit', 'submit')
+        ->getForm();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $form->submit($request);
+        if ($form->isValid()) {
+            $formDefault = $form->getData();
+            return $app->redirect('/meettheband');
+        } else {
+            var_dump($form->getErrorsAsString());
+        }
+    }
+    return $app['twig']->render('meetTheBandUpdate.twig', array('form' => $form->createView()));
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
