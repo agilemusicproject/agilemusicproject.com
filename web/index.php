@@ -3,7 +3,6 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
@@ -57,6 +56,31 @@ $app->get('/meettheband', function () use ($app) {
 
 $app->get('/bandmembers', function () use ($app) {
     return $app['twig']->render('bandMembers.twig');
+});
+
+$app->match('/contactus', function (Request $request) use ($app) {
+    $formDefault = array(
+        'name' => 'Your name',
+        'email' => 'Your email',
+        'message' => 'Your message'
+    );
+    $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
+        ->add('name')
+        ->add('email')
+        ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
+                                           'attr' => array('cols' => '20', 'rows' => '10')))
+        ->add('submit', 'submit')
+        ->getForm();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $form->submit($request);
+        if ($form->isValid()) {
+            $formDefault = $form->getData();
+            return $app->redirect('/contactus');
+        } else {
+            var_dump($form->getErrorsAsString());
+        }
+    }
+    return $app['twig']->render('contact.twig', array('form' => $form->createView()));
 });
 
 $app->run();
