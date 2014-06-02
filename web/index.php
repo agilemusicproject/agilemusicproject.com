@@ -62,9 +62,9 @@ $app->get('/meettheband/update', function () use ($app) {
         'bio' => 'bio'
     );
     $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
-        ->add('first_name')
-        ->add('last_name')
-        ->add('roles')
+        ->add('first_name', 'text', array('required' => 'true'))
+        ->add('last_name', 'text', array('required' => 'true'))
+        ->add('roles', 'text', array('required' => 'true'))
         ->add('photo', 'file')
         ->add('bio', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
                                            'attr' => array('cols' => '100', 'rows' => '20')))
@@ -80,6 +80,32 @@ $app->get('/meettheband/update', function () use ($app) {
         }
     }
     return $app['twig']->render('meetTheBandUpdate.twig', array('form' => $form->createView()));
+});
+
+// CHANGE config getting AND data getting
+$app->post('/meettheband/update', function(Request $request) use ($app) {
+    $file_bag = $request->files;
+    if ($file_bag->has('photo')) {
+        $image = $file_bag->get('image');
+        $image->move($app['upload_folder'], $image->getClientOriginalName());
+    }
+    try {
+
+        $dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') .
+            '; dbname=' . $app['config']->get('database', 'MySQL');
+        $dbh = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO band_members (filename) VALUES (:filename)";
+        $stmt = $dbh->prepare($sql);
+        $filename = $image->getClientOriginalName();
+        $stmt->bindParam(':filename', $filename);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+    $dbh = null;
+    return $app->redirect('/photos');
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
