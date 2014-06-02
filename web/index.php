@@ -12,7 +12,7 @@ $app->register(new FormServiceProvider());
 
 $app['debug'] = true;
 $app['upload_folder'] = __DIR__ . '/images/photos';
-$app['config'] = parse_ini_file(__DIR__ . '/../config/amp.ini', true);
+$app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
