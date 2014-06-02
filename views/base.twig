@@ -12,13 +12,11 @@
       <div class="headernav" id="logocontainer">
         <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
       </div>
-      <!--<button onclick="visitMembersPage();" id="meetBandButton" type="button">Band Members Only!</button>-->
+     <div class="headernav" id="postitcontainer">
+       {% block postit %}{% endblock %}
+      </div>
     </nav>
-    <div class="headernav" id="postitcontainer">
-      {% block postit %}{% endblock %}
-    </div>
-
-    <article class="pageText">
+    <article class="{% block pageClass %}{% endblock %}">
       <h1 class="title">{% block header %}{% endblock %}</h1>
       {% block content %} {% endblock %}
     </article>

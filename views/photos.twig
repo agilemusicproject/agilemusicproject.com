@@ -6,5 +6,12 @@
 
 {% block postit %}<canvas id="photospostcard" class="postitheader">Photos</canvas>{% endblock %}
 
+{% block pageClass %} photosPage {% endblock %}
+
 {% block content %}
+{% for row in results %}
+<div class="img">
+  <a href="images/photos/{{ row.filename }}"><img src="images/photos/{{ row.filename }}" width="110" height="90"></a>
+</div>
+{% endfor %}
 {% endblock %}
