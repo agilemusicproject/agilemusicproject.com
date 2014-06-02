@@ -98,6 +98,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
                 ->setBody($formatMessage);
 
             $results = $app['mailer']->send($message);
+            $formSubmit = "Your message was sent successfully";
         } else {
             //var_dump($form->getErrorsAsString());
             $formSubmit = "The form is invalid";
