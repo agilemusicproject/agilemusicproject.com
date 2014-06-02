@@ -18,5 +18,6 @@ Scenario: Submit contact form
   Then I should see a "form" element
   When I fill in "Name" with "Spud"
   And I fill in "Email" with "anemail@whoknows.com"
+  And I fill in "Subject" with "AMP!!"
   And I fill in "Message" with "You Rock!"
-  And I press "Submit"
+  And the "#form_submit" element should contain "Submit"
