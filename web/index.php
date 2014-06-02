@@ -71,7 +71,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
         ->add('email')
         ->add('subject')
         ->add('message', 'textarea', array('label_attr' => array('style' => 'vertical-align: top;'),
-                                           'attr' => array('cols' => '20', 'rows' => '10')))
+                                           'attr' => array('cols' => '30', 'rows' => '10')))
         ->add('submit', 'submit')
         ->getForm();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
