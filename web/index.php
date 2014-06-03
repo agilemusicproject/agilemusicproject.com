@@ -10,14 +10,12 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
 
 $app = new Silex\Application();
-
 $app['debug'] = true;
-
-$app['debug'] = true;
-$app['upload_folder'] = __DIR__ . '/images/photos';
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 $dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
 $app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+//$dsn = 'mysql:host=localhost; dbname=amp';
+//$app['db'] = new PDO($dsn, getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'));
 $app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $app->register(new Silex\Provider\FormServiceProvider());
@@ -29,7 +27,7 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../views',
+    'twig.path' => __DIR__ . '/../views',
 ));
 
 $app->get('/', function () use ($app) {
@@ -69,6 +67,18 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     if ($form->isValid()) {
         $dao = new AMP\Db\BandMembersDAO($app['db']);
         $dao->add($form->getData());
+        return $app->redirect('/meettheband');
+    }
+    return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
+});
+
+$app->match('/meettheband/update/{id}', function($id, Request $request) use ($app) {
+    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $dao = new AMP\Db\BandMembersDAO($app['db']);
+        $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));

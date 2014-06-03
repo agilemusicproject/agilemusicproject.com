@@ -16,7 +16,10 @@
   {% endif %}
   {{ row.roles }}:<br/>
   {{ row.first_name }} {{ row.last_name }}<br/>
-  {{ row.bio }}
+  {% if not (row.bio is null) %}
+    {{ row.bio }} <br/>
+  {% endif %}
+  <a href="meettheband/update/{{ row.id }}">Edit</a>
 </p>
 {% endfor %}
 {% endblock %}
