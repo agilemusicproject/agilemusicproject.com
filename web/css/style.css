@@ -9,17 +9,17 @@
   max-width: 900px;
 }
 
-.contactPageText {
-  margin-left:auto;
-  margin-right:auto;
+.pageText, .title, .photosPage, .meetBandPageText, .aboutPageText, .pageHeader {
+  margin-left: auto;
+  margin-right: auto;
   text-align: left;
+}
+
+.aboutPageText {
   max-width: 900px;
 }
 
 .meetBandPageText {
-  margin-left:auto;
-  margin-right:auto;
-  text-align: left;
   max-width: 900px;
 }
 
@@ -46,20 +46,22 @@
   min-width: 100px;
 }
 
-div.headernav {
-  display: inline-block;
-
+nav {
+  position: relative;
 }
 
 #logocontainer.headernav {
-  float: left;
+  display: inline-block;
+  text-align: left;
   padding-left: 10px;
 }
 
 #postitcontainer.headernav {
-  float: right;
   padding-top: 10px;
   padding-right: 10px;
+  right: -10px;
+  top: -10px;
+  position: absolute;
 }
 
 body {
@@ -69,9 +71,8 @@ body {
   font-family:  'Nunito', 'Calibri', 'Open Sans','Cambria', sans-serif;
 }
 
-.pageText, .title {
-  margin-left:auto;
-  margin-right:auto;
+.photosPage {
+  max-width: 1100px;
   text-align: left;
 }
 
@@ -202,4 +203,25 @@ body {
     top: 180%;
     right: 10%;
   }
+}
+
+div.img {
+  display: inline-block;
+  margin:5px;
+  padding: 5px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.img img {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid #ffffff;
+  height: auto;
+  width: 150px;
+}
+
+div.img a:hover img {
+  border: 1px solid #0000ff;
 }

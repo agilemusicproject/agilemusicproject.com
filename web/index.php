@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 $app = new Silex\Application();
 
 $app['debug'] = true;
+
+$app['debug'] = true;
+$app['upload_folder'] = __DIR__ . '/images/photos';
+$app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\SwiftmailerServiceProvider());
@@ -50,15 +54,72 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->get('/meettheband', function () use ($app) {
-    return $app['twig']->render('meetTheBand.twig');
+    try {
+        $dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') .
+            '; dbname=' . $app['config']->get('database', 'MySQL');
+        $dbh = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM band_members";
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+    $dbh = null;
+    return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
-$app->get('/meettheband/update', function () use ($app) {
-    return $app['twig']->render('meetTheBandUpdate.twig');
-});
+$app->match('/meettheband/add', function (Request $request) use ($app) {
+    $form = $app['form.factory']->createBuilder('form', array('csrf_protection' => false))
+        ->add('first_name', 'text', array('required' => true, 'label' => false,
+                                          'attr' => array('placeholder' => 'First Name')))
+        ->add('last_name', 'text', array('required' => true, 'label' => false,
+                                         'attr' => array('placeholder' => 'Last Name')))
+        ->add('roles', 'text', array('required' => true, 'label' => false,
+                                     'attr' => array('placeholder' => 'Roles')))
+        ->add('photo', 'file', array('required' => false))
+        ->add('bio', 'textarea', array('label' => false, 'label_attr' => array('style' => 'vertical-align: top;'),
+                                       'attr' => array('placeholder' => 'Bio',
+                                                       'cols' => '100', 'rows' => '20'), 'required' => false))
+        ->add('submit', 'submit')
+        ->getForm();
 
-$app->get('/bandMembers', function () use ($app) {
-    return $app['twig']->render('bandMembers.twig');
+    $form->handleRequest($request);
+
+    if ($form->isValid()) {
+        $data = $form->getData();
+        $filename = null;
+        if (!is_null($data['photo']))
+        {
+            $image = $data['photo'];
+            $filename =  $image->getClientOriginalName();
+            $image->move($app['upload_folder'], $filename);
+        }
+        try {
+            $dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') .
+                '; dbname=' . $app['config']->get('database', 'MySQL');
+            $dbh = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
+                    VALUES (:first_name, :last_name, :roles, :filename, :bio)";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindParam(':first_name', $data['first_name']);
+            $stmt->bindParam(':last_name', $data['last_name']);
+            $stmt->bindParam(':roles', $data['roles']);
+            $stmt->bindParam(':filename', $filename);
+            $stmt->bindParam(':bio', $data['bio']);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        $dbh = null;
+        var_dump($data);
+        return 'hello';
+    }
+    return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {

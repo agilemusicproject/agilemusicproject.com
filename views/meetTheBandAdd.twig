@@ -9,5 +9,11 @@
 {% block header %} Update the Meet the Band Page {%endblock%}
 
 {% block content %}
-
+<div id="meetTheBandUpdateForm">
+  <form class="" method="POST" enctype="multipart/form-data">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+  </form>
+</div>
 {% endblock %}

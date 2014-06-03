@@ -9,28 +9,14 @@
 {% block header %}Meet the Band{%endblock%}
 
 {% block content %}
-
-<br/>
-
-<p id="Brianbio" class="meetBandPageText">Drums:<br/>
-  Brian Zwahr<br/>
+{% for row in results %}
+<p class="meetBandPageText">
+  {% if not (row.photo_filename is null) %}
+    <img src="images/photos/{{ row.photo_filename }}" /><br/>
+  {% endif %}
+  {{ row.roles }}:<br/>
+  {{ row.first_name }} {{ row.last_name }}<br/>
+  {{ row.bio }}
 </p>
-
-<p id="Joshbio" class="meetBandPageText">Lead Guitar:<br/>
-  Josh Rizzo<br/>
-</p>
-
-<p id="Mikebio" class="meetBandPageText">Rhythm Guitar:<br/>
-  Mike Abney<br/>
-</p>
-
-<p id="Edbio" class="meetBandPageText">Bass:<br/>
-  Ed (Papa Ed) Grannan<br/>
-</p>
-
-<p id="Budbio" class="meetBandPageText">Bass:<br/>
-  Bud<br/>
-</p>
-
-
+{% endfor %}
 {% endblock %}
