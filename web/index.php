@@ -122,25 +122,24 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
-    $formDefault = array(
-        'name' => 'Your name',
-        'email' => 'Your email',
-        'subject' => 'Subject',
-        'message' => 'What would you like to say?',
-    );
     $formSubmit = null;
-    $form = $app['form.factory']->createBuilder('form', $formDefault, array('csrf_protection' => false))
+    $form = $app['form.factory']->createBuilder('form', array('csrf_protection' => false))
         ->add('name', 'text', array(
-            'constraints' => new Assert\NotBlank()
+            'constraints' => new Assert\NotBlank(),
+            'attr' => array('placeholder' => "Your name"),
         ))
         ->add('email', 'text', array(
-            'constraints' => new Assert\Email()
+            'constraints' => new Assert\Email(),
+            'attr' => array('placeholder' => "Your email"),
         ))
-        ->add('subject', 'text')
+        ->add('subject', 'text', array(
+            'attr' => array('placeholder' => "Hot topic"),
+            'required' => false,
+        ))
         ->add('message', 'textarea', array(
             'label_attr' => array('style' => 'vertical-align: top;'),
-            'attr' => array('cols' => '30', 'rows' => '10'),
-            'constraints' => new Assert\NotBlank()
+            'attr' => array('cols' => '30', 'rows' => '10', 'placeholder' => 'What would you like to say?'),
+            'constraints' => new Assert\NotBlank(),
         ))
         ->add('submit', 'submit')
         ->getForm();
