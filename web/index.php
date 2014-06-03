@@ -91,8 +91,7 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     if ($form->isValid()) {
         $data = $form->getData();
         $filename = null;
-        if (!is_null($data['photo']))
-        {
+        if (!is_null($data['photo'])) {
             $image = $data['photo'];
             $filename =  $image->getClientOriginalName();
             $image->move($app['upload_folder'], $filename);
