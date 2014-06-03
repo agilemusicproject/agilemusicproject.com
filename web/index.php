@@ -18,8 +18,15 @@ $app['upload_folder'] = __DIR__ . '/images/photos';
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 
 $app->register(new Silex\Provider\FormServiceProvider());
-$app->register(new Silex\Provider\SwiftmailerServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\SwiftmailerServiceProvider(), array(
+    'swiftmailer.options' => array(
+        'host' => 'localhost',
+        'port' => 25,
+        'encryption' => null,
+        'auth_mode' => null,
+    ),
+));
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
@@ -159,7 +166,6 @@ $app->match('/contactus', function (Request $request) use ($app) {
             $results = $app['mailer']->send($message);
             $formSubmit = "Your message was sent successfully";
         } else {
-            //var_dump($form->getErrorsAsString());
             $formSubmit = "The form is invalid";
         }
     }
