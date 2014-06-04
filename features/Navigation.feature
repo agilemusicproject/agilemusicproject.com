@@ -1,7 +1,7 @@
-Feature: AMP Web Site Template
-  In order to see what page I'm on and get back to the index page
+Feature: AMP Web Site Navigation
+  In order to navigate the website
   As a visitor to the site
-  I need an indicator of what page I'm on and a home buttom.
+  I need a navigation bar.
 
 Scenario Outline: Visit A Page
   Given I am on "<page>"
@@ -18,4 +18,17 @@ Scenario Outline: Visit A Page
     | /agile       | #agilepostcard       | About Agile   |
     | /about       | #aboutpostcard       | About Us      |
 
+Scenario Outline: Click AMP Logo
+  Given I am on "<page>"
+  When I follow "Index Page"
+  Then I should be on the homepage
 
+  Examples:
+    | page         |
+    | /blog        |
+    | /contactus   |
+    | /meettheband |
+    | /music       |
+    | /photos      |
+    | /agile       |
+    | /about       |
