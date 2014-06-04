@@ -16,9 +16,9 @@ $app['debug'] = true;
 $app['debug'] = true;
 $app['upload_folder'] = __DIR__ . '/images/photos';
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
-$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
-$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
-$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
+//$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+//$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
@@ -66,8 +66,8 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->get('/meettheband', function () use ($app) {
-    $dao = new AMP\Db\BandMembersDAO($app['db']);
-    $results = $dao->getAll();
+    //$dao = new AMP\Db\BandMembersDAO($app['db']);
+    //$results = $dao->getAll();
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
@@ -76,8 +76,8 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
-        $dao = new AMP\Db\BandMembersDAO($app['db']);
-        $dao->add($form->getData());
+       // $dao = new AMP\Db\BandMembersDAO($app['db']);
+       // $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
