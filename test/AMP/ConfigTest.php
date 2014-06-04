@@ -39,8 +39,38 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function getingConfigKeyWithDotSepartorShouldReturnCorrectValue()
+    public function getingConfigKeyWithDotSepartorInsideSectionShouldReturnCorrectValue()
     {
         $this->assertEquals("Prefix", $this->config->get("title.prefix","Section1"));
     }
+
+    /**
+     * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
+     */
+    public function gettingInvalidKeyShouldThrowException()
+    {
+        $this->config->get("foo");
+    }
+
+    /**
+     * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
+     */
+    public function gettingInvalidKeyInsideValidSectionShouldThrowException()
+    {
+        $this->config->get("foo", "Section1");
+    }
+
+    // environment variable yes, config no
+    /**
+     * @test
+     */
+    public function gettingValidEnvironmentVariableWithNoCorrespondingConfigValueShouldReturnCorrectValue()
+    {
+        $this->assertEquals("Test Var", $this->config->get("TESTVAR"));
+    }
+
+    // environment variable yes, config yes
+    // environment variable no, config no
 }

@@ -1,6 +1,8 @@
 <?php
 namespace AMP;
 
+use AMP\Exception\ConfigValueNotFoundException;
+
 class Config
 {
     private $config;
@@ -14,14 +16,27 @@ class Config
     {
         return $this->config;
     }
-    
+
     public function get($value, $section = null)
     {
-        if (is_null($section)) {
-            return $this->config[$value];
+        return getenv($value);
+        if ($this->keyExists($value, $section)) {
+            if (is_null($section)) {
+                return $this->config[$value];
+            } else {
+                return $this->config[$section][$value];
+            }
         } else {
-            return $this->config[$section][$value];
+            throw new ConfigValueNotFoundException();
         }
-        
+    }
+
+    private function keyExists($value, $section = null)
+    {
+        if (is_null($section)) {
+            return array_key_exists($value, $this->config);
+        } else {
+            return array_key_exists($section, $this->config) && array_key_exists($value, $this->config[$section]);
+        }
     }
 }

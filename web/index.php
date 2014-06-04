@@ -144,4 +144,6 @@ $app->match('/contactus', function (Request $request) use ($app) {
     return $app['twig']->render('contact.twig', array('form' => $form->createView()));
 });
 
+var_dump(getenv("TESTVAR"));
+
 $app->run();
