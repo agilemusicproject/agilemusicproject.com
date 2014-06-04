@@ -30,12 +30,10 @@
 }
 
 #contactForm {
-  float: right;
-  margin-top: 10px;
+  max-width: 300px;
 }
 
 #contactBand {
-  position: absolute;
 }
 
 #meetBandButton {

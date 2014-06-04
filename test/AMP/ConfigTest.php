@@ -1,17 +1,15 @@
 <?php
 namespace AMP;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     private $config;
-    
+
     public function setUp()
     {
         $this->config = new Config(__DIR__ . '/../test-config.ini');
     }
-    
+
     /**
      * @test
      */
@@ -27,7 +25,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals("No Section", $this->config->get("no.section"));
     }
-    
+
     /**
      * @test
      */
@@ -35,13 +33,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals("Name", $this->config->get("name", "Section1"));
     }
-    
+
     /**
      * @test
      */
     public function getingConfigKeyWithDotSepartorInsideSectionShouldReturnCorrectValue()
     {
-        $this->assertEquals("Prefix", $this->config->get("title.prefix","Section1"));
+        $this->assertEquals("Prefix", $this->config->get("title.prefix", "Section1"));
     }
 
     /**
