@@ -19,7 +19,6 @@ class Config
 
     public function get($value, $section = null)
     {
-        return getenv($value);
         if ($this->keyExists($value, $section)) {
             if (is_null($section)) {
                 return $this->config[$value];
@@ -27,6 +26,7 @@ class Config
                 return $this->config[$section][$value];
             }
         } else {
+            var_dump(getenv($value));
             throw new ConfigValueNotFoundException();
         }
     }
