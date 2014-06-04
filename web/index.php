@@ -24,8 +24,10 @@ $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\SwiftmailerServiceProvider(), array(
     'swiftmailer.options' => array(
-        'host' => 'localhost',
+        'host' => 'smtp.gmail.com',
         'port' => 25,
+        'username' => '',
+        'password' => '',
         'encryption' => null,
         'auth_mode' => null,
     ),
@@ -90,16 +92,18 @@ $app->match('/contactus', function (Request $request) use ($app) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            $formatMessage = 'From: ' . $formDefault['name'] . PHP_EOL . PHP_EOL;
-            $formatMessage .= $formDefault['message'] . PHP_EOL;
-            $message = \Swift_Message::newInstance()
+            $email = (new AMP\Mail)
+                ->setRecipient('info@agilemusicproject.com')
                 ->setSubject($formDefault['subject'])
-                ->setFrom(array($formDefault['email']))
-                ->setTo(array('info@agilemusicproject.com'))
-                ->setBody($formatMessage);
+                ->setMessage($formDefault['message'], $formDefault['name'])
+                ->setSender($formDefault['email']);
+            $results = $email->send();
+            if ($results) {
+                $formSubmit = "Your message was sent successfully";
+            } else {
+                $formSubmit = "Your message was not sent. Please try again";
+            }
 
-            $results = $app['mailer']->send($message);
-            $formSubmit = "Your message was sent successfully";
         } else {
             $formSubmit = "The form is invalid";
         }
