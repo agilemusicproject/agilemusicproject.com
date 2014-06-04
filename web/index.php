@@ -92,13 +92,12 @@ $app->match('/contactus', function (Request $request) use ($app) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            $email = (new AMP\Mail)
-                ->setRecipient('info@agilemusicproject.com')
+            $email = new AMP\Mail();
+            $email->setRecipient('info@agilemusicproject.com')
                 ->setSubject($formDefault['subject'])
                 ->setMessage($formDefault['message'], $formDefault['name'])
                 ->setSender($formDefault['email']);
-            $results = $email->send();
-            if ($results) {
+            if ($email->send()) {
                 $formSubmit = "Your message was sent successfully";
             } else {
                 $formSubmit = "Your message was not sent. Please try again";

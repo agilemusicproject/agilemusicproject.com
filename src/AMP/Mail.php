@@ -13,6 +13,11 @@ class Mail
         return $this;
     }
 
+    public static function instance()
+    {
+        return new Mail();
+    }
+
     //send the Email with message. subject can be null
     public function send()
     {
