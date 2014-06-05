@@ -6,3 +6,4 @@ vendor/
 .bash*
 .composer/
 qa/
+config/amp.ini
