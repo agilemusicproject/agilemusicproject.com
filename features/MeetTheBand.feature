@@ -5,7 +5,8 @@ Feature: AMP Web Site MeetTheBand Page
 
   Scenario Outline: View Band Members on Page
     Given I am on "/meettheband"
-    Then I should see 2 ".bandMemberEntry" elements
+    Then the "#meetBandButton" element should contain "Add Band Member"
+    And I should see 2 ".bandMemberEntry" elements
     And I should see "<roles>"
     And I should see "<name>"
 
