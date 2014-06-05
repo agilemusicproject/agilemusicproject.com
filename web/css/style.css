@@ -44,6 +44,10 @@
   margin-bottom: 50px;
 }
 
+.deleteID {
+  display: none;
+}
+
 #navLogo {
   max-width: 200px;
   min-width: 200px;

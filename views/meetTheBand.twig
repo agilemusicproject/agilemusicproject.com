@@ -25,5 +25,9 @@
   {% endif %}
   <a href="meettheband/update/{{ row.id }}">Edit</a>
 </p>
+<form method="post" action="/meettheband">
+  <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+  <input type="submit" value="Delete">
+</form>
 {% endfor %}
 {% endblock %}
