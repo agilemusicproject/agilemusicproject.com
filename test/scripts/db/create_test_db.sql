@@ -38,14 +38,6 @@ CREATE TABLE IF NOT EXISTS `band_members` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
---
--- Dumping data for table `band_members`
---
-
-INSERT INTO `band_members` (`id`, `first_name`, `last_name`, `roles`, `photo_filename`, `bio`) VALUES
-(1, 'Test', 'Jones', 'tester', NULL, NULL),
-(2, 'Test2', 'Jane', 'tester2', NULL, 'This is just a test bio.');
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
