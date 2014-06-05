@@ -7,9 +7,19 @@ class MeetTheBandFormFactory
 {
     private $form;
 
-    public function __construct(FormFactory $formService)
+    public function __construct(FormFactory $formService, array $default = null)
     {
-        $this->form = $formService->createBuilder('form', array('csrf_protection' => false))
+        $data = null;
+        if (!is_null($default)) {
+            $data = array(
+                'first_name' => $default['first_name'],
+                'last_name' => $default['last_name'],
+                'roles' => $default['roles'],
+                'bio' => $default['bio'],
+            );
+        }
+
+        $this->form = $formService->createBuilder('form', $data, array('csrf_protection' => false))
         ->add('first_name', 'text', array('required' => true, 'label' => false,
                                           'attr' => array('placeholder' => 'First Name')))
         ->add('last_name', 'text', array('required' => true, 'label' => false,

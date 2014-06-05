@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `amp`
+-- Database: `amp_test`
 --
-CREATE DATABASE IF NOT EXISTS `amp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `amp`;
+CREATE DATABASE IF NOT EXISTS `amp_test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `amp_test`;
 
 -- --------------------------------------------------------
 
