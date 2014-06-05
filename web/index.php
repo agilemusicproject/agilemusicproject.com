@@ -13,15 +13,13 @@ use AMP\Exception\ConfigValueNotFoundException;
 $app = new Silex\Application();
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 
-var_dump(getenv('MYSQL_PASSWORD'));
-
 try {
     $app['debug'] = $app['config']->get('debug');
 } catch (ConfigValueNotFoundException $e) {
     $app['debug'] = false;
 }
 
-$dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('BEHAT_MYSQL_DBNAME');
+$dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('MYSQL_DBNAME');
 $app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
 $app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
