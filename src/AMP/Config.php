@@ -17,26 +17,32 @@ class Config
         return $this->config;
     }
 
-    public function get($value, $section = null)
+    public function get($key, $section = null)
     {
-        if ($this->keyExists($value, $section)) {
+        if (getenv($key) !== false && is_null($section)) {
+            return getenv($key);
+        }
+        if ($this->keyExists($key, $section)) {
             if (is_null($section)) {
-                return $this->config[$value];
+                return $this->config[$key];
             } else {
-                return $this->config[$section][$value];
+                return $this->config[$section][$key];
             }
         } else {
-            var_dump(getenv($value));
-            throw new ConfigValueNotFoundException();
+            $msg = '[' . $key . ']';
+            if (!is_null($section)) {
+                $msg = '[' . $section . ']' . $msg;
+            }
+            throw new ConfigValueNotFoundException($msg);
         }
     }
 
-    private function keyExists($value, $section = null)
+    private function keyExists($key, $section = null)
     {
         if (is_null($section)) {
-            return array_key_exists($value, $this->config);
+            return array_key_exists($key, $this->config);
         } else {
-            return array_key_exists($section, $this->config) && array_key_exists($value, $this->config[$section]);
+            return array_key_exists($section, $this->config) && array_key_exists($key, $this->config[$section]);
         }
     }
 }

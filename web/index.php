@@ -8,27 +8,28 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
+use AMP\Exception\ConfigValueNotFoundException;
 
 $app = new Silex\Application();
-$app['debug'] = true;
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
-$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
-$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
-//$dsn = 'mysql:host=localhost; dbname=amp';
-//$app['db'] = new PDO($dsn, getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'));
+
+var_dump(getenv('MYSQL_PASSWORD'));
+
+try {
+    $app['debug'] = $app['config']->get('debug');
+} catch (ConfigValueNotFoundException $e) {
+    $app['debug'] = false;
+}
+
+$dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('BEHAT_MYSQL_DBNAME');
+$app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
 $app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\SwiftmailerServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
-
-$app->register(new Silex\Provider\TranslationServiceProvider(), array(
-    'translator.messages' => array(),
-));
-
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__ . '/../views',
-));
+$app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
+$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__ . '/../views'));
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -72,7 +73,7 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
 });
 
-$app->match('/meettheband/update/{id}', function($id, Request $request) use ($app) {
+$app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
     $form->handleRequest($request);
@@ -128,7 +129,5 @@ $app->match('/contactus', function (Request $request) use ($app) {
     }
     return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'formSubmit' => $formSubmit));
 });
-
-var_dump(getenv("TESTVAR"));
 
 $app->run();

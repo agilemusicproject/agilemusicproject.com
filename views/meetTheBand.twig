@@ -10,12 +10,12 @@
 
 {% block content %}
 {% for row in results %}
-<p class="meetBandPageText">
+<p class="bandMemberEntry">
   {% if not (row.photo_filename is null) %}
     <img src="images/photos/{{ row.photo_filename }}" /><br/>
   {% endif %}
-  {{ row.roles }}:<br/>
-  {{ row.first_name }} {{ row.last_name }}<br/>
+  <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
+  <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
   {% if not (row.bio is null) %}
     {{ row.bio }} <br/>
   {% endif %}
