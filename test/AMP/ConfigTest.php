@@ -15,7 +15,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function gettingConfigKeyShouldReturnCorrectValue()
     {
-        $this->assertEquals("Some Value", $this->config->get("someValue"));
+        $this->assertEquals('Some Value', $this->config->get('someValue'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function gettingConfigKeyWithDotSeparatorShouldReturnCorrectValue()
     {
-        $this->assertEquals("No Section", $this->config->get("no.section"));
+        $this->assertEquals('No Section', $this->config->get('no.section'));
     }
 
     /**
@@ -31,14 +31,65 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function gettingConfigKeyInsideSectionShouldReturnCorrectValue()
     {
-        $this->assertEquals("Name", $this->config->get("name", "Section1"));
+        $this->assertEquals('Name', $this->config->get('name', 'Section1'));
     }
 
     /**
      * @test
      */
-    public function getingConfigKeyWithDotSepartorShouldReturnCorrectValue()
+    public function getingConfigKeyWithDotSepartorInsideSectionShouldReturnCorrectValue()
     {
-        $this->assertEquals("Prefix", $this->config->get("title.prefix", "Section1"));
+        $this->assertEquals('Prefix', $this->config->get('title.prefix', 'Section1'));
+    }
+
+    /**
+     * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
+     */
+    public function gettingInvalidKeyShouldThrowException()
+    {
+        $this->config->get('foo');
+    }
+
+    /**
+     * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
+     */
+    public function gettingInvalidKeyInsideValidSectionShouldThrowException()
+    {
+        $this->config->get('foo', 'Section1');
+    }
+
+    /**
+     * @test
+     */
+    public function gettingValidEnvironmentVariableWithNoCorrespondingConfigValueShouldReturnCorrectValue()
+    {
+        $key = 'TESTVAR';
+        $value = 'Test Var';
+        putenv($key . '=' . $value);
+        $this->assertEquals($value, $this->config->get($key));
+    }
+
+    /**
+     * @test
+     */
+    public function gettingValidEnvironmentVariableWithCorrespondingConfigValueShouldReturnCorrectValue()
+    {
+        $key = 'someValue';
+        $value = 'Some Value';
+        putenv($key . '=' . $value);
+        $this->assertEquals($value, $this->config->get($key));
+    }
+
+    /**
+     * @test
+     */
+    public function gettingValidEmptyEnvironmentVariableShouldReturnCorrectValue()
+    {
+        $key = 'emptyValue';
+        $value = '';
+        putenv($key . '=' . $value);
+        $this->assertEquals($value, $this->config->get($key));
     }
 }

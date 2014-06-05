@@ -4,11 +4,10 @@ default:
     bootstrap: %behat.paths.features%/bootstrap
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: 'http://amp.local/'
+      base_url: 'http://amp-test.local/'
       goutte: ~
-      
+
 ci:
   extensions:
     Behat\MinkExtension\Extension:
       base_url: 'http://localhost:8000'
- 

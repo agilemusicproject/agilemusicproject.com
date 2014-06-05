@@ -9,7 +9,7 @@
   max-width: 900px;
 }
 
-.pageText, .title, .photosPage, .meetBandPageText, .aboutPageText, .pageHeader {
+.pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -19,7 +19,7 @@
   max-width: 900px;
 }
 
-.meetBandPageText {
+.bandMemberEntry {
   max-width: 900px;
 }
 

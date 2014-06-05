@@ -8,38 +8,25 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
+use AMP\Exception\ConfigValueNotFoundException;
 
 $app = new Silex\Application();
-
-$app['debug'] = true;
-
-$app['debug'] = true;
-$app['upload_folder'] = __DIR__ . '/images/photos';
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
-//$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
-//$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
-//$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+try {
+    $app['debug'] = $app['config']->get('debug');
+} catch (ConfigValueNotFoundException $e) {
+    $app['debug'] = false;
+}
+
+$dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('MYSQL_DBNAME');
+$app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
+$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
-$app->register(new Silex\Provider\SwiftmailerServiceProvider(), array(
-    'swiftmailer.options' => array(
-        'host' => 'smtp.gmail.com',
-        'port' => 25,
-        'username' => '',
-        'password' => '',
-        'encryption' => null,
-        'auth_mode' => null,
-    ),
-));
-
-$app->register(new Silex\Provider\TranslationServiceProvider(), array(
-    'translator.messages' => array(),
-));
-
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../views',
-));
+$app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
+$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__ . '/../views'));
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -66,8 +53,8 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->get('/meettheband', function () use ($app) {
-    //$dao = new AMP\Db\BandMembersDAO($app['db']);
-    //$results = $dao->getAll();
+    $dao = new AMP\Db\BandMembersDAO($app['db']);
+    $results = $dao->getAll();
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
@@ -76,8 +63,20 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
-       // $dao = new AMP\Db\BandMembersDAO($app['db']);
-       // $dao->add($form->getData());
+        $dao = new AMP\Db\BandMembersDAO($app['db']);
+        $dao->add($form->getData());
+        return $app->redirect('/meettheband');
+    }
+    return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
+});
+
+$app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
+    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $dao = new AMP\Db\BandMembersDAO($app['db']);
+        $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
