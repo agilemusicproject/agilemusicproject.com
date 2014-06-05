@@ -71,11 +71,11 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
 });
 
 $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
-    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
+    $dao = new AMP\Db\BandMembersDAO($app['db']);
+    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory'], $dao->get($id));
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
-        $dao = new AMP\Db\BandMembersDAO($app['db']);
         $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
