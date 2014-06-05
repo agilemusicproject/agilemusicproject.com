@@ -63,8 +63,8 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
-       $dao = new AMP\Db\BandMembersDAO($app['db']);
-       $dao->add($form->getData());
+        $dao = new AMP\Db\BandMembersDAO($app['db']);
+        $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
