@@ -8,6 +8,10 @@
 
 {% block header %}Meet the Band{%endblock%}
 
+{% block loginButton %}
+<button onclick="visitAddBandMembersPage();" id="meetBandButton" type="button">Add Band Member</button>
+{% endblock %}
+
 {% block content %}
 {% for row in results %}
 <p class="bandMemberEntry">
