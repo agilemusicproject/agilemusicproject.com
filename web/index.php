@@ -52,8 +52,11 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
 });
 
-$app->get('/meettheband', function () use ($app) {
+$app->match('/meettheband', function (Request $request) use ($app) {
     $dao = new AMP\Db\BandMembersDAO($app['db']);
+    if ($request->getMethod() == 'POST') {
+        $dao->delete($_POST['id']);
+    }
     $results = $dao->getAll();
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
@@ -67,7 +70,7 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
         $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView()));
 });
 
 $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
@@ -79,7 +82,7 @@ $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($a
         $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView()));
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
@@ -87,7 +90,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($request->getMethod() == 'POST') {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();

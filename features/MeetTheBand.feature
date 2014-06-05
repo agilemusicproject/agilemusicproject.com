@@ -3,13 +3,27 @@ Feature: AMP Web Site MeetTheBand Page
   As a visitor to the site
   I need to have an MeetTheBand page
 
-  Scenario Outline: View Band Members on Page
-    Given I am on "/meettheband"
-    Then I should see 2 ".bandMemberEntry" elements
-    And I should see "<roles>"
-    And I should see "<name>"
-
-    Examples:
-      | num | roles   | name       |
-      | 1   | tester  | Test Jones |
-      | 2   | tester2 | Test2 Jane |
+  Scenario: Manage Band Members
+    Given I am on "/meettheband/add"
+    Then I should see 0 ".bandMemberEntry" elements
+    Then I should see a "form" element
+    When I fill in "form_first_name" with "Action"
+    And I fill in "form_last_name" with "Jackson"
+    And I fill in "form_roles" with "Super Cop"
+    And I fill in "form_bio" with "A celebrated lieutenant in the police force"
+    And I press "form_submit"
+    Then I should be on "/meettheband"
+    And I should see "Action Jackson"
+    And I should see "Super Cop"
+    And I should see "A celebrated lieutenant in the police force"
+    When I go to "/meettheband/add"
+    When I fill in "form_first_name" with "Bilbo"
+    And I fill in "form_last_name" with "Baggins"
+    And I fill in "form_roles" with "Bravest Little Hobbit of Them All"
+    And I press "form_submit"
+    Then I should be on "/meettheband"
+    And I should see "Bilbo Baggins"
+    And I should see "Bravest Little Hobbit of Them All"
+    When I press "Delete"
+    And I press "Delete"
+    Then I should see 0 ".bandMemberEntry" elements

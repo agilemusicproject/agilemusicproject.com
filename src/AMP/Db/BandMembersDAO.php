@@ -76,4 +76,17 @@ class BandMembersDAO
             die();
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            $sql = 'DELETE from band_members WHERE id=:id';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } catch (POException $e) {
+            print 'Error!: ' . $e->getMessage() . '<br/>';
+            die();
+        }
+    }
 }
