@@ -7,9 +7,11 @@ class Config
 {
     private $config;
 
-    public function __construct($filename)
+    public function __construct($filename = null)
     {
-        $this->config = parse_ini_file($filename, true);
+        if (!is_null($filename) {
+            $this->config = parse_ini_file($filename, true);
+        }
     }
 
     public function getConfig()
