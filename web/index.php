@@ -12,15 +12,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 $app = new Silex\Application();
 $app['debug'] = true;
 $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
-$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
-$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
-//$dsn = 'mysql:host=localhost; dbname=amp';
-//$app['db'] = new PDO($dsn, getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'));
-$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//$dsn = 'mysql:host=' . $app['config']->get('host', 'MySQL') . '; dbname=' . $app['config']->get('database', 'MySQL');
+//$app['db'] = new PDO($dsn, $app['config']->get('username', 'MySQL'), $app['config']->get('password', 'MySQL'));
+//$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $app->register(new Silex\Provider\FormServiceProvider());
-$app->register(new Silex\Provider\SwiftmailerServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\SwiftmailerServiceProvider(), array(
+    'swiftmailer.options' => array(
+        'host' => 'smtp.gmail.com',
+        'port' => 25,
+        'username' => '',
+        'password' => '',
+        'encryption' => null,
+        'auth_mode' => null,
+    ),
+));
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
@@ -55,8 +62,8 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->get('/meettheband', function () use ($app) {
-    $dao = new AMP\Db\BandMembersDAO($app['db']);
-    $results = $dao->getAll();
+    //$dao = new AMP\Db\BandMembersDAO($app['db']);
+    //$results = $dao->getAll();
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
@@ -65,8 +72,8 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
-        $dao = new AMP\Db\BandMembersDAO($app['db']);
-        $dao->add($form->getData());
+       // $dao = new AMP\Db\BandMembersDAO($app['db']);
+       // $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
     return $app['twig']->render('meetTheBandAdd.twig', array('form' => $form->createView()));
@@ -86,43 +93,25 @@ $app->match('/meettheband/update/{id}', function($id, Request $request) use ($ap
 
 $app->match('/contactus', function (Request $request) use ($app) {
     $formSubmit = null;
-    $form = $app['form.factory']->createBuilder('form', array('csrf_protection' => false))
-        ->add('name', 'text', array(
-            'constraints' => new Assert\NotBlank(),
-            'attr' => array('placeholder' => "Your name"),
-        ))
-        ->add('email', 'text', array(
-            'constraints' => new Assert\Email(),
-            'attr' => array('placeholder' => "Your email"),
-        ))
-        ->add('subject', 'text', array(
-            'attr' => array('placeholder' => "Hot topic"),
-            'required' => false,
-        ))
-        ->add('message', 'textarea', array(
-            'label_attr' => array('style' => 'vertical-align: top;'),
-            'attr' => array('cols' => '30', 'rows' => '10', 'placeholder' => 'What would you like to say?'),
-            'constraints' => new Assert\NotBlank(),
-        ))
-        ->add('submit', 'submit')
-        ->getForm();
+    $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
-            $formatMessage = 'From: ' . $formDefault['name'] . PHP_EOL . PHP_EOL;
-            $formatMessage .= $formDefault['message'] . PHP_EOL;
-            $message = \Swift_Message::newInstance()
+            $email = new AMP\Mail();
+            $email->setRecipient('info@agilemusicproject.com')
                 ->setSubject($formDefault['subject'])
-                ->setFrom(array($formDefault['email']))
-                ->setTo(array('info@agilemusicproject.com'))
-                ->setBody($formatMessage);
+                ->setMessage($formDefault['message'], $formDefault['name'])
+                ->setSender($formDefault['email']);
+            if ($email->send()) {
+                $formSubmit = "Your message was sent successfully";
+            } else {
+                $formSubmit = "Your message was not sent. Please try again";
+            }
 
-            $results = $app['mailer']->send($message);
-            $formSubmit = "Your message was sent successfully";
         } else {
-            //var_dump($form->getErrorsAsString());
             $formSubmit = "The form is invalid";
         }
     }
