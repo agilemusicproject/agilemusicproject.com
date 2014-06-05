@@ -38,12 +38,15 @@
 
 #meetBandButton {
   float: right;
-  margin: 50px 50px 100px 50px;
+  margin-left: 50px;
+  margin-right: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 #navLogo {
-  max-width: 100px;
-  min-width: 100px;
+  max-width: 200px;
+  min-width: 200px;
 }
 
 nav {
@@ -59,8 +62,6 @@ nav {
 #postitcontainer.headernav {
   padding-top: 10px;
   padding-right: 10px;
-  right: -10px;
-  top: -10px;
   position: absolute;
 }
 
@@ -77,7 +78,6 @@ body {
 }
 
 .title {
-  padding-top: 50px;
   text-align: center;
 }
 
