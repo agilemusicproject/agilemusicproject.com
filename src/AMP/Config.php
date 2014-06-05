@@ -9,7 +9,7 @@ class Config
 
     public function __construct($filename = null)
     {
-        if (!is_null($filename) {
+        if (!is_null($filename)) {
             $this->config = parse_ini_file($filename, true);
         }
     }

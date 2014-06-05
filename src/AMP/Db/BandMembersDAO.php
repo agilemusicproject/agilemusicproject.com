@@ -16,7 +16,7 @@ class BandMembersDAO
         if (!is_null($data['photo'])) {
             $image = $data['photo'];
             $filename =  $image->getClientOriginalName();
-            $image->move('/images/photos', $filename);
+            $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
             $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
@@ -67,7 +67,7 @@ class BandMembersDAO
         if (!is_null($data['photo'])) {
             $image = $data['photo'];
             $filename =  $image->getClientOriginalName();
-            $image->move(__DIR__ . '/images/photos', $filename);
+            $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
             $sql = 'UPDATE band_members
