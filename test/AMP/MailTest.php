@@ -18,8 +18,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $message = "The message";
         $name = "name";
         $this->email->setMessage($message, $name);
-        $testMessage = "From: " . $name . PHP_EOL . PHP_EOL;
-        $testMessage .= $message;
+        $testMessage = "From: " . $name . PHP_EOL . PHP_EOL . $message;
         $this->assertEquals($testMessage, $this->email->getMessage());
     }
 

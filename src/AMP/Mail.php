@@ -13,11 +13,6 @@ class Mail
         return $this;
     }
 
-    public static function instance()
-    {
-        return new Mail();
-    }
-
     //send the Email with message. subject can be null
     public function send()
     {
@@ -35,8 +30,7 @@ class Mail
 
     public function setMessage($message, $name)
     {
-        $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL;
-        $this->message .= $message;
+        $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL . $message;
         return $this;
     }
 

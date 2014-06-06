@@ -13,6 +13,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  padding-top: 20px;
 }
 
 .aboutPageText {
@@ -54,6 +55,7 @@
 }
 
 nav {
+  float: left;
   position: relative;
 }
 

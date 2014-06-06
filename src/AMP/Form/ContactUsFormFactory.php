@@ -20,8 +20,8 @@ class ContactUsFormFactory
                 'attr' => array('placeholder' => "Your email"),
             ))
             ->add('subject', 'text', array(
+                'constraints' => new Assert\NotBlank(),
                 'attr' => array('placeholder' => "Hot topic"),
-                'required' => false,
             ))
             ->add('message', 'textarea', array(
                 'label_attr' => array('style' => 'vertical-align: top;'),
