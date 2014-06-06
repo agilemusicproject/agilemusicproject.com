@@ -9,7 +9,7 @@ class Config
 
     public function __construct($filename = null)
     {
-        if (!is_null($filename)) {
+        if (!is_null($filename) && file_exists($filename)) {
             $this->config = parse_ini_file($filename, true);
         }
     }
@@ -23,8 +23,7 @@ class Config
     {
         if (getenv($key) !== false && is_null($section)) {
             return getenv($key);
-        }
-        if ($this->keyExists($key, $section)) {
+        } elseif ($this->keyExists($key, $section)) {
             if (is_null($section)) {
                 return $this->config[$key];
             } else {
@@ -41,6 +40,9 @@ class Config
 
     private function keyExists($key, $section = null)
     {
+        if (is_null($this->config)) {
+            return false;
+        }
         if (is_null($section)) {
             return array_key_exists($key, $this->config);
         } else {

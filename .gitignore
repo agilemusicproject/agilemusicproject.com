@@ -7,3 +7,4 @@ vendor/
 .composer/
 qa/
 config/amp.ini
+test/coverage/

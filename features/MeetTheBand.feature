@@ -12,7 +12,6 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_roles" with "Super Cop"
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
     And I press "Submit"
-    Then print last response
     Then I should be on "/meettheband"
     And I should see "Action Jackson"
     And I should see "Super Cop"
