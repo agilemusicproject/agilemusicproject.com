@@ -9,10 +9,10 @@
 {% block header %}Meet the Band{%endblock%}
 
 {% block loginButton %}
-<button onclick="location.href='/meettheband/add'" id="meetBandButton" type="button">Add Band Member</button>
 {% endblock %}
 
 {% block content %}
+<button onclick="location.href='/meettheband/add'" id="addMemberButton" type="button">Add Band Member</button>
 {% for row in results %}
 <p class="bandMemberEntry">
   {% if not (row.photo_filename is null) %}
@@ -23,8 +23,8 @@
   {% if not (row.bio is null) %}
     {{ row.bio }} <br/>
   {% endif %}
-  <a href="meettheband/update/{{ row.id }}">Edit</a>
 </p>
+<button onclick="location.href='/meettheband/update/{{ row.id }}'" type="button">Edit</button>
 <form method="post" action="/meettheband">
   <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
   <input type="submit" value="Delete">

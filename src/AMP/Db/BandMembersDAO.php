@@ -12,6 +12,7 @@ class BandMembersDAO
 
     public function add(array $data)
     {
+        // pull photo stuff into own class maybe
         $filename = null;
         if (!is_null($data['photo'])) {
             $image = $data['photo'];
@@ -28,9 +29,8 @@ class BandMembersDAO
             $stmt->bindParam(':photo_filename', $filename);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             print 'Error!: ' . $e->getMessage() . '<br/>';
-            die();
         }
     }
 
@@ -86,7 +86,7 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
-        } catch (POException $e) {
+        } catch (PDOException $e) {
             print 'Error!: ' . $e->getMessage() . '<br/>';
             die();
         }
@@ -99,7 +99,7 @@ class BandMembersDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (POException $e) {
+        } catch (PDOException $e) {
             print 'Error!: ' . $e->getMessage() . '<br/>';
             die();
         }

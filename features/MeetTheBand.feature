@@ -26,7 +26,11 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
     Then I should not see "Action Jackson"
-    When I follow "Edit"
+
+    // WHEN BELOW HAPPENS, "The selected node does not have a form ancestor." IS THROWN
+
+    When I press "Edit"
+
     Then the "form_first_name" field should contain "Bilbo"
     Then the "form_last_name" field should contain "Baggins"
     Then the "form_roles" field should contain "Bravest Little Hobbit of Them All"

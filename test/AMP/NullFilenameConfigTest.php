@@ -12,14 +12,6 @@ class NullFilenameConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     */
-    public function constructingWithNonexistentConfigFileShouldNotError()
-    {
-        $this->assertInstanceOf('\AMP\Config', $this->config);
-    }
-
-    /**
-     * @test
      * @expectedException \AMP\Exception\ConfigValueNotFoundException
      */
     public function gettingValueFromConfigWithNonexistentFileWithoutEnvironmentVarShouldThrowException()

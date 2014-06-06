@@ -2,21 +2,22 @@
 namespace AMP;
 
 use AMP\Exception\ConfigValueNotFoundException;
+use AMP\Exception\FileNotFoundException;
 
 class Config
 {
     private $config;
 
+    // if a filename was passed in and it doesn't exists then throw an exception
     public function __construct($filename = null)
     {
-        if (!is_null($filename) && file_exists($filename)) {
-            $this->config = parse_ini_file($filename, true);
+        if (!is_null($filename)) {
+            if (file_exists($filename)) {
+                $this->config = parse_ini_file($filename, true);
+            } else {
+                throw new FileNotFoundException($filename);
+            }
         }
-    }
-
-    public function getConfig()
-    {
-        return $this->config;
     }
 
     public function get($key, $section = null)
@@ -42,10 +43,10 @@ class Config
     {
         if (is_null($this->config)) {
             return false;
-        }
-        if (is_null($section)) {
+        } elseif (is_null($section)) {
             return array_key_exists($key, $this->config);
         } else {
+            // research array_key_exists with nested
             return array_key_exists($section, $this->config) && array_key_exists($key, $this->config[$section]);
         }
     }

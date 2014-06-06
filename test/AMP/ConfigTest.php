@@ -12,6 +12,15 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \AMP\Exception\FileNotFoundException
+     */
+    public function constructingConfigWithNonexistentFileShouldThrowException()
+    {
+        $config = new Config(__DIR__ . '/../bad-config.ini');
+    }
+
+    /**
+     * @test
      */
     public function gettingConfigKeyShouldReturnCorrectValue()
     {
@@ -62,34 +71,19 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
      */
-    public function gettingValidEnvironmentVariableWithNoCorrespondingConfigValueShouldReturnCorrectValue()
+    public function gettingInvalidKeyInsideInvalidSectionShouldThrowException()
     {
-        $key = 'TESTVAR';
-        $value = 'Test Var';
-        putenv($key . '=' . $value);
-        $this->assertEquals($value, $this->config->get($key));
+        $this->config->get('foo', 'bar');
     }
 
     /**
      * @test
+     * @expectedException \AMP\Exception\ConfigValueNotFoundException
      */
-    public function gettingValidEnvironmentVariableWithCorrespondingConfigValueShouldReturnCorrectValue()
+    public function gettingValidKeyInsideInvalidSectionShouldThrowException()
     {
-        $key = 'someValue';
-        $value = 'Some Value';
-        putenv($key . '=' . $value);
-        $this->assertEquals($value, $this->config->get($key));
-    }
-
-    /**
-     * @test
-     */
-    public function gettingValidEmptyEnvironmentVariableShouldReturnCorrectValue()
-    {
-        $key = 'emptyValue';
-        $value = '';
-        putenv($key . '=' . $value);
-        $this->assertEquals($value, $this->config->get($key));
+        $this->config->get('someValue', 'bar');
     }
 }

@@ -21,6 +21,7 @@
 
 .bandMemberEntry {
   max-width: 900px;
+  margin-bottom: 0;
 }
 
 .pageHeader {
@@ -31,17 +32,6 @@
 
 #contactForm {
   max-width: 300px;
-}
-
-#contactBand {
-}
-
-#meetBandButton {
-  float: right;
-  margin-left: 50px;
-  margin-right: 100px;
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .deleteID {
