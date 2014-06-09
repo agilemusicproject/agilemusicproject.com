@@ -238,4 +238,6 @@ div.img a:hover img {
 }
 
 .contactTextArea{
+  height: 200px;
+  width: 300px;
 }
