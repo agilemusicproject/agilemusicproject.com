@@ -231,3 +231,11 @@ div.img img {
 div.img a:hover img {
   border: 1px solid #0000ff;
 }
+
+.meetBandTextArea{
+  height: 400px;
+  width: 600px;
+}
+
+.contactTextArea{
+}
