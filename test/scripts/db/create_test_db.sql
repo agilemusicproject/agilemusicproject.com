@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `amp_test`
 --
+DROP DATABASE IF EXISTS `amp_test`;
 CREATE DATABASE IF NOT EXISTS `amp_test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `amp_test`;
 
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `band_members` (
   `photo_filename` tinytext,
   `bio` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
