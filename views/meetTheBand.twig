@@ -12,7 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<button onclick="location.href='/meettheband/add'" id="addMemberButton" type="button">Add Band Member</button>
+<form action="/meettheband/add">
+    <input type="submit" value="Add Band Member">
+</form>
 {% for row in results %}
 <p class="bandMemberEntry">
   {% if not (row.photo_filename is null) %}
@@ -24,7 +26,9 @@
     {{ row.bio }} <br/>
   {% endif %}
 </p>
-<button onclick="location.href='/meettheband/update/{{ row.id }}'" type="button">Edit</button>
+<form>
+  <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
+</form>
 <form method="post" action="/meettheband">
   <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
   <input type="submit" value="Delete">

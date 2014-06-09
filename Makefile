@@ -12,7 +12,7 @@ phpcs:
 phpunit:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit .; fi
 
-behat:
+behat: db-setup
 	./vendor/bin/behat
 
 test-cyg: lint phpcs-cyg phpunit-cyg behat-cyg
@@ -23,10 +23,13 @@ phpcs-cyg:
 phpunit-cyg:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit.bat .; fi
 
-behat-cyg:
+behat-cyg: db-setup
 	./vendor/bin/behat.bat
 
 test-ci: lint phpcs phpunit behat-ci
 
 behat-ci:
 	./vendor/bin/behat --profile=ci
+
+db-setup:
+	mysql -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} -h 127.0.0.1 < ./test/scripts/db/create_test_db.sql

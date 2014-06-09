@@ -4,8 +4,9 @@ Feature: AMP Web Site MeetTheBand Page
   I need to have an MeetTheBand page
 
   Scenario: Manage Band Members
-    Given I am on "/meettheband/add"
+    Given I am on "/meettheband"
     Then I should see 0 ".bandMemberEntry" elements
+    When I go to "meettheband/add"
     Then I should see a "form" element
     When I fill in "form_first_name" with "Action"
     And I fill in "form_last_name" with "Jackson"
@@ -26,11 +27,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
     Then I should not see "Action Jackson"
-
-    // WHEN BELOW HAPPENS, "The selected node does not have a form ancestor." IS THROWN
-
-    When I press "Edit"
-
+    When I go to "meettheband/update/2"
     Then the "form_first_name" field should contain "Bilbo"
     Then the "form_last_name" field should contain "Baggins"
     Then the "form_roles" field should contain "Bravest Little Hobbit of Them All"
