@@ -10,7 +10,7 @@ class ContactUsFormFactory
 
     public function __construct(FormFactory $formService)
     {
-        $this->form = $formService->createBuilder('form', array('csrf_protection' => false))
+        $this->form = $formService->createBuilder('form')
             ->add('name', 'text', array(
                 'constraints' => new Assert\NotBlank(),
                 'attr' => array('placeholder' => "Your name"),

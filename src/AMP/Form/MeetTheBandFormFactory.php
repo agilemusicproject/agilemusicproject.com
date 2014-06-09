@@ -19,7 +19,7 @@ class MeetTheBandFormFactory
             );
         }
 
-        $this->form = $formService->createBuilder('form', $data, array('csrf_protection' => false))
+        $this->form = $formService->createBuilder('form', $data)
             ->add('first_name', 'text', array(
                 'required' => true,
                 'label' => false,
