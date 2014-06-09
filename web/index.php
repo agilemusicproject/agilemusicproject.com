@@ -9,9 +9,14 @@ use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
 use AMP\Exception\ConfigValueNotFoundException;
+use AMP\Exception\FileNotFoundException;
 
 $app = new Silex\Application();
-$app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
+try {
+    $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
+} catch (FileNotFoundException $e) {
+    $app['config'] = new AMP\Config();
+}
 
 try {
     $app['debug'] = $app['config']->get('debug');
