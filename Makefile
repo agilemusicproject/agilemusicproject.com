@@ -32,4 +32,4 @@ behat-ci:
 	./vendor/bin/behat --profile=ci
 
 db-setup:
-	mysql -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} -h 127.0.0.1 < ./test/scripts/db/create_test_db.sql
+	mysql -u ${MYSQL_USER} -p -h 127.0.0.1 < ./test/scripts/db/create_test_db.sql
