@@ -21,7 +21,9 @@
   <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
   <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
   {% if not (row.bio is null) %}
-    {{ row.bio }} <br/>
+    {% for paragraph in row.bio %}
+      <p>{{ paragraph }}</p>
+    {% endfor %}
   {% endif %}
 </p>
 <button onclick="location.href='/meettheband/update/{{ row.id }}'" type="button">Edit</button>

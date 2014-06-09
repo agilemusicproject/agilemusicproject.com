@@ -7,12 +7,15 @@
 
 .pageText {
   max-width: 900px;
+  display: table;
+  width: 100%;
 }
 
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  padding-top: 20px;
 }
 
 .aboutPageText {
@@ -44,6 +47,7 @@
 }
 
 nav {
+  float: left;
   position: relative;
 }
 
@@ -56,7 +60,6 @@ nav {
 #postitcontainer.headernav {
   padding-top: 10px;
   padding-right: 10px;
-  position: absolute;
 }
 
 body {
@@ -218,4 +221,14 @@ div.img img {
 
 div.img a:hover img {
   border: 1px solid #0000ff;
+}
+
+.meetBandTextArea{
+  height: 400px;
+  width: 600px;
+}
+
+.contactTextArea{
+  height: 200px;
+  width: 300px;
 }

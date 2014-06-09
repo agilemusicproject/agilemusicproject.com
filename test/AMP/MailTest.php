@@ -13,52 +13,89 @@ class MailTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function settingMessageShouldGetTheSameValue()
+    public function settingMessageFormat()
     {
         $message = "The message";
         $name = "name";
         $this->email->setMessage($message, $name);
-        $testMessage = "From: " . $name . PHP_EOL . PHP_EOL;
-        $testMessage .= $message;
+        $testMessage = "From: " . $name . PHP_EOL . PHP_EOL . $message;
         $this->assertEquals($testMessage, $this->email->getMessage());
     }
 
     /**
      * @test
      */
-    public function settingEmailRecipientShouldGetTheSameValue()
+    public function checkingEmptyObjectShouldBeInvalid()
     {
-        $this->email->setRecipient("info@agilemusicproject.com");
-        $this->assertEquals("info@agilemusicproject.com", $this->email->getRecipient());
+        $this->assertEquals(false, $this->email->isValid());
     }
 
     /**
      * @test
      */
-    public function settingEmailSenderShouldGetTheSameValue()
+    public function settingEmailWithoutRecipientShouldGetInvalid()
     {
-        $this->email->setSender("chris@agilemusicproject.com");
-        $this->assertEquals("From: chris@agilemusicproject.com" . PHP_EOL, $this->email->getSender());
-    }
-
-    /**
-     * @test
-     */
-    public function settingSubjectShouldGetTheSameValue()
-    {
+        $this->email->setMessage("The message", "Chris");
         $this->email->setSubject("Hot Topic");
-        $this->assertEquals("Hot Topic", $this->email->getSubject());
+        $this->email->setSender("chris@agilemusicproject.com");
+        $this->assertEquals(false, $this->email->isValid());
     }
 
-//    /**
-//     * @test
-//     */
-//    public function sendingMailSuccessfully()
-//    {
-//        $this->email->setMessage("The message", "Chris");
-//        $this->email->setRecipient("info@agilemusicproject.com");
-//        $this->email->setSubject("Hot Topic");
-//        $this->email->setSender("chris@agilemusicproject.com");
-//        $this->assertEquals(true, $this->email->send());
-//    }
+    /**
+     * @test
+     */
+    public function settingEmailWithoutSubjectShouldGetInvalid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSender("chris@agilemusicproject.com");
+        $this->assertEquals(false, $this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function settingEmailWithoutSenderShouldGetInvalid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->assertEquals(false, $this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function settingEmailWithoutMessageShouldGetInvalid()
+    {
+        $this->email->setMessage(null, "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("chris@agilemusicproject.com");
+        $this->assertEquals(false, $this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function settingEmailWithoutNameShouldGetInvalid()
+    {
+        $this->email->setMessage("The message", null);
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("chris@agilemusicproject.com");
+        $this->assertEquals(false, $this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentShouldBeValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("chris@agilemusicproject.com");
+        $this->assertEquals(true, $this->email->isValid());
+    }
 }

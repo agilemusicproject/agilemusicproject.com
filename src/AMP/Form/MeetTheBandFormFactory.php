@@ -28,7 +28,7 @@ class MeetTheBandFormFactory
             ->add('bio', 'textarea', array('label' => false,
                                            'label_attr' => array('style' => 'vertical-align: top;'),
                                            'attr' => array('placeholder' => 'Bio',
-                                                           'cols' => '100', 'rows' => '20'),
+                                                           'class' => 'meetBandTextArea'),
                                            'required' => false))
             ->add('submit', 'submit')
             ->getForm();

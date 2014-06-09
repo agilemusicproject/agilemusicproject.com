@@ -58,6 +58,10 @@ $app->match('/meettheband', function (Request $request) use ($app) {
         $dao->delete($_POST['id']);
     }
     $results = $dao->getAll();
+    foreach ($results as &$person) {
+        $person['bio'] = explode("\n", $person['bio']);
+    }
+    unset($person);
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
@@ -86,7 +90,7 @@ $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($a
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
-    $formSubmit = null;
+    $notification = null;
     $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
 
@@ -100,16 +104,16 @@ $app->match('/contactus', function (Request $request) use ($app) {
                 ->setMessage($formDefault['message'], $formDefault['name'])
                 ->setSender($formDefault['email']);
             if ($email->send()) {
-                $formSubmit = "Your message was sent successfully";
+                $notification = "Your message was sent successfully.";
             } else {
-                $formSubmit = "Your message was not sent. Please try again";
+                $notification = "Your message was not sent. Please try again.";
             }
 
         } else {
             $formSubmit = "The form is invalid";
         }
     }
-    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'formSubmit' => $formSubmit));
+    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'notification' => $notification));
 });
 
 $app->run();

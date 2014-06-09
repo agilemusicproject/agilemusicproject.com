@@ -7,19 +7,9 @@ class Mail
     private $from;
     private $to;
     private $subject;
+    private $name;
 
-    public function __construct()
-    {
-        return $this;
-    }
-
-    public static function instance()
-    {
-        return new Mail();
-    }
-
-    //send the Email with message. subject can be null
-    public function send()
+    public function isValid()
     {
         if (is_null($this->to)) {
             return false;
@@ -27,17 +17,32 @@ class Mail
             return false;
         } elseif (is_null($this->from)) {
             return false;
+        } elseif (is_null($this->subject)) {
+            return false;
+        } elseif (is_null($this->name)) {
+            return false;
         } else {
-            $results = mail($this->to, $this->subject, $this->message, $this->from);
-            return $results;
+            return true;
+        }
+    }
+
+    //send the Email with message. subject can be null
+    public function send()
+    {
+        if ($this->isValid()) {
+            return mail($this->to, $this->subject, $this->message, $this->from);
+        } else {
+            return false;
         }
     }
 
     public function setMessage($message, $name)
     {
-        $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL;
-        $this->message .= $message;
-        return $this;
+        $this->name = $name;
+        if (!is_null($message)) {
+            $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL . $message;
+            return $this;
+        }
     }
 
     public function setSender($senderEmail)
@@ -61,20 +66,5 @@ class Mail
     public function getMessage()
     {
         return $this->message;
-    }
-
-    public function getSender()
-    {
-        return $this->from;
-    }
-
-    public function getRecipient()
-    {
-        return $this->to;
-    }
-
-    public function getSubject()
-    {
-        return $this->subject;
     }
 }
