@@ -6,7 +6,6 @@ Feature: AMP Web Site MeetTheBand Page
   Scenario: Manage Band Members
     Given I am on "/meettheband"
     Then I should see 0 ".bandMemberEntry" elements
-    Then print last response
     When I go to "meettheband/add"
     Then I should see a "form" element
     When I fill in "form_first_name" with "Action"
