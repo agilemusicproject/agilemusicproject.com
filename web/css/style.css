@@ -7,6 +7,8 @@
 
 .pageText {
   max-width: 900px;
+  display: table;
+  width: 100%;
 }
 
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
@@ -68,7 +70,6 @@ nav {
 #postitcontainer.headernav {
   padding-top: 10px;
   padding-right: 10px;
-  position: absolute;
 }
 
 body {
