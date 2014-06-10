@@ -65,8 +65,9 @@ $app->match('/meettheband', function (Request $request) use ($app) {
     $results = $dao->getAll();
     foreach ($results as &$person) {
         $person['bio'] = explode("\n", $person['bio']);
+        $person['bio'] = preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>',
+                                      $person['bio']);
     }
-    unset($person);
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 

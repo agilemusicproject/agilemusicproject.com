@@ -24,7 +24,7 @@
   <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
   {% if not (row.bio is null) %}
     {% for paragraph in row.bio %}
-      <p>{{ paragraph }}</p>
+      <p>{{ paragraph|raw }}</p>
     {% endfor %}
   {% endif %}
 </p>
