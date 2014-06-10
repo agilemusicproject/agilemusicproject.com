@@ -25,6 +25,9 @@ class MeetTheBandFormFactory
                                          'attr' => array('placeholder' => 'Roles')))
             ->add('photo', 'file', array('required' => false))
             // maybe put cols and rows in css
+            ->add('addlink', 'button', array('attr' => array('onclick' => 
+                                                              'insertAtCursor(document.getElementById("form_bio"),
+                                                              "<a href=\"your link here\">Your optional text here</a>")')))
             ->add('bio', 'textarea', array('label' => false,
                                            'label_attr' => array('style' => 'vertical-align: top;'),
                                            'attr' => array('placeholder' => 'Bio',
