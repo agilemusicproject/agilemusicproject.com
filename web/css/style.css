@@ -18,6 +18,40 @@
   padding-top: 20px;
 }
 
+input, textarea {
+  outline-color: rgb(101, 101, 248);
+  display: block;
+}
+
+.submitButton {
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 14px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: black;
+  background-color: #BBBBBB;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: none 125ms ease-out 0;
+  transition-property: background-color, color;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+label {
+  display: block;
+}
+
 .aboutPageText {
   max-width: 900px;
 }
@@ -31,10 +65,6 @@
   max-width: 900px;
   font-size: 20px;
   text-align: left;
-}
-
-#contactForm {
-  max-width: 300px;
 }
 
 .deleteID {
@@ -230,5 +260,6 @@ div.img a:hover img {
 
 .contactTextArea{
   height: 200px;
-  width: 300px;
+  width: 50%;
+
 }
