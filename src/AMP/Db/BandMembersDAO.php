@@ -70,6 +70,13 @@ class BandMembersDAO
             $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
+            if(is_null($data['photo'])) {
+                $sql = 'SELECT photo_filename FROM band_members WHERE id = :id';
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+                $filename = $stmt->fetchColumn();
+            }
             $sql = 'UPDATE band_members
                     SET first_name = :first_name,
                     last_name = :last_name,
