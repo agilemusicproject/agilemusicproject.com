@@ -13,29 +13,29 @@
 
 {% block content %}
 
-<form action="/meettheband/add">
-    <input type="submit" value="Add Band Member">
-</form>
-{% for row in results %}
-<p class="bandMemberEntry">
-  {% if not (row.photo_filename is null) %}
-    <img src="images/photos/{{ row.photo_filename }}" /><br/>
-  {% endif %}
-  <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
-  <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
-  {% if not (row.bio is null) %}
-    {% for paragraph in row.bio %}
-      <p>{{ paragraph|raw }}</p>
-    {% endfor %}
-  {% endif %}
-</p>
-<form>
-  <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
-</form>
-<form method="post" action="/meettheband">
-  <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-  <input type="submit" value="Delete">
-</form>
-{% endfor %}
+  <form action="/meettheband/add">
+      <input type="submit" value="Add Band Member">
+  </form>
+  {% for row in results %}
+  <p class="bandMemberEntry">
+    {% if not (row.photo_filename is null) %}
+      <img src="images/photos/{{ row.photo_filename }}" /><br/>
+    {% endif %}
+    <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
+    <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
+    {% if not (row.bio is null) %}
+      {% for paragraph in row.bio %}
+        <p>{{ paragraph|raw }}</p>
+      {% endfor %}
+    {% endif %}
+  </p>
+  <form>
+    <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
+  </form>
+  <form method="post" action="/meettheband">
+    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+    <input type="submit" value="Delete">
+  </form>
+  {% endfor %}
 
 {% endblock %}
