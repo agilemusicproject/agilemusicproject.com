@@ -18,12 +18,12 @@
   padding-top: 20px;
 }
 
-input {
+input, textarea {
   outline-color: rgb(101, 101, 248);
   display: block;
 }
 
-button {
+.submitButton {
   box-sizing: border-box;
   white-space: nowrap;
   position: relative;
@@ -37,7 +37,7 @@ button {
   line-height: 14px;
   text-transform: uppercase;
   color: black;
-  background-color: #FFFF48;
+  background-color: #BBBBBB;
   cursor: pointer;
   border-radius: 4px;
   transition: none 125ms ease-out 0;
@@ -260,6 +260,6 @@ div.img a:hover img {
 
 .contactTextArea{
   height: 200px;
-  width: 100%;
+  width: 50%;
 
 }
