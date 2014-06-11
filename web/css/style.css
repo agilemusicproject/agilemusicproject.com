@@ -37,7 +37,7 @@
   max-width: 300px;
 }
 
-.deleteID {
+.deleteID, #form_photo {
   display: none;
 }
 
