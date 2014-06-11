@@ -40,6 +40,8 @@ input, textarea {
   background-color: #BBBBBB;
   cursor: pointer;
   border-radius: 4px;
+  border-bottom: 3px solid #333333;
+  border-right: 3px solid #333333;
   transition: none 125ms ease-out 0;
   transition-property: background-color, color;
   padding-top: 10px;
