@@ -70,7 +70,7 @@ class BandMembersDAO
             $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
-            if(is_null($data['photo'])) {
+            if (is_null($data['photo'])) {
                 $sql = 'SELECT photo_filename FROM band_members WHERE id = :id';
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(':id', $id);
