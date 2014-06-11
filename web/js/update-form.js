@@ -12,3 +12,13 @@ function photoOptions()
         document.getElementById('form_photo').style.display='none';
     });
 }
+
+function showOptions()
+{
+    document.getElementById('form_photo_actions').style.display='block';
+}
+
+function hideFileInput()
+{
+    document.getElementById('form_photo').style.display='none';
+}

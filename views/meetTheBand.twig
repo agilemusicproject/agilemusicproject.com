@@ -12,8 +12,8 @@
 {% endblock %}
 
 {% block content %}
-<form action="/meettheband/add">
-    <input type="submit" value="Add Band Member">
+<form>
+  <input onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
 </form>
 {% for row in results %}
 <p class="bandMemberEntry">

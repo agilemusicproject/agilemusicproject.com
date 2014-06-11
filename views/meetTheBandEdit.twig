@@ -18,7 +18,11 @@
     {{ form_rest(form) }}
   </form>
   <script>
-    photoOptions();
+    {% if page == 'update' %}
+      photoOptions();
+      showOptions();
+      hideFileInput();
+    {% endif %}
     CKEDITOR.replace('form_bio');
   </script>
 </div>
