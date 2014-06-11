@@ -9,13 +9,15 @@
 {% block header %} Update the Meet the Band Page {%endblock%}
 
 {% block content %}
-<script type="text/javascript" src="/js/text-area.js"></script>
+<script src="/js/ckeditor/ckeditor.js"></script>
 <div id="meetTheBandUpdateForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
   </form>
-  <button onclick="insertAtCursor(document.getElementById('form_bio'),'Test Text')">Add Test Text</button> 
+  <script>
+    CKEDITOR.replace('form_bio');
+  </script>
 </div>
 {% endblock %}

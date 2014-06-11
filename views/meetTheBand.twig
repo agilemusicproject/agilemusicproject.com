@@ -23,9 +23,7 @@
   <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
   <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
   {% if not (row.bio is null) %}
-    {% for paragraph in row.bio %}
-      <p>{{ paragraph|raw }}</p>
-    {% endfor %}
+    {{row.bio|raw}}
   {% endif %}
 </p>
 <form>

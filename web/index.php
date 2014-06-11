@@ -63,9 +63,6 @@ $app->match('/meettheband', function (Request $request) use ($app) {
         $dao->delete($_POST['id']);
     }
     $results = $dao->getAll();
-    foreach ($results as &$person) {
-        $person['bio'] = explode("\n", $person['bio']);
-    }
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
