@@ -10,7 +10,7 @@ class UploadManager
         $this->folderPath = $folderPath;    
     }
     
-    public upload($file)
+    public function upload($file)
     {
         $filename = null;
         if (!is_null($file)) {
@@ -20,7 +20,7 @@ class UploadManager
         return $filename;
     }
     
-    public delete($filename)
+    public function delete($filename)
     {
         if (file_exists($folderPath . '/' . $filename)) {
             unlink($folderPath . '/' . $filename);

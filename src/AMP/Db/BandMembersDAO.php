@@ -16,6 +16,8 @@ class BandMembersDAO
         $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
         $filename = $uploadManager->upload($data['photo']);
         try {
+            // check what the catch does by throwing the exception here
+            // then try to handle in a more user friendly way
             $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
             $stmt = $this->db->prepare($sql);
