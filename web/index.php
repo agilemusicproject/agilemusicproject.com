@@ -57,6 +57,11 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
 });
 
+$app->error(function (\Exception $e, $code) {
+    $app->redirect('/meettheband');
+    return new Response("<h1>testing</h1>");
+});
+
 $app->match('/meettheband', function (Request $request) use ($app) {
     $dao = new AMP\Db\BandMembersDAO($app['db']);
     if ($request->getMethod() == 'POST') {

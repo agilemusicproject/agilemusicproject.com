@@ -33,7 +33,7 @@ class BandMembersDAO
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            var_dump("<p>testing</p>");
+            throw new AddToDatabaseException($e->getMessage());
         }
     }
 
