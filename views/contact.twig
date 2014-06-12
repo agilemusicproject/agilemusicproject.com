@@ -10,8 +10,6 @@
 
 {% block content %}
 
-<br/>
-
 {% if notification %}
   <h1>{{ notification }}</h1>
 {% endif %}
@@ -27,5 +25,8 @@
     {{ form_widget(form) }}
     {{ form_rest(form) }}
   </form>
+  <script>
+    CKEDITOR.replace('form_message');
+  </script>
 </div>
 {% endblock %}

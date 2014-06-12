@@ -28,7 +28,9 @@ class ContactUsFormFactory
                 'attr' => array('class' => 'contactTextArea', 'placeholder' => 'What would you like to say?'),
                 'constraints' => new Assert\NotBlank(),
             ))
-            ->add('submit', 'submit')
+            ->add('submit', 'submit', array(
+                'attr' => array('class' => 'submitButton'),
+            ))
             ->getForm();
     }
 
