@@ -1,6 +1,8 @@
 <?php
 namespace AMP\Db;
 
+use AMP\Exception\AddToDatabaseException;
+
 class BandMembersDAO
 {
     private $db;
@@ -20,6 +22,7 @@ class BandMembersDAO
             $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
+            throw new \PDOException();
             $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
             $stmt = $this->db->prepare($sql);
@@ -30,7 +33,7 @@ class BandMembersDAO
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            print 'Error!: ' . $e->getMessage() . '<br/>';
+            var_dump("<p>testing</p>");
         }
     }
 
