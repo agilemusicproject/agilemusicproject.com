@@ -9,9 +9,9 @@
   <form class="loginForm" action="{{ path('admin_login_check') }}" method="post">
     {{ error }}
     Username:
-    <input type="text" name="_username" value="" placeholder="Username" />
+    <input type="text" name="_username" placeholder="Username" />
     Password:
-    <input type="password" name="_password" value="" placeholder="Password" />
+    <input type="password" name="_password" placeholder="Password" />
     <input type="submit" value="Login" />
   </form>
 {% endif %}
