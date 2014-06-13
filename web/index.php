@@ -59,7 +59,8 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->error(function (\Exception $e, $code) use($app) {
-    return new Response($app->redirect($app['request']->getRequestUri()));
+    return new Response("<h1>" . $e->getMessage() . "</h1>");
+    //return new Response($app->redirect($app['request']->getRequestUri()));
 });
 
 $app->match('/meettheband', function (Request $request) use ($app) {
