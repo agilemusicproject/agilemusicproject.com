@@ -100,9 +100,9 @@ $app->match('/meettheband', function (Request $request) use ($app) {
 });
 
 $app->get('/login', function (Request $request) use ($app) {
-    return $app['twig']->render('login.twig', array(
-        'error'         => $app['security.last_error']($request),
-    ));
+    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
+});
+    
 $app->match('/meettheband/add', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
     $form = $formFactory->getForm();

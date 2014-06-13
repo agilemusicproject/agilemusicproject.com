@@ -15,7 +15,9 @@
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <a href="{{ path('photos_logout') }}">Logout</a>
       {% endif %}
-      <!--<button onclick="visitMembersPage();" id="meetBandButton" type="button">Band Members Only!</button>-->
+      <div class="headernav" id="postitcontainer">
+       {% block postit %}{% endblock %}
+      </div>
     </nav>
     {% block loginButton %}{% endblock %}
     <article class="pageText">
