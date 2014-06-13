@@ -13,7 +13,7 @@
         <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
       </div>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <a href="{{ path('photos_logout') }}">Logout</a>
+        <a href="{{ path('admin_logout') }}">Logout</a>
       {% endif %}
       <div class="headernav" id="postitcontainer">
        {% block postit %}{% endblock %}

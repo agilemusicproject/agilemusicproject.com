@@ -48,8 +48,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         'general' => array(
             'anonymous' => 'true',
             'pattern' => '^/',
-            'form' => array('login_path' => '/login', 'check_path' => '/photos/login_check'),
-            'logout' => array('logout_path' => '/photos/logout'),
+            'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
+            'logout' => array('logout_path' => '/admin/logout'),
             'users' => array(
                 // raw password is foo
                 'admin' => array('ROLE_ADMIN',
@@ -58,7 +58,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
     ),
     'security.access_rules' => array(
-        array('^/photos', 'ROLE_ADMIN')
+        array('^/meettheband/add', 'ROLE_ADMIN'),
+        array('^/admin', 'ROLE_ADMIN')
     ),
 ));
 
