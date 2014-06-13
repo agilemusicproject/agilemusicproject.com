@@ -3,47 +3,31 @@ Feature: AMP Web Site Index Page
   As a visitor to the site
   I need to have an index page with links to other pages
 
-Scenario: Visit Index Page
+Scenario Outline: Visit Index Page
   Given I am on the homepage
-  Then the "#bloglink" element should contain "Blog"
-  And the "#contactuslink" element should contain "Contact Us"
-  And the "#meetTheBandlink" element should contain "Meet the Band"
-  And the "#musiclink" element should contain "Music"
-  And the "#photoslink" element should contain "Photos"
-  And the "#agilelink" element should contain "About Agile"
-  And the "#aboutlink" element should contain "About Us"
+  Then the "<id>" element should contain "<text>"
 
-Scenario: Click Blog Link
-  Given I am on the homepage
-  When I follow "Blog"
-  Then I should be on "/blog"
-  
-Scenario: Click Contact Us Link
-  Given I am on the homepage
-  When I follow "Contact Us"
-  Then I should be on "/contactus"
+  Examples:
+    | id               | text          |
+    | #bloglink        | Blog          |
+    | #contactuslink   | Contact Us    |
+    | #meetTheBandlink | Meet the Band |
+    | #musiclink       | Music         |
+    | #photoslink      | Photos        |
+    | #agilelink       | About Agile   |
+    | #aboutlink       | About Us      |
 
-Scenario: Click Meet the Band Link
+Scenario Outline: Click Home Page Menu Link
   Given I am on the homepage
-  When I follow "Meet the Band"
-  Then I should be on "/meettheband"
+  When I follow "<page>"
+  Then I should be on "<url>"
 
-Scenario: Click Music Link
-  Given I am on the homepage
-  When I follow "Music"
-  Then I should be on "/music"
-
-Scenario: Click Photos Link
-  Given I am on the homepage
-  When I follow "Photos"
-  Then I should be on "/photos"
-
-Scenario: Click Agile Link
-  Given I am on the homepage
-  When I follow "Agile"
-  Then I should be on "/agile"
-
-Scenario: Click About Us Link
-  Given I am on the homepage
-  When I follow "About Us"
-  Then I should be on "/about"
+  Examples:
+  | page          | url          |
+  | Blog          | /blog        |
+  | Contact Us    | /contactus   |
+  | Meet the Band | /meettheband |
+  | Our Music     | /music       |
+  | Photos        | /photos      |
+  | Agile         | /agile       |
+  | About Us      | /about       |

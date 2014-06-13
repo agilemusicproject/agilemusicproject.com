@@ -1,26 +1,23 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <script type="text/javascript" src="js/base.js"></script>
-    <script type="text/javascript" src="js/post-note.js"></script>
+    <link rel="shortcut icon" type="/image/png" href="/favicon.png" />
+    <script type="text/javascript" src="/js/post-note.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body onload="{% block onload %}{% endblock %}">
     <nav>
       <div class="headernav" id="logocontainer">
-        <a href="/"><img src="images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
+        <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
       </div>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <a href="{{ path('photos_logout') }}">Logout</a>
       {% endif %}
       <!--<button onclick="visitMembersPage();" id="meetBandButton" type="button">Band Members Only!</button>-->
     </nav>
-    <div class="headernav" id="postitcontainer">
-      {% block postit %}{% endblock %}
-    </div>
-
+    {% block loginButton %}{% endblock %}
     <article class="pageText">
       <h1 class="title">{% block header %}{% endblock %}</h1>
       {% block content %} {% endblock %}

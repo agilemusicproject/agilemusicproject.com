@@ -6,4 +6,6 @@ vendor/
 .bash*
 .composer/
 qa/
-vendor - backup
+config/amp.ini
+test/coverage/
+.project

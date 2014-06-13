@@ -18,7 +18,7 @@ function drawPostNote(idName, textArray, degrees)
         }
         context.textAlign = 'center';
     };
-    imageObj.src = "images/sticky-notes_v2.png";
+    imageObj.src = "/images/sticky-notes_v2.png";
 }
 
 function drawIndexPage()
@@ -34,7 +34,7 @@ function drawIndexPage()
 
 function drawMusicPostNote()
 {
-    drawPostNote( "musicpostcard", ["Music"], -10);
+    drawPostNote( "musicpostcard", ["Our Music"], -10);
 }
 
 function drawAgilePostNote()
@@ -44,7 +44,7 @@ function drawAgilePostNote()
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", ["Meet", "The Band"], 15);
+    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15);
 }
 
 function drawPhotosPostNote()
@@ -66,4 +66,3 @@ function drawAboutPostNote()
 {
     drawPostNote( "aboutpostcard", ["About Us"], 17);
 }
-

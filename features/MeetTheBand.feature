@@ -3,12 +3,38 @@ Feature: AMP Web Site MeetTheBand Page
   As a visitor to the site
   I need to have an MeetTheBand page
 
-Scenario: Visit MeetTheBand Page
-  Given I am on "/meettheband"
-  Then the ".headernav a" element should contain "Index Page"
-  And the "#meetTheBandpostcard" element should contain "Meet the Band"
-
-Scenario: Click AMP Logo
-  Given I am on "/meettheband"
-  When I follow "Index Page"
-  Then I should be on the homepage
+  Scenario: Manage Band Members
+    Given I am on "/meettheband"
+    Then I should see 0 ".bandMemberEntry" elements
+    When I go to "meettheband/add"
+    Then I should see a "form" element
+    When I fill in "form_first_name" with "Action"
+    And I fill in "form_last_name" with "Jackson"
+    And I fill in "form_roles" with "Super Cop"
+    And I fill in "form_bio" with "A celebrated lieutenant in the police force"
+    And I press "Submit"
+    Then I should be on "/meettheband"
+    And I should see "Action Jackson"
+    And I should see "Super Cop"
+    And I should see "A celebrated lieutenant in the police force"
+    When I go to "/meettheband/add"
+    When I fill in "form_first_name" with "Bilbo"
+    And I fill in "form_last_name" with "Baggins"
+    And I fill in "form_roles" with "Bravest Little Hobbit of Them All"
+    And I press "Submit"
+    Then I should be on "/meettheband"
+    And I should see "Bilbo Baggins"
+    And I should see "Bravest Little Hobbit of Them All"
+    When I press "Delete"
+    Then I should not see "Action Jackson"
+    When I go to "meettheband/update/2"
+    Then the "form_first_name" field should contain "Bilbo"
+    Then the "form_last_name" field should contain "Baggins"
+    Then the "form_roles" field should contain "Bravest Little Hobbit of Them All"
+    When I fill in "form_roles" with "Professional Thief"
+    And I press "Submit"
+    Then I should be on "/meettheband"
+    And I should see "Bilbo Baggins"
+    And I should see "Professional Thief"
+    And I press "Delete"
+    Then I should see 0 ".bandMemberEntry" elements
