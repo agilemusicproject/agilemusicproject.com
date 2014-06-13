@@ -12,7 +12,6 @@ class MeetTheBandFormFactory
     {
         $default['photo'] = null;
 
-        // research csrf_protection
         $this->form = $formService->createBuilder('form', $default)
             ->add('first_name', 'text', array('required' => true,
                                               'label' => false,
@@ -24,7 +23,6 @@ class MeetTheBandFormFactory
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles')))
             ->add('photo', 'file', array('required' => false))
-            // maybe put cols and rows in css
             ->add('bio', 'textarea', array('label' => false,
                                            'label_attr' => array('style' => 'vertical-align: top;'),
                                            'attr' => array('placeholder' => 'Bio',
