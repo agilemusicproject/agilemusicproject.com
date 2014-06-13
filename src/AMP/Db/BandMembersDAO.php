@@ -1,6 +1,8 @@
 <?php
 namespace AMP\Db;
 
+use AMP\UploadManager;
+
 use AMP\Exception\AddToDatabaseFailedException;
 use AMP\Exception\GetUserFailedException;
 use AMP\Exception\GetAllUsersFailedException;
@@ -18,14 +20,11 @@ class BandMembersDAO
 
     public function add(array $data)
     {
-        // pull photo stuff into own class maybe
-        $filename = null;
-        if (!is_null($data['photo'])) {
-            $image = $data['photo'];
-            $filename =  $image->getClientOriginalName();
-            $image->move(__DIR__ . '/../../../web/images/photos', $filename);
-        }
+        $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
+        $filename = $uploadManager->upload($data['photo']);
         try {
+            // check what the catch does by throwing the exception here
+            // then try to handle in a more user friendly way
             $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
             $stmt = $this->db->prepare($sql);
@@ -67,26 +66,29 @@ class BandMembersDAO
 
     public function update($id, array $data)
     {
+        $original_data = $this->get($id);
+        $original_filename = $original_data['photo_filename'];
         $filename = null;
-        if (!is_null($data['photo'])) {
-            $image = $data['photo'];
-            $filename =  $image->getClientOriginalName();
-            $image->move(__DIR__ . '/../../../web/images/photos', $filename);
+        $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
+        if ($data['photo_actions'] == 'photo_delete') {
+            $data['photo'] = null;
+            $uploadManager->delete($original_filename);
+        } elseif ($data['photo_actions'] == 'photo_change') {
+            if (!is_null($original_filename)) {
+                $uploadManager->delete($original_filename);
+            }
+            $filename = $uploadManager->upload($data['photo']);
+        } elseif ($data['photo_actions'] == 'photo_nothing') {
+            $data['photo'] = null;
+            $filename = $original_filename;
         }
         try {
-            if (is_null($data['photo'])) {
-                $sql = 'SELECT photo_filename FROM band_members WHERE id = :id';
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(':id', $id);
-                $stmt->execute();
-                $filename = $stmt->fetchColumn();
-            }
             $sql = 'UPDATE band_members
                     SET first_name = :first_name,
-                    last_name = :last_name,
-                    roles = :roles,
-                    photo_filename = :photo_filename,
-                    bio = :bio
+                        last_name = :last_name,
+                        roles = :roles,
+                        photo_filename = :photo_filename,
+                        bio = :bio
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':first_name', $data['first_name']);

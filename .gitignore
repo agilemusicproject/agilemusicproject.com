@@ -8,3 +8,4 @@ vendor/
 qa/
 config/amp.ini
 test/coverage/
+.project

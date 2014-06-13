@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
+use Silex\Application\UrlGeneratorTrait;
 
 $app = new Silex\Application();
 try {
@@ -23,6 +24,15 @@ try {
 } catch (ConfigValueNotFoundException $e) {
     $app['debug'] = false;
 }
+$app['debug'] = true;
+
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+$app->register(new Silex\Provider\SessionServiceProvider());
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../views',
+));
 
 $dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('MYSQL_DBNAME');
 $app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
@@ -33,6 +43,26 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views', 'twig.options' => array('strict_variables' => false)
+));
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'general' => array(
+            'anonymous' => 'true',
+            'pattern' => '^/',
+            'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
+            'logout' => array('logout_path' => '/admin/logout'),
+            'users' => array(
+                // raw password is foo
+                'admin' => array('ROLE_ADMIN',
+                            '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+            ),
+        ),
+    ),
+    'security.access_rules' => array(
+        array('^/meettheband/add', 'ROLE_ADMIN'),
+        array('^/admin', 'ROLE_ADMIN')
+    ),
 ));
 
 $app->get('/', function () use ($app) {
@@ -76,6 +106,10 @@ $app->match('/meettheband', function (Request $request) use ($app) {
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
+$app->get('/login', function (Request $request) use ($app) {
+    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
+});
+    
 $app->match('/meettheband/add', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
@@ -85,7 +119,7 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
         $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'title' => 'Add'));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'page' => 'add', 'title' => 'Add'));
 });
 
 $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
@@ -97,7 +131,7 @@ $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($a
         $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'title' => 'Edit'));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'page' => 'update', 'title' => 'Edit'));
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {

@@ -1,6 +1,18 @@
-<form action="{{ path('admin_login_check') }}" method="post">
+{% extends "base.twig" %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block header %}Login Page{% endblock %}
+
+{% block content %}
+{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+  <form class="loginForm" action="{{ path('admin_login_check') }}" method="post">
     {{ error }}
-    <input type="text" name="_username" value="{{ last_username }}" />
-    <input type="password" name="_password" value="" />
-    <input type="submit" />
-</form>
+    Username:
+    <input type="text" name="_username" placeholder="Username" />
+    Password:
+    <input type="password" name="_password" placeholder="Password" />
+    <input type="submit" value="Login" />
+  </form>
+{% endif %}
+{% endblock %}

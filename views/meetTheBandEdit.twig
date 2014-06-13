@@ -9,6 +9,11 @@
 {% block header %} {{ title }} Band Member {%endblock%}
 
 {% block content %}
+<<<<<<< HEAD
+=======
+<script src="/js/ckeditor/ckeditor.js"></script>
+<script src="/js/update-form.js"></script>
+>>>>>>> rawilder
 <div id="meetTheBandUpdateForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
@@ -16,6 +21,11 @@
     {{ form_rest(form) }}
   </form>
   <script>
+    {% if page == 'update' %}
+      photoOptions();
+      showOptions();
+      hideFileInput();
+    {% endif %}
     CKEDITOR.replace('form_bio');
   </script>
 </div>

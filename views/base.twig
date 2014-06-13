@@ -4,6 +4,7 @@
     <link rel="shortcut icon" type="/image/png" href="/favicon.png" />
     <script type="text/javascript" src="/js/post-note.js"></script>
     <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -12,7 +13,10 @@
       <div class="headernav" id="logocontainer">
         <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
       </div>
-     <div class="headernav" id="postitcontainer">
+      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('admin_logout') }}">Logout</a>
+      {% endif %}
+      <div class="headernav" id="postitcontainer">
        {% block postit %}{% endblock %}
       </div>
     </nav>
