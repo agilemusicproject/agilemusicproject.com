@@ -1,7 +1,12 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\AddToDatabaseException;
+use AMP\Exception\AddToDatabaseFailedException;
+use AMP\Exception\GetUserFailedException;
+use AMP\Exception\GetAllUsersFailedException;
+use AMP\Exception\UpdateUserFailedException;
+use AMP\Exception\DeletingUserFailedException;
+
 
 class BandMembersDAO
 {
@@ -22,7 +27,6 @@ class BandMembersDAO
             $image->move(__DIR__ . '/../../../web/images/photos', $filename);
         }
         try {
-            throw new \PDOException();
             $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
             $stmt = $this->db->prepare($sql);
@@ -33,7 +37,7 @@ class BandMembersDAO
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new AddToDatabaseException($e->getMessage());
+            throw new AddToDatabaseFailedException($e->getMessage());
         }
     }
 
@@ -45,9 +49,8 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (POException $e) {
-            print 'Error!: ' . $e->getMessage() . '<br/>';
-            die();
+        } catch (\PDOException $e) {
+            throw new GetUserFailedException($e->getMessage());
         }
     }
 
@@ -58,9 +61,8 @@ class BandMembersDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            print 'Error!: ' . $e->getMessage() . '<br/>';
-            die();
+        } catch (\PDOException $e) {
+            throw new GetAllUsersFailedException($e->getMessage());
         }
     }
 
@@ -96,9 +98,8 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
-        } catch (PDOException $e) {
-            print 'Error!: ' . $e->getMessage() . '<br/>';
-            die();
+        } catch (\PDOException $e) {
+            throw new UpdateUserFailedException($e->getMessage());
         }
     }
 
@@ -109,9 +110,8 @@ class BandMembersDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (PDOException $e) {
-            print 'Error!: ' . $e->getMessage() . '<br/>';
-            die();
+        } catch (\PDOException $e) {
+            throw new DeletingUserFailedException($e->getMessage());
         }
     }
 }

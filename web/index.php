@@ -59,10 +59,7 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->error(function (\Exception $e, $code) use($app) {
-    //return new Response("<h1>" . $e->getMessage() . "</h1>");
-    //return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
-    return new Response($app->redirect($app['request']->getRequestUri()));
-
+    return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
 });
 
 $app->match('/meettheband', function (Request $request) use ($app) {
