@@ -25,7 +25,7 @@ class ContactUsFormFactory
             ))
             ->add('message', 'textarea', array(
                 'label_attr' => array('style' => 'vertical-align: top;'),
-                'attr' => array('class' => 'contactTextArea', 'placeholder' => 'What would you like to say?'),
+                'attr' => array('placeholder' => 'What would you like to say?'),
                 'constraints' => new Assert\NotBlank(),
             ))
             ->add('submit', 'submit', array(

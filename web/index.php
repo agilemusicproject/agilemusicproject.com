@@ -119,7 +119,9 @@ $app->match('/meettheband/add', function (Request $request) use ($app) {
         $dao->add($form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'page' => 'add', 'title' => 'Add'));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
+                                                              'page' => 'add',
+                                                              'title' => 'Add'));
 });
 
 $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
@@ -131,7 +133,9 @@ $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($a
         $dao->update($id, $form->getData());
         return $app->redirect('/meettheband');
     }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(), 'page' => 'update', 'title' => 'Edit'));
+    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
+                                                              'page' => 'update',
+                                                              'title' => 'Edit'));
 });
 
 $app->match('/contactus', function (Request $request) use ($app) {
