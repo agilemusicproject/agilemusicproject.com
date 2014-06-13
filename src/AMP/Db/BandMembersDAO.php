@@ -1,5 +1,6 @@
 <?php
 namespace AMP\Db;
+
 use AMP\UploadManager;
 
 class BandMembersDAO
@@ -61,22 +62,19 @@ class BandMembersDAO
 
     public function update($id, array $data)
     {
-        // $form->getData()['photo_actions'] == 'photo_delete' | 'photo_change' | 'photo_nothing'
-        // if delete remove photo from upload and update database with NULL
-        // if change, remove old photo, upload new, and update database with new name
-        // if do nothing, then current implementation is fine
-        $original_filename = $this->get($id)['photo_filename'];
+        $original_data = $this->get($id);
+        $original_filename = $original_data['photo_filename'];
         $filename = null;
         $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-        if ($form->getData()['photo_actions'] == 'photo_delete') {
+        if ($data['photo_actions'] == 'photo_delete') {
             $data['photo'] = null;
             $uploadManager->delete($original_filename);
-        }
-        elseif ($form->getData()['photo_actions'] == 'photo_change') {
-            $uploadManager->delete($original_filename);
+        } elseif ($data['photo_actions'] == 'photo_change') {
+            if (!is_null($original_filename)) {
+                $uploadManager->delete($original_filename);
+            }
             $filename = $uploadManager->upload($data['photo']);
-        }
-        elseif (($form->getData()['photo_actions'] == 'photo_nothing')) {
+        } elseif ($data['photo_actions'] == 'photo_nothing') {
             $data['photo'] = null;
             $filename = $original_filename;
         }

@@ -7,7 +7,7 @@ class UploadManager
     
     public function __construct($folderPath)
     {
-        $this->folderPath = $folderPath;    
+        $this->folderPath = $folderPath;
     }
     
     public function upload($file)
@@ -15,15 +15,15 @@ class UploadManager
         $filename = null;
         if (!is_null($file)) {
             $filename =  $file->getClientOriginalName();
-            $image->move($this->folderPath, $filename);
+            $file->move($this->folderPath, $filename);
         }
         return $filename;
     }
     
     public function delete($filename)
     {
-        if (file_exists($folderPath . '/' . $filename)) {
-            unlink($folderPath . '/' . $filename);
+        if (file_exists($this->folderPath . '/' . $filename)) {
+            unlink($this->folderPath . '/' . $filename);
         }
     }
 }
