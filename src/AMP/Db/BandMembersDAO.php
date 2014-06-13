@@ -7,7 +7,6 @@ use AMP\Exception\GetAllUsersFailedException;
 use AMP\Exception\UpdateUserFailedException;
 use AMP\Exception\DeletingUserFailedException;
 
-
 class BandMembersDAO
 {
     private $db;
