@@ -18,6 +18,9 @@
     </nav>
     {% block loginButton %}{% endblock %}
     <article class="pageText">
+      {% if errorMessage %}
+        <h1>{{ errorMessage }}</h1>
+      {% endif %}
       <h1 class="title">{% block header %}{% endblock %}</h1>
       {% block content %} {% endblock %}
     </article>

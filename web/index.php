@@ -31,7 +31,8 @@ $app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
-$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__ . '/../views'));
+$app->register(new Silex\Provider\TwigServiceProvider(),
+              array('twig.path' => __DIR__ . '/../views', 'twig.options' => array('strict_variables' => false)));
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -57,9 +58,8 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
 });
 
-$app->error(function (\Exception $e, $code) {
-    $app->redirect('/meettheband');
-    return new Response("<h1>testing</h1>");
+$app->error(function (\Exception $e, $code) use($app) {
+    return new Response($app->redirect($app['request']->getRequestUri()));
 });
 
 $app->match('/meettheband', function (Request $request) use ($app) {
