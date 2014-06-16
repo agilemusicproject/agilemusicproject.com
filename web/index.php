@@ -29,8 +29,6 @@ try {
     $app['debug'] = false;
 }
 
-$app['debug'] = true;
-
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -40,7 +38,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_mysql',
-        'dbhost' => $app['config']->get('MYSQL_HOST'),
+        'host' => $app['config']->get('MYSQL_HOST'),
         'dbname' => $app['config']->get('MYSQL_DBNAME'),
         'user' => $app['config']->get('MYSQL_USER'),
         'password' => $app['config']->get('MYSQL_PASSWORD'),
@@ -108,8 +106,8 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
 $app->match('/meettheband', function (Request $request) use ($app) {
     $dao = new AMP\Db\BandMembersDAO($app['db']);
-    if ($request->getMethod() == 'POST') {
-        $dao->delete($_POST['id']);
+    if ($request->isMethod('POST')) {
+        $dao->delete($request->get('id'));
     }
     $results = $dao->getAll();
     foreach ($results as &$person) {
@@ -171,7 +169,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
 
-    if ($request->getMethod() == 'POST') {
+    if ($request->isMethod('POST')) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();

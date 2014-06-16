@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2014 at 10:56 PM
+-- Generation Time: Jun 05, 2014 at 04:49 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,16 +17,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `amp`
+-- Database: `amp_test`
 --
-
---
--- Dumping data for table `band_members`
---
-
-INSERT INTO `band_members` (`id`, `first_name`, `last_name`, `roles`, `photo_filename`, `bio`) VALUES
-(1, 'Test', 'Jones', 'tester', NULL, NULL),
-(2, 'Test2', 'Jane', 'tester2', NULL, 'This is just a test bio.');
+DROP DATABASE IF EXISTS `amp_test`;
+CREATE DATABASE IF NOT EXISTS `amp_test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `amp_test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
