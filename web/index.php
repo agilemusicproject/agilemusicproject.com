@@ -99,7 +99,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
 $app->match('/meettheband', function (Request $request) use ($app) {
     $dao = new AMP\Db\BandMembersDAO($app['db']);
-    if ($request->getMethod() == 'POST') {
+    if ($request->isMethod('POST')) {
         $dao->delete($request->get('id'));
     }
     $results = $dao->getAll();
@@ -147,7 +147,7 @@ $app->match('/contactus', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
 
-    if ($request->getMethod() == 'POST') {
+    if ($request->isMethod('POST')) {
         $form->submit($request);
         if ($form->isValid()) {
             $formDefault = $form->getData();
