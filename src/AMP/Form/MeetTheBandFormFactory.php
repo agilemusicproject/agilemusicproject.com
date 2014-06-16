@@ -15,13 +15,13 @@ class MeetTheBandFormFactory
         // research csrf_protection
         $this->form = $formService->createBuilder('form', $default)
             ->add(
-            	'first_name',
-            	'text',
-            	array(
-            		'required' => true,
-                    'label' => false,
-                    'attr' => array('placeholder' => 'First Name')
-        		)
+                'first_name',
+                'text',
+                array(
+                      'required' => true,
+                      'label' => false,
+                      'attr' => array('placeholder' => 'First Name')
+                )
             )
             ->add('last_name', 'text', array('required' => true,
                                              'label' => false,
@@ -30,12 +30,12 @@ class MeetTheBandFormFactory
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles')))
             ->add('photo_actions', 'choice', array('choices' => array('photo_nothing' => 'Do Nothing',
-                                  				   					  'photo_change' => 'New Photo',
-                                  				   					  'photo_delete' => 'Delete Photo'),
-                                  			 	   'expanded' => false,
-                                        		   'label' => 'Photo'))
+                                                                      'photo_change' => 'New Photo',
+                                                                      'photo_delete' => 'Delete Photo'),
+                                                   'expanded' => false,
+                                                   'label' => 'Photo'))
             ->add('photo', 'file', array('required' => false,
-            							 'label' => false))
+                                         'label' => false))
             
             ->add('photo', 'file', array('required' => false,
                                          'label' => false))
