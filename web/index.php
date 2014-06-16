@@ -130,9 +130,8 @@ $app->match('/account', function (Request $request) use ($app) {
     if ($form->isValid()) {
         $dao = new AMP\Db\AccountManagerDAO($app['db']);
         $data = $form->getData();
-        var_dump($data);
         $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
-        $dao->updateBandMemberPassword($form->getData());
+        $dao->updateBandMemberPassword($data);
         return $app->redirect('/');
     }
     return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
