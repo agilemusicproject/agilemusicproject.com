@@ -6,7 +6,12 @@ Feature: AMP Web Site MeetTheBand Page
   Scenario: Manage Band Members
     Given I am on "/meettheband"
     Then I should see 0 ".bandMemberEntry" elements
-    When I go to "meettheband/add"
+  	When I go to "meettheband/add"
+  	Then I should be on "login"
+  	When I fill in "_username" with "admin"
+  	And I fill in "_password" with "foo"
+  	And I press "Login"
+  	Then I should be on "meettheband/add"
     Then I should see a "form" element
     When I fill in "form_first_name" with "Action"
     And I fill in "form_last_name" with "Jackson"
