@@ -11,10 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
+use AMP\User\UserProvider;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Application\SecurityTrait;
 
 $app = new Silex\Application();
+
 try {
     $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 } catch (FileNotFoundException $e) {
@@ -26,19 +28,24 @@ try {
 } catch (ConfigValueNotFoundException $e) {
     $app['debug'] = false;
 }
+
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
 $app->register(new Silex\Provider\SessionServiceProvider());
-
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
-$dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('MYSQL_DBNAME');
-$app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
-$app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver' => 'pdo_mysql',
+        'dbhost' => $app['config']->get('MYSQL_HOST'),
+        'dbname' => $app['config']->get('MYSQL_DBNAME'),
+        'user' => $app['config']->get('MYSQL_USER'),
+        'password' => $app['config']->get('MYSQL_PASSWORD'),
+    ),
+));
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
@@ -54,13 +61,10 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'pattern' => '^/',
             'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
             'logout' => array('logout_path' => '/admin/logout'),
-            'users' => array(
-                // raw password is foo
-                'admin' => array('ROLE_ADMIN',
-                            '0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33'),
-                'chris' => array('ROLE_ADMIN',
-                            '81b06facd90fe7a6e9bbd9cee59736a79105b7be'),
-            ),
+            'users' => $app->share(function () use ($app) {
+                // Specific class App\User\UserProvider is described below
+                return new UserProvider($app['db']);
+            }),
         ),
     ),
     'security.access_rules' => array(
