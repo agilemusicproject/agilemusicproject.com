@@ -69,13 +69,14 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
     'security.access_rules' => array(
         array('^/meettheband/add', 'ROLE_ADMIN'),
-        array('^/admin', 'ROLE_ADMIN')
+        array('^/admin', 'ROLE_ADMIN'),
+        array('^/account', 'ROLE_ADMIN'),
     ),
 ));
 
-$app['security.encoder.digest'] = $app->share(function ($app) {
-    return new MessageDigestPasswordEncoder('sha1', false, 1);
-});
+//$app['security.encoder.digest'] = $app->share(function ($app) {
+//    return new MessageDigestPasswordEncoder('sha1', false, 1);
+//});
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -123,16 +124,18 @@ $app->get('/login', function (Request $request) use ($app) {
 });
 
 $app->match('/account', function (Request $request) use ($app) {
-    $formFactory = new AMP\Form\CreateAccountFormFactory($app['form.factory']);
+    $formFactory = new AMP\Form\UpdateAccountFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
     $form->handleRequest($request);
     if ($form->isValid()) {
+        $dao = new AMP\Db\AccountManagerDAO($app['db']);
         $data = $form->getData();
         var_dump($data);
-        $hash = $app['security.encoder.digest']->encodePassword($data['password'], '');
-        var_dump($hash);
+        $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
+        $dao->updateBandMemberPassword($form->getData());
+        return $app->redirect('/');
     }
-    return $app['twig']->render('createAccount.twig', array('form' => $form->createView()));
+    return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
 });
 
 

@@ -4,7 +4,7 @@ namespace AMP\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateAccountFormFactory
+class UpdateAccountFormFactory
 {
     private $form;
 
@@ -14,7 +14,7 @@ class CreateAccountFormFactory
             ->add('username', 'text', array(
                 'constraints' => new Assert\NotBlank(),
             ))
-            ->add('password', 'text', array(
+            ->add('newPassword', 'text', array(
                 'constraints' => new Assert\NotBlank(),
             ))
             ->add('submit', 'submit')

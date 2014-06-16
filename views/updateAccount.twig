@@ -1,0 +1,15 @@
+{% extends "base.twig" %}
+
+{% block title %} Update Account {% endblock %}
+
+{% block header %}Update Account{%endblock%}
+
+{% block content %}
+
+<form class="updateAccountForm" method="POST" enctype="multipart/form-data">
+  {{ form_errors(form) }}
+  {{ form_widget(form) }}
+  {{ form_rest(form) }}
+</form>
+
+{% endblock %}
