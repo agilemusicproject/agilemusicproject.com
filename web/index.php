@@ -103,10 +103,6 @@ $app->match('/meettheband', function (Request $request) use ($app) {
         $dao->delete($request->get('id'));
     }
     $results = $dao->getAll();
-    foreach ($results as &$person) {
-        $person['bio'] = explode("\n", $person['bio']);
-    }
-    unset($person);
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
 
