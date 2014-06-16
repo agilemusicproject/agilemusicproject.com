@@ -8,9 +8,11 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
 use Silex\Application\UrlGeneratorTrait;
+use Silex\Application\SecurityTrait;
 
 $app = new Silex\Application();
 try {
@@ -55,7 +57,9 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'users' => array(
                 // raw password is foo
                 'admin' => array('ROLE_ADMIN',
-                            '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+                            '0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33'),
+                'chris' => array('ROLE_ADMIN',
+                            '81b06facd90fe7a6e9bbd9cee59736a79105b7be'),
             ),
         ),
     ),
@@ -64,6 +68,10 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         array('^/admin', 'ROLE_ADMIN')
     ),
 ));
+
+$app['security.encoder.digest'] = $app->share(function ($app) {
+    return new MessageDigestPasswordEncoder('sha1', false, 1);
+});
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -109,7 +117,21 @@ $app->match('/meettheband', function (Request $request) use ($app) {
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
-    
+
+$app->match('/account', function (Request $request) use ($app) {
+    $formFactory = new AMP\Form\CreateAccountFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $data = $form->getData();
+        var_dump($data);
+        $hash = $app['security.encoder.digest']->encodePassword($data['password'], '');
+        var_dump($hash);
+    }
+    return $app['twig']->render('createAccount.twig', array('form' => $form->createView()));
+});
+
+
 $app->match('/meettheband/add', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
     $form = $formFactory->getForm();
