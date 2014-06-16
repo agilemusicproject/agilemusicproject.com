@@ -7,7 +7,7 @@ class BandMembersDAO
 {
     private $db;
 
-    public function __construct(\PDO $db)
+    public function __construct(\Doctrine\DBAL\Connection $db)
     {
         $this->db = $db;
     }

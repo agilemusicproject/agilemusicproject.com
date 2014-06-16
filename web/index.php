@@ -13,6 +13,7 @@ use AMP\Exception\FileNotFoundException;
 use Silex\Application\UrlGeneratorTrait;
 
 $app = new Silex\Application();
+
 try {
     $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
 } catch (FileNotFoundException $e) {
@@ -24,19 +25,30 @@ try {
 } catch (ConfigValueNotFoundException $e) {
     $app['debug'] = false;
 }
+
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
 $app->register(new Silex\Provider\SessionServiceProvider());
-
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
+/*
 $dsn = 'mysql:host=' . $app['config']->get('MYSQL_HOST') . '; dbname=' . $app['config']->get('MYSQL_DBNAME');
 $app['db'] = new PDO($dsn, $app['config']->get('MYSQL_USER'), $app['config']->get('MYSQL_PASSWORD'));
 $app['db']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+*/
+
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver' => 'pdo_mysql',
+        'dbhost' => $app['config']->get('MYSQL_HOST'),
+        'dbname' => $app['config']->get('MYSQL_DBNAME'),
+        'user' => $app['config']->get('MYSQL_USER'),
+        'password' => $app['config']->get('MYSQL_PASSWORD'),
+    ),
+));
 
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
