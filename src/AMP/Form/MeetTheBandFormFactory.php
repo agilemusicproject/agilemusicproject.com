@@ -17,32 +17,42 @@ class MeetTheBandFormFactory
             ->add('first_name', 'text', array(
                 'required' => true,
                 'label' => false,
-                'attr' => array('placeholder' => 'First Name')))
+                'attr' => array('placeholder' => 'First Name'),
+                'label_attr' => array('class' => 'formLabel'),
+            ))
             ->add('last_name', 'text', array(
                 'required' => true,
                 'label' => false,
-                'attr' => array('placeholder' => 'Last Name')))
+                'attr' => array('placeholder' => 'Last Name'),
+                'label_attr' => array('class' => 'formLabel'),
+            ))
             ->add('roles', 'text', array(
                 'required' => true,
                 'label' => false,
-                'attr' => array('placeholder' => 'Roles')))
-            ->add('photo', 'file', array('required' => false))
+                'attr' => array('placeholder' => 'Roles'),
+                'label_attr' => array('class' => 'formLabel'),
+            ))
+            ->add('photo', 'file', array(
+                'required' => false,
+            ))
             ->add('photo_actions', 'choice', array(
                 'choices' => array(
                     'photo_nothing' => 'Do Nothing',
                     'photo_change' => 'New Photo',
                     'photo_delete' => 'Delete Photo'),
                 'expanded' => 'false',
-                'label' => 'Photo'))
+                'label' => 'Photo',
+            ))
             ->add('photo', 'file', array(
                 'required' => false,
-                'label' => false))
-            // maybe put cols and rows in css
+                'label' => false,
+            ))
             ->add('bio', 'textarea', array(
                 'label' => false,
                 'label_attr' => array('style' => 'vertical-align: top;'),
                 'attr' => array('placeholder' => 'Bio'),
-                'required' => false))
+                'required' => false,
+            ))
             ->add('submit', 'submit', array(
                 'attr' => array('class' => 'submitButton'),
             ))
