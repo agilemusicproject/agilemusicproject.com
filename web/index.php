@@ -65,6 +65,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
     'security.access_rules' => array(
         array('^/meettheband/add', 'ROLE_ADMIN'),
+        array('^/meettheband/update', 'ROLE_ADMIN'),
         array('^/admin', 'ROLE_ADMIN')
     ),
 ));

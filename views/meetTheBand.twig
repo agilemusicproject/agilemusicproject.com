@@ -12,26 +12,30 @@
 {% endblock %}
 
 {% block content %}
-<form>
-  <input onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
-</form>
+{% if is_granted('ROLE_ADMIN') %}
+  <form>
+    <input onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
+  </form>
+{% endif %}
 {% for row in results %}
-<p class="bandMemberEntry">
-  {% if not (row.photo_filename is null) %}
-    <img src="images/photos/{{ row.photo_filename }}" /><br/>
+  <p class="bandMemberEntry">
+    {% if not (row.photo_filename is null) %}
+      <img src="images/photos/{{ row.photo_filename }}" /><br/>
+    {% endif %}
+    <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
+    <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
+    {% if not (row.bio is null) %}
+    	 <p>{{ row.bio|raw }}</p>
+    {% endif %}
+  </p>
+  {% if is_granted('ROLE_ADMIN') %}
+    <form>
+      <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
+    </form>
+    <form method="post" action="/meettheband">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input type="submit" value="Delete">
+    </form>
   {% endif %}
-  <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
-  <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
-  {% if not (row.bio is null) %}
-  	 <p>{{ row.bio|raw }}</p>
-  {% endif %}
-</p>
-<form>
-  <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
-</form>
-<form method="post" action="/meettheband">
-  <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-  <input type="submit" value="Delete">
-</form>
 {% endfor %}
 {% endblock %}
