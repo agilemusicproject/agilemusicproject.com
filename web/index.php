@@ -29,6 +29,12 @@ try {
     $app['debug'] = false;
 }
 
+if ($app['debug'] === false) {
+    $app->error(function (\Exception $e, $code) use ($app) {
+        return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
+    });
+}
+
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -72,10 +78,6 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
 ));
 
-//$app['security.encoder.digest'] = $app->share(function ($app) {
-//    return new MessageDigestPasswordEncoder('sha1', false, 1);
-//});
-
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
 });
@@ -98,10 +100,6 @@ $app->get('/agile', function () use ($app) {
 
 $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
-});
-
-$app->error(function (\Exception $e, $code) use ($app) {
-    return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
 });
 
 $app->match('/meettheband', function (Request $request) use ($app) {
