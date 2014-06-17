@@ -8,11 +8,11 @@
 {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
   <form class="loginForm" action="{{ path('admin_login_check') }}" method="post">
     {{ error }}
-    Username:
-    <input type="text" name="_username" placeholder="Username" />
-    Password:
-    <input type="password" name="_password" placeholder="Password" />
-    <input type="submit" value="Login" />
+    <label>Username:</label>
+    <input type="text" name="_username" class="loginFormField" placeholder="Username" />
+    <label>Password:</label>
+    <input type="password" name="_password" class="loginFormField" placeholder="Password" />
+    <input type="submit" value="Login" class="loginFormField" />
   </form>
 {% endif %}
 {% endblock %}

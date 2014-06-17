@@ -58,6 +58,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views', 'twig.options' => array('strict_variables' => false)
 ));
 
+// look into silex security config
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'general' => array(
@@ -103,6 +104,7 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
 });
 
+// look into silex controllers for long blocks of code
 $app->match('/meettheband', function (Request $request) use ($app) {
     $dao = new AMP\Db\BandMembersDAO($app['db']);
     if ($request->isMethod('POST')) {
@@ -111,25 +113,6 @@ $app->match('/meettheband', function (Request $request) use ($app) {
     $results = $dao->getAll();
     return $app['twig']->render('meetTheBand.twig', array('results' => $results));
 });
-
-$app->get('/login', function (Request $request) use ($app) {
-    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
-});
-
-$app->match('/account', function (Request $request) use ($app) {
-    $formFactory = new AMP\Form\UpdateAccountFormFactory($app['form.factory']);
-    $form = $formFactory->getForm();
-    $form->handleRequest($request);
-    if ($form->isValid()) {
-        $dao = new AMP\Db\AccountManagerDAO($app['db']);
-        $data = $form->getData();
-        $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
-        $dao->updateBandMemberPassword($data);
-        return $app->redirect('/');
-    }
-    return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
-});
-
 
 $app->match('/meettheband/add', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
@@ -159,6 +142,25 @@ $app->match('/meettheband/update/{id}', function ($id, Request $request) use ($a
                                                               'title' => 'Edit'));
 });
 
+$app->get('/login', function (Request $request) use ($app) {
+    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
+});
+
+$app->match('/account', function (Request $request) use ($app) {
+    $formFactory = new AMP\Form\UpdateAccountFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $dao = new AMP\Db\AccountManagerDAO($app['db']);
+        $data = $form->getData();
+        $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
+        $dao->updateBandMemberPassword($data);
+        return $app->redirect('/');
+    }
+    return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
+});
+
+// magic strings, localization
 $app->match('/contactus', function (Request $request) use ($app) {
     $notification = null;
     $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);

@@ -100,8 +100,12 @@ body {
   text-align: left;
 }
 
-.title, .loginForm {
+.title {
   text-align: center;
+}
+
+.loginFormField {
+  display: block; 
 }
 
 .postitheader {
