@@ -3,7 +3,7 @@ namespace AMP\Exception;
 
 class UpdateUserFailedException extends \PDOException
 {
-    protected $message = 'Failed to update your bio ';
+    protected $message = 'Failed to update your band member bio ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {

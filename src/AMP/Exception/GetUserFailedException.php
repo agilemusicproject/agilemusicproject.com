@@ -3,7 +3,7 @@ namespace AMP\Exception;
 
 class GetUserFailedException extends \PDOException
 {
-    protected $message = 'Failed to get your bio from the database ';
+    protected $message = 'Failed to get your band member bio from the database ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {
