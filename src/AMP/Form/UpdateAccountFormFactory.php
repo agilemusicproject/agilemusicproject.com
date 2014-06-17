@@ -14,11 +14,15 @@ class UpdateAccountFormFactory
             ->add('username', 'text', array(
                 'constraints' => new Assert\NotBlank(),
                 'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('placeholder' => "Your username"),
             ))
             ->add('newPassword', 'text', array(
                 'constraints' => new Assert\NotBlank(),
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('class' => 'passwordText'),
+                'attr' => array(
+                    'class' => 'passwordText',
+                    'placeholder' => "New Password",
+                ),
             ))
             ->add('submit', 'submit')
             ->getForm();
