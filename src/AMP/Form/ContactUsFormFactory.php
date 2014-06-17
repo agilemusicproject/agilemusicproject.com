@@ -27,13 +27,14 @@ class ContactUsFormFactory
                 'constraints' => new Assert\NotBlank(),
             ))
             ->add('message', 'textarea', array(
-                'label_attr' => array('style' => 'vertical-align: top;'),
+                'label_attr' => array(
+                    'style' => 'vertical-align: top;',
+                    'class' => 'formLabel',
+                ),
                 'attr' => array('placeholder' => 'What would you like to say?'),
                 'constraints' => new Assert\NotBlank(),
             ))
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'submitButton'),
-            ))
+            ->add('submit', 'submit')
             ->getForm();
     }
 
