@@ -31,15 +31,12 @@ class MeetTheBandFormFactory
                 'attr' => array('placeholder' => 'Roles'),
                 'label_attr' => array('class' => 'formLabel'),
             ))
-            ->add('photo', 'file', array(
-                'required' => false,
-            ))
             ->add('photo_actions', 'choice', array(
                 'choices' => array(
                     'photo_nothing' => 'Do Nothing',
                     'photo_change' => 'New Photo',
                     'photo_delete' => 'Delete Photo'),
-                'expanded' => 'false',
+                'expanded' => false,
                 'label' => 'Photo',
             ))
             ->add('photo', 'file', array(
