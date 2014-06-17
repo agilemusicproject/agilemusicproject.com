@@ -13,9 +13,12 @@ class UpdateAccountFormFactory
         $this->form = $formService->createBuilder('form')
             ->add('username', 'text', array(
                 'constraints' => new Assert\NotBlank(),
+                'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('newPassword', 'text', array(
                 'constraints' => new Assert\NotBlank(),
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('class' => 'passwordText'),
             ))
             ->add('submit', 'submit')
             ->getForm();

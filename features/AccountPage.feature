@@ -4,5 +4,5 @@ Feature: AMP Web Site Account Page
   I need to have an update account page
 
   Scenario: Change Band Member Password
-    Given I am on "/account"
-    Then I
+    When I go to "account"
+    Then I should be on "/login"

@@ -24,6 +24,10 @@ textarea {
   padding-top: 20px;
 }
 
+.passwordText {
+  -webkit-text-security: disc;
+}
+
 .submitButton {
   box-sizing: border-box;
   white-space: nowrap;
