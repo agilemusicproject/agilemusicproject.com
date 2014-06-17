@@ -3,7 +3,7 @@ namespace AMP\Exception;
 
 class GetAllUsersFailedException extends \PDOException
 {
-    protected $message = 'Failed to get the bios from the database ';
+    protected $message = 'Failed to get the band member bios from the database ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {

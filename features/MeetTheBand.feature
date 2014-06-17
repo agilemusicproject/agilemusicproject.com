@@ -2,12 +2,12 @@ Feature: AMP Web Site MeetTheBand Page
   In order see what content the site has
   As a visitor to the site
   I need to have an MeetTheBand page
-
+    
   Scenario: Manage Band Members
     Given I am on "/meettheband"
     Then I should see 0 ".bandMemberEntry" elements
   	When I go to "meettheband/add"
-  	Then I should be on "login"
+  	Then I should be on "/login"
   	When I fill in "_username" with "admin"
   	And I fill in "_password" with "foo"
   	And I press "Login"
@@ -32,7 +32,18 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
     Then I should not see "Action Jackson"
+    When I follow "Logout"
+    Then I should be on "/"
+    When I go to "/meettheband"
+    Then I should not see "Add Band Member"
+    And I should not see "Edit"
+    And I should not see "Delete"
     When I go to "meettheband/update/2"
+    Then I should be on "/login"
+    When I fill in "_username" with "admin"
+    And I fill in "_password" with "foo"
+    And I press "Login"
+    Then I should be on "meettheband/update/2"
     Then the "form_first_name" field should contain "Bilbo"
     Then the "form_last_name" field should contain "Baggins"
     Then the "form_roles" field should contain "Bravest Little Hobbit of Them All"

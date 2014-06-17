@@ -8,10 +8,12 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
 use AMP\User\UserProvider;
 use Silex\Application\UrlGeneratorTrait;
+use Silex\Application\SecurityTrait;
 
 $app = new Silex\Application();
 
@@ -66,9 +68,14 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.access_rules' => array(
         array('^/meettheband/add', 'ROLE_ADMIN'),
         array('^/meettheband/update', 'ROLE_ADMIN'),
-        array('^/admin', 'ROLE_ADMIN')
+        array('^/admin', 'ROLE_ADMIN'),
+        array('^/account', 'ROLE_ADMIN'),
     ),
 ));
+
+//$app['security.encoder.digest'] = $app->share(function ($app) {
+//    return new MessageDigestPasswordEncoder('sha1', false, 1);
+//});
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html');
@@ -110,7 +117,22 @@ $app->match('/meettheband', function (Request $request) use ($app) {
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
-    
+
+$app->match('/account', function (Request $request) use ($app) {
+    $formFactory = new AMP\Form\UpdateAccountFormFactory($app['form.factory']);
+    $form = $formFactory->getForm();
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $dao = new AMP\Db\AccountManagerDAO($app['db']);
+        $data = $form->getData();
+        $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
+        $dao->updateBandMemberPassword($data);
+        return $app->redirect('/');
+    }
+    return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
+});
+
+
 $app->match('/meettheband/add', function (Request $request) use ($app) {
     $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
     $form = $formFactory->getForm();

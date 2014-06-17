@@ -1,9 +1,9 @@
 <?php
 namespace AMP\Exception;
 
-class GetUserFailedException extends \PDOException
+class UpdateUserPasswordFailedException extends \PDOException
 {
-    protected $message = 'Failed to get your band member bio from the database ';
+    protected $message = 'Failed to change your password ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {
