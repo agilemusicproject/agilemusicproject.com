@@ -12,7 +12,6 @@ class MeetTheBandFormFactory
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
-        // research csrf_protection
         $this->form = $formService->createBuilder('form', $default)
             ->add('first_name', 'text', array(
                 'required' => true,
