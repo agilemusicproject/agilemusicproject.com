@@ -48,7 +48,6 @@ class MeetTheBandFormFactory
             ))
             ->add('bio', 'textarea', array(
                 'label' => false,
-                'label_attr' => array('style' => 'vertical-align: top;'),
                 'attr' => array('placeholder' => 'Bio'),
                 'required' => false,
             ))

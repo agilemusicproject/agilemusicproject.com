@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+textarea {
+  vertical-align: top;
+  height: 200px;
+  width: 50%;
+}
+
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;
