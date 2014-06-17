@@ -12,16 +12,19 @@ class ContactUsFormFactory
     {
         $this->form = $formService->createBuilder('form')
             ->add('name', 'text', array(
-                'constraints' => new Assert\NotBlank(),
+                'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('placeholder' => "Your name"),
+                'constraints' => new Assert\NotBlank(),
             ))
             ->add('email', 'text', array(
-                'constraints' => new Assert\Email(),
+                'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('placeholder' => "Your email"),
+                'constraints' => new Assert\Email(),
             ))
             ->add('subject', 'text', array(
-                'constraints' => new Assert\NotBlank(),
+                'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('placeholder' => "Hot topic"),
+                'constraints' => new Assert\NotBlank(),
             ))
             ->add('message', 'textarea', array(
                 'label_attr' => array('style' => 'vertical-align: top;'),
