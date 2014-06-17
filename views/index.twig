@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body onload="drawIndexPage()" id="index_body">
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+      <a href="{{ path('admin_logout') }}">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
     <div id="menu_parent">
       <img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo" />
       <div id="menu">

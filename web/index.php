@@ -78,7 +78,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 //});
 
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html');
+    return $app['twig']->render('index.twig');
 });
 
 $app->get('/blog', function () use ($app) {

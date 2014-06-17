@@ -75,7 +75,6 @@ nav {
 }
 
 #logocontainer.headernav {
-  display: inline-block;
   text-align: left;
   padding-left: 10px;
 }
@@ -105,12 +104,9 @@ body {
   width: 200px;
 }
 
-#index_body {
-  padding-top: 5%;
-}
-
 #menu_parent {
   position: relative;
+  padding-top: 5%;
 }
 
 #bgLogo {
@@ -136,7 +132,7 @@ body {
 }
 
 #agilepostcard {
-  top: -20%;
+  top: -2%;
   left: 20%;
 }
 
@@ -194,7 +190,7 @@ body {
   }
 
   #agilepostcard {
-    top: -20%;
+    top:  -2%;
     left: 10%;
   }
 
