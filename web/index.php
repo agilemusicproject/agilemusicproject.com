@@ -32,7 +32,7 @@ try {
 }
 
 if ($app['debug'] === false) {
-    $app->error(function (\Exception $e, $code) use ($app) {
+    $app->error(function (\Exception $e) use ($app) {
         return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
     });
 }
