@@ -18,6 +18,7 @@ class AccountController implements ControllerProviderInterface
             if ($form->isValid()) {
                 $dao = new \AMP\Db\AccountManagerDAO($app['db']);
                 $data = $form->getData();
+                $data['username'] = $app['security']->getToken()->getUsername();
                 $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
                 $dao->updateBandMemberPassword($data);
                 return $app->redirect('/');

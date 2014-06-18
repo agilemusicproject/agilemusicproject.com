@@ -11,13 +11,10 @@ class UpdateAccountFormFactory
     public function __construct(FormFactory $formService)
     {
         $this->form = $formService->createBuilder('form')
-            ->add('username', 'text', array(
-                'constraints' => new Assert\NotBlank(),
-            ))
-            ->add('newPassword', 'text', array(
-                'constraints' => new Assert\NotBlank(),
-            ))
-            ->add('submit', 'submit')
+            ->add('newPassword', 'password', array('constraints' => new Assert\NotBlank(),
+                                                   'label' => 'New Password:',
+                                                   'label_attr' => array('class' => 'formLabel'),))
+            ->add('update', 'submit')
             ->getForm();
     }
 
