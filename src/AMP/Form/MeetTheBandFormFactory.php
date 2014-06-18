@@ -3,10 +3,8 @@ namespace AMP\Form;
 
 use Symfony\Component\Form\FormFactory;
 
-class MeetTheBandFormFactory
+class MeetTheBandFormFactory extends BaseFormFactory
 {
-    private $form;
-
     // consider refactoring form into wrapper class
     public function __construct(FormFactory $formService, array $default = null)
     {
@@ -50,10 +48,5 @@ class MeetTheBandFormFactory
             ))
             ->add('submit', 'submit')
             ->getForm();
-    }
-
-    public function getForm()
-    {
-        return $this->form;
     }
 }

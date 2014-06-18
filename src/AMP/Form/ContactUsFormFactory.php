@@ -4,9 +4,8 @@ namespace AMP\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ContactUsFormFactory
+class ContactUsFormFactory extends BaseFormFactory
 {
-    private $form;
 
     public function __construct(FormFactory $formService)
     {
@@ -33,10 +32,5 @@ class ContactUsFormFactory
             ))
             ->add('submit', 'submit')
             ->getForm();
-    }
-
-    public function getForm()
-    {
-        return $this->form;
     }
 }

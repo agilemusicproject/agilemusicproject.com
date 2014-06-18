@@ -4,9 +4,8 @@ namespace AMP\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UpdateAccountFormFactory
+class UpdateAccountFormFactory extends BaseFormFactory
 {
-    private $form;
 
     public function __construct(FormFactory $formService)
     {
@@ -26,10 +25,5 @@ class UpdateAccountFormFactory
             ))
             ->add('submit', 'submit')
             ->getForm();
-    }
-
-    public function getForm()
-    {
-        return $this->form;
     }
 }
