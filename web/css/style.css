@@ -28,33 +28,6 @@ textarea {
   -webkit-text-security: disc;
 }
 
-.submitButton {
-  box-sizing: border-box;
-  white-space: nowrap;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  zoom: 1;
-  font-family: "brandon-grotesque", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  letter-spacing: 2px;
-  font-size: 14px;
-  line-height: 14px;
-  text-transform: uppercase;
-  color: black;
-  background-color: #BBBBBB;
-  cursor: pointer;
-  border-radius: 4px;
-  border-bottom: 3px solid #333333;
-  border-right: 3px solid #333333;
-  transition: none 125ms ease-out 0;
-  transition-property: background-color, color;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 50px;
-  padding-left: 50px;
-}
-
 .formLabel {
   display: block;
 }

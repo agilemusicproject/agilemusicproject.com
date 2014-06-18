@@ -9,14 +9,14 @@ Feature: AMP Web Site Navigation
     And the "<id>" element should contain "<page_name>"
 
     Examples:
-      | page         | id                   | page_name     |
-      | /blog        | #blogpostcard        | Blog          |
-      | /contactus   | #contactuspostcard   | Contact Us    |
-      | /meettheband | #meetTheBandpostcard | Meet the Band |
-      | /music       | #musicpostcard       | Music         |
-      | /photos      | #photospostcard      | Photos        |
-      | /agile       | #agilepostcard       | About Agile   |
-      | /about       | #aboutpostcard       | About Us      |
+      | page          | id                   | page_name     |
+      | /blog         | #blogpostcard        | Blog          |
+      | /contactus    | #contactuspostcard   | Contact Us    |
+      | /meettheband/ | #meetTheBandpostcard | Meet the Band |
+      | /music        | #musicpostcard       | Music         |
+      | /photos       | #photospostcard      | Photos        |
+      | /agile        | #agilepostcard       | About Agile   |
+      | /about        | #aboutpostcard       | About Us      |
 
   Scenario Outline: Click AMP Logo
     Given I am on "<page>"
@@ -24,11 +24,12 @@ Feature: AMP Web Site Navigation
     Then I should be on the homepage
 
     Examples:
-      | page         |
-      | /blog        |
-      | /contactus   |
-      | /meettheband |
-      | /music       |
-      | /photos      |
-      | /agile       |
-      | /about       |
+      | page          |
+      | /blog         |
+      | /contactus/   |
+      | /meettheband/ |
+      | /music        |
+      | /photos       |
+      | /agile        |
+      | /about        |
+      | /account/     |

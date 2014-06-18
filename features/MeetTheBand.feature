@@ -4,7 +4,7 @@ Feature: AMP Web Site MeetTheBand Page
   I need to have an MeetTheBand page
     
   Scenario: Manage Band Members
-    Given I am on "/meettheband"
+    Given I am on "/meettheband/"
     Then I should see 0 ".bandMemberEntry" elements
   	When I go to "meettheband/add"
   	Then I should be on "/login"
@@ -18,7 +18,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_roles" with "Super Cop"
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
     And I press "Submit"
-    Then I should be on "/meettheband"
+    Then I should be on "/meettheband/"
     And I should see "Action Jackson"
     And I should see "Super Cop"
     And I should see "A celebrated lieutenant in the police force"
@@ -27,14 +27,14 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_last_name" with "Baggins"
     And I fill in "form_roles" with "Bravest Little Hobbit of Them All"
     And I press "Submit"
-    Then I should be on "/meettheband"
+    Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
     Then I should not see "Action Jackson"
     When I follow "Logout"
     Then I should be on "/"
-    When I go to "/meettheband"
+    When I go to "/meettheband/"
     Then I should not see "Add Band Member"
     And I should not see "Edit"
     And I should not see "Delete"
@@ -49,7 +49,7 @@ Feature: AMP Web Site MeetTheBand Page
     Then the "form_roles" field should contain "Bravest Little Hobbit of Them All"
     When I fill in "form_roles" with "Professional Thief"
     And I press "Submit"
-    Then I should be on "/meettheband"
+    Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
     And I press "Delete"

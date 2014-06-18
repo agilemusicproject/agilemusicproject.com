@@ -23,11 +23,11 @@ Scenario Outline: Click Home Page Menu Link
   Then I should be on "<url>"
 
   Examples:
-  | page          | url          |
-  | Blog          | /blog        |
-  | Contact Us    | /contactus   |
-  | Meet the Band | /meettheband |
-  | Our Music     | /music       |
-  | Photos        | /photos      |
-  | Agile         | /agile       |
-  | About Us      | /about       |
+  | page          | url           |
+  | Blog          | /blog         |
+  | Contact Us    | /contactus/   |
+  | Meet the Band | /meettheband/ |
+  | Our Music     | /music        |
+  | Photos        | /photos       |
+  | Agile         | /agile        |
+  | About Us      | /about        |

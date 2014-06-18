@@ -32,7 +32,7 @@
     <form>
       <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
     </form>
-    <form method="post" action="/meettheband">
+    <form method="post" action="/meettheband/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
       <input type="submit" value="Delete">
     </form>
