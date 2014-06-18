@@ -6,6 +6,7 @@
 
 {% block content %}
 {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+  <script src="/js/login-form.js"></script>
   <form class="loginForm" action="{{ path('admin_login_check') }}" method="post">
     {{ error }}
     <label>Username:</label>
@@ -14,5 +15,8 @@
     <input type="password" name="_password" class="loginFormField" placeholder="Password" />
     <input type="submit" value="Login" class="loginFormField" />
   </form>
+  <script>
+    setFocus();
+  </script>
 {% endif %}
 {% endblock %}
