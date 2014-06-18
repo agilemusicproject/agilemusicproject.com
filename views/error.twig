@@ -1,0 +1,13 @@
+{% extends "base.twig" %}
+
+{% block title %} We're sorry. Something blew up. {% endblock %}
+
+{% block content %}
+
+{% if errorMessage %}
+  <h1 style="color:red;">{{ errorMessage }}</h1>
+{% else %}
+  <h1 style="color:red;">We're sorry. Something went really wrong!</h1>
+{% endif %}
+
+{% endblock %}

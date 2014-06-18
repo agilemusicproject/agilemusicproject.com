@@ -3,7 +3,7 @@ namespace AMP\Exception;
 
 class DeletingUserFailedException extends \PDOException
 {
-    protected $message = 'Failed to delete the band member bio from the database ';
+    protected $message = 'Failed to delete the band member information from the database ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {

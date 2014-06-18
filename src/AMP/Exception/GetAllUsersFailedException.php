@@ -1,13 +1,17 @@
 <?php
 namespace AMP\Exception;
 
-class GetAllUsersFailedException extends \PDOException
+class GetAllUsersFailedException extends \PDOException implements ExceptionInterface
 {
-    protected $message = 'Failed to get the band member bios from the database ';
+    protected $userMessage = 'Failed to get the band member information from the database.';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {
-        $this->message .= $message;
-        parent::__construct($this->message, $code, $previous);
+        parent::__construct(message, $code, $previous);
+    }
+
+    public function getUserFriendlyErrorMessage()
+    {
+        return $this->userMessage;
     }
 }
