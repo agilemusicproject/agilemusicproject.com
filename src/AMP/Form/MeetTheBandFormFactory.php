@@ -50,9 +50,7 @@ class MeetTheBandFormFactory
                                            'attr' => array('placeholder' => 'Bio'),
                                            'required' => false,
             ))
-            ->add('submit', 'submit', array(
-                                            'attr' => array('class' => 'submitButton'),
-            ))
+            ->add('submit', 'submit')
             ->getForm();
     }
 
