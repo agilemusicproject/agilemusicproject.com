@@ -1,13 +1,17 @@
 <?php
 namespace AMP\Exception;
 
-class UpdateUserPasswordFailedException extends \PDOException
+class UpdateUserPasswordFailedException extends \PDOException implements ExceptionInterface
 {
-    protected $message = 'Failed to change your password ';
+    protected $userMessage = 'Failed to change your password ';
 
     public function __construct($message = null, $code = 0, Exception $previous = null)
     {
-        $this->message .= $message;
-        parent::__construct($this->message, $code, $previous);
+        parent::__construct(message, $code, $previous);
+    }
+
+    public function getUserFriendlyErrorMessage()
+    {
+        return $this->userMessage;
     }
 }

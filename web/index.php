@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
+use AMP\Exception\ExceptionInterface;
 use AMP\User\UserProvider;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Application\SecurityTrait;
@@ -31,11 +32,12 @@ try {
     $app['debug'] = false;
 }
 
-if ($app['debug'] === false) {
-    $app->error(function (\Exception $e) use ($app) {
-        return new Response($app['twig']->render('base.twig', array('errorMessage' => $e->getMessage())));
-    });
-}
+$app->error(function (AMP\Exception\ExceptionInterface $e) use ($app) {
+    if($app['debug'] === false) {
+        return new Response($app['twig']->render('error.twig', array(
+            'errorMessage' => $e->getUserFriendlyErrorMessage())));
+    }
+});
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
@@ -100,7 +102,6 @@ $app->get('/photos', function () use ($app) {
 });
 
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
-
 $app->mount('/account', new AMP\Controller\AccountController());
 
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
