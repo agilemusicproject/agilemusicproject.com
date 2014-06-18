@@ -14,6 +14,8 @@ use AMP\Exception\FileNotFoundException;
 use AMP\User\UserProvider;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Application\SecurityTrait;
+use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 $app = new Silex\Application();
 
@@ -58,27 +60,16 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views', 'twig.options' => array('strict_variables' => false)
 ));
 
-// look into silex security config
-$app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-        'general' => array(
-            'anonymous' => 'true',
-            'pattern' => '^/',
-            'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
-            'logout' => array('logout_path' => '/admin/logout'),
-            'users' => $app->share(function () use ($app) {
-                // Specific class App\User\UserProvider is described below
-                return new UserProvider($app['db']);
-            }),
-        ),
-    ),
-    'security.access_rules' => array(
-        array('^/meettheband/add', 'ROLE_ADMIN'),
-        array('^/meettheband/update', 'ROLE_ADMIN'),
-        array('^/admin', 'ROLE_ADMIN'),
-        array('^/account', 'ROLE_ADMIN'),
-    ),
-));
+$yaml = new Parser();
+try {
+    $securityConfig = $yaml->parse(file_get_contents(__DIR__. '/../config/security.yml'));
+} catch (ParseException $e) {
+    echo('Unable to parse the YAML string: ' . $e->getMessage());
+}
+$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
+                                                                return new UserProvider($app['db']);
+});
+$app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
@@ -100,92 +91,18 @@ $app->get('/agile', function () use ($app) {
     return $app['twig']->render('agile.twig');
 });
 
-$app->get('/photos', function () use ($app) {
-    return $app['twig']->render('photos.twig');
-});
-
-// look into silex controllers for long blocks of code
-$app->match('/meettheband', function (Request $request) use ($app) {
-    $dao = new AMP\Db\BandMembersDAO($app['db']);
-    if ($request->isMethod('POST')) {
-        $dao->delete($request->get('id'));
-    }
-    $results = $dao->getAll();
-    return $app['twig']->render('meetTheBand.twig', array('results' => $results));
-});
-
-$app->match('/meettheband/add', function (Request $request) use ($app) {
-    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory']);
-    $form = $formFactory->getForm();
-    $form->handleRequest($request);
-    if ($form->isValid()) {
-        $dao = new AMP\Db\BandMembersDAO($app['db']);
-        $dao->add($form->getData());
-        return $app->redirect('/meettheband');
-    }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
-                                                              'page' => 'add',
-                                                              'title' => 'Add'));
-});
-
-$app->match('/meettheband/update/{id}', function ($id, Request $request) use ($app) {
-    $dao = new AMP\Db\BandMembersDAO($app['db']);
-    $formFactory = new AMP\Form\MeetTheBandFormFactory($app['form.factory'], $dao->get($id));
-    $form = $formFactory->getForm();
-    $form->handleRequest($request);
-    if ($form->isValid()) {
-        $dao->update($id, $form->getData());
-        return $app->redirect('/meettheband');
-    }
-    return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
-                                                              'page' => 'update',
-                                                              'title' => 'Edit'));
-});
-
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
 
-$app->match('/account', function (Request $request) use ($app) {
-    $formFactory = new AMP\Form\UpdateAccountFormFactory($app['form.factory']);
-    $form = $formFactory->getForm();
-    $form->handleRequest($request);
-    if ($form->isValid()) {
-        $dao = new AMP\Db\AccountManagerDAO($app['db']);
-        $data = $form->getData();
-        $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
-        $dao->updateBandMemberPassword($data);
-        return $app->redirect('/');
-    }
-    return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
+$app->get('/photos', function () use ($app) {
+    return $app['twig']->render('photos.twig');
 });
 
-// magic strings, localization
-$app->match('/contactus', function (Request $request) use ($app) {
-    $notification = null;
-    $formFactory = new AMP\Form\ContactUsFormFactory($app['form.factory']);
-    $form = $formFactory->getForm();
+$app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 
-    if ($request->isMethod('POST')) {
-        $form->submit($request);
-        if ($form->isValid()) {
-            $formDefault = $form->getData();
-            $email = new AMP\Mail();
-            $email->setRecipient('info@agilemusicproject.com')
-                ->setSubject($formDefault['subject'])
-                ->setMessage($formDefault['message'], $formDefault['name'])
-                ->setSender($formDefault['email']);
-            if ($email->send()) {
-                $notification = "Your message was sent successfully.";
-            } else {
-                $notification = "Your message was not sent. Please try again.";
-            }
+$app->mount('/account', new AMP\Controller\AccountController());
 
-        } else {
-            $formSubmit = "The form is invalid";
-        }
-    }
-    return $app['twig']->render('contact.twig', array('form' => $form->createView(), 'notification' => $notification));
-});
+$app->mount('/contactus', new AMP\Controller\ContactUsController());
 
 $app->run();
