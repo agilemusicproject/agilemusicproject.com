@@ -34,8 +34,6 @@ $app->error(function (AMP\Exception\ExceptionInterface $e) use ($app) {
     if($app['debug'] === false) {
         return new Response($app['twig']->render('error.twig', array(
             'errorMessage' => $e->getUserFriendlyErrorMessage())));
-    } else {
-        return;
     }
 });
 
