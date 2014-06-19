@@ -6,11 +6,11 @@ use Symfony\Component\Form\FormFactory;
 class MeetTheBandFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
-    public function __construct(FormFactory $formService, array $default = null)
+    public function __construct(FormFactory $formService, array $default = null, $isUpdateForm = false)
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
-        $this->form = $formService->createBuilder('form', $default)
+        $this->formBuilder = $formService->createBuilder('form', $default)
             ->add('first_name', 'text', array(
                                               'required' => true,
                                               'label' => false,
@@ -28,27 +28,35 @@ class MeetTheBandFormFactory extends BaseFormFactory
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles'),
                                          'label_attr' => array('class' => 'formLabel'),
-            ))
-            ->add('photo_actions', 'choice', array(
-                                                   'choices' => array(
-                                                                      'photo_nothing' => 'Do Nothing',
-                                                                      'photo_change' => 'New Photo',
-                                                                      'photo_delete' => 'Delete Photo'),
-                                                   'expanded' => false,
-                                                   'label' => 'Photo',
-            ))
+            ));
+        if ($isUpdateForm) {
+            $this->formBuilder
+                ->add('photo_actions', 'choice', array(
+                                       'choices' => array(
+                                                          'photo_nothing' => 'Do Nothing',
+                                                          'photo_change' => 'New Photo',
+                                                          'photo_delete' => 'Delete Photo'),
+                                       'expanded' => false,
+                                       'label' => 'Photo',
+                                       'label_attr' => array('class' => 'formLabel'),
+                ));
+        }
+             
+        $this->formBuilder
             ->add('photo', 'file', array(
-                                         'required' => false,
-                                         'label' => false,
+                 'required' => false,
+                 'label' => $isUpdateForm ? false : 'Photo',
+                 'label_attr' => array('class' => 'formLabel'),
+                 'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),
             ))
             ->add('bio', 'textarea', array(
-                                           'label' => false,
-                                           'label_attr' => array(
-                                                                 'class' => 'formLabel'),
-                                           'attr' => array('placeholder' => 'Bio'),
-                                           'required' => false,
+                'label' => false,
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('placeholder' => 'Bio'),
+                'required' => false,
             ))
-            ->add('submit', 'submit')
-            ->getForm();
+            ->add('submit', 'submit');
+        
+        $this->form = $this->formBuilder->getForm();
     }
 }

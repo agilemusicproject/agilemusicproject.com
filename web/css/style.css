@@ -47,7 +47,7 @@ textarea {
   text-align: left;
 }
 
-.deleteID, #form_photo_actions{
+.deleteID {
   display: none;
 }
 
