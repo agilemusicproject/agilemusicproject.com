@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactUsFormFactory extends BaseFormFactory
 {
-
     public function __construct(FormFactory $formService)
     {
         $this->form = $formService->createBuilder('form')

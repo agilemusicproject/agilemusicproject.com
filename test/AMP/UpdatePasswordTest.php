@@ -29,30 +29,30 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function incorrectCurrentPasswordShouldReturnFalse()
+    public function incorrectCurrentPasswordShouldBeInvalid()
     {
         $formData = $this->form->getForm();
         $formData['oldPassword'] = 'bar';
-        $this->assertEquals(false, $this->form->isValidAuthentication($formData));
+        $this->assertFalse($this->form->isValidAuthentication($formData));
     }
 
     /**
      * @test
      */
-    public function correctCurrentPasswordAndMatchingNewPasswordsShouldReturnTrue()
+    public function correctCurrentPasswordAndMatchingNewPasswordsShouldBeValid()
     {
         $formData = $this->form->getForm();
-        $this->assertEquals(true, $this->form->isValidAuthentication($formData));
+        $this->assertTrue($this->form->isValidAuthentication($formData));
     }
 
     /**
      * @test
      */
-    public function correctCurrentPasswordAndNotEqualNewPasswordsShouldReturnFalse()
+    public function correctCurrentPasswordAndNotEqualNewPasswordsShouldBeInvalid()
     {
         $formData = $this->form->getForm();
         $formData['newPassword'] = 'test1';
         $formData['confirmPassword'] = 'test2';
-        $this->assertEquals(false, $this->form->isValidAuthentication($formData));
+        $this->assertFalse($this->form->isValidAuthentication($formData));
     }
 }
