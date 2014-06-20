@@ -22,7 +22,10 @@ class AccountController implements ControllerProviderInterface
                 $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
                 $data['oldPassword'] = $app['security.encoder.digest']->encodePassword($data['oldPassword'], '');
                 $data['confirmPassword'] = $app['security.encoder.digest']->encodePassword($data['confirmPassword'], '');
-                $dao->updateBandMemberPassword($data);
+                $data['currentPassword'] = $dao->getCurrentPassword($data);
+                if ($formFactory->isValidAuthentication($data)) {
+                    $dao->updateBandMemberPassword($data);
+                }
                 return $app->redirect('/');
             }
             return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));

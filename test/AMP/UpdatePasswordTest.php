@@ -5,11 +5,8 @@ use Form\UpdateAccountFormFactory;
 
 class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
 {
-    private $currentPassword;
-    private $oldPassword;
-    private $newPassword;
-    private $confirmPassword;
     private $form;
+    private $data;
 
     public function setUp()
     {
@@ -17,7 +14,16 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('getForm'))
             ->getMock();
-        $this->currentPassword = 'foo';
+        $this->data = array(
+            'currentPassword' => 'foo',
+            'oldPassword' => 'foo',
+            'newPassword' => 'test',
+            'confirmPassword' => 'test',
+        );
+
+        $this->form->expects($this->once())
+            ->method('getForm')
+            ->will($this->returnValue($this->data));
     }
 
     /**
@@ -25,14 +31,9 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function incorrectCurrentPasswordShouldReturnFalse()
     {
-        $data = array('oldPassword' => 'bar', 'newPassword' => 'test', 'confirmPassword' => 'test');
-        $this->form->expects($this->once())
-            ->method('getForm')
-            ->will($this->returnValue($data));
-
+        $this->data['oldPassword'] = 'bar';
         $formData = $this->form->getForm();
-
-        $this->assertEquals(false, $this->form->isValidAuthentication($formData, $this->currentPassword));
+        $this->assertEquals(false, $this->form->isValidAuthentication($formData));
     }
 
     /**
@@ -40,14 +41,8 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function correctCurrentPasswordAndMatchingNewPasswordsShouldReturnTrue()
     {
-        $data = array('oldPassword' => 'foo', 'newPassword' => 'test', 'confirmPassword' => 'test');
-        $this->form->expects($this->once())
-            ->method('getForm')
-            ->will($this->returnValue($data));
-
         $formData = $this->form->getForm();
-
-        $this->assertEquals(true, $this->form->isValidAuthentication($formData, $this->currentPassword));
+        $this->assertEquals(true, $this->form->isValidAuthentication($formData));
     }
 
     /**
@@ -55,13 +50,9 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function correctCurrentPasswordAndNotEqualNewPasswordsShouldReturnFalse()
     {
-        $data = array('oldPassword' => 'foo', 'newPassword' => 'test1', 'confirmPassword' => 'test2');
-        $this->form->expects($this->once())
-            ->method('getForm')
-            ->will($this->returnValue($data));
-
+        $this->data['newPassword'] = 'test1';
+        $this->data['confirmPassword'] = 'test2';
         $formData = $this->form->getForm();
-
-        $this->assertEquals(false, $this->form->isValidAuthentication($formData, $this->currentPassword));
+        $this->assertEquals(false, $this->form->isValidAuthentication($formData));
     }
 }
