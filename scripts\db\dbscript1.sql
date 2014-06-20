@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `band_members` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` tinytext NOT NULL DEFAULT '',
+  `username` VARCHAR(255) NOT NULL DEFAULT '' UNIQUE,
   `password` tinytext NOT NULL DEFAULT '',
   `roles` tinytext NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
