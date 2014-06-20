@@ -12,7 +12,7 @@ class AccountManagerDAO
         $this->db = $db;
     }
 
-    public function getCurrentPassword($data)
+    public function oldPasswordValidation($data)
     {
          try {
             $sql = 'SELECT password FROM users WHERE username = :name';
@@ -20,7 +20,7 @@ class AccountManagerDAO
             $stmt->bindParam(':name', $data['username']);
             $stmt->execute();
             $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
-            return $currentPassword['password'];
+            return strcmp($currentPassword['password'], $data['oldPassword']);
         } catch (\PDOException $e) {
             throw new UpdateUserPasswordFailedException($e->getMessage());
         }
