@@ -31,8 +31,8 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function incorrectCurrentPasswordShouldReturnFalse()
     {
-        $this->data['oldPassword'] = 'bar';
         $formData = $this->form->getForm();
+        $formData['oldPassword'] = 'bar';
         $this->assertEquals(false, $this->form->isValidAuthentication($formData));
     }
 
@@ -50,9 +50,9 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function correctCurrentPasswordAndNotEqualNewPasswordsShouldReturnFalse()
     {
-        $this->data['newPassword'] = 'test1';
-        $this->data['confirmPassword'] = 'test2';
         $formData = $this->form->getForm();
+        $formData['newPassword'] = 'test1';
+        $formData['confirmPassword'] = 'test2';
         $this->assertEquals(false, $this->form->isValidAuthentication($formData));
     }
 }
