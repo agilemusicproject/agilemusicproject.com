@@ -30,7 +30,7 @@ class AccountController implements ControllerProviderInterface
             $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
             $data['oldPassword'] = $app['security.encoder.digest']->encodePassword($data['oldPassword'], '');
             $data['confirmPassword'] = $app['security.encoder.digest']->encodePassword($data['confirmPassword'], '');
-            $data['currentPassword'] = $dao->getCurrentPassword($data);
+            $data['currentPassword'] = $dao->getCurrentPassword($data['username']);
             if ($formFactory->isValidAuthentication($data)) {
                 $dao->updateBandMemberPassword($data);
             }

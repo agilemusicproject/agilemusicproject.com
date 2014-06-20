@@ -12,12 +12,12 @@ class AccountManagerDAO
         $this->db = $db;
     }
 
-    public function getCurrentPassword($data)
+    public function getCurrentPassword($username)
     {
         try {
             $sql = 'SELECT password FROM users WHERE username = :name';
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':name', $data['username']);
+            $stmt->bindParam(':name', $username);
             $stmt->execute();
             $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $currentPassword['password'];
