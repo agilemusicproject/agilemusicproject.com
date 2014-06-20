@@ -22,9 +22,15 @@ class UpdateAccountFormFactory extends BaseFormFactory
             ->getForm();
     }
 
-    public function isValid($data)
+    public function isValidAuthentication($data, $currentPassword)
     {
-        return true;
+        if ( strcmp($data['oldPassword'], $currentPassword) ){
+            return false;
+        } elseif (strcmp($data['newPassword'], $data['confirmPassword']) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

@@ -12,34 +12,40 @@ class AccountManagerDAO
         $this->db = $db;
     }
 
-    public function updateBandMemberPassword(array $data)
-    {
-        $oldPasswordCorrect = oldPasswordValidation($data);
-        $newPasswordsMatch = compareNewPassword($data['newPassword'], $data['confirmPassword']);
-        try {
-            $sql = 'UPDATE users
-                    SET password = :hash
-                    WHERE username = :name';
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':hash', $data['newPassword']);
-            $stmt->bindParam(':name', $data['username']);
-            $stmt->execute();
-        } catch (\PDOException $e) {
-            throw new UpdateUserPasswordFailedException($e->getMessage());
-        }
-    }
-
-    public function oldPasswordValidation($data)
+    public function getCurrentPassword($data)
     {
          try {
             $sql = 'SELECT password FROM users WHERE username = :name';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':name', $data['username']);
             $stmt->execute();
-            $currentPassword = $stmt->fetch(0);
-            return strcmp($currentPassword, $data['oldPassword'];
+            $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $currentPassword['password'];
         } catch (\PDOException $e) {
             throw new UpdateUserPasswordFailedException($e->getMessage());
+        }
+    }
+
+    public function updateBandMemberPassword(array $data)
+    {
+        $oldPasswordCorrect = $this->oldPasswordValidation($data);
+        $newPasswordsMatch = strcmp($data['newPassword'], $data['confirmPassword']);
+        if( ($oldPasswordCorrect === 0) && ($newPasswordsMatch === 0) )
+        {
+            try {
+                $sql = 'UPDATE users
+                        SET password = :hash
+                        WHERE username = :name';
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':hash', $data['newPassword']);
+                $stmt->bindParam(':name', $data['username']);
+                $stmt->execute();
+                return true;
+            } catch (\PDOException $e) {
+                throw new UpdateUserPasswordFailedException($e->getMessage());
+            }
+        } else {
+            throw new UpdateUserPasswordFailedException();
         }
     }
 }

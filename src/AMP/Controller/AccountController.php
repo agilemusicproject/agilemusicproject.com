@@ -10,7 +10,7 @@ class AccountController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
-        
+
         $controllers->match('', function (Request $request) use ($app) {
             $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
             $form = $formFactory->getForm();
@@ -20,6 +20,8 @@ class AccountController implements ControllerProviderInterface
                 $data = $form->getData();
                 $data['username'] = $app['security']->getToken()->getUsername();
                 $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
+                $data['oldPassword'] = $app['security.encoder.digest']->encodePassword($data['oldPassword'], '');
+                $data['confirmPassword'] = $app['security.encoder.digest']->encodePassword($data['confirmPassword'], '');
                 $dao->updateBandMemberPassword($data);
                 return $app->redirect('/');
             }

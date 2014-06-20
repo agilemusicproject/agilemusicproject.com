@@ -15,6 +15,7 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
     {
         $this->form = $this->getMockBuilder('AMP\Form\UpdateAccountFormFactory')
             ->disableOriginalConstructor()
+            ->setMethods(array('getForm'))
             ->getMock();
         $this->currentPassword = 'foo';
     }
@@ -22,7 +23,7 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function incorrectCurrentPasswordShouldNotAllowUserToChangeCurrentPassword()
+    public function incorrectCurrentPasswordShouldReturnFalse()
     {
         $data = array('oldPassword' => 'bar', 'newPassword' => 'test', 'confirmPassword' => 'test');
         $this->form->expects($this->once())
@@ -31,11 +32,36 @@ class UpdatePasswordTest extends \PHPUnit_Framework_TestCase
 
         $formData = $this->form->getForm();
 
-        $this->form->expects($this->once())
-            ->method('isValid')
-            ->with($formData)
-            ->will($this->returnValue('false'));
+        $this->assertEquals(false, $this->form->isValidAuthentication($formData, $this->currentPassword));
+    }
 
-        $this->assertEquals('false', $this->form->isValid($formData));
+    /**
+     * @test
+     */
+    public function correctCurrentPasswordAndMatchingNewPasswordsShouldReturnTrue()
+    {
+        $data = array('oldPassword' => 'foo', 'newPassword' => 'test', 'confirmPassword' => 'test');
+        $this->form->expects($this->once())
+            ->method('getForm')
+            ->will($this->returnValue($data));
+
+        $formData = $this->form->getForm();
+
+        $this->assertEquals(true, $this->form->isValidAuthentication($formData, $this->currentPassword));
+    }
+
+    /**
+     * @test
+     */
+    public function correctCurrentPasswordAndNotEqualNewPasswordsShouldReturnFalse()
+    {
+        $data = array('oldPassword' => 'foo', 'newPassword' => 'test1', 'confirmPassword' => 'test2');
+        $this->form->expects($this->once())
+            ->method('getForm')
+            ->will($this->returnValue($data));
+
+        $formData = $this->form->getForm();
+
+        $this->assertEquals(false, $this->form->isValidAuthentication($formData, $this->currentPassword));
     }
 }
