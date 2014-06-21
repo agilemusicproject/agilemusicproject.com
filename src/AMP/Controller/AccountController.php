@@ -20,6 +20,7 @@ class AccountController implements ControllerProviderInterface
 
     public function defaultAction(Request $request, Application $app)
     {
+        $notification = null;
         $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
@@ -33,9 +34,14 @@ class AccountController implements ControllerProviderInterface
             $data['currentPassword'] = $dao->getCurrentPassword($data['username']);
             if ($formFactory->isValidAuthentication($data)) {
                 $dao->updateBandMemberPassword($data);
+                return $app->redirect('/');
+            } else {
+                $notification = 'Your input was invalid. Please try again.';
             }
-            return $app->redirect('/');
         }
-        return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
+        return $app['twig']->render('updateAccount.twig', array(
+            'form' => $form->createView(),
+            'notification' => $notification,
+        ));
     }
 }
