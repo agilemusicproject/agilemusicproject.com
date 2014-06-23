@@ -24,7 +24,7 @@ phpunit-cyg:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit.bat .; fi
 
 behat-cyg: db-setup
-	./vendor/bin/behat.bat
+	./vendor/bin/behat.bat --ansi
 
 test-ci: lint phpcs phpunit behat-ci
 
