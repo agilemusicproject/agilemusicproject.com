@@ -10,7 +10,6 @@ Feature: AMP Web Site Navigation
 
     Examples:
       | page          | id                   | page_name     |
-      | /blog         | #blogpostcard        | Blog          |
       | /contactus    | #contactuspostcard   | Contact Us    |
       | /meettheband/ | #meetTheBandpostcard | Meet the Band |
       | /music        | #musicpostcard       | Music         |
@@ -25,7 +24,6 @@ Feature: AMP Web Site Navigation
 
     Examples:
       | page          |
-      | /blog /        |
       | /contactus/   |
       | /meettheband/ |
       | /music        |
