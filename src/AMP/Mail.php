@@ -39,7 +39,7 @@ class Mail
     {
         $this->name = $name;
         if (!is_null($message)) {
-            $name = str_ireplace(array("\r", "\n", '%0A', '%0D'), '', $name)
+            $name = str_ireplace(array("\r", "\n", '%0A', '%0D'), '', $name);
             $this->message = str_replace("\n.", "\n..", $this->message);
             $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL . $message;
             return $this;
