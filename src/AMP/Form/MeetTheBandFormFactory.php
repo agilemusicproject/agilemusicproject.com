@@ -2,6 +2,7 @@
 namespace AMP\Form;
 
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class MeetTheBandFormFactory extends BaseFormFactory
 {
