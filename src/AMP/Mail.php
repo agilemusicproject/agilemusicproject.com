@@ -37,8 +37,9 @@ class Mail
 
     public function setMessage($message, $name)
     {
-        $this->name = $name;
+        $this->name = str_ireplace(array("\r", "\n", '%0A', '%0D'), '', $name);
         if (!is_null($message)) {
+            $this->message = str_replace("\n.", "\n..", $this->message);
             $this->message = 'From: ' . $name . PHP_EOL . PHP_EOL . $message;
             return $this;
         }
@@ -46,8 +47,12 @@ class Mail
 
     public function setSender($senderEmail)
     {
-        $this->from = 'From: ' . $senderEmail . PHP_EOL;
-        return $this;
+        if (filter_var($senderEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->from = 'From: ' . $senderEmail . PHP_EOL;
+            return $this;
+        } else {
+            return null;
+        }
     }
 
     public function setRecipient($to)
@@ -58,7 +63,7 @@ class Mail
 
     public function setSubject($subject)
     {
-        $this->subject = $subject;
+        $this->subject = str_ireplace(array("\r", "\n", '%0A', '%0D'), '', $subject);
         return $this;
     }
 

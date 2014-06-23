@@ -21,7 +21,7 @@ class ContactUsFormFactory extends BaseFormFactory
             ))
             ->add('subject', 'text', array(
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('placeholder' => "Hot topic"),
+                'attr' => array('placeholder' => "Subject"),
                 'constraints' => new Assert\NotBlank(),
             ))
             ->add('message', 'textarea', array(
