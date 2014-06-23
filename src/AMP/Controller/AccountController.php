@@ -12,20 +12,25 @@ class AccountController implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
         
         $controllers->match('', function (Request $request) use ($app) {
-            $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
-            $form = $formFactory->getForm();
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $dao = new \AMP\Db\AccountManagerDAO($app['db']);
-                $data = $form->getData();
-                $data['username'] = $app['security']->getToken()->getUsername();
-                $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
-                $dao->updateBandMemberPassword($data);
-                return $app->redirect('/');
-            }
-            return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
+            return $this->defaultAction($request, $app);
         });
 
         return $controllers;
+    }
+    
+    private function defaultAction(Request $request, Application $app)
+    {
+        $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
+        $form = $formFactory->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $dao = new \AMP\Db\AccountManagerDAO($app['db']);
+            $data = $form->getData();
+            $data['username'] = $app['security']->getToken()->getUsername();
+            $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
+            $dao->updateBandMemberPassword($data);
+            return $app->redirect('/');
+        }
+        return $app['twig']->render('updateAccount.twig', array('form' => $form->createView()));
     }
 }

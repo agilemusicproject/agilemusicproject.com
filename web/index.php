@@ -3,20 +3,10 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Silex\Provider\FormServiceProvider;
-use Symfony\Component\Form\Forms;
-use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
 use AMP\Exception\ExceptionInterface;
 use AMP\User\UserProvider;
-use Silex\Application\UrlGeneratorTrait;
-use Silex\Application\SecurityTrait;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 $app = new Silex\Application();
 
@@ -32,7 +22,7 @@ try {
     $app['debug'] = false;
 }
 
-$app->error(function (AMP\Exception\ExceptionInterface $e) use ($app) {
+$app->error(function (ExceptionInterface $e) use ($app) {
     if ($app['debug'] === false) {
         return new Response($app['twig']->render('error.twig', array(
             'errorMessage' => $e->getUserFriendlyErrorMessage())));
@@ -62,23 +52,19 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/../views', 'twig.options' => array('strict_variables' => false)
 ));
 
-$yaml = new Parser();
+$yaml = new Symfony\Component\Yaml\Parser();
 try {
     $securityConfig = $yaml->parse(file_get_contents(__DIR__. '/../config/security.yml'));
-} catch (ParseException $e) {
+} catch (Symfony\Component\Yaml\Exception\ParseException $e) {
     echo('Unable to parse the YAML string: ' . $e->getMessage());
 }
 $securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
-                                                                return new UserProvider($app['db']);
+    return new UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
-});
-
-$app->get('/blog', function () use ($app) {
-    return $app['twig']->render('blog.twig');
 });
 
 $app->get('/about', function () use ($app) {
@@ -103,7 +89,6 @@ $app->get('/photos', function () use ($app) {
 
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
-
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
 
 $app->run();

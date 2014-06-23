@@ -25,7 +25,7 @@ Feature: AMP Web Site Navigation
 
     Examples:
       | page          |
-      | /blog         |
+      | /blog /        |
       | /contactus/   |
       | /meettheband/ |
       | /music        |

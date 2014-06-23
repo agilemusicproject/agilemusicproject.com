@@ -1,0 +1,83 @@
+/*   
+Theme Name: Responsive full width featured area Child Theme
+Theme URI: https://github.com/cyberchimps/responsive-childtheme/tree/full-width-featured-area
+Description: Responsive Child Theme
+Author: CyberChimps
+Author URI: https://cyberchimps.com/
+Template: responsive
+Version: 1.0
+*/
+
+/* =Start From Here
+-------------------------------------------------------------- */
+
+
+
+body {
+  background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
+  background-size: cover;
+}
+
+#wrapper {
+  background:rgba(0,0,0,0);
+}
+
+.type-post {
+  padding-top: 10px;
+  padding-left: 10px;
+  background: url(/images/white_notecard.png) center center;
+}
+
+.post-title {
+  margin-top: 0px;
+  padding-left: 10px;
+  margin-left: -10px;
+  border-bottom: solid;
+  border-color: rgba(255,0,0,.5);
+}
+
+#logocontainer.headernav {
+  text-align: left;
+  padding-left: 10px;
+}
+
+#postitcontainer.headernav {
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+#navLogo {
+  max-width: 200px;
+  min-width: 200px;
+}
+
+#blogNav {
+  position: relative;
+  float: left;
+}
+
+.postitheader {
+  width: 200px;
+}
+
+#container {
+  display: table;
+}
+
+#wrapper {
+  width: 800px;
+}
+
+@media screen and (max-width: 900px) {
+  #container {
+    display: table;
+  }
+
+  #wrapper {
+    max-width: 800px;
+    min-width: 100px;
+    width: auto;
+  }
+}
+
+/*The last 29 days of the month are the hardest."- Nikola Tesla*/
