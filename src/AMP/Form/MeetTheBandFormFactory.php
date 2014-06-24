@@ -2,6 +2,7 @@
 namespace AMP\Form;
 
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class MeetTheBandFormFactory extends BaseFormFactory
 {
@@ -12,22 +13,22 @@ class MeetTheBandFormFactory extends BaseFormFactory
         $default['photo_actions'] = 'photo_nothing';
         $this->formBuilder = $formService->createBuilder('form', $default)
             ->add('first_name', 'text', array(
-                                              'required' => true,
-                                              'label' => false,
-                                              'attr' => array('placeholder' => 'First Name'),
-                                              'label_attr' => array('class' => 'formLabel'),
+                'constraints' => new Assert\NotBlank(),
+                'label' => false,
+                'attr' => array('placeholder' => 'First Name'),
+                'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('last_name', 'text', array(
-                                             'required' => true,
-                                             'label' => false,
-                                             'attr' => array('placeholder' => 'Last Name'),
-                                             'label_attr' => array('class' => 'formLabel'),
+                'constraints' => new Assert\NotBlank(),
+                'label' => false,
+                'attr' => array('placeholder' => 'Last Name'),
+                'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('roles', 'text', array(
-                                         'required' => true,
-                                         'label' => false,
-                                         'attr' => array('placeholder' => 'Roles'),
-                                         'label_attr' => array('class' => 'formLabel'),
+                'constraints' => new Assert\NotBlank(),
+                'label' => false,
+                'attr' => array('placeholder' => 'Roles'),
+                'label_attr' => array('class' => 'formLabel'),
             ));
         if ($isUpdateForm) {
             $this->formBuilder

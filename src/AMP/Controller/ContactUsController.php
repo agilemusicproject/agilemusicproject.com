@@ -10,18 +10,18 @@ class ContactUsController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
-        
+
         // magic strings, localization
         $controllers->match('/', function (Request $request) use ($app) {
             $notification = null;
             $formFactory = new \AMP\Form\ContactUsFormFactory($app['form.factory']);
             $form = $formFactory->getForm();
-        
+
             if ($request->isMethod('POST')) {
                 $form->submit($request);
                 if ($form->isValid()) {
                     $formDefault = $form->getData();
-                    $email = new AMP\Mail();
+                    $email = new \AMP\Mail();
                     $email->setRecipient('info@agilemusicproject.com')
                           ->setSubject($formDefault['subject'])
                           ->setMessage($formDefault['message'], $formDefault['name'])
@@ -41,7 +41,7 @@ class ContactUsController implements ControllerProviderInterface
                       'notification' => $notification)
             );
         });
-        
+
         return $controllers;
     }
 }
