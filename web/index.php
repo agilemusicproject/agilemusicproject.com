@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use AMP\Exception\ConfigValueNotFoundException;
 use AMP\Exception\FileNotFoundException;
-use AMP\Exception\ExceptionInterface;
 use AMP\User\UserProvider;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Application\SecurityTrait;
