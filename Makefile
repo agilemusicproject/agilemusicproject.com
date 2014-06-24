@@ -13,7 +13,7 @@ phpunit:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit .; fi
 
 behat: db-setup
-	./vendor/bin/behat
+	./vendor/bin/behat -f progress
 
 test-cyg: lint phpcs-cyg phpunit-cyg behat-cyg
 

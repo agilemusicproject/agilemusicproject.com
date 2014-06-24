@@ -27,7 +27,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     public function checkingEmptyObjectShouldBeInvalid()
     {
-        $this->assertEquals(false, $this->email->isValid());
+        $this->assertFalse($this->email->isValid());
     }
 
     /**
@@ -38,7 +38,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setMessage("The message", "Chris");
         $this->email->setSubject("Hot Topic");
         $this->email->setSender("chris@agilemusicproject.com");
-        $this->assertEquals(false, $this->email->isValid());
+        $this->assertFalse($this->email->isValid());
     }
 
     /**
@@ -49,7 +49,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setMessage("The message", "Chris");
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSender("chris@agilemusicproject.com");
-        $this->assertEquals(false, $this->email->isValid());
+        $this->assertFalse($this->email->isValid());
     }
 
     /**
@@ -60,7 +60,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setMessage("The message", "Chris");
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSubject("Hot Topic");
-        $this->assertEquals(false, $this->email->isValid());
+        $this->assertFalse($this->email->isValid());
     }
 
     /**
@@ -84,7 +84,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSubject("Hot Topic");
         $this->email->setSender("chris@agilemusicproject.com");
-        $this->assertEquals(false, $this->email->isValid());
+        $this->assertFalse($this->email->isValid());
     }
 
     /**
@@ -96,6 +96,42 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSubject("Hot Topic");
         $this->email->setSender("chris@agilemusicproject.com");
-        $this->assertEquals(true, $this->email->isValid());
+        $this->assertTrue($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedEmailShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com%0ACc:%20birthdayarchive@example.com");
+        $this->assertFalse($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedSubjectShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com%0ASubject:My%20Anonymous%20Subject");
+        $this->assertFalse($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedEmailWithSpacesShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com Cc: birthdayarchive@example.com");
+        $this->assertFalse($this->email->isValid());
     }
 }
