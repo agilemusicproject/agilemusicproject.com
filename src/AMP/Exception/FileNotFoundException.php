@@ -3,16 +3,11 @@ namespace AMP\Exception;
 
 class FileNotFoundException extends \Exception implements ExceptionInterface
 {
-    protected $userMessage = 'We';
-
+    use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
+        $this->userMessage = 'We are currently experiencing issues. Please try again later.';
         $this->message = 'File not found with name ' . $message;
         parent::__construct($this->userMessage, $code, $previous);
-    }
-
-    public function getUserFriendlyErrorMessage()
-    {
-        return $this->userMessage;
     }
 }

@@ -3,16 +3,11 @@ namespace AMP\Exception;
 
 class ConfigValueNotFoundException extends \Exception implements ExceptionInterface
 {
-    protected $userMessage = 'We are currently experiencing issues. Please try again later.';
-
+    use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
+        $this->userMessage = 'We are currently experiencing issues. Please try again later.';
         $this->message = 'Config value not found for key: ' . $message;
-        parent::__construct($this->userMessage, $code, $previous);
-    }
-
-    public function getUserFriendlyErrorMessage()
-    {
-        return $this->userMessage;
+        parent::__construct($this->message, $code, $previous);
     }
 }
