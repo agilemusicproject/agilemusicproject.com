@@ -24,7 +24,6 @@ Scenario Outline: Click Home Page Menu Link
 
   Examples:
   | page          | url           |
-  | Blog          | /blog         |
   | Contact Us    | /contactus/   |
   | Meet the Band | /meettheband/ |
   | Our Music     | /music        |

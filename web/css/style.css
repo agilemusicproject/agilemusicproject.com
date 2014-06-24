@@ -72,7 +72,7 @@ nav {
 }
 
 body {
-  background: url(../images/whiteboard_v3.png) no-repeat center center fixed;
+  background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
   min-width: 900px;
   font-family:  'Nunito', 'Calibri', 'Open Sans','Cambria', sans-serif;

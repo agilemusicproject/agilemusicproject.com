@@ -25,10 +25,11 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('roles', 'text', array(
-                'constraints' => new Assert\NotBlank(),
-                'label' => false,
-                'attr' => array('placeholder' => 'Roles'),
-                'label_attr' => array('class' => 'formLabel'),
+                                         'constraints' => new Assert\NotBlank(),
+                                         'required' => true,
+                                         'label' => false,
+                                         'attr' => array('placeholder' => 'Roles'),
+                                         'label_attr' => array('class' => 'formLabel'),
             ));
         if ($isUpdateForm) {
             $this->formBuilder
