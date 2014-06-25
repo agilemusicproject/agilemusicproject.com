@@ -31,7 +31,7 @@ class ContactUsController implements ControllerProviderInterface
             if ($form->isValid()) {
                 $formDefault = $form->getData();
                 $email = new \AMP\Mail();
-                $email->setRecipient('info@agilemusicproject.com')
+                $email->setRecipient($app['config']->get('email'))
                       ->setSubject($formDefault['subject'])
                       ->setMessage($formDefault['message'], $formDefault['name'])
                       ->setSender($formDefault['email']);
