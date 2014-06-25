@@ -159,17 +159,5 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->email->isValid());
     }
 
-    /**
-     * @test
-     */
-    public function fillingOutEveryArgumentWithInjectedLinkInMessageShouldBeInValid()
-    {
-        $this->email->setMessage("https://www.google.com/", "Chris");
-        $this->email->setRecipient("info@agilemusicproject.com");
-        $this->email->setSubject("Hot Topic");
-        $this->email->setSender("a@a.com");
-        $this->assertFalse($this->email->isValid());
-    }
-
 
 }
