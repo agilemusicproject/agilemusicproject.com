@@ -39,7 +39,7 @@ function drawMusicPostNote()
 
 function drawAgilePostNote()
 {
-    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v2.png");
+    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v7.png");
 }
 
 function drawBandPostNote()
@@ -59,7 +59,7 @@ function drawBlogPostNote()
 
 function drawContactPostNote()
 {
-    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v2.png");
+    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v7.png");
 }
 
 function drawAboutPostNote()
