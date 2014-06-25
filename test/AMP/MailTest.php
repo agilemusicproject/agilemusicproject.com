@@ -134,4 +134,42 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setSender("misterburns@springfield.com Cc: birthdayarchive@example.com");
         $this->assertFalse($this->email->isValid());
     }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedHeadersAndHTMLShouldBeInValid()
+    {
+        $this->email->setMessage("<a href='https://www.google.com/'>link</a>", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("a@a.com%0AMIM-Version:%201.0%0AContent-Type:%20text/html;%20charset=ISO-8859-1%0A");
+        $this->assertFalse($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedHeadersAndLinkShouldBeInValid()
+    {
+        $this->email->setMessage("https://www.google.com/", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("a@a.com%0AMIM-Version:%201.0%0AContent-Type:%20text/html;%20charset=ISO-8859-1%0A");
+        $this->assertFalse($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedLinkInMessageShouldBeInValid()
+    {
+        $this->email->setMessage("https://www.google.com/", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("a@a.com");
+        $this->assertFalse($this->email->isValid());
+    }
+
+
 }
