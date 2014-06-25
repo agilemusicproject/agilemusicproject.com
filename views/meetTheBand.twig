@@ -20,7 +20,7 @@
 {% for row in results %}
   <p class="bandMemberEntry">
     {% if not (row.photo_filename is null) %}
-      <img src="images/photos/{{ row.photo_filename }}" /><br/>
+      <img src="/images/photos/{{ row.photo_filename }}" /><br/>
     {% endif %}
     <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
     <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
