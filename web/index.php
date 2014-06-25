@@ -3,25 +3,22 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AMP\Exception\ConfigValueNotFoundException;
-use AMP\Exception\FileNotFoundException;
-use AMP\User\UserProvider;
 
 $app = new Silex\Application();
 
 try {
     $app['config'] = new AMP\Config(__DIR__ . '/../config/amp.ini');
-} catch (FileNotFoundException $e) {
+} catch (AMP\Exception\FileNotFoundException $e) {
     $app['config'] = new AMP\Config();
 }
 
 try {
     $app['debug'] = $app['config']->get('debug');
-} catch (ConfigValueNotFoundException $e) {
+} catch (AMP\Exception\ConfigValueNotFoundException $e) {
     $app['debug'] = false;
 }
 
-$app->error(function (ExceptionInterface $e) use ($app) {
+$app->error(function (AMP\Exception\ExceptionInterface $e) use ($app) {
     if ($app['debug'] === false) {
         return new Response($app['twig']->render('error.twig', array(
             'errorMessage' => $e->getUserFriendlyErrorMessage())));
@@ -58,7 +55,7 @@ try {
     echo('Unable to parse the YAML string: ' . $e->getMessage());
 }
 $securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
-    return new UserProvider($app['db']);
+    return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
 
