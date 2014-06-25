@@ -158,6 +158,4 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setSender("a@a.com%0AMIM-Version:%201.0%0AContent-Type:%20text/html;%20charset=ISO-8859-1%0A");
         $this->assertFalse($this->email->isValid());
     }
-
-
 }
