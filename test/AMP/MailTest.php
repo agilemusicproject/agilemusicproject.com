@@ -158,4 +158,28 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setSender("a@a.com%0AMIM-Version:%201.0%0AContent-Type:%20text/html;%20charset=ISO-8859-1%0A");
         $this->assertFalse($this->email->isValid());
     }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedSQLShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com%0ASELECT%20*%20FROM%20users%20WHERE%20id%20=%201%0A");
+        $this->assertFalse($this->email->isValid());
+    }
+
+     /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedSQLWithSpaceShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com SELECT * FROM users WHERE id = 1");
+        $this->assertFalse($this->email->isValid());
+    }
 }
