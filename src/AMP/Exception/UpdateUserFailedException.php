@@ -6,7 +6,7 @@ class UpdateUserFailedException extends \PDOException implements ExceptionInterf
     use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
-        $this->userMessage = 'Failed to update your band member information';
+        $this->userMessage = 'Unable to update your band member information. Please try again.';
         parent::__construct($message, $code, $previous);
     }
 }
