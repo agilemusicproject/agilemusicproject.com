@@ -6,7 +6,7 @@ class DeletingUserFailedException extends \PDOException implements ExceptionInte
     use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
-        $this->userMessage = 'Failed to delete the band member information from the database ';
+        $this->userMessage = 'Unable to delete the band member information. Please try again.';
         parent::__construct($message, $code, $previous);
     }
 }
