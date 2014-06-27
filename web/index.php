@@ -63,10 +63,6 @@ $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
 });
 
-$app->get('/about', function () use ($app) {
-    return $app['twig']->render('about.twig');
-});
-
 $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig');
 });
@@ -86,5 +82,6 @@ $app->get('/photos', function () use ($app) {
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
+$app->mount('/about', new AMP\Controller\AboutPageController());
 
 $app->run();
