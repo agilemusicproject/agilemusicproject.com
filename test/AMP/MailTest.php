@@ -132,7 +132,6 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSubject("Hot Topic");
         $this->email->setSender("misterburns@springfield.com\r\n Cc: birthdayarchive@example.com\r\n");
-        $this->email->send();
         $this->assertFalse($this->email->isValid());
     }
 
