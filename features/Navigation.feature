@@ -29,5 +29,5 @@ Feature: AMP Web Site Navigation
       | /music        |
       | /photos       |
       | /agile        |
-      | /about        |
+      | /about/       |
       | /account/     |
