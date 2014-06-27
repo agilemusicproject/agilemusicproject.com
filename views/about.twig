@@ -18,7 +18,7 @@
   </form>
 {% endif %}
 {% for row in results %}
-  <p>{{ row.content|raw }}</p>
+  <p class="aboutPageText">{{ row.content|raw }}</p>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
       <input onclick="location.href='/about/edit/{{ row.id }}'" type="button" value="Edit"/>

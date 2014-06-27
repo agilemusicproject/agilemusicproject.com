@@ -20,3 +20,9 @@ security.access_rules:
   -
     - ^/account
     - ROLE_ADMIN
+  -
+    - ^/about/add
+    - ROLE_ADMIN
+  -
+    - ^about/edit
+    - ROLE_ADMIN
