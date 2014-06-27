@@ -6,7 +6,7 @@ class AddToDatabaseFailedException extends \PDOException implements ExceptionInt
     use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
-        $this->userMessage = 'We had trouble sending your infomation to our database.';
+        $this->userMessage = 'We had trouble sending your infomation. Please try again.';
         parent::__construct($message, $code, $previous);
     }
 }
