@@ -4,7 +4,7 @@ namespace AMP\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AboutPageFormFactory extends BaseFormFactory
+class AgilePageFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
     public function __construct(FormFactory $formService, array $default = null, $isUpdateForm = false)

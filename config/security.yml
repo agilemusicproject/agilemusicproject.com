@@ -24,5 +24,11 @@ security.access_rules:
     - ^/about/add
     - ROLE_ADMIN
   -
-    - ^about/edit
+    - ^/about/edit
+    - ROLE_ADMIN
+  -
+    - ^/agile/add
+    - ROLE_ADMIN
+  -
+    - ^/agile/edit
     - ROLE_ADMIN

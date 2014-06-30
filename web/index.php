@@ -67,10 +67,6 @@ $app->get('/music', function () use ($app) {
     return $app['twig']->render('music.twig');
 });
 
-$app->get('/agile', function () use ($app) {
-    return $app['twig']->render('agile.twig');
-});
-
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
@@ -83,5 +79,6 @@ $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
 $app->mount('/about', new AMP\Controller\AboutPageController());
+$app->mount('/agile', new AMP\Controller\AgilePageController());
 
 $app->run();

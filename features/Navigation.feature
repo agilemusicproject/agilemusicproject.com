@@ -14,7 +14,7 @@ Feature: AMP Web Site Navigation
       | /meettheband/ | #meetTheBandpostcard | Meet the Band |
       | /music        | #musicpostcard       | Music         |
       | /photos       | #photospostcard      | Photos        |
-      | /agile        | #agilepostcard       | About Agile   |
+      | /agile/       | #agilepostcard       | About Agile   |
       | /about        | #aboutpostcard       | About Us      |
 
   Scenario Outline: Click AMP Logo
@@ -28,6 +28,6 @@ Feature: AMP Web Site Navigation
       | /meettheband/ |
       | /music        |
       | /photos       |
-      | /agile        |
+      | /agile/       |
       | /about/       |
       | /account/     |
