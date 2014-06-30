@@ -8,7 +8,7 @@ use AMP\Exception\GetAllUsersFailedException;
 use AMP\Exception\UpdateUserFailedException;
 use AMP\Exception\DeletingUserFailedException;
 
-class AboutContentDAO
+class MusicContentDAO
 {
     private $db;
 
@@ -20,7 +20,12 @@ class AboutContentDAO
     public function add(array $data)
     {
         try {
-
+            $sql = 'INSERT INTO songs (embed, song_order)
+                    VALUES (:embed, :order)';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':embed', $data['embed']);
+            $stmt->bindParam(':order', $data['order']);
+            $stmt->execute();
         } catch (\PDOException $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
         }
@@ -45,7 +50,6 @@ class AboutContentDAO
     public function update($id, array $data)
     {
         try {
-            $stmt->execute();
 
         } catch (\PDOException $e) {
             throw new UpdateUserFailedException($e->getMessage());
