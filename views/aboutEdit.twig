@@ -5,24 +5,23 @@
   <script src="/js/update-form.js"></script>
 {% endblock %}
 
-{% block onload %} drawBandPostNote() {% endblock %}
+{% block onload %} drawAboutPostNote() {% endblock %}
 
-{% block title %} Meet the Band {% endblock %}
+{% block title %} About {% endblock %}
 
-{% block postit %}<canvas id="meetTheBandpostcard" class="postitheader">Meet the Band</canvas>{% endblock %}
+{% block postit %}<canvas id="aboutpostcard" class="postitheader">About</canvas>{% endblock %}
 
-{% block header %} {{ title }} Band Member {%endblock%}
+{% block header %} {{ title }} Content {%endblock%}
 
 {% block content %}
-<div id="meetTheBandUpdateForm">
+<div id="aboutEditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
   </form>
   <script>
-    CKEDITOR.replace('form_bio');
+    CKEDITOR.replace('form_content');
   </script>
 </div>
 {% endblock %}
-

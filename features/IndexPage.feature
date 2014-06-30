@@ -29,4 +29,4 @@ Scenario Outline: Click Home Page Menu Link
   | Our Music     | /music        |
   | Photos        | /photos       |
   | Agile         | /agile        |
-  | About Us      | /about        |
+  | About Us      | /about/       |

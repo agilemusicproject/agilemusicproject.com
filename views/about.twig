@@ -12,17 +12,22 @@
 
 {% block content %}
 
-<br/>
-
-<p class="pageText">A few Improving Enterprises employees (Improvers) found that we all enjoy playing musical instruments. So, in May 2013, we started having monthly Jam sessions. After a couple of months, a friend invited us to an open mic night at a local bar. We got on stage and, as we had done in our Jam Sessions, one of us started a riff and the rest joined in. We performed two different jams then gave up the stage. Next, two solo acts took the stage. They performed covers of pretty well known songs, and one of them had original material. The crowd seemed to get into them more than what we were playing. The next time we were invited we never even got on stage. The first band up had a full set play list and everyone was enjoying them so much that they continued playing most of the evening. </p>
-
-<p class="pageText">Even though we enjoyed what we were playing we wanted the audience to get into it. So, we agreed to start learning covers and work toward a set list. It was a rocky start. We limped along for a couple of months. We could never agree on what to play. Then a lightning bolt hit Ed—being the geeks we are why not practice what we preach. We promote Agile for our software development projects; why not use it for our music? The rest of the band agreed, and we only took on the challenge of adapting our Agile software development knowledge to the Agile Music Project. Our band, AMP, was born. </p>
-
-<p class="pageText">The Scrum framework seemed best suited for our project. Our first order of business was to create a backlog….or so we thought. How do we pick songs? How do we prioritize them? We were used to cross-functional teams, but how do we ensure quality? We agreed quality was the most important so we started there. It was decided that Rocksmith would be our standard. While Rocksmith does not offer drums, our drummer, Brian, had played semi-professionally in the past and was accomplished to the point that he could pick up the part separately. So, Mike (rhythm guitar), Josh (lead guitar), Bud (Bass) and Ed (Bass) learned songs via that music video game. When we got together to play, if we thought something was off, we could each play with Rocksmith to gauge proficiency.</p>
-
-<p class="pageText">We agreed to be co-product owners and dot vote from the available songs to create a product backlog. We also agreed that two-week sprints would be good. At the end of each sprint we’d demo (play the song or portions of songs we’d learned), have a retrospective, and do planning for the next sprint. During planning we broke down songs into “tasks” which are the portions of the songs we feel are learnable within the sprint. We story point them just as any Scrum project would, and we hold each other accountable..</p>
-
-<p class="pageText">The methodology has done us well. After six months we have three covers and two originals pretty well completed. We are still working on the aspects of good recording and have added that to the backlog as well. It has been a fun and satisfying adventure for us, and we’re not done yet.</p>
-
+{% if is_granted('ROLE_ADMIN') %}
+  <form>
+    <input onclick="location.href='/about/add'" type="button" value="Add Content"/>
+  </form>
+{% endif %}
+{% for row in results %}
+  <p class="aboutPageText">{{ row.content|raw }}</p>
+  {% if is_granted('ROLE_ADMIN') %}
+    <form>
+      <input onclick="location.href='/about/edit/{{ row.id }}'" type="button" value="Edit"/>
+    </form>
+    <form method="post" action="/about/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input type="submit" value="Delete">
+    </form>
+  {% endif %}
+{% endfor %}
 
 {% endblock %}
