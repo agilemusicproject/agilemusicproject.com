@@ -24,7 +24,7 @@ class MusicContentDAO
                     VALUES (:embed, :order)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':embed', $data['embed']);
-            $stmt->bindParam(':order', $data['order']);
+            $stmt->bindParam(':order', $data['song_order']);
             $stmt->execute();
         } catch (\PDOException $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
@@ -47,7 +47,7 @@ class MusicContentDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM songs';
+            $sql = 'SELECT * FROM songs Order By song_order';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -61,11 +61,11 @@ class MusicContentDAO
         try {
             $sql = 'UPDATE songs
                     SET embed = :embed,
-                    order = :order
+                    song_order = :order
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':embed', $data['embed']);
-            $stmt->bindParam(':order', $data['order']);
+            $stmt->bindParam(':order', $data['song_order']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
