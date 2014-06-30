@@ -17,6 +17,12 @@ textarea {
   width: 50%;
 }
 
+#galleria {
+  width: 1000px;
+  height: 500px;
+  background: #000
+}
+
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;

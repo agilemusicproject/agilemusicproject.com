@@ -1,5 +1,10 @@
 {% extends "base.twig" %}
 
+{% block javascript %}
+  <script type="text/javascript" src="/js/galleria/galleria-1.3.6.min.js"></script>
+  <script type="text/javascript" src="/js/galleria/themes/classic/galleria.classic.min.js"></script>
+{% endblock %}
+
 {% block onload %} drawPhotosPostNote() {% endblock %}
 
 {% block title %} Photos {% endblock %}
@@ -7,4 +12,18 @@
 {% block postit %}<canvas id="photospostcard" class="postitheader">Photos</canvas>{% endblock %}
 
 {% block content %}
+{% if is_granted('ROLE_ADMIN') %}
+  <form>
+    <input onclick="location.href='/photos/edit'" type="button" value="Manage Photos"/>
+  </form>
+{% endif %}
+<div id="galleria">
+{% for row in results %}
+  <img src="/images/photos/{{ row.filename }}" data-description="{{ row.caption }}"></img>
+{% endfor %}
+</div>
+<script>
+    Galleria.loadTheme('/js/galleria/themes/classic/galleria.classic.min.js');
+    Galleria.run('#galleria');
+</script>
 {% endblock %}

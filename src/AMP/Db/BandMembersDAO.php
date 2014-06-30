@@ -2,7 +2,6 @@
 namespace AMP\Db;
 
 use AMP\UploadManager;
-
 use AMP\Exception\AddToDatabaseFailedException;
 use AMP\Exception\GetUserFailedException;
 use AMP\Exception\GetAllUsersFailedException;

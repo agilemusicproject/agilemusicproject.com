@@ -7,7 +7,7 @@ lint:
 	for f in `find features -name *.php`; do php -l $$f; done
 
 phpcs:
-	./vendor/bin/phpcs --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog .
+	./vendor/bin/phpcs --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,galleria .
 
 phpunit:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit .; fi
@@ -18,7 +18,7 @@ behat: db-setup
 test-cyg: lint phpcs-cyg phpunit-cyg behat-cyg
 
 phpcs-cyg:
-	./vendor/bin/phpcs.bat --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog .
+	./vendor/bin/phpcs.bat --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,galleria .
 
 phpunit-cyg:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit.bat .; fi

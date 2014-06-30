@@ -54,7 +54,7 @@ try {
 } catch (Symfony\Component\Yaml\Exception\ParseException $e) {
     echo('Unable to parse the YAML string: ' . $e->getMessage());
 }
-$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
+$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {;
     return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
@@ -71,14 +71,11 @@ $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
 
-$app->get('/photos', function () use ($app) {
-    return $app['twig']->render('photos.twig');
-});
-
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
 $app->mount('/about', new AMP\Controller\AboutPageController());
 $app->mount('/agile', new AMP\Controller\AgilePageController());
+$app->mount('/photos', new AMP\Controller\PhotosController());
 
 $app->run();
