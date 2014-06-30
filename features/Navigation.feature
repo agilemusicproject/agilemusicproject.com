@@ -26,7 +26,7 @@ Feature: AMP Web Site Navigation
       | page          |
       | /contactus/   |
       | /meettheband/ |
-      | /music        |
+      | /music/       |
       | /photos       |
       | /agile        |
       | /about/       |

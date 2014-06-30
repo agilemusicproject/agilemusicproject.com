@@ -34,6 +34,11 @@ class MusicContentDAO
     public function get($id)
     {
         try {
+            $sql = 'SELECT * FROM songs WHERE id = :id';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(0);
         } catch (\PDOException $e) {
             throw new GetUserFailedException($e->getMessage());
         }
@@ -42,6 +47,10 @@ class MusicContentDAO
     public function getAll()
     {
         try {
+            $sql = 'SELECT * FROM songs';
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
         } catch (\PDOException $e) {
             throw new GetAllUsersFailedException($e->getMessage());
         }
@@ -50,7 +59,15 @@ class MusicContentDAO
     public function update($id, array $data)
     {
         try {
-
+            $sql = 'UPDATE songs
+                    SET embed = :embed,
+                    order = :order
+                    WHERE id = :id';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':embed', $data['embed']);
+            $stmt->bindParam(':order', $data['order']);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
         } catch (\PDOException $e) {
             throw new UpdateUserFailedException($e->getMessage());
         }
@@ -59,6 +76,10 @@ class MusicContentDAO
     public function delete($id)
     {
         try {
+            $sql = 'DELETE from songs WHERE id=:id';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
         } catch (\PDOException $e) {
             throw new DeletingUserFailedException($e->getMessage());
         }

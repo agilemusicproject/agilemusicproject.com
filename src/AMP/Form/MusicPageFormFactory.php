@@ -10,7 +10,6 @@ class MusicPageFormFactory extends BaseFormFactory
     {
         $this->formBuilder = $formService->createBuilder('form', $default)
             ->add('embed', 'textarea', array(
-                'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('placeholder' => 'Copy and Paste the embed code from soundcloud here'),
                 'constraints' => new Assert\NotBlank(),

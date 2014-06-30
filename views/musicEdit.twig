@@ -14,4 +14,14 @@
 {% block header %} {{ title }} Your Music {%endblock%}
 
 {% block content %}
+<div id="musicEditForm">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+  </form>
+  <script>
+    CKEDITOR.replace('embed');
+  </script>
+</div>
 {% endblock %}

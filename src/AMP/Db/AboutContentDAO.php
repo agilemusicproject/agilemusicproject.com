@@ -64,7 +64,6 @@ class AboutContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-
         } catch (\PDOException $e) {
             throw new UpdateUserFailedException($e->getMessage());
         }

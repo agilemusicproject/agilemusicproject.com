@@ -12,9 +12,21 @@
 
 {% if is_granted('ROLE_ADMIN') %}
   <form>
-    <input onclick="location.href='/music/add'" type="button" value="Add Content"/>
+    <input onclick="location.href='/music/add'" type="button" value="Add Music"/>
   </form>
 {% endif %}
+{% for row in results %}
+  <p class="musicPageText">{{ row.embed|raw }}</p>
+  {% if is_granted('ROLE_ADMIN') %}
+    <form>
+      <input onclick="location.href='/music/edit/{{ row.id }}'" type="button" value="Edit"/>
+    </form>
+    <form method="post" action="/music/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input type="submit" value="Delete">
+    </form>
+  {% endif %}
+{% endfor %}
 <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/25363333&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 
 <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/98602952&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
