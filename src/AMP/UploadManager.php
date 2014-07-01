@@ -16,7 +16,7 @@ class UploadManager
         if (!is_null($file)) {
             $filename =  $file->getClientOriginalName();
             $file->move($this->folderPath, $filename);
-            if(!file_exists($this->folderPath . '/thumbnails')) {
+            if (!file_exists($this->folderPath . '/thumbnails')) {
                 mkdir($this->folderPath . '/thumbnails');
             }
             $this->createThumb($filename, 900);

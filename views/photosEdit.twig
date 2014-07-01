@@ -9,7 +9,6 @@
 {% block header %} {{ title }} Photos {%endblock%}
 
 {% block content %}
-<h2> Add Picture </h2>
 <div id="aboutEditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
@@ -17,15 +16,4 @@
     {{ form_rest(form) }}
   </form>
 </div>
-<h2> Delete Picture </h2>
-{% for row in results %}
-  <a href="/images/photos/{{ row.filename }}"><img src="/images/photos/thumbnails/thumb_{{ row.filename }}" data-description="{{ row.caption }}" class="preview"/></a>
-  <form>
-      <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit"/>
-    </form>
-  <form method="post" action="/photos/edit">
-    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-    <input type="submit" value="Delete">
-  </form>
-{% endfor %}
 {% endblock %}

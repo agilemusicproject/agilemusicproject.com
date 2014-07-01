@@ -17,14 +17,12 @@ textarea {
   width: 50%;
 }
 
-#galleria {
-  width: 1000px;
-  height: 500px;
-  background: #000
-}
-
 .preview {
   width: 200px;
+}
+
+.edit_caption {
+  display: inline;
 }
 
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
