@@ -31,7 +31,6 @@ security.access_rules:
     - ROLE_ADMIN
   -
     - ^/agile/edit
-    - ROLE_ADMIN    - ^/about/edit
     - ROLE_ADMIN
   -
     - ^/music/add
