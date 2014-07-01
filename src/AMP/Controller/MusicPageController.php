@@ -51,7 +51,7 @@ class MusicPageController implements ControllerProviderInterface
             return $app->redirect('/music');
         }
         return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Add'));
+                                                            'title' => 'Add'));
     }
 
     private function editAction(Request $request, Application $app, $id)
@@ -65,20 +65,16 @@ class MusicPageController implements ControllerProviderInterface
             return $app->redirect('/music');
         }
         return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Edit'));
+                                                            'title' => 'Edit'));
     }
 
-    private function updateAction(Request $request, Application $app, $id)
+    private function updateAction(Request $request, Application $app)
     {
         $dao = new \AMP\Db\MusicContentDAO($app['db']);
-        $formFactory = new \AMP\Form\MusicUpdatePageFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $dao->sortUpdate($id, $form->getData());
-            return $app->redirect('/music');
+        if ($request->isMethod('POST')) {
+            $dao->sortUpdate();
         }
-        return $app['twig']->render('musicUpdate.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Sort'));
+        $results = $dao->getAll();
+        return $app['twig']->render('musicUpdate.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }

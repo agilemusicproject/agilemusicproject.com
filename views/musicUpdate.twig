@@ -4,6 +4,10 @@
 
 {% block title %} Our Music {% endblock %}
 
+{% block javascript %}
+  <script src="/js/sort-music.js"></script>
+{% endblock %}
+
 {% block postit %}<canvas id="musicpostcard" class="postitheader">Our Music</canvas>{% endblock %}
 
 {% block header %}Our Music{%endblock%}
@@ -11,15 +15,10 @@
 {% block content %}
 
 {% if is_granted('ROLE_ADMIN') %}
-  <form>
-    <input onclick="location.href='/music/add'" type="button" value="Add Music"/>
-  </form>
-  <form>
-    <input onclick="location.href='/music/update'" type="button" value="Sort Songs"/>
-  </form>
 {% endif %}
+<ul id="sortMusic">
   {% for row in results %}
-    <p class="musicPage">{{ row.embed|raw }}</p>
+    <li class="musicPageText" id="music-{{row.song_order}}">{{ row.embed|raw }}</p>
     {% if is_granted('ROLE_ADMIN') %}
       <form method="post" action="/music/">
         <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
@@ -28,4 +27,7 @@
     {% endif %}
   {% endfor %}
 </ul>
+<form>
+    <input type="submit" value="Submit Songs">
+</form>
 {% endblock %}

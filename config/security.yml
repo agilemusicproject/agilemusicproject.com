@@ -38,3 +38,6 @@ security.access_rules:
   -
     - ^/music/edit
     - ROLE_ADMIN
+  -
+    - ^/music/update
+    - ROLE_ADMIN
