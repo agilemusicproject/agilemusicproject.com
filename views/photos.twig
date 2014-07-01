@@ -19,7 +19,9 @@
 {% endif %}
 <div id="galleria">
 {% for row in results %}
-  <img src="/images/photos/{{ row.filename }}" data-description="{{ row.caption }}"></img>
+  <a href="/images/photos/{{ row.filename }}">
+    <img src="/images/photos/thumbnails/thumb_{{ row.filename }}" data-description="{{ row.caption }}"/>
+  </a>
 {% endfor %}
 </div>
 <script>

@@ -23,6 +23,10 @@ textarea {
   background: #000
 }
 
+.preview {
+  width: 200px;
+}
+
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;

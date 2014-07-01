@@ -104,6 +104,12 @@ class BandMembersDAO
     public function delete($id)
     {
         try {
+            $original_data = $this->get($id);
+            $original_filename = $original_data['photo_filename'];
+            $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
+            if (!is_null($original_filename)) {
+                $uploadManager->delete($original_filename);
+            }
             $sql = 'DELETE from band_members WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);

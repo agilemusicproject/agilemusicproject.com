@@ -78,6 +78,13 @@ class PhotosDAO
     public function delete($id)
     {
         try {
+            $original_data = $this->get($id);
+            $original_filename = $original_data['filename'];
+            $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
+            if (!is_null($original_filename)) {
+                $uploadManager->delete($original_filename);
+                $uploadManager->deleteThumb($original_filename);
+            }
             $sql = 'DELETE from photos WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);

@@ -33,6 +33,10 @@ class PhotosController implements ControllerProviderInterface
     private function editAction(Request $request, Application $app)
     {
         $dao = new \AMP\Db\PhotosDAO($app['db']);
+        if ($request->isMethod('POST')) {
+            $dao->delete($request->get('id'));
+        }
+        $results = $dao->getAll();
         $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
@@ -41,6 +45,7 @@ class PhotosController implements ControllerProviderInterface
             return $app->redirect('/photos');
         }
         return $app['twig']->render('photosEdit.twig', array('form' => $form->createView(),
-                                                             'title' => 'Manage'));
+                                                             'title' => 'Manage',
+                                                             'results' => $results));
     }
 }
