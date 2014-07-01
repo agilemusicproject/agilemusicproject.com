@@ -8,6 +8,10 @@
 
 {% block header %}Our Music{%endblock%}
 
+{% block javascript %}
+  <script src="/js/sort-music.js"></script>
+{% endblock %}
+
 {% block content %}
 
 {% if is_granted('ROLE_ADMIN') %}
@@ -15,16 +19,18 @@
     <input onclick="location.href='/music/add'" type="button" value="Add Music"/>
   </form>
 {% endif %}
-{% for row in results %}
-  <p class="musicPageText">{{ row.embed|raw }}</p>
-  {% if is_granted('ROLE_ADMIN') %}
-    <form>
-      <input onclick="location.href='/music/edit/{{ row.id }}'" type="button" value="Edit"/>
-    </form>
-    <form method="post" action="/music/">
-      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input type="submit" value="Delete">
-    </form>
-  {% endif %}
-{% endfor %}
+<ul id="sortMusic">
+  {% for row in results %}
+    <li class="musicPageText" id="music-{{row.song_order}}">{{ row.embed|raw }}</p>
+    {% if is_granted('ROLE_ADMIN') %}
+      <form>
+        <input onclick="location.href='/music/edit/{{ row.id }}'" type="button" value="Edit"/>
+      </form>
+      <form method="post" action="/music/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+        <input type="submit" value="Delete">
+      </form>
+    {% endif %}
+  {% endfor %}
+</ul>
 {% endblock %}

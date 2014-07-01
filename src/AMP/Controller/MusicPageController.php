@@ -19,6 +19,10 @@ class MusicPageController implements ControllerProviderInterface
             return $this->addAction($request, $app);
         });
 
+        $controllers->match('/update', function (Request $request) use ($app) {
+            return $this->updateAction($request, $app);
+        });
+
         $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
             return $this->editAction($request, $app, $id);
         });
@@ -62,5 +66,19 @@ class MusicPageController implements ControllerProviderInterface
         }
         return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
                                                                   'title' => 'Edit'));
+    }
+
+    private function updateAction(Request $request, Application $app, $id)
+    {
+        $dao = new \AMP\Db\MusicContentDAO($app['db']);
+        $formFactory = new \AMP\Form\MusicUpdatePageFormFactory($app['form.factory'], $dao->get($id), true);
+        $form = $formFactory->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $dao->sortUpdate($id, $form->getData());
+            return $app->redirect('/music');
+        }
+        return $app['twig']->render('musicUpdate.twig', array('form' => $form->createView(),
+                                                                  'title' => 'Sort'));
     }
 }

@@ -236,3 +236,8 @@ div.img a:hover img {
 #cke_form_bio, #cke_form_message {
   max-width: 800px;
 }
+
+.musicPageText {
+  list-style-image: url(../images/arrow.png);
+
+}
