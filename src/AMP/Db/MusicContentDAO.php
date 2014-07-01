@@ -7,6 +7,7 @@ use AMP\Exception\GetUserFailedException;
 use AMP\Exception\GetAllUsersFailedException;
 use AMP\Exception\UpdateUserFailedException;
 use AMP\Exception\DeletingUserFailedException;
+use AMP\Exception\UpdateMusicFailedException;
 
 class MusicContentDAO
 {
@@ -26,7 +27,7 @@ class MusicContentDAO
             $stmt->bindParam(':embed', $data['embed']);
             $stmt->bindParam(':order', $data['song_order']);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
         }
     }
@@ -39,7 +40,7 @@ class MusicContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetUserFailedException($e->getMessage());
         }
     }
@@ -51,7 +52,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetAllUsersFailedException($e->getMessage());
         }
     }
@@ -68,8 +69,8 @@ class MusicContentDAO
             $stmt->bindParam(':order', $data['song_order']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new UpdateMusicFailedException($e->getMessage());
         }
     }
 
@@ -80,7 +81,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new DeletingUserFailedException($e->getMessage());
         }
     }

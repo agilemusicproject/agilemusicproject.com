@@ -10,8 +10,8 @@ class MusicPageFormFactory extends BaseFormFactory
     {
         $this->formBuilder = $formService->createBuilder('form', $default)
             ->add('song_order', 'text', array(
+                'attr' => array('type' => 'number', 'min' => '1', 'max' => '10'),
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('pattern' => '[0-9]'),
                 'constraints' => new Assert\NotBlank(),
             ))
             ->add('embed', 'textarea', array(

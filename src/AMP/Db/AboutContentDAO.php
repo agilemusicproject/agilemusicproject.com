@@ -24,7 +24,7 @@ class AboutContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
         }
     }
@@ -37,7 +37,7 @@ class AboutContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetUserFailedException($e->getMessage());
         }
     }
@@ -49,7 +49,7 @@ class AboutContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetAllUsersFailedException($e->getMessage());
         }
     }
@@ -64,7 +64,7 @@ class AboutContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new UpdateUserFailedException($e->getMessage());
         }
     }
@@ -76,7 +76,7 @@ class AboutContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new DeletingUserFailedException($e->getMessage());
         }
     }

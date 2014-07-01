@@ -32,7 +32,7 @@ class BandMembersDAO
             $stmt->bindParam(':photo_filename', $filename);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
         }
     }
@@ -45,7 +45,7 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetUserFailedException($e->getMessage());
         }
     }
@@ -57,7 +57,7 @@ class BandMembersDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetAllUsersFailedException($e->getMessage());
         }
     }
@@ -97,7 +97,7 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new UpdateUserFailedException($e->getMessage());
         }
     }
@@ -109,7 +109,7 @@ class BandMembersDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new DeletingUserFailedException($e->getMessage());
         }
     }
