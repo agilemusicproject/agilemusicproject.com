@@ -1,0 +1,24 @@
+{% extends "base.twig" %}
+
+{% block javascript %}
+  <script src="/js/ckeditor/ckeditor.js"></script>
+  <script src="/js/update-form.js"></script>
+{% endblock %}
+
+{% block onload %} drawMusicPostNote() {% endblock %}
+
+{% block title %} Your music {% endblock %}
+
+{% block postit %}<canvas id="musicpostcard" class="postitheader">Our Music</canvas>{% endblock %}
+
+{% block header %} {{ title }} Your Music {%endblock%}
+
+{% block content %}
+<div id="musicEditForm">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+  </form>
+</div>
+{% endblock %}

@@ -21,7 +21,7 @@ class AccountManagerDAO
             $stmt->execute();
             $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $currentPassword['password'];
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new UpdateUserPasswordFailedException($e->getMessage());
         }
     }
@@ -36,7 +36,7 @@ class AccountManagerDAO
             $stmt->bindParam(':hash', $data['newPassword']);
             $stmt->bindParam(':name', $data['username']);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new UpdateUserPasswordFailedException($e->getMessage());
         }
     }

@@ -1,13 +1,15 @@
 <?php
 namespace AMP\Db;
 
+//need to create these
 use AMP\Exception\AddToDatabaseFailedException;
 use AMP\Exception\GetUserFailedException;
 use AMP\Exception\GetAllUsersFailedException;
 use AMP\Exception\UpdateUserFailedException;
 use AMP\Exception\DeletingUserFailedException;
+use AMP\Exception\UpdateMusicFailedException;
 
-class AboutContentDAO
+class MusicContentDAO
 {
     private $db;
 
@@ -19,10 +21,11 @@ class AboutContentDAO
     public function add(array $data)
     {
         try {
-            $sql = 'INSERT INTO about_content (content)
-                    VALUES (:content)';
+            $sql = 'INSERT INTO songs (embed, song_order)
+                    VALUES (:embed, :order)';
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':content', $data['content']);
+            $stmt->bindParam(':embed', $data['embed']);
+            $stmt->bindParam(':order', $data['song_order']);
             $stmt->execute();
         } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
@@ -32,7 +35,7 @@ class AboutContentDAO
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM about_content WHERE id = :id';
+            $sql = 'SELECT * FROM songs WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -45,7 +48,7 @@ class AboutContentDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM about_content';
+            $sql = 'SELECT * FROM songs Order By song_order';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -57,22 +60,24 @@ class AboutContentDAO
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE about_content
-                    SET content = :content
+            $sql = 'UPDATE songs
+                    SET embed = :embed,
+                    song_order = :order
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':content', $data['content']);
+            $stmt->bindParam(':embed', $data['embed']);
+            $stmt->bindParam(':order', $data['song_order']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+            throw new UpdateMusicFailedException($e->getMessage());
         }
     }
 
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from about_content WHERE id=:id';
+            $sql = 'DELETE from songs WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
