@@ -16,7 +16,7 @@
 
 <ul id="sortMusic">
   {% for row in results %}
-    <li class="musicPageText" id="music-{{row.song_order}}">{{ row.embed|raw }}</p>
+    <li class="musicPageText" id="music-{{row.id}}">{{ row.embed|raw }}</p>
   {% endfor %}
 </ul>
 <form method="post" action="/music/update">

@@ -70,20 +70,21 @@ class MusicContentDAO
     {
         $dataArray = array();
         $data = parse_str($data, $dataArray);
-        print_r($dataArray['music']);
+        $this->disableUniqueFromSongOrder();
         for($i = 0; $i < count($dataArray['music']); ++$i) {
             try {
                 $sql = 'UPDATE songs
-                    SET song_order = :newOrder
-                    WHERE song_order = :oldOrder';
+                    SET song_order = :order
+                    WHERE id = :id';
                 $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(':newOrder', $dataArray['music'][$i]);
-                $stmt->bindParam(':oldOrder', $i);
+                $stmt->bindParam(':id', $dataArray['music'][$i]);
+                $stmt->bindParam(':order', $i);
                 $stmt->execute();
             } catch (\Exception $e) {
                 throw new UpdateMusicFailedException($e->getMessage());
             }
         }
+        $this->enableUniqueFromSongOrder();
     }
 
     public function delete($id)
@@ -95,6 +96,26 @@ class MusicContentDAO
             $stmt->execute();
         } catch (\Exception $e) {
             throw new DeletingUserFailedException($e->getMessage());
+        }
+    }
+
+    public function disableUniqueFromSongOrder() {
+        try {
+            $sql = 'ALTER TABLE songs DROP INDEX song_order';
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        } catch (\Exception $e) {
+            throw new UpdateMusicFailedException($e->getMessage());
+        }
+    }
+
+    public function enableUniqueForSongOrder() {
+        try {
+            $sql = 'ALTER TABLE songs ADD UNIQUE (song_order)';
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        } catch (\Exception $e) {
+            throw new UpdateMusicFailedException($e->getMessage());
         }
     }
 }
