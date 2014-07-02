@@ -66,30 +66,28 @@ class MusicContentDAO
         }
     }
 
-//    UPDATE songs
-//    SET song_order = CASE id
-//        WHEN 1 THEN 1
-//        WHEN 2 THEN 0
-//        WHEN 3 THEN 2
-//    END
-//WHERE id IN (1,2,3);
     public function sortUpdate($data)
     {
         $dataArray = array();
         $data = parse_str($data, $dataArray);
         $this->disableUniqueFromSongOrder();
-        for($i = 0; $i < count($dataArray['music']); ++$i) {
-            try {
-                $sql = 'UPDATE songs
-                    SET song_order = :order
-                    WHERE id = :id';
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(':id', $dataArray['music'][$i]);
-                $stmt->bindParam(':order', $i);
-                $stmt->execute();
-            } catch (\Exception $e) {
-                throw new UpdateMusicFailedException($e->getMessage());
+        $ids = implode(',', array_values($dataArray['music']));
+        try {
+            $sql = 'UPDATE songs SET song_order = CASE id ';
+            for($i = 0; $i < count($dataArray['music']); ++$i) {
+                $sql .= 'WHEN :id' . $i . ' THEN :order' . $i . ' ';
             }
+            $sql .= 'END WHERE id IN ('. $ids .')';
+            $stmt = $this->db->prepare($sql);
+            $count = 0;
+            foreach($dataArray['music'] as $order => $id) {
+                $stmt->bindParam(':id'.$count, $id);
+                $stmt->bindParam(':order'.$count, $order);
+                ++$count;
+            }
+            $stmt->execute();
+        } catch (\Exception $e) {
+            throw new UpdateMusicFailedException($e->getMessage());
         }
         $this->enableUniqueForSongOrder();
     }
