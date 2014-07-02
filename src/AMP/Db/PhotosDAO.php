@@ -64,11 +64,12 @@ class PhotosDAO
         try {
             $sql = 'UPDATE photos
                     SET caption = :caption,
-                        category = :category,
+                        category = :category
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':caption', $data['caption']);
-            $stmt->bindParam(':filename', $data['category']);
+            $stmt->bindParam(':category', $data['category']);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
             throw new UpdateUserFailedException($e->getMessage());

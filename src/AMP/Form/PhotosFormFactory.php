@@ -6,13 +6,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class PhotosFormFactory extends BaseFormFactory
 {
-    public function __construct(FormFactory $formService, array $default = null)
+    public function __construct(FormFactory $formService, array $default = null, $isEditForm = false)
     {
-        $this->formBuilder = $formService->createBuilder('form', $default)
-            ->add('photo', 'file', array('required' => false,
+        $this->formBuilder = $formService->createBuilder('form', $default);
+        if (!$isEditForm)
+        $this->formBuilder->add('photo', 'file', array('required' => false,
                 'label' => 'Photo',
-                'label_attr' => array('class' => 'formLabel')))
-            ->add('caption', 'text', array(
+                'label_attr' => array('class' => 'formLabel')));
+        $this->formBuilder->add('caption', 'text', array(
                 'required' => false,
                 'attr' => array('placeholder' => 'Caption'),
                 'label_attr' => array('class' => 'formLabel'),

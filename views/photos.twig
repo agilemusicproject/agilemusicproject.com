@@ -19,14 +19,14 @@
     <input onclick="location.href='/photos/add'" type="button" value="Add Photos"/>
   </form>
 {% endif %}
-<div id="photo_gallery" style="position: relative; width: 600px; height: 300px;">
-  <div u="slides"  style="cursor: move; position: absolute; left: 0px; top: 0px; width:900px; height:300px; overflow: hidden;">
+<div id="photo_gallery" style="position: relative; width: 900px; height: 400px;">
+  <div u="slides"  style="cursor: move; position: absolute; left: 0px; top: 0px; width:900px; height:400px; overflow: hidden;">
     {% for row in results %}
       <!-- <a href="/images/photos/{{ row.filename }}"></a>  -->
       <!-- Slide -->
       <div>
         <img u="image" src="/images/photos/thumbnails/thumb_{{ row.filename }}" />
-        <div u="caption" t="B" style="position: absolute; top: 250px; left: 150px;
+        <div u="caption" t="B" style="position: absolute; top: 350px; left: 150px;
           width: 600px; height: 50px;">
           <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
             background-color: Black; opacity: 0.5; filter: alpha(opacity=50);">
@@ -35,14 +35,16 @@
             color: White; font-size: 16px; font-weight: bold; line-height: 50px; text-align: center;">
             {% if not (row.caption is null) %}
               {{ row.caption }}
-            {% endif %}   
-            <form class="edit_caption">
-              <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit"/>
-            </form>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %} 
+              <form class="edit_caption">
+                <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption"/>
+              </form>
+            {% endif %}
           </div>
         </div>
         {% if is_granted('ROLE_ADMIN') %}
-          <div u="caption" t="" style="position: absolute; top: 0px; left: 150px;
+          <div u="caption" t="T" style="position: absolute; top: 0px; left: 150px;
             width: 600px; height: 50px;">
             <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
               background-color: Black; opacity: 0.5; filter: alpha(opacity=50);">
@@ -59,5 +61,37 @@
       </div>
     {% endfor %}
   </div>
+  <!-- Arrow Navigator Skin Begin -->
+  <style>
+      /* jssor slider arrow navigator skin 09 css */
+      /*
+      .jssora09l              (normal)
+      .jssora09r              (normal)
+      .jssora09l:hover        (normal mouseover)
+      .jssora09r:hover        (normal mouseover)
+      .jssora09ldn            (mousedown)
+      .jssora09rdn            (mousedown)
+      */
+      .jssora09l, .jssora09r, .jssora09ldn, .jssora09rdn
+      {
+      	position: absolute;
+       	cursor: pointer;
+       	display: block;
+        background: url(/images/a09.png) no-repeat;
+        overflow:hidden;
+        opacity: .4; filter:alpha(opacity=40);
+      }
+      .jssora09l { background-position: -5px -35px; }
+      .jssora09r { background-position: -65px -35px; }
+      .jssora09l:hover { background-position: -5px -35px; opacity: .8; filter:alpha(opacity=80); }
+      .jssora09r:hover { background-position: -65px -35px; opacity: .8; filter:alpha(opacity=80); }
+      .jssora09ldn { background-position: -5px -35px; opacity: .3; filter:alpha(opacity=30); }
+      .jssora09rdn { background-position: -65px -35px; opacity: .3; filter:alpha(opacity=30); }
+  </style>
+  <!-- Arrow Left -->
+  <span u="arrowleft" class="jssora09l" style="width: 50px; height: 50px; top: 123px; left: 8px;"></span>
+  <!-- Arrow Right -->
+  <span u="arrowright" class="jssora09r" style="width: 50px; height: 50px; top: 123px; right: 8px"></span>
+  <!-- Arrow Navigator Skin End -->
 </div>
 {% endblock %}
