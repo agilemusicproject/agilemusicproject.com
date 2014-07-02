@@ -24,12 +24,17 @@ class MusicContentDAO
             $sql = 'SELECT MAX(song_order) FROM songs';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            $maxSortOrder = $stmt->fetch(0);
+            $maxSortOrder = $stmt->fetch(\PDO::FETCH_BOTH)[0];
+            if(is_null($maxSortOrder)) {
+                $maxSortOrder = 0;
+            } else {
+                $maxSortOrder += 1;
+            }
             $sql = 'INSERT INTO songs (embed, song_order)
                     VALUES (:embed, :order)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':embed', $data['embed']);
-            $stmt->bindParam(':order', ++$maxSortOrder);
+            $stmt->bindParam(':order', $maxSortOrder);
             $stmt->execute();
         } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
@@ -63,19 +68,21 @@ class MusicContentDAO
 
     public function sortUpdate($data)
     {
-        var_dump($data);
-        try {
-            $sql = 'UPDATE songs
-                    SET embed = :embed,
-                    song_order = :order
-                    WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':embed', $data['embed']);
-            $stmt->bindParam(':order', $data['song_order']);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-        } catch (\Exception $e) {
-            throw new UpdateMusicFailedException($e->getMessage());
+        $dataArray = array();
+        $data = parse_str($data, $dataArray);
+        print_r($dataArray['music']);
+        for($i = 0; $i < count($dataArray['music']); ++$i) {
+            try {
+                $sql = 'UPDATE songs
+                    SET song_order = :newOrder
+                    WHERE song_order = :oldOrder';
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':newOrder', $dataArray['music'][$i]);
+                $stmt->bindParam(':oldOrder', $i);
+                $stmt->execute();
+            } catch (\Exception $e) {
+                throw new UpdateMusicFailedException($e->getMessage());
+            }
         }
     }
 
