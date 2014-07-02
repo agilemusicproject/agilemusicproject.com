@@ -19,7 +19,7 @@
     <li class="musicPageText" id="music-{{row.id}}">{{ row.embed|raw }}</p>
   {% endfor %}
 </ul>
-<form method="post" action="/music/update">
-    <input id="sortSubmit" type="submit" value="Submit Songs">
+<form action="/music">
+    <input id="sortSubmit" type="submit" value="Finalize Sorting">
 </form>
 {% endblock %}
