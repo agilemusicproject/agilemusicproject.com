@@ -66,6 +66,13 @@ class MusicContentDAO
         }
     }
 
+//    UPDATE songs
+//    SET song_order = CASE id
+//        WHEN 1 THEN 1
+//        WHEN 2 THEN 0
+//        WHEN 3 THEN 2
+//    END
+//WHERE id IN (1,2,3);
     public function sortUpdate($data)
     {
         $dataArray = array();
@@ -84,7 +91,7 @@ class MusicContentDAO
                 throw new UpdateMusicFailedException($e->getMessage());
             }
         }
-        $this->enableUniqueFromSongOrder();
+        $this->enableUniqueForSongOrder();
     }
 
     public function delete($id)
@@ -111,7 +118,7 @@ class MusicContentDAO
 
     public function enableUniqueForSongOrder() {
         try {
-            $sql = 'ALTER TABLE songs ADD UNIQUE (song_order)';
+            $sql = 'ALTER TABLE songs ADD UNIQUE(song_order)';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
