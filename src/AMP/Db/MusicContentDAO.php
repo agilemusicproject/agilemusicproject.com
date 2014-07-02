@@ -21,11 +21,15 @@ class MusicContentDAO
     public function add(array $data)
     {
         try {
+            $sql = 'SELECT MAX(song_order) FROM songs';
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $maxSortOrder = $stmt->fetch(0);
             $sql = 'INSERT INTO songs (embed, song_order)
                     VALUES (:embed, :order)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':embed', $data['embed']);
-            $stmt->bindParam(':order', $data['song_order']);
+            $stmt->bindParam(':order', ++$maxSortOrder);
             $stmt->execute();
         } catch (\Exception $e) {
             throw new AddToDatabaseFailedException($e->getMessage());
@@ -57,8 +61,9 @@ class MusicContentDAO
         }
     }
 
-    public function update($id, array $data)
+    public function sortUpdate($data)
     {
+        var_dump($data);
         try {
             $sql = 'UPDATE songs
                     SET embed = :embed,

@@ -71,8 +71,9 @@ class MusicPageController implements ControllerProviderInterface
     private function updateAction(Request $request, Application $app)
     {
         $dao = new \AMP\Db\MusicContentDAO($app['db']);
+        var_dump($request->getMethod());
         if ($request->isMethod('POST')) {
-            $dao->sortUpdate();
+            $dao->sortUpdate($request->get('list'));
         }
         $results = $dao->getAll();
         return $app['twig']->render('musicUpdate.twig', array('results' => $results, 'title' => 'Sort'));
