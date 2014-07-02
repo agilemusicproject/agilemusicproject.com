@@ -1,13 +1,13 @@
 $(document).ready(function() {
+   var sortData;
    $('#sortMusic').sortable({
       update: function(event, ui) {
-         var sortData = $(this).sortable('serialize');
-   //on click post
-         //try sortData instead of o
-            $.post('/music/update', {list: sortData}, function(o) {
-            },'json');
-
+         sortData = $(this).sortable('serialize');
       }
+   });
+   $('#sortSubmit').click(function(){
+      $.post('/music/update', {list: sortData}, function(o) {
+            },'json');
    });
 
 });
