@@ -35,3 +35,6 @@ security.access_rules:
   -
     - ^/photos/edit
     - ROLE_ADMIN
+  -
+    - ^/photos/add
+    - ROLE_ADMIN

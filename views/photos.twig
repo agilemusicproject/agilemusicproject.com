@@ -22,10 +22,10 @@
 <div id="photo_gallery" style="position: relative; width: 900px; height: 400px;">
   <div u="slides"  style="cursor: move; position: absolute; left: 0px; top: 0px; width:900px; height:400px; overflow: hidden;">
     {% for row in results %}
-      <!-- <a href="/images/photos/{{ row.filename }}"></a>  -->
       <!-- Slide -->
       <div>
-        <img u="image" src="/images/photos/thumbnails/thumb_{{ row.filename }}" />
+        <img u="image" src="/images/photos/{{ row.filename }}" />
+        {% if not (row.caption is null) or is_granted('ROLE_ADMIN') %}
         <div u="caption" t="B" style="position: absolute; top: 350px; left: 150px;
           width: 600px; height: 50px;">
           <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
@@ -43,6 +43,7 @@
             {% endif %}
           </div>
         </div>
+        {% endif %}
         {% if is_granted('ROLE_ADMIN') %}
           <div u="caption" t="T" style="position: absolute; top: 0px; left: 150px;
             width: 600px; height: 50px;">
