@@ -25,7 +25,14 @@
 <a class="fancybox" rel="group" href="/images/photos/{{ row.filename }}" data-title-id="title-{{ row.id }}"><img 
     class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}" alt="" title=""{{ row.cpation }}/></a>
 <div id="title-{{ row.id }}" class="hidden">
-    {{ row.caption }} <a href="http://google.com">Some link</a>
+  {{ row.caption }} 
+  <form class="edit_caption">
+    <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption"/>
+  </form>
+  <form method="post" action="/photos/">
+    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+    <input type="submit" value="Delete Photo">
+  </form>
 </div>
 {% endfor %}
 
