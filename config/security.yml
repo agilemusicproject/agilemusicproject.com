@@ -33,8 +33,8 @@ security.access_rules:
     - ^/agile/edit
     - ROLE_ADMIN
   -
-    - ^/photos/edit
+    - ^/photos/add
     - ROLE_ADMIN
   -
-    - ^/photos/add
+    - ^/photos/edit
     - ROLE_ADMIN

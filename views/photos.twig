@@ -1,9 +1,10 @@
 {% extends "base.twig" %}
 
 {% block javascript %}
-<script type="text/javascript" src="/js/jssor/jssor.core.js"></script>
-<script type="text/javascript" src="/js/jssor/jssor.utils.js"></script>
-<script type="text/javascript" src="/js/jssor/jssor.slider.js"></script>
+<link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
 <script type="text/javascript" src="/js/photo_gallery.js"></script>
 {% endblock %}
 
@@ -19,80 +20,13 @@
     <input onclick="location.href='/photos/add'" type="button" value="Add Photos"/>
   </form>
 {% endif %}
-<div id="photo_gallery" style="position: relative; width: 900px; height: 400px;">
-  <div u="slides"  style="cursor: move; position: absolute; left: 0px; top: 0px; width:900px; height:400px; overflow: hidden;">
-    {% for row in results %}
-      <!-- Slide -->
-      <div>
-        <img u="image" src="/images/photos/{{ row.filename }}" />
-        {% if not (row.caption is null) or is_granted('ROLE_ADMIN') %}
-        <div u="caption" t="B" style="position: absolute; top: 350px; left: 150px;
-          width: 600px; height: 50px;">
-          <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
-            background-color: Black; opacity: 0.5; filter: alpha(opacity=50);">
-          </div>
-          <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
-            color: White; font-size: 16px; font-weight: bold; line-height: 50px; text-align: center;">
-            {% if not (row.caption is null) %}
-              {{ row.caption }}
-            {% endif %}
-            {% if is_granted('ROLE_ADMIN') %} 
-              <form class="edit_caption">
-                <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption"/>
-              </form>
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
-          <div u="caption" t="T" style="position: absolute; top: 0px; left: 150px;
-            width: 600px; height: 50px;">
-            <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
-              background-color: Black; opacity: 0.5; filter: alpha(opacity=50);">
-            </div>
-            <div style="position: absolute; top: 0px; left: 0px; width: 600px; height: 50px;
-              color: White; font-size: 16px; font-weight: bold; line-height: 50px; text-align: center;">
-              <form method="post" action="/photos/">
-                <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-                <input type="submit" value="Delete Photo">
-              </form>
-            </div>
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-  <!-- Arrow Navigator Skin Begin -->
-  <style>
-      /* jssor slider arrow navigator skin 09 css */
-      /*
-      .jssora09l              (normal)
-      .jssora09r              (normal)
-      .jssora09l:hover        (normal mouseover)
-      .jssora09r:hover        (normal mouseover)
-      .jssora09ldn            (mousedown)
-      .jssora09rdn            (mousedown)
-      */
-      .jssora09l, .jssora09r, .jssora09ldn, .jssora09rdn
-      {
-      	position: absolute;
-       	cursor: pointer;
-       	display: block;
-        background: url(/images/a09.png) no-repeat;
-        overflow:hidden;
-        opacity: .4; filter:alpha(opacity=40);
-      }
-      .jssora09l { background-position: -5px -35px; }
-      .jssora09r { background-position: -65px -35px; }
-      .jssora09l:hover { background-position: -5px -35px; opacity: .8; filter:alpha(opacity=80); }
-      .jssora09r:hover { background-position: -65px -35px; opacity: .8; filter:alpha(opacity=80); }
-      .jssora09ldn { background-position: -5px -35px; opacity: .3; filter:alpha(opacity=30); }
-      .jssora09rdn { background-position: -65px -35px; opacity: .3; filter:alpha(opacity=30); }
-  </style>
-  <!-- Arrow Left -->
-  <span u="arrowleft" class="jssora09l" style="width: 50px; height: 50px; top: 123px; left: 8px;"></span>
-  <!-- Arrow Right -->
-  <span u="arrowright" class="jssora09r" style="width: 50px; height: 50px; top: 123px; right: 8px"></span>
-  <!-- Arrow Navigator Skin End -->
+
+{% for row in results %}
+<a class="fancybox" rel="group" href="/images/photos/{{ row.filename }}" data-title-id="title-{{ row.id }}"><img 
+    class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}" alt="" title=""{{ row.cpation }}/></a>
+<div id="title-{{ row.id }}" class="hidden">
+    {{ row.caption }} <a href="http://google.com">Some link</a>
 </div>
+{% endfor %}
+
 {% endblock %}

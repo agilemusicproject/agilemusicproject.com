@@ -5,6 +5,10 @@
   clear: both;
 }
 
+.hidden {
+  display: none;  
+}
+
 .pageText {
   max-width: 900px;
   display: table;
@@ -21,8 +25,11 @@ textarea {
   width: 200px;
 }
 
-.edit_caption {
+.fancyphoto {
   display: inline;
+  max-width: 200px;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
