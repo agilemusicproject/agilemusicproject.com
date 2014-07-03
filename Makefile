@@ -18,7 +18,7 @@ behat: db-setup
 test-cyg: lint phpcs-cyg phpunit-cyg behat-cyg
 
 phpcs-cyg:
-	./vendor/bin/phpcs.bat --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,galleria .
+	./vendor/bin/phpcs.bat --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,fancybox .
 
 phpunit-cyg:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit.bat .; fi
