@@ -32,7 +32,7 @@ class BandMembersDAO
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ class BandMembersDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new GetUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -57,7 +57,7 @@ class BandMembersDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ class BandMembersDAO
             $stmt->execute();
 
         } catch (\Exception $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ class BandMembersDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 }

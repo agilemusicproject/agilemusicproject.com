@@ -38,7 +38,6 @@ security.access_rules:
   -
     - ^/photos/edit
     - ROLE_ADMIN
-    - ROLE_ADMIN
   -
     - ^/music/add
     - ROLE_ADMIN
