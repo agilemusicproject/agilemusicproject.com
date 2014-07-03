@@ -1,9 +1,9 @@
 <?php
-namespace AMP\Exception;
+namespace AMP\Exception\MusicPage;
 
-class DeletingSongFailedException extends \PDOException implements ExceptionInterface
+class DeletingSongFailedException extends \PDOException implements \AMP\Exception\ExceptionInterface
 {
-    use ExceptionTrait;
+    use \AMP\Exception\ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
         $this->userMessage = 'Unable to delete song. Please try again later. ';

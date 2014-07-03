@@ -1,9 +1,9 @@
 <?php
-namespace AMP\Exception;
+namespace AMP\Exception\ContentPage;
 
-class AddContentToDatabaseFailedException extends \PDOException implements ExceptionInterface
+class AddContentToDatabaseFailedException extends \PDOException implements \AMP\Exception\ExceptionInterface
 {
-    use ExceptionTrait;
+    use \AMP\Exception\ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
         $this->userMessage = 'We had trouble adding your content. Please try again.';

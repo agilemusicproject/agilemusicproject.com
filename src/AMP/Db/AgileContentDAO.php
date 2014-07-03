@@ -24,7 +24,7 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new AddContentToDatabaseFailedException($e->getMessage());
         }
     }
@@ -37,7 +37,7 @@ class AgileContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetContentFailedException($e->getMessage());
         }
     }
@@ -49,7 +49,7 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new GetAllPageContentFailedException($e->getMessage());
         }
     }
@@ -64,8 +64,7 @@ class AgileContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new UpdateContentFailedException($e->getMessage());
         }
     }
@@ -77,7 +76,7 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             throw new DeletingContentFailedException($e->getMessage());
         }
     }

@@ -1,9 +1,9 @@
 <?php
-namespace AMP\Exception;
+namespace AMP\Exception\MusicPage;
 
-class GetSongFailedException extends \PDOException implements ExceptionInterface
+class GetSongFailedException extends \PDOException implements \AMP\Exception\ExceptionInterface
 {
-    use ExceptionTrait;
+    use \AMP\Exception\ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
         $this->userMessage = 'We were unable to find the song we were looking for. Please try again later ';

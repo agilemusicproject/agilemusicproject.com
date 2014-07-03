@@ -1,9 +1,9 @@
 <?php
-namespace AMP\Exception;
+namespace AMP\Exception\ContentPage;
 
-class GetContentFailedException extends \PDOException implements ExceptionInterface
+class GetContentFailedException extends \PDOException implements \AMP\Exception\ExceptionInterface
 {
-    use ExceptionTrait;
+    use \AMP\Exception\ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
         $this->userMessage = 'We had trouble getting your content. Please try again.';
