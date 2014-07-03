@@ -25,7 +25,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             $maxSortOrder = $stmt->fetch(\PDO::FETCH_BOTH)[0];
-            if(is_null($maxSortOrder)) {
+            if (is_null($maxSortOrder)) {
                 $maxSortOrder = 0;
             } else {
                 $maxSortOrder += 1;
@@ -73,7 +73,7 @@ class MusicContentDAO
         $this->disableUniqueFromSongOrder();
         try {
             $sql = 'UPDATE songs SET song_order = CASE id ';
-            for($i = 0; $i < count($dataArray['music']); ++$i) {
+            for ($i = 0; $i < count($dataArray['music']); ++$i) {
                 $sql .= 'WHEN ' . $dataArray['music'][$i] .' THEN ' . $i . ' ';
             }
             $sql .= 'END';
@@ -97,7 +97,8 @@ class MusicContentDAO
         }
     }
 
-    public function disableUniqueFromSongOrder() {
+    public function disableUniqueFromSongOrder()
+    {
         try {
             $sql = 'ALTER TABLE songs DROP INDEX song_order';
             $stmt = $this->db->prepare($sql);
@@ -107,7 +108,8 @@ class MusicContentDAO
         }
     }
 
-    public function enableUniqueForSongOrder() {
+    public function enableUniqueForSongOrder()
+    {
         try {
             $sql = 'ALTER TABLE songs ADD UNIQUE(song_order)';
             $stmt = $this->db->prepare($sql);

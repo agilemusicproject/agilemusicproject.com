@@ -14,16 +14,20 @@ Feature: AMP Web Site Music Page
     Then I should be on "/music/add"
     And I should see a "form" element
     When I fill in "form_embed" with "<iframe>test</iframe>"
-    And I fill in "form_song_order" with "1"
     And I press "Submit"
     Then I should be on "/music/"
-    And I should see 1 ".musicPageText" element
-    When I go to "music/edit/1"
-    And I fill in "form_embed" with "<iframe>edit test</iframe>"
-    Then the "form_song_order" field should contain "1"
+    And I should see 1 "iframe" element
+    When I go to "music/add"
+    And I should see a "form" element
+    When I fill in "form_embed" with "<iframe>test again</iframe>"
     And I press "Submit"
     Then I should be on "/music/"
-    And I should see 1 ".musicPageText" element
-    And I should see "edit test" in the ".musicPageText" element
+    And I should see 2 "iframe" elements
+    When I go to "/music/update"
+    And I should see 2 "iframe" elements
+    When I press "Finalize Sorting"
+    Then I should be on "/music/"
+    And I should see 2 "iframe" elements
     When I press "Delete"
+    And I press "Delete"
     Then I should see 0 ".musictPageText" elements
