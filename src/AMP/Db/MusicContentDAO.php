@@ -79,11 +79,9 @@ class MusicContentDAO
             }
             $sql .= 'END WHERE id IN ('. $ids .')';
             $stmt = $this->db->prepare($sql);
-            $count = 0;
-            foreach($dataArray['music'] as $order => $id) {
-                $stmt->bindParam(':id'.$count, $id);
-                $stmt->bindParam(':order'.$count, $order);
-                ++$count;
+            for($j = 0; $j < count($dataArray['music']); ++$j){
+                $stmt->bindParam(':id'.$j, $dataArray['music'][$j]);
+                $stmt->bindParam(':order'.$j, $j);
             }
             $stmt->execute();
         } catch (\Exception $e) {
