@@ -71,18 +71,13 @@ class MusicContentDAO
         $dataArray = array();
         $data = parse_str($data, $dataArray);
         $this->disableUniqueFromSongOrder();
-        $ids = implode(',', array_values($dataArray['music']));
         try {
             $sql = 'UPDATE songs SET song_order = CASE id ';
             for($i = 0; $i < count($dataArray['music']); ++$i) {
-                $sql .= 'WHEN :id' . $i . ' THEN :order' . $i . ' ';
+                $sql .= 'WHEN ' . $dataArray['music'][$i] .' THEN ' . $i . ' ';
             }
-            $sql .= 'END WHERE id IN ('. $ids .')';
+            $sql .= 'END';
             $stmt = $this->db->prepare($sql);
-            for($j = 0; $j < count($dataArray['music']); ++$j){
-                $stmt->bindParam(':id'.$j, $dataArray['music'][$j]);
-                $stmt->bindParam(':order'.$j, $j);
-            }
             $stmt->execute();
         } catch (\Exception $e) {
             throw new UpdateMusicFailedException($e->getMessage());
