@@ -7,7 +7,7 @@ lint:
 	for f in `find features -name *.php`; do php -l $$f; done
 
 phpcs:
-	./vendor/bin/phpcs --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,galleria .
+	./vendor/bin/phpcs --standard=PSR2 --ignore=vendor,coverage,ckeditor,blog,fancybox .
 
 phpunit:
 	if [ -e test ]; then cd test && ../vendor/bin/phpunit .; fi
