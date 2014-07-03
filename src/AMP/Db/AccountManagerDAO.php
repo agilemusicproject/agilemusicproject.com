@@ -1,7 +1,8 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\UpdateUserPasswordFailedException;
+use AMP\Exception\AccountPage\UpdateUserPasswordFailedException;
+use AMP\Exception\AccountPage\GetUserPasswordFailedException;
 
 class AccountManagerDAO
 {
@@ -22,7 +23,7 @@ class AccountManagerDAO
             $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $currentPassword['password'];
         } catch (\Exception $e) {
-            throw new UpdateUserPasswordFailedException($e->getMessage());
+            throw new GetUserPasswordFailedException($e->getMessage());
         }
     }
 

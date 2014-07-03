@@ -2,11 +2,11 @@
 namespace AMP\Db;
 
 use AMP\UploadManager;
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
+use AMP\Exception\MeetTheBand\AddToDatabaseFailedException;
+use AMP\Exception\MeetTheBand\GetUserFailedException;
+use AMP\Exception\MeetTheBand\GetAllUsersFailedException;
+use AMP\Exception\MeetTheBand\UpdateUserFailedException;
+use AMP\Exception\MeetTheBand\DeletingUserFailedException;
 
 class BandMembersDAO
 {

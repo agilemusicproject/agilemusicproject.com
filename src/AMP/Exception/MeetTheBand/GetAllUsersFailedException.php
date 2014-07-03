@@ -1,9 +1,9 @@
 <?php
-namespace AMP\Exception;
+namespace AMP\Exception\MeetTheBand;
 
-class GetAllUsersFailedException extends \PDOException implements ExceptionInterface
+class GetAllUsersFailedException extends \PDOException implements \AMP\Exception\ExceptionInterface
 {
-    use ExceptionTrait;
+    use \AMP\Exception\ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
         $this->userMessage = 'Unable to get the band member information. Please try again later.';

@@ -1,13 +1,13 @@
 <?php
 namespace AMP\Db;
 
-//need to create these
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
-use AMP\Exception\UpdateMusicFailedException;
+use AMP\Exception\MusicPage\AddSongToDatabaseFailedException;
+use AMP\Exception\MusicPage\DeletingSongFailedException;
+use AMP\Exception\MusicPage\DisableUniqueConstraintFailedException;
+use AMP\Exception\MusicPage\EnableUniqueConstraintFailedException;
+use AMP\Exception\MusicPage\GetAllSongsFailedException;
+use AMP\Exception\MusicPage\GetSongFailedException;
+use AMP\Exception\MusicPage\SortingFailedException;
 
 class MusicContentDAO
 {
@@ -37,7 +37,7 @@ class MusicContentDAO
             $stmt->bindParam(':order', $maxSortOrder);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+            throw new AddSongToDatabaseFailedException($e->getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ class MusicContentDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new GetUserFailedException($e->getMessage());
+            throw new GetSongFailedException($e->getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ class MusicContentDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new GetAllSongsFailedException($e->getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateMusicFailedException($e->getMessage());
+            throw new SortingFailedException($e->getMessage());
         }
         $this->enableUniqueForSongOrder();
     }
@@ -93,7 +93,7 @@ class MusicContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+            throw new DeletingSongFailedException($e->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateMusicFailedException($e->getMessage());
+            throw new DisableUniqueConstraintFailedException($e->getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateMusicFailedException($e->getMessage());
+            throw new EnableUniqueConstraintFailedException($e->getMessage());
         }
     }
 }

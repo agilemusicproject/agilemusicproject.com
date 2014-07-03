@@ -17,7 +17,7 @@ Feature: AMP Web Site Music Page
     And I press "Submit"
     Then I should be on "/music/"
     And I should see 1 "iframe" element
-    When I go to "music/add"
+    When I go to "/music/add"
     And I should see a "form" element
     When I fill in "form_embed" with "<iframe>test again</iframe>"
     And I press "Submit"

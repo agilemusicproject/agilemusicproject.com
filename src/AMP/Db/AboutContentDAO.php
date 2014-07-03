@@ -1,11 +1,11 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
+use AMP\Exception\ContentPage\AddContentToDatabaseFailedException;
+use AMP\Exception\ContentPage\DeletingContentFailedException;
+use AMP\Exception\ContentPage\GetAllPageContentFailedException;
+use AMP\Exception\ContentPage\GetContentFailedException;
+use AMP\Exception\ContentPage\UpdateContentFailedException;
 
 class AboutContentDAO
 {
@@ -25,7 +25,7 @@ class AboutContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+            throw new AddContentToDatabaseFailedException($e->getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ class AboutContentDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new GetUserFailedException($e->getMessage());
+            throw new GetContentFailedException($e->getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ class AboutContentDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new GetAllPageContentFailedException($e->getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ class AboutContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+            throw new UpdateContentFailedException($e->getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ class AboutContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+            throw new DeletingContentFailedException($e->getMessage());
         }
     }
 }

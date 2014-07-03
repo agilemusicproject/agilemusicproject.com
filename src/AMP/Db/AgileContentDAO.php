@@ -1,11 +1,11 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
+use AMP\Exception\ContentPage\AddContentToDatabaseFailedException;
+use AMP\Exception\ContentPage\DeletingContentFailedException;
+use AMP\Exception\ContentPage\GetAllPageContentFailedException;
+use AMP\Exception\ContentPage\GetContentFailedException;
+use AMP\Exception\ContentPage\UpdateContentFailedException;
 
 class AgileContentDAO
 {
@@ -24,8 +24,8 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
-        } catch (\PDOException $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new AddContentToDatabaseFailedException($e->getMessage());
         }
     }
 
@@ -37,8 +37,8 @@ class AgileContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\PDOException $e) {
-            throw new GetUserFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new GetContentFailedException($e->getMessage());
         }
     }
 
@@ -49,8 +49,8 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (\PDOException $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new GetAllPageContentFailedException($e->getMessage());
         }
     }
 
@@ -64,9 +64,8 @@ class AgileContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-
-        } catch (\PDOException $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new UpdateContentFailedException($e->getMessage());
         }
     }
 
@@ -77,8 +76,8 @@ class AgileContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\PDOException $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+        } catch (\Exception $e) {
+            throw new DeletingContentFailedException($e->getMessage());
         }
     }
 }
