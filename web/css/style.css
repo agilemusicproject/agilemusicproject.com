@@ -25,6 +25,25 @@ textarea {
   width: 200px;
 }
 
+#galleryTab {
+  padding-left: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.filter {
+  padding-right: 10px;
+  padding-left: 10px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: #96CDCD;
+}
+
 .fancyphoto {
   display: inline;
   max-width: 200px;

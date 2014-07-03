@@ -17,23 +17,30 @@
 {% block content %}
 {% if is_granted('ROLE_ADMIN') %}
   <form>
-    <input onclick="location.href='/photos/add'" type="button" value="Add Photos"/>
+    <input onclick="location.href='/photos/add'" type="button" value="Add Photo"/>
   </form>
 {% endif %}
 
-{% for row in results %}
-<a class="fancybox" rel="group" href="/images/photos/{{ row.filename }}" data-title-id="title-{{ row.id }}"><img 
-    class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}" alt="" title=""{{ row.cpation }}/></a>
-<div id="title-{{ row.id }}" class="hidden">
-  {{ row.caption }} 
-  <form class="edit_caption">
-    <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption"/>
-  </form>
-  <form method="post" action="/photos/">
-    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-    <input type="submit" value="Delete Photo">
-  </form>
+ <div id="galleryTab">
+   <a data-rel="all"  href="javascript:;" class="filter active">View all</a>
+{% for row in categories %}
+   <a data-rel="{{ row.category }}" href="javascript:;" class="filter">{{ row.category }}</a>
+{% endfor %}
 </div>
+
+{% for row in results %}
+  <a class="fancybox" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" data-title-id="title-{{ row.id }}" data-filter={{ row.category }}><img 
+  class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/></a>
+  <div id="title-{{ row.id }}" class="hidden">
+    {{ row.caption }} 
+    <form class="edit_caption">
+      <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
+    </form>
+    <form method="post" action="/photos/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input type="submit" value="Delete Photo">
+    </form>
+  </div>
 {% endfor %}
 
 {% endblock %}

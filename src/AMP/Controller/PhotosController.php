@@ -34,7 +34,8 @@ class PhotosController implements ControllerProviderInterface
             $dao->delete($request->get('id'));
         }
         $results = $dao->getAll();
-        return $app['twig']->render('photos.twig', array('results' => $results));
+        $categories = $dao->getCategories();
+        return $app['twig']->render('photos.twig', array('results' => $results, 'categories' => $categories));
     }
     
     private function addAction(Request $request, Application $app)

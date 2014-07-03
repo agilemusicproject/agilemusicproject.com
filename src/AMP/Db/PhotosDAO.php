@@ -59,6 +59,18 @@ class PhotosDAO
         }
     }
     
+    public function getCategories()
+    {
+        try {
+            $sql = 'SELECT DISTINCT category FROM photos';
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new GetAllUsersFailedException($e->getMessage());
+        }
+    }
+    
     public function update($id, array $data)
     {
         try {
