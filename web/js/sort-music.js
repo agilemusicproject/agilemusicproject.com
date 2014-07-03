@@ -1,10 +1,11 @@
 $(document).ready(function() {
-   $('#sortMusic').sortable({
+   var sortData = $('#sortMusic').sortable({
       update: function(event, ui) {
-         var sortData = $(this).sortable('serialize');
-            $.post('/music/update', {list: sortData}, function(o) {
-            },'json');
+         return $(this).sortable('serialize');
       }
    });
-
+   $('#sortSubmit').click(function(sortData){
+      $.post('/music/update', {list: sortData}, function(o) {
+      },'json');
+   });
 });

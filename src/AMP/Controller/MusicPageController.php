@@ -23,10 +23,6 @@ class MusicPageController implements ControllerProviderInterface
             return $this->updateAction($request, $app);
         });
 
-        $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
-            return $this->editAction($request, $app, $id);
-        });
-
         return $controllers;
     }
 
@@ -52,20 +48,6 @@ class MusicPageController implements ControllerProviderInterface
         }
         return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
                                                             'title' => 'Add'));
-    }
-
-    private function editAction(Request $request, Application $app, $id)
-    {
-        $dao = new \AMP\Db\MusicContentDAO($app['db']);
-        $formFactory = new \AMP\Form\MusicPageFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $dao->update($id, $form->getData());
-            return $app->redirect('/music');
-        }
-        return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
-                                                            'title' => 'Edit'));
     }
 
     private function updateAction(Request $request, Application $app)
