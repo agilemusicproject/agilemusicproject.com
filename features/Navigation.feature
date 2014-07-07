@@ -16,6 +16,7 @@ Feature: AMP Web Site Navigation
       | /photos       | #photospostcard      | Photos        |
       | /agile/       | #agilepostcard       | About Agile   |
       | /about        | #aboutpostcard       | About Us      |
+      | /news         | #newspostcard        | Our News      |
 
   Scenario Outline: Click AMP Logo
     Given I am on "<page>"
@@ -31,3 +32,4 @@ Feature: AMP Web Site Navigation
       | /agile/       |
       | /about/       |
       | /account/     |
+      | /news         |
