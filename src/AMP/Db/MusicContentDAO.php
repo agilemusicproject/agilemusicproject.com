@@ -37,7 +37,7 @@ class MusicContentDAO
             $stmt->bindParam(':order', $maxSortOrder);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new AddSongToDatabaseFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ class MusicContentDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new GetSongFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ class MusicContentDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new GetAllSongsFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new SortingFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
         $this->enableUniqueForSongOrder();
     }
@@ -93,7 +93,7 @@ class MusicContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DeletingSongFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DisableUniqueConstraintFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ class MusicContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new EnableUniqueConstraintFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 }

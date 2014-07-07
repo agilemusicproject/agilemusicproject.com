@@ -30,7 +30,7 @@ class PhotosDAO
             $stmt->bindParam(':category', $data['category']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
     
@@ -43,7 +43,7 @@ class PhotosDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\PDOException $e) {
-            throw new GetUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ class PhotosDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
     
@@ -67,7 +67,7 @@ class PhotosDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
     
@@ -84,7 +84,7 @@ class PhotosDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ class PhotosDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 }

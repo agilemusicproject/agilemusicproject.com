@@ -25,7 +25,7 @@ class AgileContentDAO
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new AddContentToDatabaseFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ class AgileContentDAO
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new GetContentFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ class AgileContentDAO
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new GetAllPageContentFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ class AgileContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new UpdateContentFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ class AgileContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new DeletingContentFailedException($e->getMessage());
+            throw new \AMP\Exception\DbException($e->getMessage());
         }
     }
 }
