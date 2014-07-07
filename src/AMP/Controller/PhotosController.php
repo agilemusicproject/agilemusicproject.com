@@ -31,12 +31,11 @@ class PhotosController implements ControllerProviderInterface
     {
         $dao = new \AMP\Db\PhotosDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $id = $request->get('id');
-            $photo_data = $dao->get($id);
+            $photo_data = $dao->get($request->get('id'));
             $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
             $uploadManager->deleteFile($photo_data['filename']);
             $uploadManager->deleteThumbnail($photo_data['filename']);
-            $dao->delete($id);
+            $dao->delete($request->get('id'));
         }
         $results = $dao->getAll();
         $categories = $dao->getCategories();

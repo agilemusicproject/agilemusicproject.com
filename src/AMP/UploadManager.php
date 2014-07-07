@@ -4,7 +4,7 @@ namespace AMP;
 class UploadManager
 {
     private $folderPath;
-    private $thumbnailDirectory = '/thumbnails';
+    private $thumbnailsDirectory = '/thumbnails';
     private $thumbnailWidth = 900;
     
     public function __construct($folderPath)
@@ -22,8 +22,8 @@ class UploadManager
     public function uploadPhoto($file)
     {
         $filename = $this->upload($file);
-        if (!file_exists($this->folderPath . '/thumbnails')) {
-            mkdir($this->folderPath . '/thumbnails');
+        if (!file_exists($this->folderPath . $thumbnailsDirectory)) {
+            mkdir($this->folderPath . $thumbnailsDirectory);
         }
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
@@ -37,13 +37,13 @@ class UploadManager
     }
     
     public function deleteFile($filename)
-    {     
-        $this->delete($this->folderPath . '/' . $filename);   
+    {
+        $this->delete($this->folderPath . '/' . $filename);
     }
     
     public function deleteThumbnail($filename)
-    {     
-        $this->delete($this->folderPath . '/thumbnails/thumb_' . $filename);   
+    {
+        $this->delete($this->folderPath . $thumbnailsDirectory . '/thumb_' . $filename);
     }
     
     public function createThumbnail($filename, $desired_width)
@@ -59,7 +59,7 @@ class UploadManager
         
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
         
-        imagejpeg($thumb, $this->folderPath . '/thumbnails/thumb_' . $filename);
+        imagejpeg($thumb, $this->folderPath . $thumbnailsDirectory . '/thumb_' . $filename);
         imagedestroy($thumb);
     }
 }

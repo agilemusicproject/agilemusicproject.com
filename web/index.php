@@ -64,7 +64,9 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/login', function (Request $request) use ($app) {
-    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
+    $lastPage = $request->server->get('HTTP_REFERER');
+    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request),
+                                                    'lastPage' => $lastPage));
 });
 
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
