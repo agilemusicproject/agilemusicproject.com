@@ -24,7 +24,7 @@ class MusicContentDAO
             $sql = 'SELECT MAX(song_order) FROM songs';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            $maxSortOrder = $stmt->fetchOne();
+            $maxSortOrder = $stmt->fetchColumn();
             if (is_null($maxSortOrder)) {
                 $maxSortOrder = 0;
             } else {
