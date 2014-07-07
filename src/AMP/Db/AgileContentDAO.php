@@ -3,7 +3,7 @@ namespace AMP\Db;
 
 use \AMP\Exception\DbException;
 
-class AgileContentDAO
+class AgileContentDAO extends AbstractDAO
 {
     private $db;
     private $tableName = 'agile_content';

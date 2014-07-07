@@ -3,7 +3,7 @@ namespace AMP\Db;
 
 use \AMP\Exception\DbException;
 
-class MusicContentDAO
+class MusicContentDAO extends AbstractDAO
 {
     private $db;
     private $tableName = 'songs';
