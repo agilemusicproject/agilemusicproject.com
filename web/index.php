@@ -71,15 +71,12 @@ $app->get('/photos', function () use ($app) {
     return $app['twig']->render('photos.twig');
 });
 
-$app->get('/news', function () use ($app) {
-    return $app['twig']->render('news.twig');
-});
-
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
 $app->mount('/about', new AMP\Controller\AboutPageController());
 $app->mount('/agile', new AMP\Controller\AgilePageController());
 $app->mount('/music', new AMP\Controller\MusicPageController());
+$app->mount('/news', new AMP\Controller\NewsPageController());
 
 $app->run();
