@@ -13,10 +13,10 @@ class AgilePageFormFactory extends BaseFormFactory
             ->add('content', 'textarea', array('label' => false,
                                            'label_attr' => array('class' => 'formLabel'),
                                            'attr' => array('placeholder' => 'Content'),
-                                           'required' => false,
+                                           'constraints' => new Assert\NotBlank(),
             ))
             ->add('submit', 'submit');
-        
+
         $this->form = $this->formBuilder->getForm();
     }
 }

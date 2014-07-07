@@ -7,7 +7,7 @@ use AMP\Exception\ContentPage\GetAllPageContentFailedException;
 use AMP\Exception\ContentPage\GetContentFailedException;
 use AMP\Exception\ContentPage\UpdateContentFailedException;
 
-class AboutContentDAO
+class NewsContentDAO
 {
     private $db;
 
@@ -73,7 +73,7 @@ class AboutContentDAO
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from about_content WHERE id=:id';
+            $sql = 'DELETE from stories WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
