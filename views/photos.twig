@@ -5,7 +5,7 @@
 <script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
 <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-<script type="text/javascript" src="/js/photo_gallery.js"></script>
+<script type="text/javascript" src="/js/photo-gallery.js"></script>
 {% endblock %}
 
 {% block onload %} drawPhotosPostNote() {% endblock %}
@@ -29,17 +29,21 @@
 </div>
 
 {% for row in results %}
-  <a class="fancybox" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" data-title-id="title-{{ row.id }}" data-filter={{ row.category }}><img 
-  class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/></a>
+  <a class="fancybox imageLink" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" 
+    data-title-id="title-{{ row.id }}" data-filter={{ row.category }}>
+    <img class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/>
+  </a>
   <div id="title-{{ row.id }}" class="hidden">
     {{ row.caption }} 
-    <form class="edit_caption">
-      <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
-    </form>
-    <form method="post" action="/photos/">
-      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input type="submit" value="Delete Photo">
-    </form>
+    {% if is_granted('ROLE_ADMIN') %}
+      <form class="edit_caption">
+        <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
+      </form>
+      <form method="post" action="/photos/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+        <input type="submit" value="Delete Photo">
+      </form>
+    {% endif %}
   </div>
 {% endfor %}
 

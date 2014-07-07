@@ -1,16 +1,14 @@
 <?php
 namespace AMP\Db;
 
-use AMP\UploadManager;
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
+use \AMP\UploadManager;
+use \AMP\Exception\DbException;
+
 
 class PhotosDAO
 {
     private $db;
+    private $tableName = 'photos';
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -19,10 +17,9 @@ class PhotosDAO
 
     public function add(array $data)
     {
-        $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-        $filename = $uploadManager->upload($data['photo']);
+        $filename = $data['photo']->getClientOriginalName(); 
         try {
-            $sql = 'INSERT INTO photos (filename, caption, category)
+            $sql = 'INSERT INTO ' . $this->tableName . ' (filename, caption, category)
                     VALUES (:filename, :caption, :category)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':filename', $filename);
@@ -30,51 +27,51 @@ class PhotosDAO
             $stmt->bindParam(':category', $data['category']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
     
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM photos WHERE id = :id';
+            $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM photos';
+            $sql = 'SELECT * FROM ' . $this->tableName;
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
     
     public function getCategories()
     {
         try {
-            $sql = 'SELECT DISTINCT category FROM photos';
+            $sql = 'SELECT DISTINCT category FROM ' . $this->tableName;
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
     
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE photos
+            $sql = 'UPDATE ' . $this->tableName . '
                     SET caption = :caption,
                         category = :category
                     WHERE id = :id';
@@ -84,26 +81,19 @@ class PhotosDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function delete($id)
     {
         try {
-            $original_data = $this->get($id);
-            $original_filename = $original_data['filename'];
-            $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-            if (!is_null($original_filename)) {
-                $uploadManager->delete($original_filename);
-                $uploadManager->deleteThumb($original_filename);
-            }
-            $sql = 'DELETE from photos WHERE id=:id';
+            $sql = 'DELETE from ' . $this->tableName . ' WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 }

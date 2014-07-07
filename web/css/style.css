@@ -21,6 +21,10 @@ textarea {
   width: 50%;
 }
 
+a.imageLink {
+  text-decoration: none;
+}
+
 .preview {
   width: 200px;
 }

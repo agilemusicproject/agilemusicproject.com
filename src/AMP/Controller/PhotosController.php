@@ -31,7 +31,12 @@ class PhotosController implements ControllerProviderInterface
     {
         $dao = new \AMP\Db\PhotosDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $id = $request->get('id');
+            $photo_data = $dao->get($id);
+            $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
+            $uploadManager->deleteFile($photo_data['filename']);
+            $uploadManager->deleteThumbnail($photo_data['filename']);
+            $dao->delete($id);
         }
         $results = $dao->getAll();
         $categories = $dao->getCategories();
@@ -41,12 +46,14 @@ class PhotosController implements ControllerProviderInterface
     private function addAction(Request $request, Application $app)
     {
         $dao = new \AMP\Db\PhotosDAO($app['db']);
-        $results = $dao->getAll();
         $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->add($form->getData());
+            $formData = $form->getData();
+            $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
+            $uploadManager->uploadPhoto($formData['photo']);
+            $dao->add($formData);
             return $app->redirect('/photos');
         }
         return $app['twig']->render('photosEdit.twig', array('form' => $form->createView(),
