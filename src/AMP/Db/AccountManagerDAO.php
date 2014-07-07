@@ -1,12 +1,12 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\AccountPage\UpdateUserPasswordFailedException;
-use AMP\Exception\AccountPage\GetUserPasswordFailedException;
+use \AMP\Exception\DbException;
 
 class AccountManagerDAO
 {
     private $db;
+    private $tableName = 'users';
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -16,21 +16,21 @@ class AccountManagerDAO
     public function getCurrentPassword($username)
     {
         try {
-            $sql = 'SELECT password FROM users WHERE username = :name';
+            $sql = 'SELECT password FROM ' . $this->tableName . ' WHERE username = :name';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':name', $username);
             $stmt->execute();
             $currentPassword = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $currentPassword['password'];
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function updateBandMemberPassword(array $data)
     {
         try {
-            $sql = 'UPDATE users
+            $sql = 'UPDATE ' . $this->tableName . '
                         SET password = :hash
                         WHERE username = :name';
             $stmt = $this->db->prepare($sql);
@@ -38,7 +38,7 @@ class AccountManagerDAO
             $stmt->bindParam(':name', $data['username']);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 }

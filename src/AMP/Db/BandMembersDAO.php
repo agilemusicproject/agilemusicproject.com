@@ -1,12 +1,12 @@
 <?php
 namespace AMP\Db;
 
-use \AMP\UploadManager;
 use \AMP\Exception\DbException;
 
 class BandMembersDAO
 {
     private $db;
+    private $tableName = 'band_members';
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -16,7 +16,7 @@ class BandMembersDAO
     public function add(array $data)
     {
         try {
-            $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
+            $sql = 'INSERT INTO ' . $this->tableName . ' (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':first_name', $data['first_name']);
@@ -33,7 +33,7 @@ class BandMembersDAO
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM band_members WHERE id = :id';
+            $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -46,7 +46,7 @@ class BandMembersDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM band_members';
+            $sql = 'SELECT * FROM ' . $this->tableName;
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -58,7 +58,7 @@ class BandMembersDAO
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE band_members
+            $sql = 'UPDATE ' . $this->tableName . '
                     SET first_name = :first_name,
                         last_name = :last_name,
                         roles = :roles,
@@ -82,7 +82,7 @@ class BandMembersDAO
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from band_members WHERE id=:id';
+            $sql = 'DELETE from ' . $this->tableName . ' WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();

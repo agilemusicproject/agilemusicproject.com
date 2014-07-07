@@ -32,10 +32,9 @@ class MeetTheBandController implements ControllerProviderInterface
         $dao = new \AMP\Db\BandMembersDAO($app['db']);
         if ($request->isMethod('POST')) {
             $bandMemberData = $dao->get($request->get('id'));
-            $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
             if (!is_null($bandMemberData['photo_filename'])) {
-                $uploadManager->deleteFile($bandMemberData['photo_filename']);
-                $uploadManager->deleteThumbnail($bandMemberData['photo_filename']);
+                $app['photoUploadManager']->deleteFile($bandMemberData['photo_filename']);
+                $app['photoUploadManager']->deleteThumbnail($bandMemberData['photo_filename']);
             }
             $dao->delete($request->get('id'));
         }
@@ -52,8 +51,7 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $dao = new \AMP\Db\BandMembersDAO($app['db']);
             if (!is_null($formData['photo'])) {
-                $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-                $filename = $uploadManager->uploadPhoto($formData['photo']);
+                $filename = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             }
             $dao->add($formData);
             return $app->redirect('/meettheband');
@@ -72,15 +70,14 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $bandMemberData = $dao->get($id);
             $filename = null;
-            $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
             if ($formData['photo_actions'] == 'photo_delete') {
                 $formData['photo'] = null;
-                $uploadManager->deleteFile($bandMemberData['photo_filename']);
+                $app['photoUploadManager']->deleteFile($bandMemberData['photo_filename']);
             } elseif ($formData['photo_actions'] == 'photo_change') {
                 if (!is_null($original_filename)) {
-                    $uploadManager->deleteFile($bandMemberData['photo_filename']);
+                    $app['photoUploadManager']->deleteFile($bandMemberData['photo_filename']);
                 }
-                $filename = $uploadManager->uploadPhoto($formData['photo']);
+                $filename = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             } elseif ($formData['photo_actions'] == 'photo_nothing') {
                 $data['photo'] = null;
                 $filename = $bandMemberData['photo_filename'];

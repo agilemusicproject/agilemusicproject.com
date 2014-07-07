@@ -1,15 +1,12 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\ContentPage\AddContentToDatabaseFailedException;
-use AMP\Exception\ContentPage\DeletingContentFailedException;
-use AMP\Exception\ContentPage\GetAllPageContentFailedException;
-use AMP\Exception\ContentPage\GetContentFailedException;
-use AMP\Exception\ContentPage\UpdateContentFailedException;
+use \AMP\Exception\DbException;
 
 class AboutContentDAO
 {
     private $db;
+    private $tableName = 'about_content';
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -19,45 +16,45 @@ class AboutContentDAO
     public function add(array $data)
     {
         try {
-            $sql = 'INSERT INTO about_content (content)
+            $sql = 'INSERT INTO ' . $this->tableName . ' (content)
                     VALUES (:content)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM about_content WHERE id = :id';
+            $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM about_content';
+            $sql = 'SELECT * FROM ' . $this->tableName;
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE about_content
+            $sql = 'UPDATE ' . $this->tableName . '
                     SET content = :content
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
@@ -65,19 +62,19 @@ class AboutContentDAO
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from about_content WHERE id=:id';
+            $sql = 'DELETE from ' . $this->tableName . ' WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\Exception $e) {
-            throw new \AMP\Exception\DbException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 }

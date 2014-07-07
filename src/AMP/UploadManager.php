@@ -22,8 +22,8 @@ class UploadManager
     public function uploadPhoto($file)
     {
         $filename = $this->upload($file);
-        if (!file_exists($this->folderPath . $thumbnailsDirectory)) {
-            mkdir($this->folderPath . $thumbnailsDirectory);
+        if (!file_exists($this->folderPath . $this->thumbnailsDirectory)) {
+            mkdir($this->folderPath . $this->thumbnailsDirectory);
         }
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
@@ -43,13 +43,11 @@ class UploadManager
     
     public function deleteThumbnail($filename)
     {
-        $this->delete($this->folderPath . $thumbnailsDirectory . '/thumb_' . $filename);
+        $this->delete($this->folderPath . $this->thumbnailsDirectory . '/thumb_' . $filename);
     }
     
     public function createThumbnail($filename, $desired_width)
     {
-        header('Content-Type: image/jpeg');
-        
         list($width, $height) = getimagesize($this->folderPath . '/' . $filename);
         $percent = $desired_width/$width;
         $desired_height = $height * $percent;
@@ -59,7 +57,7 @@ class UploadManager
         
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
         
-        imagejpeg($thumb, $this->folderPath . $thumbnailsDirectory . '/thumb_' . $filename);
+        imagejpeg($thumb, $this->folderPath . $this->thumbnailsDirectory . '/thumb_' . $filename);
         imagedestroy($thumb);
     }
 }

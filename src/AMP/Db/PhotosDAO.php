@@ -1,7 +1,6 @@
 <?php
 namespace AMP\Db;
 
-use \AMP\UploadManager;
 use \AMP\Exception\DbException;
 
 class PhotosDAO
