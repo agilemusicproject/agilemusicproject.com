@@ -24,3 +24,5 @@ Feature: AMP Web Site Agile Page
     And I should see "Edited test content"
     When I press "Delete"
     Then I should see 0 ".agilePageText" elements
+    When I follow "Logout"
+    Then I should see "Login"

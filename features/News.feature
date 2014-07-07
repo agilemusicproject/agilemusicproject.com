@@ -24,3 +24,5 @@ Scenario: Manage News Content
     And I should see "Edited test content"
     When I press "Delete"
     Then I should see 0 ".newsPageText" elements
+    When I follow "Logout"
+    Then I should see "Login"

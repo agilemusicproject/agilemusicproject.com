@@ -31,3 +31,5 @@ Feature: AMP Web Site Music Page
     When I press "Delete"
     And I press "Delete"
     Then I should see 0 ".musictPageText" elements
+    When I follow "Logout"
+    Then I should see "Login"

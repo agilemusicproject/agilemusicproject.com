@@ -3,7 +3,7 @@ Feature: AMP Web Site Navigation
   As a visitor to the site
   I need a navigation bar.
 
-  Scenario Outline: Visit A Page
+  Scenario Outline: Visit a Page
     Given I am on "<page>"
     Then the ".headernav a" element should contain "Index Page"
     And the "<id>" element should contain "<page_name>"
