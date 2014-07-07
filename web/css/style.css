@@ -253,3 +253,8 @@ div.img a:hover img {
   outline-style: groove;
   outline-width: thick;
 }
+
+#newspostcard {
+  top: 155%;
+  left: 10%;
+}
