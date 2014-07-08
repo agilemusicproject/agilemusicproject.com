@@ -73,7 +73,7 @@ class MusicContentDAO
         $this->disableUniqueFromSongOrder();
         try {
             $sql = 'UPDATE songs SET song_order = CASE id';
-            for ($i = 0; $i < count($dataArray['music']); ++$i) {
+            for ($i = 0; $i < count($dataArray['music']); $i++) {
                 $sql .= ' WHEN ' . $dataArray['music'][$i] .' THEN ' . $i;
             }
             $sql .= ' END';
