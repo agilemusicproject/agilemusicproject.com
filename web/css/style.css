@@ -34,8 +34,11 @@ a.imageLink {
     max-width: 220px;
 }
 
-p.photoContainer {
+.caption {
     display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
 }
 
 #galleryTab {
