@@ -272,6 +272,23 @@ div.img a:hover img {
 }
 
 .musicPageText {
-  list-style-image: url(../images/arrow.png);
+  list-style-type: none;
+  padding: 10px;
+  cursor: move;
 
+}
+
+.musicIframe {
+  padding: 20px;
+}
+
+.outline {
+  outline: black;
+  outline-style: groove;
+  outline-width: thick;
+}
+
+#newspostcard {
+  top: 110%;
+  left: 40%;
 }

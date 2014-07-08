@@ -25,7 +25,6 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('roles', 'text', array('constraints' => new Assert\NotBlank(),
-                                         'required' => true,
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles'),
                                          'label_attr' => array('class' => 'formLabel'),
@@ -41,7 +40,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                                        'label_attr' => array('class' => 'formLabel'),
                 ));
         }
-             
+
         $this->formBuilder
             ->add('photo', 'file', array('required' => false,
                                          'label' => $isUpdateForm ? false : 'Photo',
@@ -54,7 +53,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                                            'required' => false,
             ))
             ->add('submit', 'submit');
-        
+
         $this->form = $this->formBuilder->getForm();
     }
 }

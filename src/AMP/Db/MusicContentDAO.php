@@ -24,7 +24,7 @@ class MusicContentDAO
             $sql = 'SELECT MAX(song_order) FROM songs';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            $maxSortOrder = $stmt->fetch(\PDO::FETCH_BOTH)[0];
+            $maxSortOrder = $stmt->fetchColumn();
             if (is_null($maxSortOrder)) {
                 $maxSortOrder = 0;
             } else {
@@ -57,7 +57,7 @@ class MusicContentDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM songs Order By song_order';
+            $sql = 'SELECT * FROM songs ORDER BY song_order';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -72,11 +72,11 @@ class MusicContentDAO
         $data = parse_str($data, $dataArray);
         $this->disableUniqueFromSongOrder();
         try {
-            $sql = 'UPDATE songs SET song_order = CASE id ';
+            $sql = 'UPDATE songs SET song_order = CASE id';
             for ($i = 0; $i < count($dataArray['music']); ++$i) {
-                $sql .= 'WHEN ' . $dataArray['music'][$i] .' THEN ' . $i . ' ';
+                $sql .= ' WHEN ' . $dataArray['music'][$i] .' THEN ' . $i;
             }
-            $sql .= 'END';
+            $sql .= ' END';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
         } catch (\Exception $e) {

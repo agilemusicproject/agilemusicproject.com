@@ -5,7 +5,7 @@
 {% block title %} Our Music {% endblock %}
 
 {% block javascript %}
-  <script src="/js/sort-music.js"></script>
+<script src="/js/sort-music.js"></script>
 {% endblock %}
 
 {% block postit %}<canvas id="musicpostcard" class="postitheader">Our Music</canvas>{% endblock %}
@@ -16,10 +16,14 @@
 
 <ul id="sortMusic">
   {% for row in results %}
-    <li class="musicPageText" id="music-{{row.id}}">{{ row.embed|raw }}</p>
+  <li class="musicPageText" id="music-{{row.id}}">
+    <div class="outline">
+      <div class="musicIframe">{{ row.embed|raw }}</div>
+    </div>
+  </li>
   {% endfor %}
 </ul>
 <form action="/music">
-    <input id="sortSubmit" type="submit" value="Finalize Sorting">
+  <input id="sortSubmit" type="submit" value="Finalize Sorting">
 </form>
 {% endblock %}

@@ -30,6 +30,7 @@ function drawIndexPage()
     drawBlogPostNote();
     drawContactPostNote();
     drawAboutPostNote();
+    drawNewsPostNote();
 }
 
 function drawMusicPostNote()
@@ -65,4 +66,9 @@ function drawContactPostNote()
 function drawAboutPostNote()
 {
     drawPostNote( "aboutpostcard", ["About Us"], 17);
+}
+
+function drawNewsPostNote()
+{
+    drawPostNote( "newspostcard", ["Our News"], -8);
 }
