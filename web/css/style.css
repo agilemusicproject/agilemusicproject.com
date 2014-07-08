@@ -292,3 +292,8 @@ div.img a:hover img {
   top: 110%;
   left: 40%;
 }
+
+.newsData {
+  text-align: right;
+  font-size: x-large;
+}

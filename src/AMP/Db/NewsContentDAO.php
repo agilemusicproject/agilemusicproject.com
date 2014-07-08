@@ -49,9 +49,11 @@ class NewsContentDAO
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
-            foreach($results as $entry) {
-
+            foreach($results as &$entry) {
+                $entry['date'] = date("F j, Y");
             }
+            unset($entry);
+            return $results;
         } catch (\Exception $e) {
             throw new GetAllPageContentFailedException($e->getMessage());
         }
