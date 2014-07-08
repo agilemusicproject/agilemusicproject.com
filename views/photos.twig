@@ -29,10 +29,15 @@
 </div>
 
 {% for row in results %}
-  <a class="fancybox imageLink" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" 
-    data-title-id="title-{{ row.id }}" data-filter={{ row.category }}>
-    <img class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/>
-  </a>
+  <div class = "photoContainer" data-fancybox-group="gallery" data-filter="{{ row.category }}">
+    <a class="fancybox imageLink" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" 
+      data-title-id="title-{{ row.id }}" data-filter="{{ row.category }}">
+      <img class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/>
+    </a>
+    <p class="caption" data-fancybox-group="gallery" data-filter="{{ row.category }}">
+      {{ row.caption }}
+    </p>
+  </div>
   <div id="title-{{ row.id }}" class="hidden">
     {{ row.caption }} 
     {% if is_granted('ROLE_ADMIN') %}
