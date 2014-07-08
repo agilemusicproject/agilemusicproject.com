@@ -278,13 +278,13 @@ div.img a:hover img {
 }
 
 .musicIframe {
-  margin-left: 50px
+  margin-left: 75px
 }
 
 .dotsSection {
   float: left;
   vertical-align: middle;
-  padding-top: 25px;
+  padding-top: 15px;
 }
 
 .dots {
@@ -293,7 +293,7 @@ div.img a:hover img {
   height: 25px;
   border-radius: 50%;
   margin: 10px;
-
+  border-style: outset;
 }
 
 #newspostcard {
