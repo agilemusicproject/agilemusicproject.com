@@ -28,22 +28,19 @@ class MusicPageController implements ControllerProviderInterface
 
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\MusicContentDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $app['dao.musicContent']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.musicContent']->getAll();
         return $app['twig']->render('music.twig', array('results' => $results));
     }
 
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\MusicPageFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.musicPage'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\MusicContentDAO($app['db']);
-            $dao->add($form->getData());
+            $app['dao.musicContent']->add($form->getData());
             return $app->redirect('/music');
         }
         return $app['twig']->render('musicEdit.twig', array('form' => $form->createView(),
@@ -52,11 +49,10 @@ class MusicPageController implements ControllerProviderInterface
 
     private function updateAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\MusicContentDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->sortUpdate($request->get('list'));
+            $app['dao.musicContent']->sortUpdate($request->get('list'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.musicContent']->getAll();
         return $app['twig']->render('musicUpdate.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }

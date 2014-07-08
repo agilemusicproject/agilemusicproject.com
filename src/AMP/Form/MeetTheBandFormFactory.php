@@ -7,11 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MeetTheBandFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
-    public function __construct(FormFactory $formService, array $default = null, $isUpdateForm = false)
+    public function __construct(FormFactory $formService, $isUpdateForm = false)
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
-        $this->formBuilder = $formService->createBuilder('form', $default)
+        $this->formBuilder = $formService->createBuilder('form')
             ->add('first_name', 'text', array(
                 'constraints' => new Assert\NotBlank(),
                 'label' => false,

@@ -29,28 +29,25 @@ class PhotosController implements ControllerProviderInterface
     
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\PhotosDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $photo_data = $dao->get($request->get('id'));
+            $photo_data = $app['dao.photos']->get($request->get('id'));
             $app['photoUploadManager']->deleteFile($photo_data['filename']);
             $app['photoUploadManager']->deleteThumbnail($photo_data['filename']);
-            $dao->delete($request->get('id'));
+            $app['dao.photos']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
-        $categories = $dao->getCategories();
+        $results = $app['dao.photos']->getAll();
+        $categories = $app['dao.photos']->getCategories();
         return $app['twig']->render('photos.twig', array('results' => $results, 'categories' => $categories));
     }
     
     private function addAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\PhotosDAO($app['db']);
-        $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.photosAdd'];
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
             $app['photoUploadManager']->uploadPhoto($formData['photo']);
-            $dao->add($formData);
+            $app['dao.photos']->add($formData);
             return $app->redirect('/photos');
         }
         return $app['twig']->render('photosEdit.twig', array('form' => $form->createView(),
@@ -59,12 +56,11 @@ class PhotosController implements ControllerProviderInterface
     
     private function editAction(Request $request, Application $app, $id)
     {
-        $dao = new \AMP\Db\PhotosDAO($app['db']);
-        $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
+        $form = $app['forms.photosEdit'];
+        $form->setData($app['dao.photos']->get($id));
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->update($id, $form->getData());
+            $app['dao.photos']->update($id, $form->getData());
             return $app->redirect('/photos');
         }
         return $app['twig']->render('photosEdit.twig', array('form' => $form->createView(),

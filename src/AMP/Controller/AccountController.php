@@ -25,15 +25,14 @@ class AccountController implements ControllerProviderInterface
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\AccountManagerDAO($app['db']);
             $data = $form->getData();
             $data['username'] = $app['security']->getToken()->getUsername();
             $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
             $data['oldPassword'] = $app['security.encoder.digest']->encodePassword($data['oldPassword'], '');
             $data['confirmPassword'] = $app['security.encoder.digest']->encodePassword($data['confirmPassword'], '');
-            $data['currentPassword'] = $dao->getCurrentPassword($data['username']);
+            $data['currentPassword'] = $app['dao.accountManager']->getCurrentPassword($data['username']);
             if ($formFactory->isValidAuthentication($data)) {
-                $dao->updateBandMemberPassword($data);
+                $app['dao.accountManager']->updateBandMemberPassword($data);
                 return $app->redirect('/');
             } else {
                 $notification = 'Your input was invalid. Please try again.';

@@ -18,7 +18,7 @@ Feature: AMP Web Site Content Pages
       Then I should be on "/<page>/"
       And I should see "Test content"
       When I go to "<page>/edit/1"
-      And I fill in "form_content" with "Edited test content"
+      When I fill in "form_content" with "Edited test content"
       And I press "Submit"
       Then I should be on "/<page>/"
       And I should see "Edited test content"

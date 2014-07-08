@@ -18,8 +18,6 @@ try {
     $app['debug'] = false;
 }
 
-$app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
-
 $app->error(function (AMP\Exception\ExceptionInterface $e) use ($app) {
     if ($app['debug'] === false) {
         return new Response($app['twig']->render('error.twig', array(
@@ -60,6 +58,11 @@ $securityConfig['security.firewalls']['general']['users'] = $app->share(function
     return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
+
+$ampServiceProvider = new \AMP\AMPServiceProvider();
+$app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
+$ampServiceProvider->registerDAOs($app);
+$ampServiceProvider->registerForms($app);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');

@@ -29,22 +29,19 @@ class AboutPageController implements ControllerProviderInterface
     
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\AboutContentDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $app['dao.aboutContent']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.aboutContent']->getAll();
         return $app['twig']->render('about.twig', array('results' => $results));
     }
     
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.textArea'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\AboutContentDAO($app['db']);
-            $dao->add($form->getData());
+            $app['dao.aboutContent']->add($form->getData());
             return $app->redirect('/about');
         }
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
@@ -55,12 +52,11 @@ class AboutPageController implements ControllerProviderInterface
     
     private function editAction(Request $request, Application $app, $id)
     {
-        $dao = new \AMP\Db\AboutContentDAO($app['db']);
-        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
+        $form = $app['forms.textArea'];
+        $form->setData($app['dao.aboutContent']->get($id));
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->update($id, $form->getData());
+            $app['dao.aboutContent']->update($id, $form->getData());
             return $app->redirect('/about');
         }
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),

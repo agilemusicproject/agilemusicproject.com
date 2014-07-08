@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class MusicPageFormFactory extends BaseFormFactory
 {
-    public function __construct(FormFactory $formService, array $default = null, $isUpdateForm = false)
+    public function __construct(FormFactory $formService, array $default = null)
     {
         $this->formBuilder = $formService->createBuilder('form', $default)
             ->add('embed', 'textarea', array(

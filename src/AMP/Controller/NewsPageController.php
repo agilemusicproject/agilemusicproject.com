@@ -28,22 +28,19 @@ class NewsPageController implements ControllerProviderInterface
 
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\NewsContentDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $app['dao.newsContent']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.newsContent']->getAll();
         return $app['twig']->render('news.twig', array('results' => $results));
     }
 
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\NewsPageFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.newsPage'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\NewsContentDAO($app['db']);
-            $dao->add($form->getData());
+            $app['dao.newsContent']->add($form->getData());
             return $app->redirect('/news');
         }
         return $app['twig']->render('newsEdit.twig', array('form' => $form->createView(),
@@ -52,12 +49,11 @@ class NewsPageController implements ControllerProviderInterface
 
     private function editAction(Request $request, Application $app, $id)
     {
-        $dao = new \AMP\Db\NewsContentDAO($app['db']);
-        $formFactory = new \AMP\Form\NewsPageFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
+        $form = $app['forms.newsPage'];
+        $form->setData($app['dao.newsContent']->get($id));
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->update($id, $form->getData());
+            $app['dao.newsContent']->update($id, $form->getData());
             return $app->redirect('/news');
         }
         return $app['twig']->render('newsEdit.twig', array('form' => $form->createView(),

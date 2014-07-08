@@ -29,22 +29,19 @@ class AgilePageController implements ControllerProviderInterface
     
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\AgileContentDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $app['dao.agileContent']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.agileContent']->getAll();
         return $app['twig']->render('agile.twig', array('results' => $results));
     }
     
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.textArea'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\AgileContentDAO($app['db']);
-            $dao->add($form->getData());
+            $app['dao.agileContent']->add($form->getData());
             return $app->redirect('/agile');
         }
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
@@ -55,15 +52,14 @@ class AgilePageController implements ControllerProviderInterface
     
     private function editAction(Request $request, Application $app, $id)
     {
-        $dao = new \AMP\Db\AgileContentDAO($app['db']);
-        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
+        $form = $app['forms.textArea'];
+        $form->setData($app['dao.agileContent']->get($id));
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->update($id, $form->getData());
+            $app['dao.agileContent']->update($id, $form->getData());
             return $app->redirect('/agile');
         }
-        return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
+        return $app['twig']->render('contentEdit.twig', array('form' =>$form->createView(),
                                                               'title' => 'Edit',
                                                               'page' => 'Agile',
                                                               'elementTitle' => 'agile'));
