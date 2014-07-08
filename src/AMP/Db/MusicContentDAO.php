@@ -65,7 +65,7 @@ class MusicContentDAO extends AbstractDAO
         $this->disableUniqueFromSongOrder();
         try {
             $sql = 'UPDATE ' . $this->getTableName() . ' SET song_order = CASE id ';
-            for ($i = 0; $i < count($dataArray['music']); ++$i) {
+            for ($i = 0; $i < count($dataArray['music']); $i++) {
                 $sql .= ' WHEN ' . $dataArray['music'][$i] .' THEN ' . $i;
             }
             $sql .= ' END';

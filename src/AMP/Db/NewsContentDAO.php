@@ -45,10 +45,15 @@ class NewsContentDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM stories';
+            $sql = 'SELECT * FROM stories ORDER BY id DESC';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll();
+            $results = $stmt->fetchAll();
+            foreach ($results as &$entry) {
+                $entry['date'] = date("F j, Y");
+            }
+            unset($entry);
+            return $results;
         } catch (\Exception $e) {
             throw new GetAllPageContentFailedException($e->getMessage());
         }
@@ -58,8 +63,7 @@ class NewsContentDAO
     {
         try {
             $sql = 'UPDATE stories
-                    SET content = :content,
-                    date = now()
+                    SET content = :content
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);

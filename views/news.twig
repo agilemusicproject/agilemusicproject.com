@@ -18,6 +18,7 @@
   </form>
 {% endif %}
 {% for row in results %}
+  <div class="newsData">{{row.date}}</div>
   <p class="newsPageText">{{ row.content|raw }}</p>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
