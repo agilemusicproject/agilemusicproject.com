@@ -41,11 +41,11 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.meetTheBandEdit'] = function () use ($app) {
-            $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory'], true);    
+            $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory'], true);
             return $formFactory->getForm();
         };
         $app['forms.musicPage'] = function () use ($app) {
-            $formFactory = new \AMP\Form\MusicPageFormFactory($app['form.factory']);    
+            $formFactory = new \AMP\Form\MusicPageFormFactory($app['form.factory']);
             return $formFactory->getForm();
         };
         $app['forms.newsPage'] = function () use ($app) {
