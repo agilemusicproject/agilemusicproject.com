@@ -28,12 +28,12 @@ $(document).ready(function() {
             var $filter = $this.data("rel");
             // if we select view all, return to initial settings and show all
             $filter == 'all' ?
-                $(".fancybox")
+                $(".fancybox, .caption, .photoCotainer")
                 .attr("data-fancybox-group", "gallery")
                 .not(":visible")
                 .fadeIn()
             : // otherwise
-                $(".fancybox")
+                $(".fancybox, .caption, .photoCotainer")
                 .fadeOut(0)
                 .filter(function () {
                     // set data-filter value as the data-rel value of selected tab

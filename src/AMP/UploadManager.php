@@ -22,8 +22,8 @@ class UploadManager
     public function uploadPhoto($file)
     {
         $filename = $this->upload($file);
-        if (!file_exists($this->getThumbnailDir())) {
-            mkdir($this->getThumbnailDir());
+        if (!file_exists($this->getThumbnailDirectory())) {
+            mkdir($this->getThumbnailDirectory());
         }
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
