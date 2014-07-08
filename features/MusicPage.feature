@@ -17,17 +17,19 @@ Feature: AMP Web Site Music Page
     And I press "Submit"
     Then I should be on "/music/"
     And I should see 1 "iframe" element
-    And I should see 3 "dots" elements
-    And I should see "Delete"
+    And I should see 3 ".dots" elements
+    And I should see 1 "#musicDelete" element
     When I go to "/music/add"
     And I should see a "form" element
     When I fill in "form_embed" with "<iframe>test again</iframe>"
     And I press "Submit"
     Then I should be on "/music/"
     And I should see 2 "iframe" elements
-    And I should see 6 "dots" elements
+    And I should see 6 ".dots" elements
     When I press "Delete"
     And I press "Delete"
     Then I should see 0 ".musictPageText" elements
     When I follow "Logout"
     Then I should see "Login"
+    And I should not see "#musicDelete"
+    And I should not see ".dots"
