@@ -284,7 +284,6 @@ div.img a:hover img {
 .dotsSection {
   float: left;
   vertical-align: middle;
-  padding-top: 15px;
 }
 
 .dots {
@@ -304,4 +303,8 @@ div.img a:hover img {
 .newsData {
   text-align: right;
   font-size: x-large;
+}
+
+#musicAdd {
+  padding-left: 30px;
 }
