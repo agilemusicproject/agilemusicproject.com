@@ -289,19 +289,26 @@ div.img a:hover img {
 
 .musicPageText {
   list-style-type: none;
-  padding: 10px;
   cursor: move;
 
 }
 
 .musicIframe {
-  padding: 20px;
+  margin-left: 75px
 }
 
-.outline {
-  outline: black;
-  outline-style: groove;
-  outline-width: thick;
+.dotsSection {
+  float: left;
+  vertical-align: middle;
+}
+
+.dots {
+  background: #555;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 10px;
+  border-style: outset;
 }
 
 #newspostcard {
@@ -312,4 +319,8 @@ div.img a:hover img {
 .newsData {
   text-align: right;
   font-size: x-large;
+}
+
+#musicAdd {
+  padding-left: 30px;
 }
