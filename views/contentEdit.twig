@@ -5,16 +5,16 @@
   <script src="/js/update-form.js"></script>
 {% endblock %}
 
-{% block onload %} drawAgilePostNote() {% endblock %}
+{% block onload %} draw{{ page }}PostNote() {% endblock %}
 
-{% block title %} Agile {% endblock %}
+{% block title %} {{ page }} {% endblock %}
 
-{% block postit %}<canvas id="agilepostcard" class="postitheader">About</canvas>{% endblock %}
+{% block postit %}<canvas id="{{ elementTitle }}postcard" class="postitheader">{{ page }}</canvas>{% endblock %}
 
 {% block header %} {{ title }} Content {%endblock%}
 
 {% block content %}
-<div id="aboutEditForm">
+<div id="{{ elementTitle }}EditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
