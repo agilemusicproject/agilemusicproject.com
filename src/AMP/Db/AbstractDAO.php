@@ -3,17 +3,31 @@ namespace AMP\Db;
 
 use \AMP\Exception\DbException;
 
-class AbstractDAO
+abstract class AbstractDAO
 {
     private $db;
 
+    public abstract function getTableName();
+    
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
         $this->db = $db;
     }
 
-    public function getTableName()
+    public function getDb()
     {
-        return $this->tableName;   
+        return $this->db;
+    }
+    
+    public function getAll()
+    {
+        try {
+            $sql = 'SELECT * FROM ' . $this->getTableName();
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\PDOException $e) {
+            throw new DbException($e->getMessage());
+        }
     }
 }

@@ -5,21 +5,18 @@ use \AMP\Exception\DbException;
 
 class PhotosDAO extends AbstractDAO
 {
-    private $db;
-    private $tableName = 'photos';
-
-    public function __construct(\Doctrine\DBAL\Connection $db)
+    public function getTableName()
     {
-        $this->db = $db;
+        return 'photos';   
     }
 
     public function add(array $data)
     {
         $filename = $data['photo']->getClientOriginalName();
         try {
-            $sql = 'INSERT INTO ' . $this->tableName . ' (filename, caption, category)
+            $sql = 'INSERT INTO ' . $this->getTableName() . ' (filename, caption, category)
                     VALUES (:filename, :caption, :category)';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':filename', $filename);
             $stmt->bindParam(':caption', $data['caption']);
             $stmt->bindParam(':category', $data['category']);
@@ -32,8 +29,8 @@ class PhotosDAO extends AbstractDAO
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE id = :id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
@@ -45,8 +42,8 @@ class PhotosDAO extends AbstractDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM ' . $this->tableName;
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT * FROM ' . $this->getTableName();
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
@@ -57,8 +54,8 @@ class PhotosDAO extends AbstractDAO
     public function getCategories()
     {
         try {
-            $sql = 'SELECT DISTINCT category FROM ' . $this->tableName;
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT DISTINCT category FROM ' . $this->getTableName();
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
@@ -69,11 +66,11 @@ class PhotosDAO extends AbstractDAO
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE ' . $this->tableName . '
+            $sql = 'UPDATE ' . $this->getTableName() . '
                     SET caption = :caption,
                         category = :category
                     WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':caption', $data['caption']);
             $stmt->bindParam(':category', $data['category']);
             $stmt->bindParam(':id', $id);
@@ -86,8 +83,8 @@ class PhotosDAO extends AbstractDAO
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from ' . $this->tableName . ' WHERE id=:id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'DELETE from ' . $this->getTableName() . ' WHERE id=:id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {

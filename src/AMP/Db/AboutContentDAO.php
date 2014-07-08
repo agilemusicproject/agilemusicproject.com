@@ -5,23 +5,20 @@ use \AMP\Exception\DbException;
 
 class AboutContentDAO extends AbstractDAO
 {
-    private $db;
-    private $tableName = 'about_content';
-
-    public function __construct(\Doctrine\DBAL\Connection $db)
+    public function getTableName()
     {
-        $this->db = $db;
+        return 'about_content';   
     }
 
     public function add(array $data)
     {
         try {
-            $sql = 'INSERT INTO ' . $this->tableName . ' (content)
+            $sql = 'INSERT INTO ' . $this->getTableName() . ' (content)
                     VALUES (:content)';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->execute();
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             throw new DbException($e->getMessage());
         }
     }
@@ -29,24 +26,12 @@ class AboutContentDAO extends AbstractDAO
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE id = :id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
-        } catch (\Exception $e) {
-            throw new DbException($e->getMessage());
-        }
-    }
-
-    public function getAll()
-    {
-        try {
-            $sql = 'SELECT * FROM ' . $this->tableName;
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             throw new DbException($e->getMessage());
         }
     }
@@ -54,14 +39,14 @@ class AboutContentDAO extends AbstractDAO
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE ' . $this->tableName . '
+            $sql = 'UPDATE ' . $this->getTableName() . '
                     SET content = :content
                     WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             throw new DbException($e->getMessage());
         }
     }
@@ -69,11 +54,11 @@ class AboutContentDAO extends AbstractDAO
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from ' . $this->tableName . ' WHERE id=:id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'DELETE from ' . $this->getTableName() . ' WHERE id=:id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             throw new DbException($e->getMessage());
         }
     }
