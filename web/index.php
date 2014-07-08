@@ -74,5 +74,6 @@ $app->mount('/about', new AMP\Controller\AboutPageController());
 $app->mount('/agile', new AMP\Controller\AgilePageController());
 $app->mount('/music', new AMP\Controller\MusicPageController());
 $app->mount('/photos', new AMP\Controller\PhotosController());
+$app->mount('/news', new AMP\Controller\NewsPageController());
 
 $app->run();

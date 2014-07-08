@@ -2,16 +2,16 @@ Feature: AMP Web Site MeetTheBand Page
   In order see what content the site has
   As a visitor to the site
   I need to have an MeetTheBand page
-    
+
   Scenario: Manage Band Members
     Given I am on "/meettheband/"
     Then I should see 0 ".bandMemberEntry" elements
-  	When I go to "/meettheband/add"
-  	Then I should be on "/login"
-  	When I fill in "_username" with "admin"
-  	And I fill in "_password" with "foo"
-  	And I press "Login"
-  	Then I should be on "/meettheband/add"
+    When I go to "/meettheband/add"
+    Then I should be on "/login"
+    When I fill in "_username" with "admin"
+    And I fill in "_password" with "foo"
+    And I press "Login"
+    Then I should be on "/meettheband/add"
     Then I should see a "form" element
     When I fill in "form_first_name" with "Action"
     And I fill in "form_last_name" with "Jackson"
@@ -54,3 +54,5 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Professional Thief"
     And I press "Delete"
     Then I should see 0 ".bandMemberEntry" elements
+    When I follow "Logout"
+    Then I should see "Login"

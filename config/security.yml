@@ -47,3 +47,9 @@ security.access_rules:
   -
     - ^/music/update
     - ROLE_ADMIN
+  -
+    - ^/news/add
+    - ROLE_ADMIN
+  -
+    - ^/news/edit
+    - ROLE_ADMIN
