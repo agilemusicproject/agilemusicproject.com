@@ -4,7 +4,6 @@ namespace AMP\Db;
 use \AMP\UploadManager;
 use \AMP\Exception\DbException;
 
-
 class PhotosDAO
 {
     private $db;
@@ -17,7 +16,7 @@ class PhotosDAO
 
     public function add(array $data)
     {
-        $filename = $data['photo']->getClientOriginalName(); 
+        $filename = $data['photo']->getClientOriginalName();
         try {
             $sql = 'INSERT INTO ' . $this->tableName . ' (filename, caption, category)
                     VALUES (:filename, :caption, :category)';

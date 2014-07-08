@@ -37,13 +37,13 @@ class UploadManager
     }
     
     public function deleteFile($filename)
-    {     
-        $this->delete($this->folderPath . '/' . $filename);   
+    {
+        $this->delete($this->folderPath . '/' . $filename);
     }
     
     public function deleteThumbnail($filename)
-    {     
-        $this->delete($this->folderPath . '/thumbnails/thumb_' . $filename);   
+    {
+        $this->delete($this->folderPath . '/thumbnails/thumb_' . $filename);
     }
     
     public function createThumbnail($filename, $desired_width)
