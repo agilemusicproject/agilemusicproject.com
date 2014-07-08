@@ -1,15 +1,14 @@
 <?php
 namespace AMP\Db;
 
-use AMP\Exception\ContentPage\AddContentToDatabaseFailedException;
-use AMP\Exception\ContentPage\DeletingContentFailedException;
-use AMP\Exception\ContentPage\GetAllPageContentFailedException;
-use AMP\Exception\ContentPage\GetContentFailedException;
-use AMP\Exception\ContentPage\UpdateContentFailedException;
+use \AMP\Exception\DbException;
 
-class NewsContentDAO
+class NewsContentDAO extends AbstractDAO
 {
-    private $db;
+    public function getTableName()
+    {
+        return 'stories';
+    }
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -19,7 +18,7 @@ class NewsContentDAO
     public function add(array $data)
     {
         try {
-            $sql = 'INSERT INTO stories (content, date)
+            $sql = 'INSERT INTO ' . $this->getTableName() . ' (content, date)
                     VALUES (:content, now())';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':content', $data['content']);
@@ -32,7 +31,7 @@ class NewsContentDAO
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM stories WHERE id = :id';
+            $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE id = :id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -45,7 +44,7 @@ class NewsContentDAO
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM stories ORDER BY id DESC';
+            $sql = 'SELECT * FROM ' . $this->getTableName() . ' ORDER BY id DESC';
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
@@ -62,7 +61,7 @@ class NewsContentDAO
     public function update($id, array $data)
     {
         try {
-            $sql = 'UPDATE stories
+            $sql = 'UPDATE ' . $this->getTableName() . '
                     SET content = :content
                     WHERE id = :id';
             $stmt = $this->db->prepare($sql);
@@ -77,7 +76,7 @@ class NewsContentDAO
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from stories WHERE id=:id';
+            $sql = 'DELETE from ' . $this->getTableName() . ' WHERE id=:id';
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
