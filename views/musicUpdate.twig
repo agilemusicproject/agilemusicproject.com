@@ -17,9 +17,12 @@
 <ul id="sortMusic">
   {% for row in results %}
   <li class="musicPageText" id="music-{{row.id}}">
-    <div class="outline">
-      <div class="musicIframe">{{ row.embed|raw }}</div>
+    <div class="dotsSection">
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
     </div>
+      <div class="musicIframe">{{ row.embed|raw }}</div>
   </li>
   {% endfor %}
 </ul>
