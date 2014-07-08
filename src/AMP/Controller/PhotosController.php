@@ -31,12 +31,10 @@ class PhotosController implements ControllerProviderInterface
     {
         $dao = new \AMP\Db\PhotosDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $id = $request->get('id');
-            $photo_data = $dao->get($id);
-            $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
-            $uploadManager->deleteFile($photo_data['filename']);
-            $uploadManager->deleteThumbnail($photo_data['filename']);
-            $dao->delete($id);
+            $photo_data = $dao->get($request->get('id'));
+            $app['photoUploadManager']->deleteFile($photo_data['filename']);
+            $app['photoUploadManager']->deleteThumbnail($photo_data['filename']);
+            $dao->delete($request->get('id'));
         }
         $results = $dao->getAll();
         $categories = $dao->getCategories();
@@ -51,8 +49,7 @@ class PhotosController implements ControllerProviderInterface
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            $uploadManager = new \AMP\UploadManager(__DIR__ . '/../../../web/images/photos');
-            $uploadManager->uploadPhoto($formData['photo']);
+            $app['photoUploadManager']->uploadPhoto($formData['photo']);
             $dao->add($formData);
             return $app->redirect('/photos');
         }

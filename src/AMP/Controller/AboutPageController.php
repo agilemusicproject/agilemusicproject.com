@@ -39,7 +39,7 @@ class AboutPageController implements ControllerProviderInterface
     
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\AboutPageFormFactory($app['form.factory']);
+        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -47,21 +47,25 @@ class AboutPageController implements ControllerProviderInterface
             $dao->add($form->getData());
             return $app->redirect('/about');
         }
-        return $app['twig']->render('aboutEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Add'));
+        return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
+                                                              'title' => 'Add',
+                                                              'page' => 'About',
+                                                              'elementTitle' => 'about'));
     }
     
     private function editAction(Request $request, Application $app, $id)
     {
         $dao = new \AMP\Db\AboutContentDAO($app['db']);
-        $formFactory = new \AMP\Form\AboutPageFormFactory($app['form.factory'], $dao->get($id), true);
+        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory'], $dao->get($id), true);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
             $dao->update($id, $form->getData());
             return $app->redirect('/about');
         }
-        return $app['twig']->render('aboutEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Edit'));
+        return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
+                                                              'title' => 'Edit',
+                                                              'page' => 'About',
+                                                              'elementTitle' => 'about'));
     }
 }

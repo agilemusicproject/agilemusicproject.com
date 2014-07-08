@@ -3,27 +3,27 @@ namespace AMP;
 
 class UploadManager
 {
-    private $folderPath;
-    private $thumbnailDirectory = '/thumbnails';
+    private $uploadDirectory;
+    private $thumbnailsDirectoryName = '/thumbnails';
     private $thumbnailWidth = 900;
     
-    public function __construct($folderPath)
+    public function __construct($uploadDirectory)
     {
-        $this->folderPath = $folderPath;
+        $this->uploadDirectory = $uploadDirectory;
     }
     
     public function upload($file)
     {
         $filename =  $file->getClientOriginalName();
-        $file->move($this->folderPath, $filename);
+        $file->move($this->uploadDirectory, $filename);
         return $filename;
     }
     
     public function uploadPhoto($file)
     {
         $filename = $this->upload($file);
-        if (!file_exists($this->folderPath . '/thumbnails')) {
-            mkdir($this->folderPath . '/thumbnails');
+        if (!file_exists($this->getThumbnailDir())) {
+            mkdir($this->getThumbnailDir());
         }
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
@@ -38,28 +38,41 @@ class UploadManager
     
     public function deleteFile($filename)
     {
-        $this->delete($this->folderPath . '/' . $filename);
+        $this->delete($this->getFilePath($filename));
     }
     
     public function deleteThumbnail($filename)
     {
-        $this->delete($this->folderPath . '/thumbnails/thumb_' . $filename);
+        $this->delete($this->getThumbnailFilePath($filename));
     }
     
     public function createThumbnail($filename, $desired_width)
     {
-        header('Content-Type: image/jpeg');
-        
-        list($width, $height) = getimagesize($this->folderPath . '/' . $filename);
+        list($width, $height) = getimagesize($this->getFilepath($filename));
         $percent = $desired_width/$width;
         $desired_height = $height * $percent;
         
         $thumb = imagecreatetruecolor($desired_width, $desired_height);
-        $source = imagecreatefromjpeg($this->folderPath . '/' . $filename);
+        $source = imagecreatefromjpeg($this->getFilepath($filename));
         
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
         
-        imagejpeg($thumb, $this->folderPath . '/thumbnails/thumb_' . $filename);
+        imagejpeg($thumb, $this->getThumbnailFilePath($filename));
         imagedestroy($thumb);
+    }
+    
+    public function getThumbnailDirectory()
+    {
+        return $this->uploadDirectory . $this->thumbnailsDirectoryName;
+    }
+    
+    public function getFilePath($filename)
+    {
+        return $this->uploadDirectory . '/' . $filename;
+    }
+    
+    public function getThumbnailFilePath($filename)
+    {
+        return $this->getThumbnailDirectory() . '/thumb_' . $filename;
     }
 }
