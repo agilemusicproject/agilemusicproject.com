@@ -53,6 +53,6 @@ class MusicPageController implements ControllerProviderInterface
             $app['dao.musicContent']->sortUpdate($request->get('list'));
         }
         $results = $app['dao.musicContent']->getAll();
-        return $app['twig']->render('musicUpdate.twig', array('results' => $results, 'title' => 'Sort'));
+        return $app['twig']->render('music.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }
