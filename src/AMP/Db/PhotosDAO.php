@@ -7,7 +7,7 @@ class PhotosDAO extends AbstractDAO
 {
     public function getTableName()
     {
-        return 'photos';   
+        return 'photos';
     }
 
     public function add(array $data)

@@ -7,7 +7,7 @@ class BandMembersDAO extends AbstractDAO
 {
     public function getTableName()
     {
-        return 'band_members';   
+        return 'band_members';
     }
 
     public function add(array $data)

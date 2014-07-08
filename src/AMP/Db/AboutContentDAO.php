@@ -7,7 +7,7 @@ class AboutContentDAO extends AbstractDAO
 {
     public function getTableName()
     {
-        return 'about_content';   
+        return 'about_content';
     }
 
     public function add(array $data)

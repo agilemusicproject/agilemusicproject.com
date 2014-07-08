@@ -4,10 +4,10 @@ namespace AMP\Db;
 use \AMP\Exception\DbException;
 
 class AccountManagerDAO extends AbstractDAO
-{   
+{
     public function getTableName()
     {
-        return 'users';   
+        return 'users';
     }
 
     public function getCurrentPassword($username)

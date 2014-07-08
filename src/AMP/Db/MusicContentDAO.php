@@ -7,7 +7,7 @@ class MusicContentDAO extends AbstractDAO
 {
     public function getTableName()
     {
-        return 'songs';   
+        return 'songs';
     }
 
     public function add(array $data)

@@ -7,7 +7,7 @@ abstract class AbstractDAO
 {
     private $db;
 
-    public abstract function getTableName();
+    abstract public function getTableName();
     
     public function __construct(\Doctrine\DBAL\Connection $db)
     {

@@ -7,7 +7,7 @@ class AgileContentDAO extends AbstractDAO
 {
     public function getTableName()
     {
-        return 'agile_content';   
+        return 'agile_content';
     }
 
     public function add(array $data)
