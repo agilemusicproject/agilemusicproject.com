@@ -3,19 +3,19 @@ namespace AMP;
 
 class UploadManager
 {
-    private $folderPath;
-    private $thumbnailsDirectory = '/thumbnails';
+    private $uploadDirectory;
+    private $thumbnailsDirectoryName = '/thumbnails';
     private $thumbnailWidth = 900;
     
-    public function __construct($folderPath)
+    public function __construct($uploadDirectory)
     {
-        $this->folderPath = $folderPath;
+        $this->uploadDirectory = $uploadDirectory;
     }
     
     public function upload($file)
     {
         $filename =  $file->getClientOriginalName();
-        $file->move($this->folderPath, $filename);
+        $file->move($this->uploadDirectory, $filename);
         return $filename;
     }
     
@@ -61,18 +61,18 @@ class UploadManager
         imagedestroy($thumb);
     }
     
-    public function getThumbnailFolderPath()
+    public function getThumbnailDirectory()
     {
-        return $this->folderPath . $this->thumbnailsDirectory;
+        return $this->uploadDirectory . $this->thumbnailsDirectoryName;
     }
     
     public function getFilePath($filename)
     {
-        return $this->folderPath . '/' . $filename;
+        return $this->uploadDirectory . '/' . $filename;
     }
     
     public function getThumbnailFilePath($filename)
     {
-        return $this->getThumbnailFolderPath() . '/thumb_' . $filename;
+        return $this->getThumbnailDirectory() . '/thumb_' . $filename;
     }
 }
