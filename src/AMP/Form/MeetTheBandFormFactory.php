@@ -25,7 +25,6 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('roles', 'text', array('constraints' => new Assert\NotBlank(),
-                                         'required' => true,
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles'),
                                          'label_attr' => array('class' => 'formLabel'),
@@ -51,7 +50,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
             ->add('bio', 'textarea', array('label' => false,
                                            'label_attr' => array('class' => 'formLabel'),
                                            'attr' => array('placeholder' => 'Bio'),
-                                           'constraints' => new Assert\NotBlank(),
+                                           'required' => false,
             ))
             ->add('submit', 'submit');
 
