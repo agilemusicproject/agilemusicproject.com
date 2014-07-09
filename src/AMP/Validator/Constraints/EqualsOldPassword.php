@@ -11,5 +11,4 @@ class EqualsOldPassword extends Constraint
     public $message = 'This password does not match the old one.';
     public $oldPassword;
     public $encoder;
-    
 }

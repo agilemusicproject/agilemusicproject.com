@@ -17,7 +17,7 @@ class MusicContentDAO extends AbstractDAO
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute();
             $maxSortOrder = $stmt->fetchColumn();
-            if (is_null($maxSortOrder)) {
+            if ($maxSortOrder === false) {
                 $maxSortOrder = 0;
             } else {
                 $maxSortOrder += 1;

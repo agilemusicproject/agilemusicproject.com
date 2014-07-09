@@ -53,7 +53,21 @@ class UploadManager
         $desired_height = $height * $percent;
         
         $thumb = imagecreatetruecolor($desired_width, $desired_height);
-        $source = imagecreatefromjpeg($this->getFilepath($filename));
+        
+        $extension = substr($filename, strrpos($filename, '.')+1);
+        var_dump($extension);
+        switch($extension) {
+            case 'jpeg':
+            case 'jpg':
+                $source = imagecreatefromjpeg($this->getFilepath($filename));
+                break;
+            case 'png':
+                $source = imagecreatefrompng($this->getFilepath($filename));
+                break;
+            case 'gif':
+                $source = imagecreatefromgif($this->getFilepath($filename));
+                break;
+        }
         
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
         
