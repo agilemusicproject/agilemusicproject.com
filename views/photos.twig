@@ -17,7 +17,7 @@
 {% block content %}
 {% if is_granted('ROLE_ADMIN') %}
   <form>
-    <input onclick="location.href='/photos/add'" type="button" value="Add Photo"/>
+    <input class="addButton" onclick="location.href='/photos/add'" type="button" value="Add Photo"/>
   </form>
 {% endif %}
 
@@ -30,7 +30,7 @@
 
 {% for row in results %}
   <div class = "photoContainer" data-fancybox-group="gallery" data-filter="{{ row.category }}">
-    <a class="fancybox imageLink" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}" 
+    <a class="fancybox imageLink" data-fancybox-group="gallery" href="/images/photos/{{ row.filename }}"
       data-title-id="title-{{ row.id }}" data-filter="{{ row.category }}">
       <img class="fancyphoto" src="/images/photos/thumbnails/thumb_{{ row.filename }}"  alt="{{ row.caption }}"/>
     </a>
@@ -39,7 +39,7 @@
     </p>
   </div>
   <div id="title-{{ row.id }}" class="hidden">
-    {{ row.caption }} 
+    {{ row.caption }}
     {% if is_granted('ROLE_ADMIN') %}
       <form class="edit_caption">
         <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
