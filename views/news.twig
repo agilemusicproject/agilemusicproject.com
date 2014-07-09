@@ -14,7 +14,7 @@
 
 {% if is_granted('ROLE_ADMIN') %}
   <form>
-    <input onclick="location.href='/news/add'" type="button" value="Add Content"/>
+    <input class="addButton" onclick="location.href='/news/add'" type="button" value="Add Content"/>
   </form>
 {% endif %}
 {% for row in results %}
@@ -22,11 +22,11 @@
   <p class="newsPageText">{{ row.content|raw }}</p>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
-      <input onclick="location.href='/news/edit/{{ row.id }}'" type="button" value="Edit"/>
+      <input class="editButton" onclick="location.href='/news/edit/{{ row.id }}'" type="button" value="Edit"/>
     </form>
     <form method="post" action="/news/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input type="submit" value="Delete">
+      <input class="deleteButton" type="submit" value="Delete">
     </form>
   {% endif %}
 {% endfor %}

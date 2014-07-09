@@ -6,6 +6,9 @@ Feature: AMP Web Site MeetTheBand Page
   Scenario: Manage Band Members
     Given I am on "/meettheband/"
     Then I should see 0 ".bandMemberEntry" elements
+    And I should not see an ".addButton" element
+    And I should not see an ".editButton" element
+    And I should not see an ".deleteButton" element
     When I go to "/meettheband/add"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
@@ -19,6 +22,9 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
     And I press "Submit"
     Then I should be on "/meettheband/"
+    And I should see an ".addButton" element
+    And I should see an ".editButton" element
+    And I should see an ".deleteButton" element
     And I should see "Action Jackson"
     And I should see "Super Cop"
     And I should see "A celebrated lieutenant in the police force"
@@ -35,9 +41,9 @@ Feature: AMP Web Site MeetTheBand Page
     When I follow "Logout"
     Then I should be on "/"
     When I go to "/meettheband/"
-    Then I should not see "Add Band Member"
-    And I should not see "Edit"
-    And I should not see "Delete"
+    Then I should not see an ".addButton" element
+    And I should not see an ".editButton" element
+    And I should not see an ".deleteButton" element
     When I go to "/meettheband/update/2"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
