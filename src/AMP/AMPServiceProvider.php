@@ -65,7 +65,11 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.updateAccount'] = function () use ($app) {
-            $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
+            $formFactory = new \AMP\Form\UpdateAccountFormFactory(
+                $app['form.factory'],
+                $app['dao.accountManager']->getCurrentPassword($app['security']->getToken()->getUsername()),
+                $app['security.encoder.digest']
+            );
             return $formFactory->getForm();
         };
     }
