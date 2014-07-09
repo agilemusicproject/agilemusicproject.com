@@ -49,7 +49,8 @@ class NewsContentDAO extends AbstractDAO
             $stmt->execute();
             $results = $stmt->fetchAll();
             foreach ($results as &$entry) {
-                $entry['date'] = date("F j, Y");
+                $date = date_create($entry['date']);
+                $entry['date'] = date_format($date, 'F j, Y');
             }
             unset($entry);
             return $results;

@@ -38,7 +38,7 @@ class NewsPageController implements ControllerProviderInterface
 
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\NewsPageFormFactory($app['form.factory']);
+        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -53,7 +53,7 @@ class NewsPageController implements ControllerProviderInterface
     private function editAction(Request $request, Application $app, $id)
     {
         $dao = new \AMP\Db\NewsContentDAO($app['db']);
-        $formFactory = new \AMP\Form\NewsPageFormFactory($app['form.factory'], $dao->get($id), true);
+        $formFactory = new \AMP\Form\TextAreaFormFactory($app['form.factory'], $dao->get($id), true);
         $form = $formFactory->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {

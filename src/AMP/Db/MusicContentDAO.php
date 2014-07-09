@@ -17,10 +17,10 @@ class MusicContentDAO extends AbstractDAO
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute();
             $maxSortOrder = $stmt->fetchColumn();
-            if ($maxSortOrder) {
-                $maxSortOrder += 1;
-            } else {
+            if ($maxSortOrder === false) {
                 $maxSortOrder = 0;
+            } else {
+                $maxSortOrder += 1;
             }
             $sql = 'INSERT INTO ' . $this->getTableName() . ' (embed, song_order)
                     VALUES (:embed, :order)';
