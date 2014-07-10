@@ -30,7 +30,6 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
-
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_mysql',
@@ -40,7 +39,6 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'password' => $app['config']->get('MYSQL_PASSWORD'),
     ),
 ));
-
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));

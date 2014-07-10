@@ -19,7 +19,7 @@ class BandMembersDAO extends AbstractDAO
             $stmt->bindParam(':first_name', $data['first_name']);
             $stmt->bindParam(':last_name', $data['last_name']);
             $stmt->bindParam(':roles', $data['roles']);
-            $stmt->bindParam(':photo_filename', $filename);
+            $stmt->bindParam(':photo_filename', $data['photo_filename']);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\PDOException $e) {
@@ -66,7 +66,7 @@ class BandMembersDAO extends AbstractDAO
             $stmt->bindParam(':first_name', $data['first_name']);
             $stmt->bindParam(':last_name', $data['last_name']);
             $stmt->bindParam(':roles', $data['roles']);
-            $stmt->bindParam(':photo_filename', $filename);
+            $stmt->bindParam(':photo_filename', $data['photo_filename']);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
