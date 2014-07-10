@@ -38,5 +38,21 @@ Scenario: Manage Photos on Photos page
     And I fill in "_password" with "foo"
     And I press "Login"
     Then I go to "/photos/"
-    When I follow "christmas in july"
-    Then I should see an ".edit_caption" element
+    And I should see an ".deleteID" element
+    And I should see an ".edit_caption" element
+    When I go to "/photos/edit/1"
+    Then I fill in "form_caption" with "ron swanson"
+    And I fill in "form_category" with "crazyness"
+    When I press "Submit"
+    Then I should be on "/photos/"
+    And I should see an ".addButton" element
+    And the "#galleryTab" element should contain "View all"
+    And the "#galleryTab" element should contain "crazyness"
+    And I should see an ".fancyphoto" element
+    And I should see "ron swanson"
+    Then I press "Delete Photo"
+    And I should see an ".addButton" element
+    And I should not see an ".fancyphoto" element
+    And I should not see "ron swanson"
+    When I follow "Logout"
+    Then I should see "Login"
