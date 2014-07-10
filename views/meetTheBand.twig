@@ -15,16 +15,20 @@
   </form>
 {% endif %}
 {% for row in results %}
+<div class="notecard">
   <p class="bandMemberEntry">
+    <span class="bandMemberRoles">{{ row.roles }}</span>:
+    <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/><br/>
     {% if not (row.photo_filename is null) %}
       <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" /><br/>
     {% endif %}
-    <span class="bandMemberRoles">{{ row.roles }}</span>:<br/>
-    <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/>
+
+
     {% if not (row.bio is null) %}
        <p>{{ row.bio|raw }}</p>
     {% endif %}
   </p>
+</div>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
       <input class="editButton" onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>

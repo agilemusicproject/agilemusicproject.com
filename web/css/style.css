@@ -75,6 +75,13 @@ a.imageLink {
   padding-top: 20px;
 }
 
+.notecard {
+  background: url(/images/notecard.png) repeat-x 0 46px white;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .passwordText {
   -webkit-text-security: disc;
 }
