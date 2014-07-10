@@ -1,9 +1,6 @@
 <?php
 namespace AMP;
 
-use AMP\Exception\ConfigValueNotFoundException;
-use AMP\Exception\FileNotFoundException;
-
 class Config
 {
     private $config;
@@ -15,7 +12,7 @@ class Config
             if (file_exists($filename)) {
                 $this->config = parse_ini_file($filename, true);
             } else {
-                throw new FileNotFoundException($filename);
+                throw new \AMP\Exception\FileNotFoundException($filename);
             }
         }
     }
@@ -35,7 +32,7 @@ class Config
             if (!is_null($section)) {
                 $msg = '[' . $section . ']' . $msg;
             }
-            throw new ConfigValueNotFoundException($msg);
+            throw new \AMP\Exception\ConfigValueNotFoundException($msg);
         }
     }
 

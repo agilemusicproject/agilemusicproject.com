@@ -5,6 +5,8 @@
     <script type="text/javascript" src="/js/post-note.js"></script>
     <script src="/js/ckeditor/ckeditor.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     {% block javascript %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -23,7 +25,6 @@
        {% block postit %}{% endblock %}
       </div>
     </nav>
-    {% block loginButton %}{% endblock %}
     <article class="pageText">
       <h1 class="title">{% block header %}{% endblock %}</h1>
       {% block content %} {% endblock %}

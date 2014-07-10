@@ -30,7 +30,6 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
-
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_mysql',
@@ -40,7 +39,6 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'password' => $app['config']->get('MYSQL_PASSWORD'),
     ),
 ));
-
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
@@ -54,37 +52,31 @@ try {
 } catch (Symfony\Component\Yaml\Exception\ParseException $e) {
     echo('Unable to parse the YAML string: ' . $e->getMessage());
 }
-$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
+$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {;
     return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
 
+$ampServiceProvider = new \AMP\AMPServiceProvider();
+$app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
+$ampServiceProvider->registerDAOs($app);
+$ampServiceProvider->registerForms($app);
+
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
-});
-
-$app->get('/about', function () use ($app) {
-    return $app['twig']->render('about.twig');
-});
-
-$app->get('/music', function () use ($app) {
-    return $app['twig']->render('music.twig');
-});
-
-$app->get('/agile', function () use ($app) {
-    return $app['twig']->render('agile.twig');
 });
 
 $app->get('/login', function (Request $request) use ($app) {
     return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
 });
 
-$app->get('/photos', function () use ($app) {
-    return $app['twig']->render('photos.twig');
-});
-
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
+$app->mount('/about', new AMP\Controller\AboutPageController());
+$app->mount('/agile', new AMP\Controller\AgilePageController());
+$app->mount('/music', new AMP\Controller\MusicPageController());
+$app->mount('/photos', new AMP\Controller\PhotosController());
+$app->mount('/news', new AMP\Controller\NewsPageController());
 
 $app->run();

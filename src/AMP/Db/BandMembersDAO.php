@@ -1,116 +1,90 @@
 <?php
 namespace AMP\Db;
 
-use AMP\UploadManager;
+use \AMP\Exception\DbException;
 
-use AMP\Exception\AddToDatabaseFailedException;
-use AMP\Exception\GetUserFailedException;
-use AMP\Exception\GetAllUsersFailedException;
-use AMP\Exception\UpdateUserFailedException;
-use AMP\Exception\DeletingUserFailedException;
-
-class BandMembersDAO
+class BandMembersDAO extends AbstractDAO
 {
-    private $db;
-
-    public function __construct(\Doctrine\DBAL\Connection $db)
+    public function getTableName()
     {
-        $this->db = $db;
+        return 'band_members';
     }
 
     public function add(array $data)
     {
-        $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-        $filename = $uploadManager->upload($data['photo']);
         try {
-            $sql = 'INSERT INTO band_members (first_name, last_name, roles, photo_filename, bio)
+            $sql = 'INSERT INTO ' . $this->getTableName() . ' (first_name, last_name, roles, photo_filename, bio)
                     VALUES (:first_name, :last_name, :roles, :photo_filename, :bio)';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':first_name', $data['first_name']);
             $stmt->bindParam(':last_name', $data['last_name']);
             $stmt->bindParam(':roles', $data['roles']);
-            $stmt->bindParam(':photo_filename', $filename);
+            $stmt->bindParam(':photo_filename', $data['photo_filename']);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new AddToDatabaseFailedException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function get($id)
     {
         try {
-            $sql = 'SELECT * FROM band_members WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE id = :id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(0);
         } catch (\PDOException $e) {
-            throw new GetUserFailedException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function getAll()
     {
         try {
-            $sql = 'SELECT * FROM band_members';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'SELECT * FROM ' . $this->getTableName();
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            throw new GetAllUsersFailedException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function update($id, array $data)
     {
-        $original_data = $this->get($id);
-        $original_filename = $original_data['photo_filename'];
-        $filename = null;
-        $uploadManager = new UploadManager(__DIR__ . '/../../../web/images/photos');
-        if ($data['photo_actions'] == 'photo_delete') {
-            $data['photo'] = null;
-            $uploadManager->delete($original_filename);
-        } elseif ($data['photo_actions'] == 'photo_change') {
-            if (!is_null($original_filename)) {
-                $uploadManager->delete($original_filename);
-            }
-            $filename = $uploadManager->upload($data['photo']);
-        } elseif ($data['photo_actions'] == 'photo_nothing') {
-            $data['photo'] = null;
-            $filename = $original_filename;
-        }
         try {
-            $sql = 'UPDATE band_members
+            $sql = 'UPDATE ' . $this->getTableName() . '
                     SET first_name = :first_name,
                         last_name = :last_name,
                         roles = :roles,
                         photo_filename = :photo_filename,
                         bio = :bio
                     WHERE id = :id';
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':first_name', $data['first_name']);
             $stmt->bindParam(':last_name', $data['last_name']);
             $stmt->bindParam(':roles', $data['roles']);
-            $stmt->bindParam(':photo_filename', $filename);
+            $stmt->bindParam(':photo_filename', $data['photo_filename']);
             $stmt->bindParam(':bio', $data['bio']);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
         } catch (\PDOException $e) {
-            throw new UpdateUserFailedException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 
     public function delete($id)
     {
         try {
-            $sql = 'DELETE from band_members WHERE id=:id';
-            $stmt = $this->db->prepare($sql);
+            $sql = 'DELETE from ' . $this->getTableName() . ' WHERE id=:id';
+            $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (\PDOException $e) {
-            throw new DeletingUserFailedException($e->getMessage());
+            throw new DbException($e->getMessage());
         }
     }
 }

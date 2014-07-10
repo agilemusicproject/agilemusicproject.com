@@ -21,27 +21,27 @@ class AccountController implements ControllerProviderInterface
     public function defaultAction(Request $request, Application $app)
     {
         $notification = null;
-        $formFactory = new \AMP\Form\UpdateAccountFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.updateAccount'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\AccountManagerDAO($app['db']);
             $data = $form->getData();
             $data['username'] = $app['security']->getToken()->getUsername();
             $data['newPassword'] = $app['security.encoder.digest']->encodePassword($data['newPassword'], '');
-            $data['oldPassword'] = $app['security.encoder.digest']->encodePassword($data['oldPassword'], '');
-            $data['confirmPassword'] = $app['security.encoder.digest']->encodePassword($data['confirmPassword'], '');
-            $data['currentPassword'] = $dao->getCurrentPassword($data['username']);
-            if ($formFactory->isValidAuthentication($data)) {
-                $dao->updateBandMemberPassword($data);
-                return $app->redirect('/');
-            } else {
-                $notification = 'Your input was invalid. Please try again.';
-            }
+            $app['dao.accountManager']->updateBandMemberPassword($data);
+            return $app->redirect('/');
         }
         return $app['twig']->render('updateAccount.twig', array(
             'form' => $form->createView(),
             'notification' => $notification,
         ));
+    }
+    
+    public function isValidAuthentication($data)
+    {
+        if (strcmp($data['oldPassword'], $data['currentPassword'])) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
