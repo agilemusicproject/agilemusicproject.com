@@ -43,7 +43,7 @@ class MeetTheBandController implements ControllerProviderInterface
     
     private function addAction(Request $request, Application $app)
     {
-        $form = $app['forms.meetTheBandEdit'];
+        $form = $app['forms.meetTheBandAdd'];
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
@@ -70,9 +70,12 @@ class MeetTheBandController implements ControllerProviderInterface
             if ($formData['photo_actions'] == 'photo_delete') {
                 $formData['photo'] = null;
                 $app['photoUploadManager']->deleteFile($original_filename);
+                $app['photoUploadManager']->deleteThumbnail($original_filename);
+                $formData['photo_filename'] = null;
             } elseif ($formData['photo_actions'] == 'photo_change') {
                 if (!is_null($original_filename)) {
                     $app['photoUploadManager']->deleteFile($original_filename);
+                    $app['photoUploadManager']->deleteThumbnail($original_filename);
                 }
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             } elseif ($formData['photo_actions'] == 'photo_nothing') {
