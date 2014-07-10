@@ -32,6 +32,7 @@ a.imageLink {
 .photoContainer {
     display: inline-block;
     max-width: 220px;
+    float: left;
 }
 
 .caption {
