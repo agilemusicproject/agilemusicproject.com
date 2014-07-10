@@ -20,8 +20,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_last_name" with "Jackson"
     And I fill in "form_roles" with "Super Cop"
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
-    And I select "New Photo" from "form_photo_actions"
-    Then I should see an "#form_photo" element
+    And I should see an "#form_photo_actions" element
     And I attach the file "download.jpg" to "form_photo"
     And I press "Submit"
     Then I should be on "/meettheband/"
