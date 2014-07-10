@@ -11,7 +11,7 @@
 {% block content %}
 {% if is_granted('ROLE_ADMIN') %}
   <form>
-    <input onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
+    <input class="addButton" onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
   </form>
 {% endif %}
 {% for row in results %}
@@ -27,11 +27,11 @@
   </p>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
-      <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
+      <input class="editButton" onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
     </form>
     <form method="post" action="/meettheband/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input type="submit" value="Delete">
+      <input class="deleteButton" type="submit" value="Delete">
     </form>
   {% endif %}
 {% endfor %}
