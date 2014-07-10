@@ -131,6 +131,18 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $this->email->setMessage("The message", "Chris");
         $this->email->setRecipient("info@agilemusicproject.com");
         $this->email->setSubject("Hot Topic");
+        $this->email->setSender("misterburns@springfield.com Cc: birthdayarchive@example.com");
+        $this->assertFalse($this->email->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function fillingOutEveryArgumentWithInjectedEmailWithNewLinesShouldBeInValid()
+    {
+        $this->email->setMessage("The message", "Chris");
+        $this->email->setRecipient("info@agilemusicproject.com");
+        $this->email->setSubject("Hot Topic");
         $this->email->setSender("misterburns@springfield.com\r\n Cc: birthdayarchive@example.com\r\n");
         $this->assertFalse($this->email->isValid());
     }
