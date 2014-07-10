@@ -43,8 +43,10 @@ class NewsPageController implements ControllerProviderInterface
             $app['dao.newsContent']->add($form->getData());
             return $app->redirect('/news');
         }
-        return $app['twig']->render('newsEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Add'));
+        return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
+                                                              'title' => 'Add',
+                                                              'page' => 'News',
+                                                              'elementTitle' => 'news'));
     }
 
     private function editAction(Request $request, Application $app, $id)
@@ -56,7 +58,9 @@ class NewsPageController implements ControllerProviderInterface
             $app['dao.newsContent']->update($id, $form->getData());
             return $app->redirect('/news');
         }
-        return $app['twig']->render('newsEdit.twig', array('form' => $form->createView(),
-                                                                  'title' => 'Edit'));
+        return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
+                                                              'title' => 'Edit',
+                                                              'page' => 'News',
+                                                              'elementTitle' => 'news'));
     }
 }
