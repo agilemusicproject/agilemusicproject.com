@@ -6,7 +6,6 @@ class ConfigValueNotFoundException extends \Exception implements ExceptionInterf
     use ExceptionTrait;
     public function __construct($message = null, $code = 0, \Exception $previous = null)
     {
-        $this->userMessage = 'We are currently experiencing issues. Please try again later.';
         $this->message = 'Config value not found for key: ' . $message;
         parent::__construct($this->message, $code, $previous);
     }

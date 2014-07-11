@@ -7,79 +7,23 @@
 {% block postit %}<canvas id="agilepostcard" class="postitheader">About Agile</canvas>{% endblock %}
 
 {% block content %}
-<p>Agile was originally created for software development. &nbsp;It is a value system and not a process. &nbsp;There are multiple frameworks which adhere to the Agile values and principles. &nbsp;These include but are not limited to Scrum, Kanban, and XP. &nbsp;Likewise, Agile may be applied within different development processes (e.g.: Rational&rsquo;s Unified Process).</p>
 
-<p>Our band members and our company, Improving Enterprises, promote the use of Agile on our client software development projects. &nbsp;We thought that by using the core values and principles listed below we could more affectively perfect our craft of playing music as a group and individually.</p>
-
-<p>&nbsp;</p>
-
-<h1 style="text-align: center;"><strong>Manifesto for Agile Software Development</strong></h1>
-
-<p style="text-align: center;"><span style="font-size:20px">We are uncovering better ways of developing<br />
-software by doing it and helping others do it.<br />
-Through this work we have come to value:</span></p>
-
-<p style="text-align: center;"><span style="font-size:28px">Individuals and interactions</span>&nbsp;<span style="font-size:20px">over processes and tools</span><br />
-<span style="font-size:28px">Working software&nbsp;</span><span style="font-size:20px">over comprehensive documentation</span><br />
-<span style="font-size:28px">Customer collaboration</span>&nbsp;<span style="font-size:20px">over contract negotiation</span><br />
-<span style="font-size:28px">Responding to change</span>&nbsp;<span style="font-size:20px">over following a plan</span></p>
-
-<p style="text-align: center;"><span style="font-size:20px">That is, while there is value in the items on<br />
-the right, we value the items on the left more.</span></p>
-
-<p style="text-align:center"><a href="http://agilemanifesto.org/">http://agilemanifesto.org/</a></p>
-
-<p style="text-align:center">&nbsp;</p>
-
-<hr />
-<h1 style="text-align:center">&nbsp;</h1>
-
-<h1 style="text-align:center"><strong>Principles behind the Agile Manifesto</strong></h1>
-
-<p style="text-align:center"><span style="font-size:18px"><em>We follow these principles:</em></span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Our highest priority is to satisfy the customer<br />
-through early and continuous delivery<br />
-of valuable software.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Welcome changing requirements, even late in&nbsp;<br />
-development. Agile processes harness change for&nbsp;<br />
-the customer&#39;s competitive advantage.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Deliver working software frequently, from a&nbsp;<br />
-couple of weeks to a couple of months, with a&nbsp;<br />
-preference to the shorter timescale.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Business people and developers must work&nbsp;<br />
-together daily throughout the project.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Build projects around motivated individuals.&nbsp;<br />
-Give them the environment and support they need,&nbsp;<br />
-and trust them to get the job done.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">The most efficient and effective method of&nbsp;<br />
-conveying information to and within a development&nbsp;<br />
-team is face-to-face conversation.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Working software is the primary measure of progress.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Agile processes promote sustainable development.&nbsp;<br />
-The sponsors, developers, and users should be able&nbsp;<br />
-to maintain a constant pace indefinitely.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Continuous attention to technical excellence&nbsp;<br />
-and good design enhances agility.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">Simplicity--the art of maximizing the amount&nbsp;<br />
-of work not done--is essential.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">The best architectures, requirements, and designs&nbsp;<br />
-emerge from self-organizing teams.</span></p>
-
-<p style="text-align:center"><span style="font-size:18px">At regular intervals, the team reflects on how&nbsp;<br />
-to become more effective, then tunes and adjusts&nbsp;<br />
-its behavior accordingly.</span></p>
-
-<p style="text-align:center"><a href="http://agilemanifesto.org/principles.html">http://agilemanifesto.org/principles.html</a></p>
+{% if is_granted('ROLE_ADMIN') %}
+  <form>
+    <input class="addButton" onclick="location.href='/agile/add'" type="button" value="Add Content"/>
+  </form>
+{% endif %}
+{% for row in results %}
+  <p class="agilePageText">{{ row.content|raw }}</p>
+  {% if is_granted('ROLE_ADMIN') %}
+    <form>
+      <input class="editButton" onclick="location.href='/agile/edit/{{ row.id }}'" type="button" value="Edit"/>
+    </form>
+    <form method="post" action="/agile/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input class="deleteButton" type="submit" value="Delete">
+    </form>
+  {% endif %}
+{% endfor %}
 
 {% endblock %}

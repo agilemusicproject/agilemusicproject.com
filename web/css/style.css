@@ -5,6 +5,10 @@
   clear: both;
 }
 
+.hidden {
+  display: none;
+}
+
 .pageText {
   max-width: 900px;
   display: table;
@@ -17,11 +21,66 @@ textarea {
   width: 50%;
 }
 
+a.imageLink {
+  text-decoration: none;
+}
+
+.preview {
+  width: 200px;
+}
+
+.photoContainer {
+  display: inline-block;
+  max-width: 220px;
+  vertical-align: top;
+}
+
+.caption {
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+#galleryTab {
+  padding-left: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.filter {
+  padding-right: 10px;
+  padding-left: 10px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: #96CDCD;
+}
+
+.fancyphoto {
+  display: inline;
+  max-width: 200px;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
 .pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   padding-top: 20px;
+}
+
+.notecard {
+  background: url(/images/notecard.png) repeat-x 0 46px white;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 210px;
 }
 
 .passwordText {
@@ -235,4 +294,47 @@ div.img a:hover img {
 
 #cke_form_bio, #cke_form_message {
   max-width: 800px;
+}
+
+.musicPageText {
+  list-style-type: none;
+  cursor: move;
+
+}
+
+.musicIframe {
+  margin-left: 75px
+}
+
+.dotsSection {
+  float: left;
+  vertical-align: middle;
+}
+
+.dots {
+  background: #555;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin: 10px;
+  border-style: outset;
+}
+
+#newspostcard {
+  top: 110%;
+  left: 40%;
+}
+
+.newsData {
+  text-align: right;
+  font-size: x-large;
+}
+
+#musicAdd {
+  padding-left: 30px;
+}
+
+.bioPhoto {
+  max-width: 200px;
+  float: left;
 }

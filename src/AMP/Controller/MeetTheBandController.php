@@ -29,22 +29,28 @@ class MeetTheBandController implements ControllerProviderInterface
     
     private function defaultAction(Request $request, Application $app)
     {
-        $dao = new \AMP\Db\BandMembersDAO($app['db']);
         if ($request->isMethod('POST')) {
-            $dao->delete($request->get('id'));
+            $bandMemberData = $app['dao.bandMembers']->get($request->get('id'));
+            if (!is_null($bandMemberData['photo_filename'])) {
+                $app['photoUploadManager']->deleteFile($bandMemberData['photo_filename']);
+                $app['photoUploadManager']->deleteThumbnail($bandMemberData['photo_filename']);
+            }
+            $app['dao.bandMembers']->delete($request->get('id'));
         }
-        $results = $dao->getAll();
+        $results = $app['dao.bandMembers']->getAll();
         return $app['twig']->render('meetTheBand.twig', array('results' => $results));
     }
     
     private function addAction(Request $request, Application $app)
     {
-        $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
+        $form = $app['forms.meetTheBandAdd'];
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao = new \AMP\Db\BandMembersDAO($app['db']);
-            $dao->add($form->getData());
+            $formData = $form->getData();
+            if (!is_null($formData['photo'])) {
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            }
+            $app['dao.bandMembers']->add($formData);
             return $app->redirect('/meettheband');
         }
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
@@ -53,12 +59,30 @@ class MeetTheBandController implements ControllerProviderInterface
     
     private function editAction(Request $request, Application $app, $id)
     {
-        $dao = new \AMP\Db\BandMembersDAO($app['db']);
-        $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory'], $dao->get($id), true);
-        $form = $formFactory->getForm();
+        $form = $app['forms.meetTheBandEdit'];
+        $form->setData($app['dao.bandMembers']->get($id));
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $dao->update($id, $form->getData());
+            $formData = $form->getData();
+            $bandMemberData = $app['dao.bandMembers']->get($id);
+            $original_filename = $bandMemberData['photo_filename'];
+            $filename = null;
+            if ($formData['photo_actions'] == 'photo_delete') {
+                $formData['photo'] = null;
+                $app['photoUploadManager']->deleteFile($original_filename);
+                $app['photoUploadManager']->deleteThumbnail($original_filename);
+                $formData['photo_filename'] = null;
+            } elseif ($formData['photo_actions'] == 'photo_change') {
+                if (!is_null($original_filename)) {
+                    $app['photoUploadManager']->deleteFile($original_filename);
+                    $app['photoUploadManager']->deleteThumbnail($original_filename);
+                }
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            } elseif ($formData['photo_actions'] == 'photo_nothing') {
+                $data['photo'] = null;
+                $formData['photo_filename'] = $original_filename;
+            }
+            $app['dao.bandMembers']->update($id, $formData);
             return $app->redirect('/meettheband');
         }
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),

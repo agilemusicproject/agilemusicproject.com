@@ -1,0 +1,27 @@
+{% extends "base.twig" %}
+
+{% block javascript %}
+  <script src="/js/ckeditor/ckeditor.js"></script>
+  <script src="/js/update-form.js"></script>
+{% endblock %}
+
+{% block onload %} draw{{ page }}PostNote() {% endblock %}
+
+{% block title %} {{ page }} {% endblock %}
+
+{% block postit %}<canvas id="{{ elementTitle }}postcard" class="postitheader">{{ page }}</canvas>{% endblock %}
+
+{% block header %} {{ title }} Content {%endblock%}
+
+{% block content %}
+<div id="{{ elementTitle }}EditForm">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_rest(form) }}
+  </form>
+  <script>
+    CKEDITOR.replace('form_content');
+  </script>
+</div>
+{% endblock %}

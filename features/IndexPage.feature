@@ -26,7 +26,7 @@ Scenario Outline: Click Home Page Menu Link
   | page          | url           |
   | Contact Us    | /contactus/   |
   | Meet the Band | /meettheband/ |
-  | Our Music     | /music        |
-  | Photos        | /photos       |
-  | Agile         | /agile        |
-  | About Us      | /about        |
+  | Our Music     | /music/       |
+  | Photos        | /photos/      |
+  | Agile         | /agile/       |
+  | About Us      | /about/       |

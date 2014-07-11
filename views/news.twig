@@ -1,0 +1,34 @@
+{% extends "base.twig" %}
+
+{% block onload %} drawNewsPostNote() {% endblock %}
+
+{% block title %} Latest News {% endblock %}
+
+{% block postit %}<canvas id="newspostcard" class="postitheader">Our News</canvas>{% endblock %}
+
+{% block header %} Latest News {%endblock%}
+
+{% block pageClass %} newsPage {% endblock %}
+
+{% block content %}
+
+{% if is_granted('ROLE_ADMIN') %}
+  <form>
+    <input class="addButton" onclick="location.href='/news/add'" type="button" value="Add Content"/>
+  </form>
+{% endif %}
+{% for row in results %}
+  <div class="newsData">{{row.date}}</div>
+  <p class="newsPageText">{{ row.content|raw }}</p>
+  {% if is_granted('ROLE_ADMIN') %}
+    <form>
+      <input class="editButton" onclick="location.href='/news/edit/{{ row.id }}'" type="button" value="Edit"/>
+    </form>
+    <form method="post" action="/news/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input class="deleteButton" type="submit" value="Delete">
+    </form>
+  {% endif %}
+<hr>
+{% endfor %}
+{% endblock %}

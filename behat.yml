@@ -6,6 +6,7 @@ default:
     Behat\MinkExtension\Extension:
       base_url: 'http://amp-test.local/'
       goutte: ~
+      files_path: 'web/images/'
 
 ci:
   extensions:

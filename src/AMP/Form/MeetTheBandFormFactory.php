@@ -7,11 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MeetTheBandFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
-    public function __construct(FormFactory $formService, array $default = null, $isUpdateForm = false)
+    public function __construct(FormFactory $formService, $isUpdateForm = false)
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
-        $this->formBuilder = $formService->createBuilder('form', $default)
+        $this->formBuilder = $formService->createBuilder('form')
             ->add('first_name', 'text', array(
                 'constraints' => new Assert\NotBlank(),
                 'label' => false,
@@ -25,7 +25,6 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label_attr' => array('class' => 'formLabel'),
             ))
             ->add('roles', 'text', array('constraints' => new Assert\NotBlank(),
-                                         'required' => true,
                                          'label' => false,
                                          'attr' => array('placeholder' => 'Roles'),
                                          'label_attr' => array('class' => 'formLabel'),
@@ -41,7 +40,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                                        'label_attr' => array('class' => 'formLabel'),
                 ));
         }
-             
+
         $this->formBuilder
             ->add('photo', 'file', array('required' => false,
                                          'label' => $isUpdateForm ? false : 'Photo',
@@ -54,7 +53,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                                            'required' => false,
             ))
             ->add('submit', 'submit');
-        
+
         $this->form = $this->formBuilder->getForm();
     }
 }

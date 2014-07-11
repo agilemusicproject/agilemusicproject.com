@@ -4,7 +4,39 @@
 
 {% block title %} Our Music {% endblock %}
 
+{% block javascript %}
+<script src="/js/sort-music.js"></script>
+{% endblock %}
+
 {% block postit %}<canvas id="musicpostcard" class="postitheader">Our Music</canvas>{% endblock %}
 
+{% block header %}Our Music{%endblock%}
+
 {% block content %}
+
+{% if is_granted('ROLE_ADMIN') %}
+  <form id="musicAdd">
+    <input onclick="location.href='/music/add'" type="button" value="Add Music"/>
+  </form>
+<ul id="sortMusic">
+{% endif %}
+  {% for row in results %}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="musicPageText" id="music-{{row.id}}">
+    <div class="dotsSection">
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <form method="post" action="/music/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+        <input id="musicDelete" type="submit" value="Delete">
+    </form>
+    </div>
+  {% endif %}
+    <div {% if is_granted('ROLE_ADMIN') %} class="musicIframe" {% endif %}>{{ row.embed|raw }}</div>
+  {% if is_granted('ROLE_ADMIN') %}
+  </li>
+    {% endif %}
+  {% endfor %}
+</ul>
 {% endblock %}

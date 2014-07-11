@@ -2,14 +2,14 @@ security.firewalls:
   general:
     anonymous: true
     pattern: ^/
-    form: 
+    form:
       login_path: /login
       check_path: /admin/login_check
     logout:
       logout_path: /admin/logout
 security.access_rules:
   -
-    - ^/meettheband/add 
+    - ^/meettheband/add
     - ROLE_ADMIN
   -
     - ^/meettheband/update
@@ -19,4 +19,37 @@ security.access_rules:
     - ROLE_ADMIN
   -
     - ^/account
+    - ROLE_ADMIN
+  -
+    - ^/about/add
+    - ROLE_ADMIN
+  -
+    - ^/about/edit
+    - ROLE_ADMIN
+  -
+    - ^/agile/add
+    - ROLE_ADMIN
+  -
+    - ^/agile/edit
+    - ROLE_ADMIN
+  -
+    - ^/photos/add
+    - ROLE_ADMIN
+  -
+    - ^/photos/edit
+    - ROLE_ADMIN
+  -
+    - ^/music/add
+    - ROLE_ADMIN
+  -
+    - ^/music/edit
+    - ROLE_ADMIN
+  -
+    - ^/music/update
+    - ROLE_ADMIN
+  -
+    - ^/news/add
+    - ROLE_ADMIN
+  -
+    - ^/news/edit
     - ROLE_ADMIN
