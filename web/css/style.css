@@ -80,6 +80,7 @@ a.imageLink {
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  margin-left: 210px;
 }
 
 .passwordText {
@@ -331,4 +332,9 @@ div.img a:hover img {
 
 #musicAdd {
   padding-left: 30px;
+}
+
+.bioPhoto {
+  max-width: 200px;
+  float: left;
 }
