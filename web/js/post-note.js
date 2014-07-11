@@ -40,35 +40,35 @@ function drawMusicPostNote()
 
 function drawAgilePostNote()
 {
-    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v7.png");
+    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v5.png");
 }
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v5.png");
+    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v12.png");
 }
 
 function drawPhotosPostNote()
 {
-    drawPostNote( "photospostcard", ["Photos"], 4.5, "sticky-notes_v6.png");
+    drawPostNote( "photospostcard", ["Photos"], 4.5, "sticky-notes_v7.png");
 }
 
 function drawBlogPostNote()
 {
-    drawPostNote( "blogpostcard", ["Blog"], 4.5, "sticky-notes_v4.png");
+    drawPostNote( "blogpostcard", ["Blog"], 4.5, "sticky-notes_v8.png");
 }
 
 function drawContactPostNote()
 {
-    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v7.png");
+    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v13.png");
 }
 
 function drawAboutPostNote()
 {
-    drawPostNote( "aboutpostcard", ["About Us"], 17, "sticky-notes_v5.png");
+    drawPostNote( "aboutpostcard", ["About Us"], 17, "sticky-notes_v10.png");
 }
 
 function drawNewsPostNote()
 {
-    drawPostNote( "newspostcard", ["Our News"], -8, "sticky-notes_v4.png");
+    drawPostNote( "newspostcard", ["Our News"], -8, "sticky-notes_v11.png");
 }
