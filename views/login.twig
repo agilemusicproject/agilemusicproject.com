@@ -16,7 +16,9 @@
     <input type="text" name="_username" class="loginFormField" placeholder="Username" />
     <label>Password:</label>
     <input type="password" name="_password" class="loginFormField" placeholder="Password" />
-    <input type="hidden" name="_target_path" value="{{ lastPage }}" />
+    {% if not (lastPage) is null %}
+      <input type="hidden" name="_target_path" value="{{ lastPage }}" />
+    {% endif %}
     <input type="submit" value="Login" class="loginFormField" />
   </form>
 {% endif %}
