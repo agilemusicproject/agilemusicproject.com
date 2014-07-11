@@ -75,15 +75,8 @@ a.imageLink {
   padding-top: 20px;
 }
 
-.redLine {
-  background-color: #DB87B0;
-  height: 3px;
-  background-repeat: repeat-x;
-  width: auto;
-}
-
 .notecard {
-  background: url(/images/notecard-long.png) repeat-x 0 46px white;
+  background: url(/images/notecard.png) repeat-x 0 46px white;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
