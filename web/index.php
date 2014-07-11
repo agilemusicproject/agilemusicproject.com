@@ -30,7 +30,6 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
-
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_mysql',
@@ -40,7 +39,6 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'password' => $app['config']->get('MYSQL_PASSWORD'),
     ),
 ));
-
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
@@ -58,6 +56,11 @@ $securityConfig['security.firewalls']['general']['users'] = $app->share(function
     return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
+
+$ampServiceProvider = new \AMP\AMPServiceProvider();
+$app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
+$ampServiceProvider->registerDAOs($app);
+$ampServiceProvider->registerForms($app);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
