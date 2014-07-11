@@ -5,8 +5,7 @@ class UploadManager
 {
     private $uploadDirectory;
     private $thumbnailsDirectoryName = '/thumbnails';
-    private $thumbnailWidth = 250;
-    private $thumbnailHeight = 250;
+    private $thumbnailWidth = 900;
     
     public function __construct($uploadDirectory)
     {
@@ -26,7 +25,7 @@ class UploadManager
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
         }
-        $this->createThumbnail($filename, $this->thumbnailWidth, $this->thumbnailHeight);
+        $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
     
@@ -47,21 +46,13 @@ class UploadManager
         $this->delete($this->getThumbnailFilePath($filename));
     }
     
-    public function createThumbnail($filename, $thumb_width, $thumb_height)
+    public function createThumbnail($filename, $desired_width)
     {
         list($width, $height) = getimagesize($this->getFilepath($filename));
-        $original_aspect = $width/$height;
-        $thumb_aspect = $thumb_width/$thumb_height;
+        $percent = $desired_width/$width;
+        $desired_height = $height * $percent;
         
-        if ($original_aspect >= $thumb_aspect) {
-            $new_height = $thumb_height;
-            $new_width = $width / ($height/$thumb_height);
-        } else {
-            $new_width = $thumb_width;
-            $new_height = $height / ($width/$thumb_width);
-        }
-        
-        $thumb = imagecreatetruecolor($thumb_width, $thumb_height);
+        $thumb = imagecreatetruecolor($desired_width, $desired_height);
         
         $extension = substr($filename, strrpos($filename, '.')+1);
         var_dump($extension);
@@ -78,18 +69,7 @@ class UploadManager
                 break;
         }
         
-        imagecopyresized(
-            $thumb,
-            $source,
-            0 - ($new_width - $thumb_width) / 2,
-            0 - ($new_height - $thumb_height) / 2,
-            0,
-            0,
-            $new_width,
-            $new_height,
-            $width,
-            $height
-        );
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
         
         imagejpeg($thumb, $this->getThumbnailFilePath($filename));
         imagedestroy($thumb);
