@@ -30,6 +30,7 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver' => 'pdo_mysql',
@@ -39,6 +40,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'password' => $app['config']->get('MYSQL_PASSWORD'),
     ),
 ));
+
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array('translator.messages' => array()));
@@ -57,17 +59,14 @@ $securityConfig['security.firewalls']['general']['users'] = $app->share(function
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
 
-$ampServiceProvider = new \AMP\AMPServiceProvider();
-$app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
-$ampServiceProvider->registerDAOs($app);
-$ampServiceProvider->registerForms($app);
-
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
 });
 
 $app->get('/login', function (Request $request) use ($app) {
-    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request)));
+    $lastPage = $request->server->get('HTTP_REFERER');
+    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request),
+                                                    'lastPage' => $lastPage));
 });
 
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
@@ -77,6 +76,5 @@ $app->mount('/about', new AMP\Controller\AboutPageController());
 $app->mount('/agile', new AMP\Controller\AgilePageController());
 $app->mount('/music', new AMP\Controller\MusicPageController());
 $app->mount('/photos', new AMP\Controller\PhotosController());
-$app->mount('/news', new AMP\Controller\NewsPageController());
 
 $app->run();
