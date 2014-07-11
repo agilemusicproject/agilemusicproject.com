@@ -70,5 +70,5 @@ function drawAboutPostNote()
 
 function drawNewsPostNote()
 {
-    drawPostNote( "newspostcard", ["Our News"], -8);
+    drawPostNote( "newspostcard", ["Our News"], -8, "sticky-notes_v4.png");
 }
