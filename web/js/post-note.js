@@ -55,7 +55,7 @@ function drawPhotosPostNote()
 
 function drawBlogPostNote()
 {
-    drawPostNote( "blogpostcard", ["Blog"], 4.5, "sticky-notes_v8.png");
+    drawPostNote( "blogpostcard", ["Blog"], 4.5, "sticky-notes_v14.png");
 }
 
 function drawContactPostNote()
