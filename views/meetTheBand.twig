@@ -20,6 +20,10 @@
   <div>
     <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
   </div>
+  {% else %}
+  <div>
+    <img class="bioPhoto" src="/images/question-mark.png" />
+  </div>
   {% endif %}
   <div class="notecard">
     <p class="bandMemberEntry">
