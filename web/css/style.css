@@ -30,16 +30,16 @@ a.imageLink {
 }
 
 .photoContainer {
-    display: inline-block;
-    max-width: 220px;
-    vertical-align: top;
+  display: inline-block;
+  max-width: 220px;
+  vertical-align: top;
 }
 
 .caption {
-    display: block;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 5px;
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
 }
 
 #galleryTab {
@@ -76,7 +76,7 @@ a.imageLink {
 }
 
 .notecard {
-  background: url(/images/notecard.png) repeat-x 0 46px white;
+  background: url(/images/notecard-long.png) repeat-x 0 46px white;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
