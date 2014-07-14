@@ -177,8 +177,8 @@ body {
 }
 
 #musicpostcard {
-  top: 30%;
-  right: 3%;
+  top: 110%;
+  left: 40%;
 }
 
 #agilepostcard {
@@ -202,8 +202,8 @@ body {
 }
 
 #contactuspostcard {
-  top: 120%;
-  left: 23%;
+  top: 30%;
+  right: 3%;
 }
 
 #aboutpostcard {
@@ -321,8 +321,8 @@ div.img a:hover img {
 }
 
 #newspostcard {
-  top: 110%;
-  left: 40%;
+  top: 120%;
+  left: 23%;
 }
 
 .newsData {
