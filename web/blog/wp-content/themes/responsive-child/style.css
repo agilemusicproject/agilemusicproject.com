@@ -19,8 +19,9 @@ body {
   background:rgba(0,0,0,0);
 }
 
-.type-post {
+.post-body {
   padding-right: 0;
+  padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 10px;
   margin: 0 auto 10px;
@@ -49,10 +50,10 @@ body {
 }
 
 .post-title {
-  margin-top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   padding-top: 6px;
   padding-left: 10px;
-  margin-left: -10px;
   border-bottom: solid;
   border-color: rgba(255,0,0,.3);
   background-color: white;
