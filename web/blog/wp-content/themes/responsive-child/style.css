@@ -19,6 +19,14 @@ body {
   background:rgba(0,0,0,0);
 }
 
+.type-post {
+  padding-right: 0px;
+}
+
+.post-entry > p {
+  margin: 1.45em 0;
+}
+
 .post-body {
   padding-right: 0;
   padding-top: 4px;
