@@ -78,7 +78,7 @@ Feature: AMP Web Site MeetTheBand Page
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
-    And I should not see an ".bioPhoto" element
+    And I should see an ".questionMark" element
     And I press "Delete"
     Then I should see 0 ".bandMemberEntry" elements
     When I follow "Logout"
