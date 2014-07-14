@@ -20,7 +20,6 @@ body {
 }
 
 .type-post {
-  padding-top: 6px;
   padding-right: 0px;
   padding-bottom: 4px;
   padding-left: 10px;
@@ -51,10 +50,12 @@ body {
 
 .post-title {
   margin-top: 0px;
+  padding-top: 6px;
   padding-left: 10px;
   margin-left: -10px;
   border-bottom: solid;
   border-color: rgba(255,0,0,.3);
+  background-color: white;
 }
 
 #logocontainer.headernav {

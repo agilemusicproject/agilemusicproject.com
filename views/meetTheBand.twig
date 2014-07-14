@@ -26,14 +26,13 @@
   </div>
   {% endif %}
   <div class="notecard">
-    <p class="bandMemberEntry">
-      <span class="bandMemberRoles">{{ row.roles }}</span>:
-      <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/><br/>
+    <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
+    <p class="bandMemberBio">
       {% if not (row.bio is null) %}
-    <p>{{ row.bio|raw }}</p>
-    {% endif %}
+        {{ row.bio|raw }}
+      {% endif %}
     </p>
-</div>
+  </div>
 </div>
 <div class="clearer"></div>
 {% if is_granted('ROLE_ADMIN') %}
