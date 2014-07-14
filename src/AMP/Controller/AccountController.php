@@ -20,6 +20,7 @@ class AccountController implements ControllerProviderInterface
 
     public function defaultAction(Request $request, Application $app)
     {
+        var_dump($app['session']->all());
         $notification = null;
         $form = $app['forms.updateAccount'];
         $form->handleRequest($request);
