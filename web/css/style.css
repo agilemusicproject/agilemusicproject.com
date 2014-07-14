@@ -80,7 +80,7 @@ a.imageLink {
   padding-right: 0px;
   padding-bottom: 4px;
   padding-left: 10px;
-  margin: 0 auto 10px;
+  margin: 0 auto 0px;
   position: relative;
   color: #444;
   line-height: 20px;
@@ -126,6 +126,16 @@ a.imageLink {
   padding-right: 6px;
 }
 
+.bioPhoto {
+  max-width: 200px;
+  float: left;
+}
+
+.bioWrapper {
+  padding-bottom: 1.5em;
+  overflow: auto;
+}
+
 .passwordText {
   -webkit-text-security: disc;
 }
@@ -136,12 +146,6 @@ a.imageLink {
 
 .aboutPageText {
   max-width: 900px;
-}
-
-.bandMemberEntry {
-  max-width: 900px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 }
 
 .pageHeader {
@@ -376,14 +380,4 @@ div.img a:hover img {
 
 #musicAdd {
   padding-left: 30px;
-}
-
-.bioPhoto {
-  max-width: 200px;
-  float: left;
-}
-
-.bioWrapper {
-  padding-bottom: 1.5em;
-  overflow: auto;
 }

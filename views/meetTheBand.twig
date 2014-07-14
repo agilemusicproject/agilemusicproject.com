@@ -30,6 +30,8 @@
     <p class="bandMemberBio">
       {% if not (row.bio is null) %}
         {{ row.bio|raw }}
+      {% else %}
+        [Redacted]
       {% endif %}
     </p>
   </div>
