@@ -60,7 +60,7 @@ function drawBlogPostNote()
 
 function drawContactPostNote()
 {
-    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v13.png");
+    drawPostNote( "contactuspostcard", ["Contact Us"], -7, "sticky-notes_v25.png");
 }
 
 function drawAboutPostNote()
