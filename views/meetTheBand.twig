@@ -30,8 +30,10 @@
       <span class="bandMemberRoles">{{ row.roles }}</span>:
       <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/><br/>
       {% if not (row.bio is null) %}
-    <p>{{ row.bio|raw }}</p>
-    {% endif %}
+      <p>{{ row.bio|raw }}</p>
+      {% else %}
+      <p>[Redacted]</p>
+      {% endif %}
     </p>
 </div>
 </div>
