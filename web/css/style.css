@@ -72,15 +72,68 @@ a.imageLink {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  padding-top: 20px;
+  padding-top: 0px;
 }
 
 .notecard {
   background: url(/images/notecard.png) repeat-x 0 46px white;
-  padding-bottom: 10px;
+  padding-right: 0px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  margin: 0 auto 0px;
+  position: relative;
+  color: #444;
+  line-height: 20px;
+  border: 1px solid #d2d2d2;
+ 
+  background: #fff;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+ 
+  -webkit-background-size: 100% 20px;
+  -moz-background-size: 100% 20px;
+  -ms-background-size: 100% 20px;
+  -o-background-size: 100% 20px;
+  background-size: 100% 20px;
+ 
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-left: 210px;
+  
+  background-position: 0px 100px;
+}
+
+.bandMemberTitle {
+  margin-top: 0px;
+  height: 30px;
+  padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-left: 210px;
+  margin-left: -10px;
+  border-bottom: solid;
+  border-color: rgba(255,0,0,.3);
+  background-color: white;
+  font-weight: normal;
+}
+
+.bandMemberBio {
+  line-height: 20px;
+  padding-right: 6px;
+}
+
+.bioPhoto {
+  max-width: 200px;
+  float: left;
+}
+
+.bioWrapper {
+  padding-bottom: 1.5em;
+  overflow: auto;
 }
 
 .passwordText {
@@ -93,11 +146,6 @@ a.imageLink {
 
 .aboutPageText {
   max-width: 900px;
-}
-
-.bandMemberEntry {
-  max-width: 900px;
-  margin-bottom: 0;
 }
 
 .pageHeader {
@@ -332,9 +380,4 @@ div.img a:hover img {
 
 #musicAdd {
   padding-left: 30px;
-}
-
-.bioPhoto {
-  max-width: 200px;
-  float: left;
 }

@@ -17,25 +17,20 @@
 {% for row in results %}
 <div class="bioWrapper">
   {% if not (row.photo_filename is null) %}
-  <div>
-    <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
-  </div>
+  <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
   {% else %}
-  <div class="questionMark">
-    <img class="bioPhoto" src="/images/question-mark.png" />
-  </div>
+  <img class="defaultBioPhoto" src="/images/question-mark.png" />
   {% endif %}
   <div class="notecard">
-    <p class="bandMemberEntry">
-      <span class="bandMemberRoles">{{ row.roles }}</span>:
-      <span class="bandMemberName">{{ row.first_name }} {{ row.last_name }}</span><br/><br/>
+    <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
+    <p class="bandMemberBio">
       {% if not (row.bio is null) %}
-      <p>{{ row.bio|raw }}</p>
+        {{ row.bio|raw }}
       {% else %}
-      <p>[Redacted]</p>
+        [Redacted]
       {% endif %}
     </p>
-</div>
+  </div>
 </div>
 <div class="clearer"></div>
 {% if is_granted('ROLE_ADMIN') %}
