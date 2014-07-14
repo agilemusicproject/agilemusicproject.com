@@ -55,7 +55,6 @@ class UploadManager
         $thumb = imagecreatetruecolor($desired_width, $desired_height);
         
         $extension = substr($filename, strrpos($filename, '.')+1);
-        var_dump($extension);
         switch($extension) {
             case 'jpeg':
             case 'jpg':
