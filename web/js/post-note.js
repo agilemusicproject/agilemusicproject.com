@@ -35,12 +35,12 @@ function drawIndexPage()
 
 function drawMusicPostNote()
 {
-    drawPostNote( "musicpostcard", ["Our Music"], -10, "sticky-notes_v4.png");
+    drawPostNote( "musicpostcard", ["Our Music"], -10, "sticky-notes_v23.png"); //16 is brighter
 }
 
 function drawAgilePostNote()
 {
-    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v5.png");
+    drawPostNote( "agilepostcard", ["Agile"], -7, "sticky-notes_v20.png");
 }
 
 function drawBandPostNote()
@@ -50,7 +50,7 @@ function drawBandPostNote()
 
 function drawPhotosPostNote()
 {
-    drawPostNote( "photospostcard", ["Photos"], 4.5, "sticky-notes_v7.png");
+    drawPostNote( "photospostcard", ["Photos"], 4.5, "sticky-notes_v21.png");
 }
 
 function drawBlogPostNote()
