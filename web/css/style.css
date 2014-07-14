@@ -206,6 +206,11 @@ body {
   right: 3%;
 }
 
+#newspostcard {
+  top: 120%;
+  left: 23%;
+}
+
 #aboutpostcard {
   top: 130%;
   right: 12%;
@@ -234,7 +239,7 @@ body {
     top: 0;
   }
 
-  #musicpostcard {
+  #contactuspostcard {
     top: 80%;
     right: 10%;
   }
@@ -260,7 +265,7 @@ body {
     margin-left: 2.5%;
   }
 
-  #contactuspostcard {
+  #newspostcard {
     top: 180%;
     left: 10%;
   }
@@ -318,11 +323,6 @@ div.img a:hover img {
   border-radius: 50%;
   margin: 10px;
   border-style: outset;
-}
-
-#newspostcard {
-  top: 120%;
-  left: 23%;
 }
 
 .newsData {
