@@ -68,7 +68,14 @@ a.imageLink {
   padding-left: 3px;
 }
 
-.pageText, .title, .photosPage, .bandMemberEntry, .aboutPageText, .pageHeader {
+.pageText, .title, .photosPage, .aboutPageText, .pageHeader {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.bandMemberEntry {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
