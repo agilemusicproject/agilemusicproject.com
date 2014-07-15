@@ -24,33 +24,42 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'attr' => array('placeholder' => 'Last Name'),
                 'label_attr' => array('class' => 'formLabel'),
             ))
-            ->add('roles', 'text', array('constraints' => new Assert\NotBlank(),
-                                         'label' => false,
-                                         'attr' => array('placeholder' => 'Roles'),
-                                         'label_attr' => array('class' => 'formLabel'),
+            ->add('roles', 'text', array(
+                'constraints' => new Assert\NotBlank(),
+                'label' => false,
+                'attr' => array('placeholder' => 'Roles'),
+                'label_attr' => array('class' => 'formLabel'),
+            ))
+            ->add('photo_url', 'text', array(
+                'required' => false,
+                'label' => false,
+                'attr' => array('placeholder' => 'Enter image url'),
+                'label_attr' => array('class' => 'formLabel'),
             ));
         if ($isUpdateForm) {
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
-                                       'choices' => array('photo_nothing' => 'Do Nothing',
-                                                          'photo_change' => 'New Photo',
-                                                          'photo_delete' => 'Delete Photo'),
-                                       'expanded' => false,
-                                       'label' => 'Photo',
-                                       'label_attr' => array('class' => 'formLabel'),
+                    'choices' => array('photo_nothing' => 'Do Nothing',
+                                       'photo_change' => 'New Photo',
+                                       'photo_delete' => 'Delete Photo'),
+                    'expanded' => false,
+                    'label' => 'Photo',
+                    'label_attr' => array('class' => 'formLabel'),
                 ));
         }
 
         $this->formBuilder
-            ->add('photo', 'file', array('required' => false,
-                                         'label' => $isUpdateForm ? false : 'Photo',
-                                         'label_attr' => array('class' => 'formLabel'),
-                                         'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),
+            ->add('photo', 'file', array(
+                'required' => false,
+                'label' => $isUpdateForm ? false : 'Photo',
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),
             ))
-            ->add('bio', 'textarea', array('label' => false,
-                                           'label_attr' => array('class' => 'formLabel'),
-                                           'attr' => array('placeholder' => 'Bio'),
-                                           'required' => false,
+            ->add('bio', 'textarea', array(
+                'label' => false,
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('placeholder' => 'Bio'),
+                'required' => false,
             ))
             ->add('submit', 'submit');
 
