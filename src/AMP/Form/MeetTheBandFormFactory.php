@@ -29,19 +29,24 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label' => false,
                 'attr' => array('placeholder' => 'Roles'),
                 'label_attr' => array('class' => 'formLabel'),
-            ))
-            ->add('photo_url', 'text', array(
-                'required' => false,
-                'label' => false,
-                'attr' => array('placeholder' => 'Enter image url'),
-                'label_attr' => array('class' => 'formLabel'),
             ));
         if ($isUpdateForm) {
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
                     'choices' => array('photo_nothing' => 'Do Nothing',
-                                       'photo_change' => 'New Photo',
+                                       'photo_file' => 'Upload file',
+                                       'photo_url' => 'Upload from url',
                                        'photo_delete' => 'Delete Photo'),
+                    'expanded' => false,
+                    'label' => 'Photo',
+                    'label_attr' => array('class' => 'formLabel'),
+                ));
+        } else {
+            $this->formBuilder
+                ->add('photo_actions', 'choice', array(
+                    'choices' => array('photo_nothing' => 'Add Nothing',
+                                       'photo_file' => 'Upload file',
+                                       'photo_url' => 'Upload from url'),
                     'expanded' => false,
                     'label' => 'Photo',
                     'label_attr' => array('class' => 'formLabel'),
@@ -51,9 +56,15 @@ class MeetTheBandFormFactory extends BaseFormFactory
         $this->formBuilder
             ->add('photo', 'file', array(
                 'required' => false,
-                'label' => $isUpdateForm ? false : 'Photo',
+                'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),
+                'attr' => array('style' => 'display: none'),
+            ))
+            ->add('photo_url', 'text', array(
+                'required' => false,
+                'label' => false,
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
             ))
             ->add('bio', 'textarea', array(
                 'label' => false,
