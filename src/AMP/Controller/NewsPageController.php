@@ -46,7 +46,7 @@ class NewsPageController implements ControllerProviderInterface
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
                                                               'title' => 'Add',
                                                               'page' => 'News',
-                                                              'elementTitle' => 'news'));
+                                                              'route' => 'news'));
     }
 
     private function editAction(Request $request, Application $app, $id)
@@ -61,6 +61,6 @@ class NewsPageController implements ControllerProviderInterface
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
                                                               'title' => 'Edit',
                                                               'page' => 'News',
-                                                              'elementTitle' => 'news'));
+                                                              'route' => 'news'));
     }
 }
