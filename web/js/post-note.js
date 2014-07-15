@@ -35,7 +35,7 @@ function drawIndexPage()
 
 function drawMusicPostNote()
 {
-    drawPostNote( "musicpostcard", ["Our Music"], -10, "sticky-notes_v23.png"); //16 is brighter
+    drawPostNote( "musicpostcard", ["Our Music"], -10, "sticky-notes_v16.png");
 }
 
 function drawAgilePostNote()
@@ -45,7 +45,7 @@ function drawAgilePostNote()
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v12.png");
+    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v23.png");
 }
 
 function drawPhotosPostNote()
