@@ -45,7 +45,7 @@ function drawAgilePostNote()
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v23.png");
+    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v23.png"); //old version is 12
 }
 
 function drawPhotosPostNote()
