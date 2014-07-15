@@ -21,15 +21,18 @@ class UploadManager
 
     public function uploadPhoto($file)
     {
-        var_dump($file);
-        $imageUrl = imagecreatefromstring(file_get_contents($file));
-        var_dump($imageUrl);
-        die();
         $filename = $this->upload($file);
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
         }
         $this->createThumbnail($filename, $this->thumbnailWidth);
+        return $filename;
+    }
+
+    public function uploadPhotoFromUrl($file)
+    {
+        $filename = basename($file);
+        file_put_contents("$this->uploadDirectory/$filename",file_get_contents($file));
         return $filename;
     }
 

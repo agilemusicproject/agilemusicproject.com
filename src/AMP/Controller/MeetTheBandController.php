@@ -51,7 +51,7 @@ class MeetTheBandController implements ControllerProviderInterface
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             }
             if (!is_null($formData['photo_url'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo_url']);
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoFromUrl($formData['photo_url']);
             }
             $app['dao.bandMembers']->add($formData);
             return $app->redirect('/meettheband');
