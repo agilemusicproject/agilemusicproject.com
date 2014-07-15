@@ -50,7 +50,7 @@ class MeetTheBandController implements ControllerProviderInterface
             if (!is_null($formData['photo'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             }
-            if (!is_null($formData['photo_url'])) {
+            elseif (!is_null($formData['photo_url'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoFromUrl($formData['photo_url']);
             }
             $app['dao.bandMembers']->add($formData);
@@ -84,6 +84,17 @@ class MeetTheBandController implements ControllerProviderInterface
             } elseif ($formData['photo_actions'] == 'photo_nothing') {
                 $data['photo'] = null;
                 $formData['photo_filename'] = $original_filename;
+            } else {
+                if (!is_null($original_filename)) {
+                    $app['photoUploadManager']->deleteFile($original_filename);
+                    $app['photoUploadManager']->deleteThumbnail($original_filename);
+                }
+                if (!is_null($formData['photo'])) {
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+                }
+                elseif (!is_null($formData['photo_url'])) {
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoFromUrl($formData['photo_url']);
+                }
             }
             $app['dao.bandMembers']->update($id, $formData);
             return $app->redirect('/meettheband');
