@@ -33,6 +33,10 @@ class UploadManager
     {
         $filename = basename($file);
         file_put_contents("$this->uploadDirectory/$filename",file_get_contents($file));
+        if (!file_exists($this->getThumbnailDirectory())) {
+            mkdir($this->getThumbnailDirectory());
+        }
+        $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
 
