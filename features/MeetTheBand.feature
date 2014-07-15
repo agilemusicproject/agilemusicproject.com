@@ -20,7 +20,8 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_last_name" with "Jackson"
     And I fill in "form_roles" with "Super Cop"
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
-    And I should not see an "#form_photo_actions" element
+    And I should see an "#form_photo_actions" element
+    And I select "Upload File" from "form_photo_actions"
     And I attach the file "download.jpg" to "form_photo"
     And I press "Submit"
     Then I should be on "/meettheband/"
@@ -57,9 +58,9 @@ Feature: AMP Web Site MeetTheBand Page
     And the "form_last_name" field should contain "Baggins"
     And the "form_roles" field should contain "Bravest Little Hobbit of Them All"
     And I fill in "form_roles" with "Professional Thief"
-    And I select "New Photo" from "form_photo_actions"
-    Then I should see an "#form_photo" element
-    And I attach the file "download.jpg" to "form_photo"
+    And I select "Upload from URL" from "form_photo_actions"
+    Then I should see an "#form_photo_url" element
+    And I fill in "form_photo_url" with "http://s2.hubimg.com/u/1906243_f260.jpg"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
@@ -79,7 +80,34 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
     And I should see an ".defaultBioPhoto" element
+    When I go to "/meettheband/update/2"
+    Then I select "Upload File" from "form_photo_actions"
+    And I attach the file "download.jpg" to "form_photo"
+    And I press "Submit"
+    Then I should be on "/meettheband/"
+    And I should see "Bilbo Baggins"
+    And I should see "Professional Thief"
+    And I should see an ".bioPhoto" element
     And I press "Delete"
+    When I go to "/meettheband/add"
+    And I fill in "form_first_name" with "Stewie"
+    And I fill in "form_last_name" with "Griffin"
+    And I fill in "form_roles" with "Innocent toddler"
+    And I fill in "form_bio" with "A young lad with an obsession for violence and world domination"
+    And I should see an "#form_photo_actions" element
+    And I select "Upload from URL" from "form_photo_actions"
+    Then I should see an "#form_photo_url" element
+    And I fill in "form_photo_url" with "http://s2.hubimg.com/u/1906243_f260.jpg"
+    And I press "Submit"
+    Then I should be on "/meettheband/"
+    And I should see an ".addButton" element
+    And I should see an ".editButton" element
+    And I should see an ".deleteButton" element
+    And I should see "Stewie Griffin"
+    And I should see "Innocent toddler"
+    And I should see "A young lad with an obsession for violence and world domination"
+    And I should see an ".bioPhoto" element
+    Then I press "Delete"
     Then I should see 0 ".bandMemberEntry" elements
     When I follow "Logout"
     Then I should see "Login"

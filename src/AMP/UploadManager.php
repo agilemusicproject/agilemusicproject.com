@@ -29,10 +29,10 @@ class UploadManager
         return $filename;
     }
 
-    public function uploadPhotoFromUrl($file)
+    public function uploadPhotoUrl($file)
     {
         $filename = basename($file);
-        file_put_contents("$this->uploadDirectory/$filename",file_get_contents($file));
+        file_put_contents("$this->uploadDirectory/$filename", file_get_contents($file));
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
         }

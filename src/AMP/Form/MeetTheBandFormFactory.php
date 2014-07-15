@@ -34,8 +34,8 @@ class MeetTheBandFormFactory extends BaseFormFactory
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
                     'choices' => array('photo_nothing' => 'Do Nothing',
-                                       'photo_file' => 'Upload file',
-                                       'photo_url' => 'Upload from url',
+                                       'photo_file' => 'Upload File',
+                                       'photo_url' => 'Upload from URL',
                                        'photo_delete' => 'Delete Photo'),
                     'expanded' => false,
                     'label' => 'Photo',
@@ -45,8 +45,8 @@ class MeetTheBandFormFactory extends BaseFormFactory
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
                     'choices' => array('photo_nothing' => 'Add Nothing',
-                                       'photo_file' => 'Upload file',
-                                       'photo_url' => 'Upload from url'),
+                                       'photo_file' => 'Upload File',
+                                       'photo_url' => 'Upload from URL'),
                     'expanded' => false,
                     'label' => 'Photo',
                     'label_attr' => array('class' => 'formLabel'),
