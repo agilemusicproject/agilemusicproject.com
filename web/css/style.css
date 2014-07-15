@@ -225,8 +225,8 @@ body {
 }
 
 #musicpostcard {
-  top: 30%;
-  right: 3%;
+  top: 110%;
+  left: 40%;
 }
 
 #agilepostcard {
@@ -250,6 +250,11 @@ body {
 }
 
 #contactuspostcard {
+  top: 30%;
+  right: 3%;
+}
+
+#newspostcard {
   top: 120%;
   left: 23%;
 }
@@ -282,7 +287,7 @@ body {
     top: 0;
   }
 
-  #musicpostcard {
+  #contactuspostcard {
     top: 80%;
     right: 10%;
   }
@@ -308,7 +313,7 @@ body {
     margin-left: 2.5%;
   }
 
-  #contactuspostcard {
+  #newspostcard {
     top: 180%;
     left: 10%;
   }
@@ -366,11 +371,6 @@ div.img a:hover img {
   border-radius: 50%;
   margin: 10px;
   border-style: outset;
-}
-
-#newspostcard {
-  top: 110%;
-  left: 40%;
 }
 
 .newsData {
