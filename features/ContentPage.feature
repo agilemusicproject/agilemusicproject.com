@@ -36,7 +36,7 @@ Feature: AMP Web Site Content Pages
       And I fill in "_password" with "foo"
       And I press "Login"
       Then I should be on "/<page>/edit/1"
-      And I should see an ".cancel_Button" element
+      And I should see an ".cancel_button" element
       When I press "Cancel"
       Then I should be on "/<page>/"
       When I go to "/<page>/edit/1"
@@ -50,7 +50,7 @@ Feature: AMP Web Site Content Pages
       When I press "Delete"
       Then I should see 0 ".<page>PageText" elements
       When I go to "/<page>/add"
-      Then I should see an ".cancel_Button" element
+      Then I should see an ".cancel_button" element
       When I press "Cancel"
       Then I should be on "/<page>/"
       When I follow "Logout"
