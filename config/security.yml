@@ -12,7 +12,7 @@ security.access_rules:
     - ^/meettheband/add
     - ROLE_ADMIN
   -
-    - ^/meettheband/update
+    - ^/meettheband/edit
     - ROLE_ADMIN
   -
     - ^/admin
