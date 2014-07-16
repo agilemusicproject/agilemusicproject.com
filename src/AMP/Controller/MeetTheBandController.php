@@ -20,7 +20,7 @@ class MeetTheBandController implements ControllerProviderInterface
             return $this->addAction($request, $app);
         });
 
-        $controllers->match('/update/{id}', function ($id, Request $request) use ($app) {
+        $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
             return $this->editAction($request, $app, $id);
         });
 

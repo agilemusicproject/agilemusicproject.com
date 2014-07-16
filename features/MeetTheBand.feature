@@ -49,12 +49,12 @@ Feature: AMP Web Site MeetTheBand Page
     Then I should not see an ".addButton" element
     And I should not see an ".editButton" element
     And I should not see an ".deleteButton" element
-    When I go to "/meettheband/update/2"
+    When I go to "/meettheband/edit/2"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
     And I fill in "_password" with "foo"
     And I press "Login"
-    Then I should be on "/meettheband/update/2"
+    Then I should be on "/meettheband/edit/2"
     And the "form_first_name" field should contain "Bilbo"
     And the "form_last_name" field should contain "Baggins"
     And the "form_roles" field should contain "Bravest Little Hobbit of Them All"
@@ -68,21 +68,21 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
     And I should see an ".bioPhoto" element
-    When I go to "/meettheband/update/2"
+    When I go to "/meettheband/edit/2"
     Then I select "Do Nothing" from "form_photo_actions"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
     And I should see an ".bioPhoto" element
-    When I go to "/meettheband/update/2"
+    When I go to "/meettheband/edit/2"
     Then I select "Delete Photo" from "form_photo_actions"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Professional Thief"
     And I should see an ".defaultBioPhoto" element
-    When I go to "/meettheband/update/2"
+    When I go to "/meettheband/edit/2"
     Then I select "Upload File" from "form_photo_actions"
     And I attach the file "download.jpg" to "form_photo"
     And I press "Submit"
