@@ -42,8 +42,8 @@ if( !defined( 'ABSPATH' ) ) {
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 		
 		<script type="text/javascript" src="/js/post-note.js"></script>
-
 		<?php wp_head(); ?>
+		<script type="text/javascript" src="/js/img-margin.js"></script>
 	</head>
 	
 <body <?php body_class(); ?> onload="drawBlogPostNote()">
