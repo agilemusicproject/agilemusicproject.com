@@ -12,12 +12,11 @@ class PhotosDAO extends AbstractDAO
 
     public function add(array $data)
     {
-        $filename = $data['photo']->getClientOriginalName();
         try {
             $sql = 'INSERT INTO ' . $this->getTableName() . ' (filename, caption, category)
                     VALUES (:filename, :caption, :category)';
             $stmt = $this->getDb()->prepare($sql);
-            $stmt->bindParam(':filename', $filename);
+            $stmt->bindParam(':filename', $data['filename']);
             $stmt->bindParam(':caption', $data['caption']);
             $stmt->bindParam(':category', $data['category']);
             $stmt->execute();
@@ -25,7 +24,7 @@ class PhotosDAO extends AbstractDAO
             throw new DbException($e->getMessage());
         }
     }
-    
+
     public function get($id)
     {
         try {
@@ -50,7 +49,7 @@ class PhotosDAO extends AbstractDAO
             throw new DbException($e->getMessage());
         }
     }
-    
+
     public function getCategories()
     {
         try {
@@ -62,7 +61,7 @@ class PhotosDAO extends AbstractDAO
             throw new DbException($e->getMessage());
         }
     }
-    
+
     public function update($id, array $data)
     {
         try {

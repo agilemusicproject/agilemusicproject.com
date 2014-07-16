@@ -11,22 +11,22 @@ class PhotosController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
-        
+
         $controllers->match('', function (Request $request) use ($app) {
             return $this->defaultAction($request, $app);
         });
-        
+
         $controllers->match('/add', function (Request $request) use ($app) {
             return $this->addAction($request, $app);
         });
-        
+
         $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
             return $this->editAction($request, $app, $id);
         });
-        
+
         return $controllers;
     }
-    
+
     private function defaultAction(Request $request, Application $app)
     {
         if ($request->isMethod('POST')) {
@@ -39,21 +39,25 @@ class PhotosController implements ControllerProviderInterface
         $categories = $app['dao.photos']->getCategories();
         return $app['twig']->render('photos.twig', array('results' => $results, 'categories' => $categories));
     }
-    
+
     private function addAction(Request $request, Application $app)
     {
         $form = $app['forms.photosAdd'];
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            if (!is_null($formData['photo'])) {
+                $formData['filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            } elseif (!is_null($formData['photo_url'])) {
+                $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+            }
             $app['dao.photos']->add($formData);
             return $app->redirect('/photos');
         }
         return $app['twig']->render('photosEdit.twig', array('form' => $form->createView(),
                                                              'title' => 'Add'));
     }
-    
+
     private function editAction(Request $request, Application $app, $id)
     {
         $form = $app['forms.photosEdit'];
