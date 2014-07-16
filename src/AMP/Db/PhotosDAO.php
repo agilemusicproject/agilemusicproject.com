@@ -12,6 +12,9 @@ class PhotosDAO extends AbstractDAO
 
     public function add(array $data)
     {
+        if (is_null($data['category'])) {
+            $data['category'] = 'Uncategorized';
+        }
         try {
             $sql = 'INSERT INTO ' . $this->getTableName() . ' (filename, caption, category)
                     VALUES (:filename, :caption, :category)';

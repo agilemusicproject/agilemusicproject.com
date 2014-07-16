@@ -10,7 +10,7 @@ class PhotosFormFactory extends BaseFormFactory
     {
         $this->formBuilder = $formService->createBuilder('form');
         if (!$isEditForm) {
-           $this->formBuilder
+            $this->formBuilder
                 ->add('photo_actions', 'choice', array(
                     'choices' => array('photo_file' => 'Upload File',
                                        'photo_url' => 'Upload from URL'),
@@ -18,18 +18,18 @@ class PhotosFormFactory extends BaseFormFactory
                     'label' => 'Photo',
                     'label_attr' => array('class' => 'formLabel'),
                 ))
-               ->add('photo', 'file', array(
-                'required' => false,
-                'label' => false,
-                'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('style' => 'display: display'),
-            ))
-            ->add('photo_url', 'text', array(
-                'required' => false,
-                'label' => false,
-                'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
-            ));
+                ->add('photo', 'file', array(
+                    'required' => false,
+                    'label' => false,
+                    'label_attr' => array('class' => 'formLabel'),
+                    'attr' => array('style' => 'display: display'),
+                ))
+                ->add('photo_url', 'text', array(
+                    'required' => false,
+                    'label' => false,
+                    'label_attr' => array('class' => 'formLabel'),
+                    'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
+                ));
         }
         $this->formBuilder
 

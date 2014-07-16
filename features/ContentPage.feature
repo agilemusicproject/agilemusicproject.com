@@ -17,6 +17,7 @@ Feature: AMP Web Site Content Pages
       Then I should be on "/<page>/add"
       And I should see a "form" element
       When I fill in "form_content" with "Test content"
+      Then I should see an ".cancel_button" element
       And I press "Submit"
       Then I should be on "/<page>/"
       And I should see "Test content"
@@ -30,16 +31,13 @@ Feature: AMP Web Site Content Pages
       And I should not see an ".addButton" element
       And I should not see an ".editButton" element
       And I should not see an ".deleteButton" element
-      When I go to "<page>/edit/1"
+      When I go to "/<page>/edit/1"
       Then I should be on "/login"
       When I fill in "_username" with "admin"
       And I fill in "_password" with "foo"
       And I press "Login"
       Then I should be on "/<page>/edit/1"
       And I should see an ".cancel_button" element
-      When I press "Cancel"
-      Then I should be on "/<page>/"
-      When I go to "/<page>/edit/1"
       And I fill in "form_content" with "Edited test content"
       And I press "Submit"
       Then I should be on "/<page>/"
@@ -49,10 +47,6 @@ Feature: AMP Web Site Content Pages
       And I should see an ".deleteButton" element
       When I press "Delete"
       Then I should see 0 ".<page>PageText" elements
-      When I go to "/<page>/add"
-      Then I should see an ".cancel_button" element
-      When I press "Cancel"
-      Then I should be on "/<page>/"
       When I follow "Logout"
       Then I should see "Login"
 

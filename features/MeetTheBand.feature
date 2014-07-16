@@ -20,6 +20,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I fill in "form_last_name" with "Jackson"
     And I fill in "form_roles" with "Super Cop"
     And I fill in "form_bio" with "A celebrated lieutenant in the police force"
+    And I should see an ".cancel_button" element
     And I should see an "#form_photo_actions" element
     And I select "Upload File" from "form_photo_actions"
     And I attach the file "download.jpg" to "form_photo"
@@ -57,6 +58,7 @@ Feature: AMP Web Site MeetTheBand Page
     And the "form_first_name" field should contain "Bilbo"
     And the "form_last_name" field should contain "Baggins"
     And the "form_roles" field should contain "Bravest Little Hobbit of Them All"
+    And I should see an ".cancel_button" element
     And I fill in "form_roles" with "Professional Thief"
     And I select "Upload from URL" from "form_photo_actions"
     Then I should see an "#form_photo_url" element

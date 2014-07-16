@@ -16,6 +16,7 @@ Feature: AMP Web Site Music Page
     Then I should be on "/music/add"
     And I should see a "form" element
     When I fill in "form_embed" with "<iframe>test</iframe>"
+    And I should see an ".cancel_button" element
     And I press "Submit"
     Then I should be on "/music/"
     And I should see an "#musicAdd" element

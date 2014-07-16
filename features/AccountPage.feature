@@ -13,6 +13,7 @@ Feature: AMP Web Site Account Page
     When I fill in "form_oldPassword" with "<password>"
     And I fill in "form_newPassword_first" with "<newPassword>"
     And I fill in "form_newPassword_second" with "<newPassword>"
+    And I should see an ".cancel_button" element
     And I press "Update"
     Then I should be on "/"
     When I follow "Logout"
