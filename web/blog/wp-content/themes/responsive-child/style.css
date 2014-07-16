@@ -27,6 +27,16 @@ body {
   margin: 1.45em 0;
 }
 
+.post-entry img.alignnone {
+  margin-top: 0;
+}
+
+.post-body div.navigation {
+  margin-top: 0;
+  line-height: 20px;
+  height: 20px;
+}
+
 .post-body {
   padding-right: 0;
   padding-top: 4px;
