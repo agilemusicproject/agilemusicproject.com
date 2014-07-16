@@ -24,7 +24,7 @@ body {
 }
 
 .post-entry > p {
-  margin: 1.45em 0;
+  margin: 20px 0;
 }
 
 .post-entry img.alignnone {
@@ -35,6 +35,10 @@ body {
   margin-top: 0;
   line-height: 20px;
   height: 20px;
+}
+
+.post-body div.post-edit {
+  margin: 20px 0;
 }
 
 .post-body {
