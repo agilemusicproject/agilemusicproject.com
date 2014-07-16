@@ -2,6 +2,10 @@
 
 {% block onload %} drawPhotosPostNote() {% endblock %}
 
+{% block javascript %}
+  <script src="/js/update-form.js"></script>
+{% endblock %}
+
 {% block title %} Photos {% endblock %}
 
 {% block postit %}<canvas id="photospostcard" class="postitheader">About</canvas>{% endblock %}

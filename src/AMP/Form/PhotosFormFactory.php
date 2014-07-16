@@ -17,21 +17,22 @@ class PhotosFormFactory extends BaseFormFactory
                     'expanded' => false,
                     'label' => 'Photo',
                     'label_attr' => array('class' => 'formLabel'),
-                ));
-        }
-        $this->formBuilder
-            ->add('photo', 'file', array(
+                ))
+               ->add('photo', 'file', array(
                 'required' => false,
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('style' => 'display: none'),
+                'attr' => array('style' => 'display: display'),
             ))
             ->add('photo_url', 'text', array(
                 'required' => false,
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
-            ))
+            ));
+        }
+        $this->formBuilder
+
             ->add('caption', 'text', array(
                 'required' => false,
                 'attr' => array('placeholder' => 'Caption'),

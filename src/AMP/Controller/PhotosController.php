@@ -50,6 +50,8 @@ class PhotosController implements ControllerProviderInterface
                 $formData['filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             } elseif (!is_null($formData['photo_url'])) {
                 $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+            } else {
+                return $app->redirect('/photos');
             }
             $app['dao.photos']->add($formData);
             return $app->redirect('/photos');
