@@ -22,7 +22,7 @@ class ContactUsController implements ControllerProviderInterface
 
     private function defaultAction(Request $request, Application $app)
     {
-        $notification = null;
+        $notification = $request->get('notification');
         $formFactory = new \AMP\Form\ContactUsFormFactory($app['form.factory']);
         $form = $formFactory->getForm();
 
@@ -37,11 +37,12 @@ class ContactUsController implements ControllerProviderInterface
                       ->setSender($formDefault['email']);
                 if ($email->send()) {
                     $notification = "Your message was sent successfully.";
+                    return $app->redirect('/contactus/?notification=Your message was sent successfully.');
                 } else {
                     $notification = "Your message was not sent. Please try again.";
                 }
             } else {
-                $formSubmit = "The form is invalid";
+                $notification = "The form is invalid";
             }
         }
         return $app['twig']->render(
