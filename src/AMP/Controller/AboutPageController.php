@@ -47,7 +47,7 @@ class AboutPageController implements ControllerProviderInterface
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
                                                               'title' => 'Add',
                                                               'page' => 'About',
-                                                              'elementTitle' => 'about'));
+                                                              'route' => 'about'));
     }
     
     private function editAction(Request $request, Application $app, $id)
@@ -62,6 +62,6 @@ class AboutPageController implements ControllerProviderInterface
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
                                                               'title' => 'Edit',
                                                               'page' => 'About',
-                                                              'elementTitle' => 'about'));
+                                                              'route' => 'about'));
     }
 }

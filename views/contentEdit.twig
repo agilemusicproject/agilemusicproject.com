@@ -9,16 +9,19 @@
 
 {% block title %} {{ page }} {% endblock %}
 
-{% block postit %}<canvas id="{{ elementTitle }}postcard" class="postitheader">{{ page }}</canvas>{% endblock %}
+{% block postit %}<canvas id="{{ route }}postcard" class="postitheader">{{ page }}</canvas>{% endblock %}
 
 {% block header %} {{ title }} Content {%endblock%}
 
 {% block content %}
-<div id="{{ elementTitle }}EditForm">
+<div id="{{ route }}EditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
+  </form>
+  <form class="cancel_buttom">
+    <input onclick="location.href='/{{ route }}/'" type="button" value="Cancel"/>
   </form>
   <script>
     CKEDITOR.replace('form_content');
