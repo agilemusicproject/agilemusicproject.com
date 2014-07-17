@@ -22,27 +22,24 @@ class ContactUsController implements ControllerProviderInterface
 
     private function defaultAction(Request $request, Application $app)
     {
-        $notification = $request->get('notification');
-        $formFactory = new \AMP\Form\ContactUsFormFactory($app['form.factory']);
-        $form = $formFactory->getForm();
-
+        $notification = null;
+        $form = $app['forms.contactUs'];
         if ($request->isMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
-                $formDefault = $form->getData();
-                $email = new \AMP\Mail();
+                $formData = $form->getData();
+                $email = $app['amp.email'];
                 $email->setRecipient('info@agilemusicproject.com')
-                      ->setSubject($formDefault['subject'])
-                      ->setMessage($formDefault['message'], $formDefault['name'])
-                      ->setSender($formDefault['email']);
+                      ->setSubject($formData['subject'])
+                      ->setMessage($formData['message'], $formData['name'])
+                      ->setSender($formData['email']);
                 if ($email->send()) {
-                    $notification = "Your message was sent successfully.";
-                    return $app->redirect('/contactus/?notification=Your message was sent successfully.');
+                    $notification = true;
                 } else {
-                    $notification = "Your message was not sent. Please try again.";
+                    $notification = false;
                 }
             } else {
-                $notification = "The form is invalid";
+                $notification = false;
             }
         }
         return $app['twig']->render(
