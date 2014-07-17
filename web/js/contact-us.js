@@ -1,7 +1,8 @@
 $(document).ready(function() {
-if ( $('#emailNotification').attr('value') == "1" ) {
-      console.log('true');
-      $("#contactForm")[0].reset();
+    if ( $('#emailNotification').attr('value') == "1" ) {
+        $(':input','#contactForm')
+        .not(':button, :submit')
+        .val('');
     }
-console.log('false');
+    console.log('false');
 });
