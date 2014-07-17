@@ -4,5 +4,4 @@ $(document).ready(function() {
         .not(':submit')
         .val('');
     }
-    console.log('false');
 });
