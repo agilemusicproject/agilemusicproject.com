@@ -14,18 +14,22 @@
 
 {% block content %}
 
-{% if notification == true %}
-  <h1>Your message was sent successfully.</h1>
-{% elseif notification == false %}
-  <h1>We were not able to send your message. Your form may be invalid.</h1>
+<h1 id='emailNotification' value="{{notification}}">
+{% if notification is not null %}
+  {% if notification == true %}
+    Your message was sent successfully.
+  {% elseif notification == false %}
+    We were not able to send your message. Your form may be invalid.
+  {% endif %}
 {% endif %}
+</h1>
 
 <div id="contactBand">
   <p class="pageHeader">Fill out the form below to contact AMP</p>
 </div>
 
-<div id="contactForm">
-  <form class="contactPageText" method="POST" enctype="multipart/form-data">
+<div>
+  <form id="contactForm" class="contactPageText" method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
