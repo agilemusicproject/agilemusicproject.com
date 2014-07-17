@@ -1,5 +1,9 @@
 {% extends "base.twig" %}
 
+{% block javascript %}
+  <script src="/js/contact-us.js"></script>
+{% endblock %}
+
 {% block onload %} drawContactPostNote() {% endblock %}
 
 {% block title %} Contact Us {% endblock %}
@@ -10,8 +14,10 @@
 
 {% block content %}
 
-{% if notification %}
-  <h1>{{ notification }}</h1>
+{% if notification == true %}
+  <h1>Your message was sent successfully.</h1>
+{% elseif notification == false %}
+  <h1>We were not able to send your message. Your form may be invalid.</h1>
 {% endif %}
 
 <div id="contactBand">
