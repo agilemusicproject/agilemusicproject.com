@@ -29,7 +29,7 @@ class AMPServiceProvider
             return new \AMP\Db\PhotosDAO($app['db']);
         };
     }
-    
+
     public function registerForms(Application $app)
     {
         $app['forms.contactUs'] = function () use ($app) {
@@ -71,6 +71,13 @@ class AMPServiceProvider
                 $app['security.encoder.digest']
             );
             return $formFactory->getForm();
+        };
+    }
+
+    public function registerMail(Application $app)
+    {
+        $app['amp.email'] = function () use ($app) {
+            return new \AMP\Mail();
         };
     }
 }
