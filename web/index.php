@@ -61,6 +61,7 @@ $ampServiceProvider = new \AMP\AMPServiceProvider();
 $app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
 $ampServiceProvider->registerDAOs($app);
 $ampServiceProvider->registerForms($app);
+$ampServiceProvider->registerMail($app);
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.twig');
