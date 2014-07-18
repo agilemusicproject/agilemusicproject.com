@@ -7,7 +7,7 @@ Feature: AMP Web Site Music Page
     Given I am on "/music/"
     And I should see 0 ".musicPageText" elements
     And I should not see an "#musicAdd" element
-    And I should not see an "#musicDelete" element
+    And I should not see an ".deleteButton" element
     When I go to "/music/add"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
@@ -21,14 +21,14 @@ Feature: AMP Web Site Music Page
     And I should see an "#musicAdd" element
     And I should see an "iframe" element
     And I should see 3 ".dots" elements
-    And I should see an "#musicDelete" element
+    And I should see an ".deleteButton" element
     When I follow "Logout"
     Then I should be on "/"
     When I go to "/music/"
     Then I should see an "iframe" element
     And I should not see an "#musicAdd" element
     And I should not see an ".dots" element
-    And I should not see an "#musicDelete" element
+    And I should not see an ".deleteButton" element
     When I go to "/music/add"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
@@ -42,7 +42,7 @@ Feature: AMP Web Site Music Page
     And I should see an "#musicAdd" element
     And I should see 2 "iframe" elements
     And I should see 6 ".dots" elements
-    And I should see 2 "#musicDelete" elements
+    And I should see 2 ".deleteButton" elements
     When I press "Delete"
     And I press "OK"
     And I press "Delete"
@@ -51,5 +51,5 @@ Feature: AMP Web Site Music Page
     When I follow "Logout"
     Then I should see "Login"
     And I should not see an "#musicAdd" element
-    And I should not see an "#musicDelete" element
+    And I should not see an ".deleteButton" element
     And I should not see an ".dots" element

@@ -25,7 +25,7 @@
     </form>
     <form method="post" action="/about/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input class="deleteButton" type="submit" value="Delete">
+      <input onclick="alert('Are you sure you want to kill?');" class="deleteButton" type="submit" value="Delete">
     </form>
   {% endif %}
 {% endfor %}
