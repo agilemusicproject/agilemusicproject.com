@@ -26,11 +26,8 @@
     </form>
     <form method="post" action="/news/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input class="deleteButton" type="submit" value="Delete">
+      <input onclick="alert('Are you sure you want to kill?');" class="deleteButton" type="submit" value="Delete">
     </form>
-  <div class="dialogBox">
-    <p>Are you sure you want to kill?</p>
-  </div>
   {% endif %}
 <hr>
 {% endfor %}

@@ -394,6 +394,12 @@ div.img a:hover img {
   padding-left: 30px;
 }
 
-.dialogBox {
-  display: none;
+.alert
+{
+    font-size: 1.3em;
+    padding: 1em;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+    word-wrap: normal;
 }
