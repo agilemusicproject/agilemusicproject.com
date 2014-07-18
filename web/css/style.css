@@ -83,7 +83,6 @@ a.imageLink {
 }
 
 .notecard {
-  background: url(/images/notecard.png) repeat-x 0 46px white;
   padding-right: 0px;
   padding-bottom: 4px;
   padding-left: 10px;
@@ -115,8 +114,14 @@ a.imageLink {
   background-position: 0px 100px;
 }
 
+.notecard p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
 .bandMemberTitle {
   margin-top: 0px;
+  margin-bottom: 17px;
   height: 30px;
   padding-top: 10px;
   padding-left: 10px;
