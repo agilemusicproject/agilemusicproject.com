@@ -51,6 +51,10 @@ Scenario: Manage Photos on Photos page
     And I should see an ".fancyphoto" element
     And I should see "ron swanson"
     Then I press "Delete Photo"
+    And I press "Cancel Delete"
+    Then I should not see an ".confirmButton" element
+    And I should see an ".deleteButton" element
+    When I press "Delete"
     And I press "Confirm Delete"
     And I should see an ".addButton" element
     And I should not see an ".fancyphoto" element

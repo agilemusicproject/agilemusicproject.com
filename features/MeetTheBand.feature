@@ -40,6 +40,10 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bilbo Baggins"
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
+    And I press "Cancel Delete"
+    Then I should not see an ".confirmButton" element
+    And I should see an ".deleteButton" element
+    When I press "Delete"
     And I press "Confirm Delete"
     Then I should not see "Action Jackson"
     When I follow "Logout"
@@ -81,6 +85,10 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Professional Thief"
     And I should see an ".defaultBioPhoto" element
     And I press "Delete"
+    And I press "Cancel Delete"
+    Then I should not see an ".confirmButton" element
+    And I should see an ".deleteButton" element
+    When I press "Delete"
     And I press "Confirm Delete"
     Then I should see 0 ".bandMemberEntry" elements
     When I follow "Logout"
