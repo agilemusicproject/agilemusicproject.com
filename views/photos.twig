@@ -44,10 +44,14 @@
       <form class="edit_caption">
         <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
       </form>
-      <form method="post" action="/photos/">
-        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-        <input onclick="alert('Are you sure you want to kill?');" class="deleteButton" type="submit" value="Delete Photo">
+      <form>
+        <input class="deleteButton" type="button" value="Delete Photo">
       </form>
+    <form class="dialogBox" method="post" action="/photos/">
+      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+      <input class="confirmButton" type="submit" value="Confirm Delete">
+      <input class="cancelButton" type="button" value="Cancel Delete">
+    </form>
     {% endif %}
   </div>
 {% endfor %}

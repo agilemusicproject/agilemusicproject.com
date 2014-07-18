@@ -24,9 +24,13 @@
     <form>
       <input class="editButton" onclick="location.href='/news/edit/{{ row.id }}'" type="button" value="Edit"/>
     </form>
-    <form method="post" action="/news/">
+    <form>
+      <input class="deleteButton" type="button" value="Delete">
+    </form>
+    <form class="dialogBox" method="post" action="/news/">
       <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input onclick="alert('Are you sure you want to kill?');" class="deleteButton" type="submit" value="Delete">
+      <input class="confirmButton" type="submit" value="Confirm Delete">
+      <input class="cancelButton" type="button" value="Cancel Delete">
     </form>
   {% endif %}
 <hr>

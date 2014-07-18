@@ -1,7 +1,10 @@
 $(document).ready(function(){
   $(".deleteButton").click(function(){
-    if (!confirm("Are you sure you want to kill?")){
-      return false;
-    }
+    $('.dialogBox').css("display", "block");
+    $('.deleteButton').css("display", "none");
+  });
+  $(".cancelButton").click(function(){
+    $('.dialogBox').css("display", "none");
+    $('.deleteButton').css("display", "block");
   });
 });
