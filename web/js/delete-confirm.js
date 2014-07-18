@@ -1,7 +1,8 @@
 $(document).ready(function(){
   $(".deleteButton").click(function(){
-    if (!confirm("Are you sure you want to kill?")) {
-      return false;
-    }
+    $( ".dialogBox" ).dialog({
+      buttons: [ { text: "Yes", click: function() { $( this ).dialog( "close" ); } },
+               { text: "No", click: function() { $( this ).dialog( "close" ); return false; } }]
+    });
   });
 });
