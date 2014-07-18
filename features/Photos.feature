@@ -51,6 +51,7 @@ Scenario: Manage Photos on Photos page
     And I should see an ".fancyphoto" element
     And I should see "ron swanson"
     Then I press "Delete Photo"
+    And I press "OK"
     And I should see an ".addButton" element
     And I should not see an ".fancyphoto" element
     And I should not see "ron swanson"

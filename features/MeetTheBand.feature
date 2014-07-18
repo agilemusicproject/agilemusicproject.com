@@ -40,6 +40,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Bilbo Baggins"
     And I should see "Bravest Little Hobbit of Them All"
     When I press "Delete"
+    And I press "OK"
     Then I should not see "Action Jackson"
     When I follow "Logout"
     Then I should be on "/"
@@ -80,6 +81,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see "Professional Thief"
     And I should see an ".defaultBioPhoto" element
     And I press "Delete"
+    And I press "OK"
     Then I should see 0 ".bandMemberEntry" elements
     When I follow "Logout"
     Then I should see "Login"

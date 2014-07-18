@@ -44,7 +44,9 @@ Feature: AMP Web Site Music Page
     And I should see 6 ".dots" elements
     And I should see 2 "#musicDelete" elements
     When I press "Delete"
+    And I press "OK"
     And I press "Delete"
+    And I press "OK"
     Then I should see 0 ".musicPageText" elements
     When I follow "Logout"
     Then I should see "Login"
