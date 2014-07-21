@@ -14,11 +14,11 @@
 
 {% block content %}
 
-<h1 id='emailNotification' value="{{success}}">
 {% if notification %}
+<h1 id='emailNotification' value="{{ success }}">
     {{notification}}
-{% endif %}
 </h1>
+{% endif %}
 
 <div id="contactBand">
   <p class="pageHeader">Fill out the form below to contact AMP</p>

@@ -43,7 +43,7 @@ class ContactUsController implements ControllerProviderInterface
                     $success = false;
                 }
             } else {
-                $sucess = false;
+                $success = false;
             }
         }
         return $app['twig']->render(
