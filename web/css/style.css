@@ -397,7 +397,3 @@ div.img a:hover img {
 .deleteBox .cancelButton, .deleteBox .confirmButton {
   display: none;
 }
-
-.deleteBox .deleteButton {
-  display: block;
-}
