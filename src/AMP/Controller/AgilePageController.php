@@ -46,7 +46,7 @@ class AgilePageController implements ControllerProviderInterface
         }
         return $app['twig']->render('contentEdit.twig', array('form' => $form->createView(),
                                                               'title' => 'Add',
-                                                              'page' => 'About',
+                                                              'page' => 'Agile',
                                                               'route' => 'agile'));
     }
 
