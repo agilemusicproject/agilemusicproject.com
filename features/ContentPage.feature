@@ -45,7 +45,7 @@ Feature: AMP Web Site Content Pages
       And I should see an ".deleteButton" element
       When I press "Delete"
       And I press "Cancel Delete"
-      Then I should not see an ".confirmButton" element
+      Then I should not see an ".dialogBox" element
       And I should see an ".deleteButton" element
       When I press "Delete"
       And I press "Confirm Delete"

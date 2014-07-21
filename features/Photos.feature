@@ -52,7 +52,7 @@ Scenario: Manage Photos on Photos page
     And I should see "ron swanson"
     Then I press "Delete Photo"
     And I press "Cancel Delete"
-    Then I should not see an ".confirmButton" element
+    Then I should not see an ".dialogBox" element
     And I should see an ".deleteButton" element
     When I press "Delete"
     And I press "Confirm Delete"
