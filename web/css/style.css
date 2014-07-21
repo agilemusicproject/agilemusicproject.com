@@ -394,6 +394,10 @@ div.img a:hover img {
   padding-left: 30px;
 }
 
-.dialogBox {
+.deleteBox .cancelButton, .deleteBox .confirmButton {
   display: none;
+}
+
+.deleteBox .deleteButton {
+  display: block;
 }

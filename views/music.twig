@@ -27,11 +27,9 @@
       <div class="dots"></div>
       <div class="dots"></div>
       <div class="dots"></div>
-      <form>
-        <input class="deleteButton" type="button" value="Delete">
-      </form>
-      <form class="dialogBox" method="post" action="/music/">
+      <form class="deleteBox" method="post" action="/music/">
         <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
+        <input class="deleteButton" type="button" value="Delete">
         <input class="confirmButton" type="submit" value="Confirm Delete">
         <input class="cancelButton" type="button" value="Cancel Delete">
       </form>
