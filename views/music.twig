@@ -28,11 +28,9 @@
       <div class="dots"></div>
       <div class="dots"></div>
       <form class="deleteBox" method="post" action="/music/">
-        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-        <input class="deleteButton" type="button" value="Delete">
-        <input class="confirmButton" type="submit" value="Confirm Delete">
-        <input class="cancelButton" type="button" value="Cancel Delete">
-      </form>
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
+    </form>
     </div>
   {% endif %}
     <div {% if is_granted('ROLE_ADMIN') %} class="musicIframe" {% endif %}>{{ row.embed|raw }}</div>

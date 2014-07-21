@@ -393,7 +393,3 @@ div.img a:hover img {
 #musicAdd {
   padding-left: 30px;
 }
-
-.deleteBox .cancelButton, .deleteBox .confirmButton {
-  display: none;
-}

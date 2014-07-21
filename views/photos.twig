@@ -46,9 +46,7 @@
       </form>
       <form class="deleteBox" method="post" action="/photos/">
         <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-        <input class="deleteButton" type="button" value="Delete Photo">
-        <input class="confirmButton" type="submit" value="Confirm Delete">
-        <input class="cancelButton" type="button" value="Cancel Delete">
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete Photo">
       </form>
     {% endif %}
   </div>

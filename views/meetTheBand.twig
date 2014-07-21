@@ -36,11 +36,9 @@
     <input class="editButton" onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
   </form>
   <form class="deleteBox" method="post" action="/meettheband/">
-    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-    <input class="deleteButton" type="button" value="Delete">
-    <input class="confirmButton" type="submit" value="Confirm Delete">
-    <input class="cancelButton" type="button" value="Cancel Delete">
-  </form>
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
+    </form>
 {% endif %}
 {% endfor %}
 {% endblock %}
