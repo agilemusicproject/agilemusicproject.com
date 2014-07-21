@@ -22,6 +22,7 @@ class ContactUsController implements ControllerProviderInterface
     private function defaultAction(Request $request, Application $app)
     {
         $notification = null;
+        $success = null;
         $form = $app['forms.contactUs'];
         if ($request->isMethod('POST')) {
             $form->submit($request);
@@ -33,18 +34,20 @@ class ContactUsController implements ControllerProviderInterface
                       ->setMessage($formData['message'], $formData['name'])
                       ->setSender($formData['email']);
                 if ($email->send()) {
-                    $notification = true;
+                    $notification = 'Your message was sent successfully.';
+                    $success = true;
                 } else {
-                    $notification = false;
+                    $error = error_get_last();
+                    $notification = $error['message'];
+                    $success = false;
                 }
             } else {
-                $notification = false;
+                $success = false;
             }
         }
         return $app['twig']->render(
             'contact.twig',
-            array('form' => $form->createView(),
-                  'notification' => $notification)
+            array('form' => $form->createView(), 'notification' => $notification, 'success' => $success)
         );
     }
 }
