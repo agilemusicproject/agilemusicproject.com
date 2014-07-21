@@ -12,7 +12,6 @@ class ContactUsController implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
-        // magic strings, localization
         $controllers->match('/', function (Request $request) use ($app) {
             return $this->defaultAction($request, $app);
         });
