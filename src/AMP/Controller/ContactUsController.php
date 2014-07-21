@@ -5,7 +5,6 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-// pull function into class method
 class ContactUsController implements ControllerProviderInterface
 {
     public function connect(Application $app)
@@ -22,7 +21,6 @@ class ContactUsController implements ControllerProviderInterface
     private function defaultAction(Request $request, Application $app)
     {
         $notification = null;
-        $success = null;
         $form = $app['forms.contactUs'];
         if ($request->isMethod('POST')) {
             $form->submit($request);
@@ -34,20 +32,17 @@ class ContactUsController implements ControllerProviderInterface
                       ->setMessage($formData['message'], $formData['name'])
                       ->setSender($formData['email']);
                 if ($email->send()) {
-                    $notification = 'Your message was sent successfully.';
-                    $success = true;
+                    $notification = true;
                 } else {
-                    $error = error_get_last();
-                    $notification = $error['message'];
-                    $success = false;
+                    $notification = false;
                 }
             } else {
-                $success = false;
+                $notification = false;
             }
         }
         return $app['twig']->render(
             'contact.twig',
-            array('form' => $form->createView(), 'notification' => $notification, 'success' => $success)
+            array('form' => $form->createView(), 'notification' => $notification)
         );
     }
 }
