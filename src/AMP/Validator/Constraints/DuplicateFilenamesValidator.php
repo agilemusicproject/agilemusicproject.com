@@ -9,9 +9,9 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class DuplicateFilenamesValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate($file, Constraint $constraint)
     {
-        if (file_exists($value)) {
+        if (file_exists(__DIR__ . '/images/photos'.$file->getClientOriginalName())) {
             $this->context->addViolation($constraint->message);
         }
     }
