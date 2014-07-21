@@ -44,10 +44,6 @@ Feature: AMP Web Site Content Pages
       And I should see an ".editButton" element
       And I should see an ".deleteButton" element
       When I press "Delete"
-      And I press "Cancel Delete"
-      Then I should not see an ".dialogBox" element
-      And I should see an ".deleteButton" element
-      When I press "Delete"
       And I press "Confirm Delete"
       Then I should see 0 ".<page>PageText" elements
       When I follow "Logout"
