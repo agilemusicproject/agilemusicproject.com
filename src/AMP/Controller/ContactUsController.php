@@ -46,10 +46,9 @@ class ContactUsController implements ControllerProviderInterface
                 $sucess = false;
             }
         }
-        return $app['twig']->render('contact.twig', array(
-            'form' => $form->createView(),
-            'notification' => $notification,
-            'success' => $success)
+        return $app['twig']->render(
+            'contact.twig',
+            array('form' => $form->createView(), 'notification' => $notification, 'success' => $success)
         );
     }
 }
