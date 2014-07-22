@@ -1,8 +1,10 @@
 {% extends "base.twig" %}
 
 {% block javascript %}
+  <script src="/js/ajaxupload.js" type="text/javascript"></script>
   <script src="/js/ckeditor/ckeditor.js"></script>
   <script src="/js/update-form.js"></script>
+  <script src="/js/preview-photo.js"></script>
 {% endblock %}
 
 {% block onload %} drawBandPostNote() {% endblock %}
