@@ -99,6 +99,6 @@ class MeetTheBandController implements ControllerProviderInterface
             $app['dao.bandMembers']->sortUpdate($request->get('list'));
         }
         $results = $app['dao.bandMembers']->getAll();
-        return $app['twig']->render('meetTheBandSort.twig', array('results' => $results, 'title' => 'Sort'));
+        return $app['twig']->render('meetTheBand.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }
