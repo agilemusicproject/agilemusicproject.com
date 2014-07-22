@@ -60,11 +60,18 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.photosAdd'] = function () use ($app) {
-            $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory']);
+            $formFactory = new \AMP\Form\PhotosFormFactory(
+                $app['form.factory'],
+                $app['photoUploadManager']
+            );
             return $formFactory->getForm();
         };
         $app['forms.photosEdit'] = function () use ($app) {
-            $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory'], true);
+            $formFactory = new \AMP\Form\PhotosFormFactory(
+                $app['form.factory'],
+                null,
+                true
+            );
             return $formFactory->getForm();
         };
         $app['forms.textArea'] = function () use ($app) {
