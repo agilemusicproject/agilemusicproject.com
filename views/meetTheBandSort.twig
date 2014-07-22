@@ -1,0 +1,47 @@
+{% extends "base.twig" %}
+
+{% block onload %} drawBandPostNote() {% endblock %}
+
+{% block title %} Sort the Bios {% endblock %}
+
+{% block javascript %}
+<script src="/js/sort-bios.js"></script>
+{% endblock %}
+
+{% block postit %}<canvas id="meetTheBandpostcard" class="postitheader">Meet the Band</canvas>{% endblock %}
+
+{% block header %}Sort the Bios{% endblock %}
+
+{% block content %}
+{% if is_granted('ROLE_ADMIN') %}
+<ul id="sortBios">
+{% endif %}
+{% for row in results %}
+<li class="bioPagetext" id="bios-{{row.id}}">
+  <div class="dotsSection">
+        <div class="dots"></div>
+        <div class="dots"></div>
+        <div class="dots"></div>
+  </div>
+  <div class="bioWrapper">
+    {% if not (row.photo_filename is null) %}
+    <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
+    {% else %}
+    <img class="defaultBioPhoto" src="/images/question-mark.png" />
+    {% endif %}
+    <div class="notecard">
+      <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
+        {% if not (row.bio is null) %}
+          {{ row.bio|raw }}
+        {% else %}
+          [Redacted]
+        {% endif %}
+    </div>
+  </div>
+  <div class="clearer"></div>
+</li>
+{% endfor %}
+{% if is_granted('ROLE_ADMIN') %}
+</ul>
+{% endif %}
+{% endblock %}
