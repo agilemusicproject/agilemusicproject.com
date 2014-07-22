@@ -9,6 +9,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should not see an ".addButton" element
     And I should not see an ".editButton" element
     And I should not see an ".deleteButton" element
+    And I should not see an ".dots" element
     When I go to "/meettheband/add"
     Then I should be on "/login"
     When I fill in "_username" with "admin"
@@ -27,6 +28,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see an ".addButton" element
     And I should see an ".editButton" element
     And I should see an ".deleteButton" element
+    And I should see 3 ".dots" elements
     And I should see "Action Jackson"
     And I should see "Super Cop"
     And I should see "A celebrated lieutenant in the police force"
@@ -39,6 +41,7 @@ Feature: AMP Web Site MeetTheBand Page
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
     And I should see "Bravest Little Hobbit of Them All"
+    And I should see 6 ".dots" elements
     When I press "Delete"
     Then I should not see "Action Jackson"
     When I follow "Logout"

@@ -397,3 +397,7 @@ div.img a:hover img {
 .bioPagetext {
   list-style-type: none;
 }
+
+#sortBios {
+  padding-left: 0px;
+}
