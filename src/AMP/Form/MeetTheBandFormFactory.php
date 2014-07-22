@@ -45,7 +45,8 @@ class MeetTheBandFormFactory extends BaseFormFactory
         $this->formBuilder
             ->add('photo', 'file', array('required' => false,
                                          'constraints' => new DuplicateFilenames(
-                                             array('uploadManager' => $uploadManager)),
+                                             array('uploadManager' => $uploadManager)
+                                         ),
                                          'label' => $isUpdateForm ? false : 'Photo',
                                          'label_attr' => array('class' => 'formLabel'),
                                          'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),

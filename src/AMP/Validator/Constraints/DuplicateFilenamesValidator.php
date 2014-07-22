@@ -11,9 +11,11 @@ class DuplicateFilenamesValidator extends ConstraintValidator
 {
     public function validate($file, Constraint $constraint)
     {
-        $filename = $constraint->uploadManager->getFilePath($file->getClientOriginalName());
-        if (file_exists($filename)) {
-            $this->context->addViolation($constraint->message);
+        if (!is_null($file)) {
+            $filename = $constraint->uploadManager->getFilePath($file->getClientOriginalName());
+            if (file_exists($filename)) {
+                $this->context->addViolation($constraint->message);
+            }
         }
     }
 }
