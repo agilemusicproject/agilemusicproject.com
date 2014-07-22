@@ -9,4 +9,5 @@ use \Symfony\Component\Validator\Constraint;
 class DuplicateFilenames extends Constraint
 {
     public $message = 'This filename is already being used. Please choose another.';
+    public $uploadManager;
 }

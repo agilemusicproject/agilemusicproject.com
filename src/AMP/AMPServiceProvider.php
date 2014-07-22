@@ -37,11 +37,18 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.meetTheBandAdd'] = function () use ($app) {
-            $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory']);
+            $formFactory = new \AMP\Form\MeetTheBandFormFactory(
+                $app['form.factory'],
+                $app['photoUploadManager']
+            );
             return $formFactory->getForm();
         };
         $app['forms.meetTheBandEdit'] = function () use ($app) {
-            $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory'], true);
+            $formFactory = new \AMP\Form\MeetTheBandFormFactory(
+                $app['form.factory'],
+                $app['photoUploadManager'],
+                true
+            );
             return $formFactory->getForm();
         };
         $app['forms.musicPage'] = function () use ($app) {
