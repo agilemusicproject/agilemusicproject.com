@@ -1,7 +1,6 @@
 {% extends "base.twig" %}
 
 {% block javascript %}
-  <script src="/js/ajaxupload.js" type="text/javascript"></script>
   <script src="/js/ckeditor/ckeditor.js"></script>
   <script src="/js/update-form.js"></script>
   <script src="/js/preview-photo.js"></script>
@@ -22,6 +21,7 @@
     {{ form_widget(form) }}
     {{ form_rest(form) }}
   </form>
+  <img id="preview" src="#" alt="preview image" />
   <form class="cancel_buttom">
     <input onclick="location.href='/meettheband/'" type="button" value="Cancel"/>
   </form>
