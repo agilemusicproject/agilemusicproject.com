@@ -398,10 +398,16 @@ div.img a:hover img {
   padding-left: 0px;
 }
 
-.preview {
+#previewBioPhoto {
   display: none;
   width: auto;
   height: 120px;
+}
+
+#previewPhotoPage {
+  display: none;
+  width: auto;
+  height: 300px;
 }
 
 #meetTheBandUpdateForm {
@@ -412,4 +418,8 @@ div.img a:hover img {
   position: absolute;
   top: 0px;
   right: 100px;
+}
+
+#photoEditForm {
+  position: relative;
 }
