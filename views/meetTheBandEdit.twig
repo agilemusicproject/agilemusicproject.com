@@ -18,7 +18,16 @@
 <div id="meetTheBandUpdateForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.first_name) }}
+    {{ form_row(form.last_name) }}
+    {{ form_row(form.roles) }}
+    {% if form.photo_actions is not null %}
+      {{ form_row(form.photo_actions) }}
+    {% endif %}
+    {{ form_row(form.photo) }}
+    <div class="previewContainer">
+      <img class="preview" src="#" alt="preview image"/>
+    </div>
     {{ form_rest(form) }}
   </form>
   <form class="cancel_buttom">
@@ -27,7 +36,6 @@
   <script>
     CKEDITOR.replace('form_bio');
   </script>
-  <img id="preview" src="#" alt="preview image"/>
 </div>
 {% endblock %}
 

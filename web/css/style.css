@@ -402,8 +402,18 @@ div.img a:hover img {
   padding-left: 0px;
 }
 
-#preview {
+.preview {
   display: none;
-  width: 200px;
-  height: 100%;
+  width: auto;
+  height: 120px;
+}
+
+#meetTheBandUpdateForm {
+  position: relative;
+}
+
+.previewContainer {
+  position: absolute;
+  top: 0px;
+  right: 100px;
 }
