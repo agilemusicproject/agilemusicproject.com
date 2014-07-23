@@ -44,7 +44,7 @@ Scenario: Manage Photos on Photos page
     When I go to "/photos/add"
     And I select "Upload from URL" from "form_photo_actions"
     Then I should see an "#form_photo_url" element
-    And I fill in "form_photo_url" with "http://s2.hubimg.com/u/1906243_f260.jpg"
+    And I fill in "form_photo_url" with "http://images6.alphacoders.com/391/391246.jpg"
     And I fill in "form_caption" with "chicken"
     And I fill in "form_category" with "random stuff"
     And I press "Submit"

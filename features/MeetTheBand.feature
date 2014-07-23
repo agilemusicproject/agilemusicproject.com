@@ -24,7 +24,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see an ".cancel_button" element
     And I should see an "#form_photo_actions" element
     And I select "Upload File" from "form_photo_actions"
-    And I attach the file "download.jpg" to "form_photo"
+    And I attach the file "sticky-notes.png" to "form_photo"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see an ".addButton" element
@@ -87,7 +87,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see an ".defaultBioPhoto" element
     When I go to "/meettheband/edit/2"
     Then I select "Upload File" from "form_photo_actions"
-    And I attach the file "download.jpg" to "form_photo"
+    And I attach the file "question-mark.png" to "form_photo"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"
@@ -102,7 +102,7 @@ Feature: AMP Web Site MeetTheBand Page
     And I should see an "#form_photo_actions" element
     And I select "Upload from URL" from "form_photo_actions"
     Then I should see an "#form_photo_url" element
-    And I fill in "form_photo_url" with "http://s2.hubimg.com/u/1906243_f260.jpg"
+    And I fill in "form_photo_url" with "http://images3.alphacoders.com/296/29667.jpg"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see an ".addButton" element
