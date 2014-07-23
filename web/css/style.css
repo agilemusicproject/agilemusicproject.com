@@ -25,10 +25,6 @@ a.imageLink {
   text-decoration: none;
 }
 
-.preview {
-  width: 200px;
-}
-
 .photoContainer {
   display: inline-block;
   max-width: 220px;
