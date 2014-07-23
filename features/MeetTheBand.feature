@@ -7,8 +7,8 @@ Feature: AMP Web Site MeetTheBand Page
     Given I am on "/meettheband/"
     Then I should see 0 ".bandMemberEntry" elements
     And I should not see an ".addButton" element
-    And I should not see an ".editButton" element
-    And I should not see an ".deleteButton" element
+    And I should not see an ".editButtonMembers" element
+    And I should not see an ".deleteBoxMembers" element
     And I should not see an ".dots" element
     When I go to "/meettheband/add"
     Then I should be on "/login"
@@ -26,8 +26,8 @@ Feature: AMP Web Site MeetTheBand Page
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see an ".addButton" element
-    And I should see an ".editButton" element
-    And I should see an ".deleteButton" element
+    And I should see an ".editButtonMembers" element
+    And I should see an ".deleteBoxMembers" element
     And I should see 3 ".dots" elements
     And I should see "Action Jackson"
     And I should see "Super Cop"
@@ -48,8 +48,8 @@ Feature: AMP Web Site MeetTheBand Page
     Then I should be on "/"
     When I go to "/meettheband/"
     Then I should not see an ".addButton" element
-    And I should not see an ".editButton" element
-    And I should not see an ".deleteButton" element
+    And I should not see an ".editButtonMembers" element
+    And I should not see an ".deleteBoxMembers" element
     When I go to "/meettheband/update/2"
     Then I should be on "/login"
     When I fill in "_username" with "admin"

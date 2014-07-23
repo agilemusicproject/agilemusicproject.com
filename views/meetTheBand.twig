@@ -45,10 +45,10 @@
   </div>
   <div class="clearer"></div>
 {% if is_granted('ROLE_ADMIN') %}
-  <form>
-    <input class="editButton" onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
+  <form class="editButtonMembers">
+    <input onclick="location.href='/meettheband/update/{{ row.id }}'" type="button" value="Edit"/>
   </form>
-  <form class="deleteBox" method="post" action="/meettheband/">
+  <form class="deleteBoxMembers" method="post" action="/meettheband/">
         <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
         <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
     </form>

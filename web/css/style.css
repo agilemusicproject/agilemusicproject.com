@@ -392,6 +392,7 @@ div.img a:hover img {
 
 .bioPagetext {
   list-style-type: none;
+  position: relative;
 }
 
 #sortBios {
@@ -422,4 +423,16 @@ div.img a:hover img {
 
 #photoEditForm {
   position: relative;
+}
+
+.editButtonMembers {
+  position: absolute;
+  top: 3px;
+  right: 70px;
+}
+
+.deleteBoxMembers {
+  position: absolute;
+  top: 3px;
+  right: 3px;
 }
