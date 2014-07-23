@@ -4,8 +4,6 @@ require_once __DIR__.'/blog/wp-blog-header.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 $app = new Silex\Application();
 
@@ -64,8 +62,18 @@ $ampServiceProvider = new \AMP\AMPServiceProvider();
 $app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos');
 $ampServiceProvider->registerDAOs($app);
 $ampServiceProvider->registerForms($app);
+$ampServiceProvider->registerUserProviders($app);
 
-$app->get('/', function () use ($app) {
+$app['security.authentication.logout_handler.general'] = $app->share(function () use ($app) {
+    return new \AMP\User\CustomLogoutSuccessHandler(
+            $app['security.http_utils']);
+});
+
+$app->before(function (Request $request) use ($app) {
+    $app['user.loginProvider']->loginUser($request);
+});
+
+$app->get('/', function (Request $request) use ($app) {
     return $app['twig']->render('index.twig');
 });
 
@@ -87,19 +95,3 @@ $app->mount('/photos', new AMP\Controller\PhotosController());
 $app->mount('/news', new AMP\Controller\NewsPageController());
 
 $app->run();
-
-if( current_user_can('edit_pages') ) {
-    $userProvider = new AMP\User\UserProvider($app['db']);
-    global $current_user;
-    get_currentuserinfo();
-    $user = $userProvider->loadUserByUsername($current_user->user_login);
-    $token = new UsernamePasswordToken($user, null, 'general', $user->getRoles());
-    //var_dump($app['security']);
-    $app['security']->setToken($token); //now the user is logged in
-    
-    //now dispatch the login event
-    $request = $app->get('request');
-    $event = new InteractiveLoginEvent($request, $token);
-    $eventDispatcher = new Symfony\Component\EventDispatcher\EventDispatcher();
-    //$this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-}
