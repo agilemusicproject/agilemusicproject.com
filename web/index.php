@@ -77,14 +77,6 @@ $app->get('/', function (Request $request) use ($app) {
     return $app['twig']->render('index.twig');
 });
 
-$app->get('/login', function (Request $request) use ($app) {
-    if (strpos($request->server->get('HTTP_REFERER'), '/login') === false) {
-        $app['session']->set('lastUrlBeforeClickingLogin', $request->server->get('HTTP_REFERER'));
-    }
-    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request),
-                                                    'lastPage' =>  $app['session']->get('lastUrlBeforeClickingLogin')));
-}); 
-
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
 $app->mount('/account', new AMP\Controller\AccountController());
 $app->mount('/contactus', new AMP\Controller\ContactUsController());
