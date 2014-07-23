@@ -15,6 +15,9 @@ security.access_rules:
     - ^/meettheband/edit
     - ROLE_ADMIN
   -
+    - ^/meettheband/sort
+    - ROLE_ADMIN
+  -
     - ^/admin
     - ROLE_ADMIN
   -

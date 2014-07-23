@@ -19,9 +19,9 @@
     <form>
       <input class="editButton" onclick="location.href='/agile/edit/{{ row.id }}'" type="button" value="Edit"/>
     </form>
-    <form method="post" action="/agile/">
-      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input class="deleteButton" type="submit" value="Delete">
+    <form class="deleteBox" method="post" action="/agile/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
     </form>
   {% endif %}
 {% endfor %}

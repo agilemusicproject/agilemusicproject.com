@@ -24,6 +24,10 @@ class MeetTheBandController implements ControllerProviderInterface
             return $this->editAction($request, $app, $id);
         });
 
+        $controllers->match('/sort', function (Request $request) use ($app) {
+            return $this->sortAction($request, $app);
+        });
+
         return $controllers;
     }
 
@@ -93,5 +97,14 @@ class MeetTheBandController implements ControllerProviderInterface
         }
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
                                                                   'title' => 'Edit'));
+    }
+
+    private function sortAction(Request $request, Application $app)
+    {
+        if ($request->isMethod('POST')) {
+            $app['dao.bandMembers']->sortUpdate($request->get('list'));
+        }
+        $results = $app['dao.bandMembers']->getAll();
+        return $app['twig']->render('meetTheBand.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }

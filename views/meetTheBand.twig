@@ -4,6 +4,10 @@
 
 {% block title %} Meet the Band {% endblock %}
 
+{% block javascript %}
+<script src="/js/sort-bios.js"></script>
+{% endblock %}
+
 {% block postit %}<canvas id="meetTheBandpostcard" class="postitheader">Meet the Band</canvas>{% endblock %}
 
 {% block header %}Meet the Band{%endblock%}
@@ -13,34 +17,45 @@
 <form>
   <input class="addButton" onclick="location.href='/meettheband/add'" type="button" value="Add Band Member"/>
 </form>
+<ul id="sortBios">
 {% endif %}
 {% for row in results %}
-<div class="bioWrapper">
-  {% if not (row.photo_filename is null) %}
-  <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
-  {% else %}
-  <img class="defaultBioPhoto" src="/images/question-mark.png" />
-  {% endif %}
-  <div class="notecard">
-    <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
-    <p class="bandMemberBio">
-      {% if not (row.bio is null) %}
-        {{ row.bio|raw }}
-      {% else %}
-        [Redacted]
-      {% endif %}
-    </p>
+<li class="bioPagetext" id="bios-{{row.id}}">
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="dotsSection">
+        <div class="dots"></div>
+        <div class="dots"></div>
+        <div class="dots"></div>
   </div>
-</div>
-<div class="clearer"></div>
+  {% endif %}
+  <div class="bioWrapper">
+    {% if not (row.photo_filename is null) %}
+    <img class="bioPhoto" src="/images/photos/{{ row.photo_filename }}" />
+    {% else %}
+    <img class="defaultBioPhoto" src="/images/question-mark.png" />
+    {% endif %}
+    <div class="notecard">
+      <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
+        {% if not (row.bio is null) %}
+          {{ row.bio|raw }}
+        {% else %}
+          [Redacted]
+        {% endif %}
+    </div>
+  </div>
+  <div class="clearer"></div>
 {% if is_granted('ROLE_ADMIN') %}
-  <form>
-    <input class="editButton" onclick="location.href='/meettheband/edit/{{ row.id }}'" type="button" value="Edit"/>
+  <form class="editButtonMembers">
+    <input onclick="location.href='/meettheband/edit/{{ row.id }}'" type="button" value="Edit"/>
   </form>
-  <form method="post" action="/meettheband/">
-    <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-    <input class="deleteButton" type="submit" value="Delete">
-  </form>
+  <form class="deleteBoxMembers" method="post" action="/meettheband/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
+    </form>
 {% endif %}
+</li>
 {% endfor %}
+{% if is_granted('ROLE_ADMIN') %}
+</ul>
+{% endif %}
 {% endblock %}

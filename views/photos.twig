@@ -44,9 +44,9 @@
       <form class="edit_caption">
         <input onclick="location.href='/photos/edit/{{ row.id }}'" type="button" value="Edit Caption / Category"/>
       </form>
-      <form method="post" action="/photos/">
+      <form class="deleteBox" method="post" action="/photos/">
         <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-        <input type="submit" value="Delete Photo">
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete Photo">
       </form>
     {% endif %}
   </div>

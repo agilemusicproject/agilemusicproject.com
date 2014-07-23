@@ -25,10 +25,6 @@ a.imageLink {
   text-decoration: none;
 }
 
-.preview {
-  width: 200px;
-}
-
 .photoContainer {
   display: inline-block;
   max-width: 220px;
@@ -83,7 +79,6 @@ a.imageLink {
 }
 
 .notecard {
-  background: url(/images/notecard.png) repeat-x 0 46px white;
   padding-right: 0px;
   padding-bottom: 4px;
   padding-left: 10px;
@@ -115,8 +110,14 @@ a.imageLink {
   background-position: 0px 100px;
 }
 
+.notecard p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
 .bandMemberTitle {
   margin-top: 0px;
+  margin-bottom: 17px;
   height: 30px;
   padding-top: 10px;
   padding-left: 10px;
@@ -359,16 +360,16 @@ div.img a:hover img {
 .musicPageText {
   list-style-type: none;
   cursor: move;
-
 }
 
 .musicIframe {
-  margin-left: 75px
+  margin-left: 75px;
 }
 
 .dotsSection {
   float: left;
   vertical-align: middle;
+  cursor: move;
 }
 
 .dots {
@@ -387,4 +388,51 @@ div.img a:hover img {
 
 #musicAdd {
   padding-left: 30px;
+}
+
+.bioPagetext {
+  list-style-type: none;
+  position: relative;
+}
+
+#sortBios {
+  padding-left: 0px;
+}
+
+#previewBioPhoto {
+  display: none;
+  width: auto;
+  height: 120px;
+}
+
+#previewPhotoPage {
+  display: none;
+  width: auto;
+  height: 300px;
+}
+
+#meetTheBandUpdateForm {
+  position: relative;
+}
+
+.previewContainer {
+  position: absolute;
+  top: 0px;
+  right: 100px;
+}
+
+#photoEditForm {
+  position: relative;
+}
+
+.editButtonMembers {
+  position: absolute;
+  top: 3px;
+  right: 70px;
+}
+
+.deleteBoxMembers {
+  position: absolute;
+  top: 3px;
+  right: 3px;
 }

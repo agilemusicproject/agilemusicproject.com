@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `band_members` (
   `roles` tinytext NOT NULL,
   `photo_filename` tinytext,
   `bio` longtext,
+  `member_order` INT UNSIGNED NOT NULL UNIQUE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

@@ -3,11 +3,12 @@ namespace AMP\Form;
 
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints as Assert;
+use \AMP\Validator\Constraints\DuplicateFilenames;
 
 class MeetTheBandFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
-    public function __construct(FormFactory $formService, $isUpdateForm = false)
+    public function __construct(FormFactory $formService, $uploadManager = null, $isUpdateForm = false)
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
@@ -59,6 +60,13 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('style' => 'display: none'),
+            ->add('photo', 'file', array('required' => false,
+                                         'constraints' => new DuplicateFilenames(
+                                             array('uploadManager' => $uploadManager)
+                                         ),
+                                         'label' => $isUpdateForm ? false : 'Photo',
+                                         'label_attr' => array('class' => 'formLabel'),
+                                         'attr' => array('style' => 'display: ' . ($isUpdateForm ? 'none' : 'block')),
             ))
             ->add('photo_url', 'text', array(
                 'required' => false,
