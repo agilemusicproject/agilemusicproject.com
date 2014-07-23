@@ -47,13 +47,8 @@ if( !defined( 'ABSPATH' ) ) {
 	</head>
 	
 <body <?php body_class(); ?> onload="drawBlogPostNote()">
-
+	
 <nav id="blogNav">
-
-<?php if(is_user_logged_in()) {
-    echo('<a class="wpLogout" href="/admin/logout">Logout</a>');
-}
-?>
   <div class="headernav" id="logocontainer">
 	<a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
   </div>
