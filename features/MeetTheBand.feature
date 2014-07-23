@@ -106,8 +106,8 @@ Feature: AMP Web Site MeetTheBand Page
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see an ".addButton" element
-    And I should see an ".editButton" element
-    And I should see an ".deleteButton" element
+    And I should see an ".editButtonMembers" element
+    And I should see an ".deleteBoxMembers" element
     And I should see "Stewie Griffin"
     And I should see "Innocent toddler"
     And I should see "A young lad with an obsession for violence and world domination"

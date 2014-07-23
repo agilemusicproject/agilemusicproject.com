@@ -17,14 +17,11 @@
 <div id="photoEditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
-    {% if form.photo_actions is not null %}
-      {{ form_row(form.photo_actions) }}
-      {{ form_row(form.photo) }}
-      <div class="previewContainer">
-        <img id="previewPhotoPage" class="preview" src="#" alt="preview image"/>
-      </div>
-    {% endif %}
+    {{ form_widget(form) }}
     {{ form_rest(form) }}
+    <div class="previewContainer">
+        <img id="previewPhotoPage" class="preview" src="#" alt="Can't find image"/>
+    </div>
   </form>
 </div>
 <form class="cancel_button">
