@@ -401,3 +401,9 @@ div.img a:hover img {
 #sortBios {
   padding-left: 0px;
 }
+
+#preview {
+  display: none;
+  width: 200px;
+  height: 100%;
+}
