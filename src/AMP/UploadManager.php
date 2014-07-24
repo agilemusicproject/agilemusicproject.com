@@ -12,16 +12,26 @@ class UploadManager
         $this->uploadDirectory = $uploadDirectory;
     }
 
-    public function upload($file)
+    public function upload($file, $newFileName = null)
     {
-        $filename =  $file->getClientOriginalName();
+        $filename = null;
+        if (is_null($newFilename)) {
+            $filename = $newFileName;
+        } else {
+            $filename =  $file->getClientOriginalName();
+        }
         $file->move($this->uploadDirectory, $filename);
         return $filename;
     }
 
-    public function uploadPhoto($file)
+    public function uploadPhoto($file, $newFileName = null)
     {
-        $filename = $this->upload($file);
+        $filename = null;
+        if (is_null($newFilename)) {
+            $filename = $this->upload($file);
+        } else {
+            $filename = $this->upload($file, $newFileName);
+        }
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
         }
