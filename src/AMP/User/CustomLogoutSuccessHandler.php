@@ -1,7 +1,7 @@
 <?php
 namespace AMP\User;
  
-use Symfony\Component\HttpFoundation\Request;
+use \Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
  
 class CustomLogoutSuccessHandler extends DefaultLogoutSuccessHandler

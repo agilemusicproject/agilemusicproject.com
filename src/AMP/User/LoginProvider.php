@@ -14,7 +14,8 @@ class LoginProvider
         $this->app = $app;
     }
     
-    public function loginUser(Request $request) {
+    public function loginUser(Request $request)
+    {
         if (is_user_logged_in()) {
             global $current_user;
             get_currentuserinfo();

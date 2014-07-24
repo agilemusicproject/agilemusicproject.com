@@ -77,10 +77,9 @@ class AMPServiceProvider
     
     public function registerUserProviders(Application $app)
     {
-        $app['user.userProvider'] = function () use ($app){
+        $app['user.userProvider'] = function () use ($app) {
             return new \AMP\User\UserProvider($app['db']);
         };
-        
         $app['user.loginProvider'] = function () use ($app) {
             return new \AMP\User\LoginProvider($app);
         };

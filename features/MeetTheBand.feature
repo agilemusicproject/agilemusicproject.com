@@ -10,10 +10,11 @@ Feature: AMP Web Site MeetTheBand Page
     And I should not see an ".editButton" element
     And I should not see an ".deleteButton" element
     When I go to "/meettheband/add"
-    Then I should be on "/login"
-    When I fill in "_username" with "admin"
-    And I fill in "_password" with "foo"
-    And I press "Login"
+    Then I should be on "/blog/wp-login.php"
+    When I fill in "log" with "admin"
+    And I fill in "pwd" with "foo"
+    And I press "Log In"
+    And I go to "/meettheband/add"
     Then I should be on "/meettheband/add"
     Then I should see a "form" element
     When I fill in "form_first_name" with "Action"
@@ -48,10 +49,11 @@ Feature: AMP Web Site MeetTheBand Page
     And I should not see an ".editButton" element
     And I should not see an ".deleteButton" element
     When I go to "/meettheband/update/2"
-    Then I should be on "/login"
-    When I fill in "_username" with "admin"
-    And I fill in "_password" with "foo"
-    And I press "Login"
+    Then I should be on "/blog/wp-login.php"
+    When I fill in "log" with "admin"
+    And I fill in "pwd" with "foo"
+    And I press "Log In"
+    And I go to "meettheband/update/2"
     Then I should be on "/meettheband/update/2"
     And the "form_first_name" field should contain "Bilbo"
     And the "form_last_name" field should contain "Baggins"
@@ -82,4 +84,3 @@ Feature: AMP Web Site MeetTheBand Page
     And I press "Delete"
     Then I should see 0 ".bandMemberEntry" elements
     When I follow "Logout"
-    Then I should see "Login"
