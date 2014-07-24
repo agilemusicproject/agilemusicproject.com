@@ -19,4 +19,10 @@ $(document).ready(function() {
     $(".preview").error(function() {
         $(this).css("display","none");
     });
+    $("#form_photo_actions").change(function() {
+        var option = $("#form_photo_actions option:selected").text();
+        if (option == "Add Nothing" || option == "Do Nothing" || option == "Delete Photo") {
+            $(".preview").css("display","none");
+        }
+    });
 });
