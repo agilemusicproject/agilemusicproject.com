@@ -16,4 +16,7 @@ $(document).ready(function() {
             $('.preview').css("display","block").attr('src', url);
         }
     });
+    $(".preview").error(function() {
+        $(this).css("display","none");
+    });
 });
