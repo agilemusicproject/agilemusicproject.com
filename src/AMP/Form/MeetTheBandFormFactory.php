@@ -73,6 +73,15 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
             ))
+            ->add('photo_rename', 'text', array(
+                'required' => false,
+                'constraints' => new DuplicateFilenames(
+                    array('uploadManager' => $uploadManager)
+                ),
+                'label' => false,
+                'label_attr' => array('class' => 'formLabel'),
+                'attr' => array('style' => 'display: none', 'placeholder' => 'Rename photo here'),
+            ))
             ->add('bio', 'textarea', array(
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
