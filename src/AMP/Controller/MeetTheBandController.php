@@ -51,6 +51,10 @@ class MeetTheBandController implements ControllerProviderInterface
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
+            if ($formData['photo_actions'] == 'photo_nothing') {
+                $data['photo'] = null;
+                $formData['photo_filename'] = null;
+            }
             if (!is_null($formData['photo'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             } elseif (!is_null($formData['photo_url'])) {
