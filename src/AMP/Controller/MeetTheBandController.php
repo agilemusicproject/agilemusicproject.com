@@ -11,22 +11,26 @@ class MeetTheBandController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
-        
+
         $controllers->match('', function (Request $request) use ($app) {
             return $this->defaultAction($request, $app);
         });
-        
+
         $controllers->match('/add', function (Request $request) use ($app) {
             return $this->addAction($request, $app);
         });
-        
-        $controllers->match('/update/{id}', function ($id, Request $request) use ($app) {
+
+        $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
             return $this->editAction($request, $app, $id);
         });
-        
+
+        $controllers->match('/sort', function (Request $request) use ($app) {
+            return $this->sortAction($request, $app);
+        });
+
         return $controllers;
     }
-    
+
     private function defaultAction(Request $request, Application $app)
     {
         if ($request->isMethod('POST')) {
@@ -40,15 +44,22 @@ class MeetTheBandController implements ControllerProviderInterface
         $results = $app['dao.bandMembers']->getAll();
         return $app['twig']->render('meetTheBand.twig', array('results' => $results));
     }
-    
+
     private function addAction(Request $request, Application $app)
     {
         $form = $app['forms.meetTheBandAdd'];
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            if (!is_null($formData['photo'])) {
+            if ($formData['photo_actions'] == 'photo_nothing') {
+                $data['photo'] = null;
+                $formData['photo_filename'] = null;
+            } elseif ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+            } else {
+                throw new \AMP\Exception\PhotosOptionsException();
             }
             $app['dao.bandMembers']->add($formData);
             return $app->redirect('/meettheband');
@@ -56,7 +67,7 @@ class MeetTheBandController implements ControllerProviderInterface
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
                                                                   'title' => 'Add'));
     }
-    
+
     private function editAction(Request $request, Application $app, $id)
     {
         $form = $app['forms.meetTheBandEdit'];
@@ -72,20 +83,32 @@ class MeetTheBandController implements ControllerProviderInterface
                 $app['photoUploadManager']->deleteFile($original_filename);
                 $app['photoUploadManager']->deleteThumbnail($original_filename);
                 $formData['photo_filename'] = null;
-            } elseif ($formData['photo_actions'] == 'photo_change') {
-                if (!is_null($original_filename)) {
-                    $app['photoUploadManager']->deleteFile($original_filename);
-                    $app['photoUploadManager']->deleteThumbnail($original_filename);
-                }
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
             } elseif ($formData['photo_actions'] == 'photo_nothing') {
                 $data['photo'] = null;
                 $formData['photo_filename'] = $original_filename;
+            } elseif ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+            } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+            } elseif (!is_null($original_filename)) {
+                    $app['photoUploadManager']->deleteFile($original_filename);
+                    $app['photoUploadManager']->deleteThumbnail($original_filename);
+            } else {
+                throw new \AMP\Exception\PhotosOptionsException();
             }
             $app['dao.bandMembers']->update($id, $formData);
             return $app->redirect('/meettheband');
         }
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
                                                                   'title' => 'Edit'));
+    }
+
+    private function sortAction(Request $request, Application $app)
+    {
+        if ($request->isMethod('POST')) {
+            $app['dao.bandMembers']->sortUpdate($request->get('list'));
+        }
+        $results = $app['dao.bandMembers']->getAll();
+        return $app['twig']->render('meetTheBand.twig', array('results' => $results, 'title' => 'Sort'));
     }
 }

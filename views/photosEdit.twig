@@ -2,6 +2,11 @@
 
 {% block onload %} drawPhotosPostNote() {% endblock %}
 
+{% block javascript %}
+  <script src="/js/update-form.js"></script>
+  <script src="/js/preview-photo.js"></script>
+{% endblock %}
+
 {% block title %} Photos {% endblock %}
 
 {% block postit %}<canvas id="photospostcard" class="postitheader">About</canvas>{% endblock %}
@@ -9,14 +14,17 @@
 {% block header %} {{ title }} Photos {%endblock%}
 
 {% block content %}
-<div id="aboutEditForm">
+<div id="photoEditForm">
   <form method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
+    <div class="previewContainer">
+        <img id="previewPhotoPage" class="preview" src="" alt="Cannot find image"/>
+    </div>
   </form>
 </div>
-<form class="cancel_buttom">
+<form class="cancel_button">
   <input onclick="location.href='/photos/'" type="button" value="Cancel"/>
 </form>
 {% endblock %}

@@ -27,9 +27,9 @@
       <div class="dots"></div>
       <div class="dots"></div>
       <div class="dots"></div>
-      <form method="post" action="/music/">
-        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-        <input id="musicDelete" type="submit" value="Delete">
+      <form class="deleteBox" method="post" action="/music/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
     </form>
     </div>
   {% endif %}

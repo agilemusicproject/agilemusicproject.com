@@ -2,10 +2,11 @@
 
 {% block javascript %}
   <script src="/js/ckeditor/ckeditor.js"></script>
+  <script src="/js/preview-photo.js"></script>
   <script src="/js/update-form.js"></script>
 {% endblock %}
 
-{% block onload %} drawBandPostNote() {% endblock %}
+{% block onload %} drawBandPostNote(); {% endblock %}
 
 {% block title %} Meet the Band {% endblock %}
 
@@ -19,8 +20,11 @@
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}
+    <div class="previewContainer">
+      <img id="previewBioPhoto" class="preview" src="#" alt="Cannot find image"/>
+    </div>
   </form>
-  <form class="cancel_buttom">
+  <form class="cancel_button">
     <input onclick="location.href='/meettheband/'" type="button" value="Cancel"/>
   </form>
   <script>

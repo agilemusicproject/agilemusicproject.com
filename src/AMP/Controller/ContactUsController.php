@@ -5,14 +5,12 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-// pull function into class method
 class ContactUsController implements ControllerProviderInterface
 {
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
 
-        // magic strings, localization
         $controllers->match('/', function (Request $request) use ($app) {
             return $this->defaultAction($request, $app);
         });
@@ -44,8 +42,7 @@ class ContactUsController implements ControllerProviderInterface
         }
         return $app['twig']->render(
             'contact.twig',
-            array('form' => $form->createView(),
-                  'notification' => $notification)
+            array('form' => $form->createView(), 'notification' => $notification)
         );
     }
 }

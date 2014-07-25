@@ -23,9 +23,9 @@
     <form>
       <input class="editButton" onclick="location.href='/about/edit/{{ row.id }}'" type="button" value="Edit"/>
     </form>
-    <form method="post" action="/about/">
-      <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}">
-      <input class="deleteButton" type="submit" value="Delete">
+    <form class="deleteBox" method="post" action="/about/">
+        <input class="deleteID" name="id" type="hidden" id="id" value="{{ row.id }}"/>
+        <input class="deleteButton" onclick="return deletePopUp();" type="submit" value="Delete"/>
     </form>
   {% endif %}
 {% endfor %}
