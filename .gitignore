@@ -9,5 +9,5 @@ qa/
 config/amp.ini
 test/coverage/
 .project
-/web/blog/wp-config.php
-/web/images/photos/
+web/blog/wp-config.php
+web/images/photos/
