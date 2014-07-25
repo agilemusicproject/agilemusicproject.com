@@ -12,7 +12,7 @@ Feature: AMP Web Site Music Page
     Then I should be on "/blog/wp-login.php"
     When I fill in "log" with "admin"
     And I fill in "pwd" with "foo"
-    And I press "wp-submit"
+    And I press "Log In"
     Then I should be on "/"
     When I go to "/music/add"
     Then I should be on "/music/add"
