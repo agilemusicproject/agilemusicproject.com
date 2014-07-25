@@ -2,6 +2,7 @@
 namespace AMP;
 
 use \Silex\Application;
+use \Symfony\Component\HttpFoundation\Request;
 
 class AMPServiceProvider
 {
@@ -92,6 +93,16 @@ class AMPServiceProvider
     {
         $app['amp.email'] = function () use ($app) {
             return new \AMP\Mail();
+        };
+    }
+
+	public function registerUserProviders(Application $app)
+    {
+        $app['user.userProvider'] = function () use ($app) {
+            return new \AMP\User\UserProvider($app['db']);
+        };
+        $app['user.loginProvider'] = function () use ($app) {
+            return new \AMP\User\LoginProvider($app);
         };
     }
 }

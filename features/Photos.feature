@@ -8,10 +8,11 @@ Scenario: Manage Photos on Photos page
     Then I should see an "#galleryTab" element
     And I should not see an ".addButton" element
     When I go to "/photos/add"
-    Then I should be on "/login"
-    When I fill in "_username" with "admin"
-    And I fill in "_password" with "foo"
-    And I press "Login"
+    Then I should be on "/blog/wp-login.php"
+    When I fill in "log" with "admin"
+    And I fill in "pwd" with "foo"
+    And I press "Log In"
+    And I go to "/photos/add"
     Then I should be on "/photos/add"
     And I attach the file "download.jpg" to "form_photo"
     And I fill in "form_caption" with "christmas in july"
@@ -33,11 +34,12 @@ Scenario: Manage Photos on Photos page
     And the "#galleryTab" element should contain "randomness"
     And I should see an ".fancyphoto" element
     And I should see "christmas in july"
-    When I follow "Login"
-    Then I should be on "/login"
-    When I fill in "_username" with "admin"
-    And I fill in "_password" with "foo"
-    And I press "Login"
+    When I go to "/blog/wp-login.php"
+    Then I should be on "/blog/wp-login.php"
+    When I fill in "log" with "admin"
+    And I fill in "pwd" with "foo"
+    And I press "Log In"
+    And I go to "/photos/"
     Then I go to "/photos/"
     And I should see an ".deleteID" element
     And I should see an ".edit_caption" element
@@ -72,4 +74,3 @@ Scenario: Manage Photos on Photos page
     And I should not see an ".fancyphoto" element
     And I should not see "ron swanson"
     When I follow "Logout"
-    Then I should see "Login"
