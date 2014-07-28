@@ -57,6 +57,12 @@ class UploadManager
         }
     }
 
+    public function deleteFileAndThumbnail($filename)
+    {
+        $this->deleteFile($filename);
+        $this->deleteThumbnail($filename);
+    }
+
     public function deleteFile($filename)
     {
         $this->delete($this->getFilePath($filename));

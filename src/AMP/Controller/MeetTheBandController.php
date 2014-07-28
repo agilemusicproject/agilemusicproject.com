@@ -36,8 +36,7 @@ class MeetTheBandController implements ControllerProviderInterface
         if ($request->isMethod('POST')) {
             $bandMemberData = $app['dao.bandMembers']->get($request->get('id'));
             if (!is_null($bandMemberData['photo_filename'])) {
-                $app['photoUploadManager']->deleteFile($bandMemberData['photo_filename']);
-                $app['photoUploadManager']->deleteThumbnail($bandMemberData['photo_filename']);
+                $app['photoUploadManager']->deleteFileAndThumbnail($bandMemberData['photo_filename']);
             }
             $app['dao.bandMembers']->delete($request->get('id'));
         }
@@ -80,22 +79,23 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $bandMemberData = $app['dao.bandMembers']->get($id);
             $original_filename = $bandMemberData['photo_filename'];
-            $filename = null;
             if ($formData['photo_actions'] == 'photo_delete') {
                 $formData['photo'] = null;
-                $app['photoUploadManager']->deleteFile($original_filename);
-                $app['photoUploadManager']->deleteThumbnail($original_filename);
+                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
                 $formData['photo_filename'] = null;
             } elseif ($formData['photo_actions'] == 'photo_nothing') {
-                $data['photo'] = null;
                 $formData['photo_filename'] = $original_filename;
             } elseif ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                    $formData['photo'],
+                    $formData['photo_rename']
+                );
+                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             } elseif (!is_null($original_filename)) {
-                $app['photoUploadManager']->deleteFile($original_filename);
-                $app['photoUploadManager']->deleteThumbnail($original_filename);
+                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             } else {
                 throw new \AMP\Exception\PhotosOptionsException();
             }

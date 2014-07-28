@@ -2,6 +2,7 @@ function duplicateFileError(filename) {
     $.ajax({
         url: "/images/photos/" + filename,
         success: function(data) {
+            $("#checking").remove();
             if ($("#duplicateError").length == 0) {
                 $("#form_photo").after("<div id=\"duplicateError\">There is already a file with this name.</div>");
             }
@@ -12,6 +13,7 @@ function duplicateFileError(filename) {
         {
             $("#form_submit").removeAttr("disabled");
             $("#duplicateError").remove();
+            $("#checking").remove();
         }
 
     });
@@ -39,10 +41,13 @@ $(document).ready(function() {
     });
     $("#form_photo").change(function() {
         $("#form_submit").attr("disabled", "disabled");
+        $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
         var filename = $(this)[0].files[0].name;
         duplicateFileError(filename);
     });
     $('#form_photo_rename').on('input', function() {
+        $("#form_submit").attr("disabled", "disabled");
+        $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
         var filename = $('#form_photo_rename').val();
         duplicateFileError(filename);
     });
