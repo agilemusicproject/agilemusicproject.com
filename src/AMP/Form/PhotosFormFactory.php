@@ -21,21 +21,21 @@ class PhotosFormFactory extends BaseFormFactory
                 ))
                 ->add('photo', 'file', array(
                     'required' => true,
-                    'constraints' => new DuplicateFilenames(
-                        array('uploadManager' => $uploadManager)
-                    ),
                     'label' => false,
                     'label_attr' => array('class' => 'formLabel'),
                     'attr' => array('style' => 'display: display'),
                 ))
                 ->add('photo_url', 'text', array(
                     'required' => false,
-                    'constraints' => new DuplicateFilenames(
-                        array('uploadManager' => $uploadManager)
-                    ),
                     'label' => false,
                     'label_attr' => array('class' => 'formLabel'),
                     'attr' => array('style' => 'display: none', 'placeholder' => 'Enter url of photo'),
+                ))
+                ->add('photo_rename', 'text', array(
+                    'required' => false,
+                    'label' => false,
+                    'label_attr' => array('class' => 'formLabel'),
+                    'attr' => array('style' => 'display: none', 'placeholder' => 'Rename photo here'),
                 ));
         }
         $this->formBuilder
