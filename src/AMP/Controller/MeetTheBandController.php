@@ -59,7 +59,10 @@ class MeetTheBandController implements ControllerProviderInterface
                     $formData['photo_rename']
                 );
             } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                    $formData['photo_url'],
+                    $formData['photo_rename']
+                );
             } else {
                 throw new \AMP\Exception\PhotosOptionsException();
             }
@@ -92,7 +95,10 @@ class MeetTheBandController implements ControllerProviderInterface
                 );
                 $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                    $formData['photo_url'],
+                    $formData['photo_rename']
+                );
                 $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             } elseif (!is_null($original_filename)) {
                 $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);

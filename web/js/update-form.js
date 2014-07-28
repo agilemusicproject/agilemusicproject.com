@@ -1,17 +1,17 @@
-function duplicateFileError(filename) {
+function duplicateFileError(filename, divID) {
     $("#form_submit").attr("disabled", "disabled");
         if ($("#checking").length == 0) {
-            $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
+            $(divID).after("<div id=\"checking\">Checking file...</div>");
         }
     $.ajax({
         url: "/images/photos/" + filename,
         success: function(data) {
             $("#checking").remove();
             if ($("#duplicateError").length == 0) {
-                $("#form_photo").after("<div id=\"duplicateError\">There is already a file with this name.</div>");
+                $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
             }
             $("#form_photo_rename").css("display","block");
-            $("#form_photo").css("display","none");
+            $(divID).css("display","none");
         },
         error: function(err)
         {
@@ -19,10 +19,10 @@ function duplicateFileError(filename) {
             $("#duplicateError").remove();
             $("#checking").remove();
         }
-
     });
 }
 $(document).ready(function() {
+    var divID = null;
     $("#form_photo_actions").change(function() {
         $("#form_photo_rename").css("display","none");
         var choice = $(this).val();
@@ -47,15 +47,19 @@ $(document).ready(function() {
         }
     });
     $("#form_photo").change(function() {
+        divID = "#form_photo";
         var filename = $(this)[0].files[0].name;
-        duplicateFileError(filename);
+        duplicateFileError(filename, divID);
     });
-    $('#form_photo_rename').on('input', function() {
+    $("#form_photo_rename").on('input', function() {
         var filename = $('#form_photo_rename').val();
-        duplicateFileError(filename);
+        duplicateFileError(filename, divID);
     });
-    $('#form_photo_url').on('input', function() {
-        var filename = $('#form_photo_url').val();
-        duplicateFileError(filename);
+    $("#form_photo_url").on('input', function() {
+        divID = "#form_photo_url";
+        var url = $('#form_photo_url').val();
+        var filename = url.substr(url.lastIndexOf("/") + 1);
+        console.log(filename);
+        duplicateFileError(filename, divID);
     });
 });
