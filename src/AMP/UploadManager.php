@@ -14,24 +14,14 @@ class UploadManager
 
     public function upload($file, $newFileName = null)
     {
-        $filename = null;
-        if (is_null($newFileName)) {
-            $filename = $file->getClientOriginalName();
-        } else {
-            $filename = $newFileName;
-        }
+        $filename = is_null($newFileName) ? $file->getClientOriginalName() : $newFileName;
         $file->move($this->uploadDirectory, $filename);
         return $filename;
     }
 
     public function uploadPhoto($file, $newFileName = null)
     {
-        $filename = null;
-        if (is_null($newFileName)) {
-            $filename = $this->upload($file);
-        } else {
-            $filename = $this->upload($file, $newFileName);
-        }
+        $filename = is_null($newFileName) ? $this->upload($file) : $this->upload($file, $newFileName);
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
         }
@@ -41,12 +31,7 @@ class UploadManager
 
     public function uploadPhotoUrl($file, $newFileName = null)
     {
-        $filename = null;
-        if (is_null($newFileName)) {
-            $filename = basename($file);
-        } else {
-            $filename = $newFileName;
-        }
+        $filename = is_null($newFileName) ? basename($file) : $newFileName;
         file_put_contents("$this->uploadDirectory/$filename", file_get_contents($file));
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
