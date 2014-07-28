@@ -50,7 +50,7 @@ class PhotosFormFactory extends BaseFormFactory
                 'attr' => array('placeholder' => 'Category'),
                 'label_attr' => array('class' => 'formLabel'),
             ))
-            ->add('submit', 'submit');
+            ->add('submit', 'button');
         $this->form = $this->formBuilder->getForm();
     }
 }
