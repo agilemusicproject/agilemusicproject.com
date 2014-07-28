@@ -15,12 +15,14 @@ function duplicateFileError(filename, divID) {
         },
         error: function(err)
         {
+            console.log(err);
             $("#form_submit").removeAttr("disabled");
             $("#duplicateError").remove();
             $("#checking").remove();
         }
     });
 }
+
 $(document).ready(function() {
     var divID = null;
     $("#form_photo_actions").change(function() {
@@ -59,7 +61,6 @@ $(document).ready(function() {
         divID = "#form_photo_url";
         var url = $('#form_photo_url').val();
         var filename = url.substr(url.lastIndexOf("/") + 1);
-        console.log(filename);
         duplicateFileError(filename, divID);
     });
 });
