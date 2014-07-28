@@ -96,7 +96,7 @@ class AMPServiceProvider
         };
     }
 
-	public function registerUserProviders(Application $app)
+    public function registerUserProviders(Application $app)
     {
         $app['user.userProvider'] = function () use ($app) {
             return new \AMP\User\UserProvider($app['db']);
