@@ -45,7 +45,7 @@ class DuplicateFilenamesValidator extends ConstraintValidator
     private function isValidFilePath($filepath)
     {
         if (file_exists($filepath)) {
-           return false;
+            return false;
         }
         return true;
     }
