@@ -15,10 +15,10 @@ class UploadManager
     public function upload($file, $newFileName = null)
     {
         $filename = null;
-        if (is_null($newFilename)) {
-            $filename = $newFileName;
+        if (is_null($newFileName)) {
+            $filename = $file->getClientOriginalName();
         } else {
-            $filename =  $file->getClientOriginalName();
+            $filename = $newFileName;
         }
         $file->move($this->uploadDirectory, $filename);
         return $filename;
@@ -27,7 +27,7 @@ class UploadManager
     public function uploadPhoto($file, $newFileName = null)
     {
         $filename = null;
-        if (is_null($newFilename)) {
+        if (is_null($newFileName)) {
             $filename = $this->upload($file);
         } else {
             $filename = $this->upload($file, $newFileName);

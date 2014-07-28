@@ -94,8 +94,8 @@ class MeetTheBandController implements ControllerProviderInterface
             } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
                 $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
             } elseif (!is_null($original_filename)) {
-                    $app['photoUploadManager']->deleteFile($original_filename);
-                    $app['photoUploadManager']->deleteThumbnail($original_filename);
+                $app['photoUploadManager']->deleteFile($original_filename);
+                $app['photoUploadManager']->deleteThumbnail($original_filename);
             } else {
                 throw new \AMP\Exception\PhotosOptionsException();
             }
