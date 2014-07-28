@@ -1,4 +1,8 @@
 function duplicateFileError(filename) {
+    $("#form_submit").attr("disabled", "disabled");
+        if ($("#checking").length == 0) {
+            $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
+        }
     $.ajax({
         url: "/images/photos/" + filename,
         success: function(data) {
@@ -43,19 +47,15 @@ $(document).ready(function() {
         }
     });
     $("#form_photo").change(function() {
-        $("#form_submit").attr("disabled", "disabled");
-        if ($("#checking").length == 0) {
-            $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
-        }
         var filename = $(this)[0].files[0].name;
         duplicateFileError(filename);
     });
     $('#form_photo_rename').on('input', function() {
-        $("#form_submit").attr("disabled", "disabled");
-        if ($("#checking").length == 0) {
-            $("#form_photo").after("<div id=\"checking\">Checking file...</div>");
-        }
         var filename = $('#form_photo_rename').val();
+        duplicateFileError(filename);
+    });
+    $('#form_photo_url').on('input', function() {
+        var filename = $('#form_photo_url').val();
         duplicateFileError(filename);
     });
 });

@@ -47,9 +47,15 @@ class PhotosController implements ControllerProviderInterface
         if ($form->isValid()) {
             $formData = $form->getData();
             if ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
-                $formData['filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
+                $formData['filename'] = $app['photoUploadManager']->uploadPhoto(
+                    $formData['photo'],
+                    $formData['photo_rename']
+                );
             } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
+                $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                    $formData['photo_url'],
+                    $formData['photo_rename']
+                );
             } else {
                 throw new \AMP\Exception\PhotosOptionsException();
             }

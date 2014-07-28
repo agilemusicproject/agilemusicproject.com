@@ -39,9 +39,14 @@ class UploadManager
         return $filename;
     }
 
-    public function uploadPhotoUrl($file)
+    public function uploadPhotoUrl($file, $newFileName = null)
     {
-        $filename = basename($file);
+        $filename = null;
+        if (is_null($newFileName)) {
+            $filename = basename($file);
+        } else {
+            $filename = $newFileName;
+        }
         file_put_contents("$this->uploadDirectory/$filename", file_get_contents($file));
         if (!file_exists($this->getThumbnailDirectory())) {
             mkdir($this->getThumbnailDirectory());
