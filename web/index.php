@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/blog/wp-blog-header.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +53,7 @@ try {
 } catch (Symfony\Component\Yaml\Exception\ParseException $e) {
     echo('Unable to parse the YAML string: ' . $e->getMessage());
 }
-$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {;
+$securityConfig['security.firewalls']['general']['users'] = $app->share(function () use ($app) {
     return new AMP\User\UserProvider($app['db']);
 });
 $app->register(new Silex\Provider\SecurityServiceProvider(), $securityConfig);
@@ -62,12 +63,26 @@ $app['photoUploadManager'] =  new \AMP\UploadManager(__DIR__ . '/images/photos')
 $ampServiceProvider->registerDAOs($app);
 $ampServiceProvider->registerForms($app);
 $ampServiceProvider->registerMail($app);
+$ampServiceProvider->registerUserProviders($app);
 
-$app->get('/', function () use ($app) {
+$app['security.authentication.success_handler.general'] = $app->share(function () use ($app) {
+    return new \AMP\User\CustomAuthenticationSuccessHandler($app['security.http_utils'], array());
+});
+
+$app['security.authentication.logout_handler.general'] = $app->share(function () use ($app) {
+    return new \AMP\User\CustomLogoutSuccessHandler($app['security.http_utils']);
+});
+
+$app->before(function (Request $request) use ($app) {
+    $app['user.loginProvider']->loginUser($request);
+});
+
+$app->get('/', function (Request $request) use ($app) {
     return $app['twig']->render('index.twig');
 });
 
 $app->get('/login', function (Request $request) use ($app) {
+    return $app->redirect('/blog/wp-login.php');
     if (strpos($request->server->get('HTTP_REFERER'), '/login') === false) {
         $app['session']->set('lastUrlBeforeClickingLogin', $request->server->get('HTTP_REFERER'));
     }

@@ -96,6 +96,10 @@ body {
   min-width: 200px;
 }
 
+.wpLogout {
+  padding-left: 20px;
+}
+
 #blogNav {
   position: relative;
   float: left;

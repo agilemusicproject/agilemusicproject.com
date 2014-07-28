@@ -20,7 +20,7 @@ class PhotosFormFactory extends BaseFormFactory
                     'label_attr' => array('class' => 'formLabel'),
                 ))
                 ->add('photo', 'file', array(
-                    'required' => false,
+                    'required' => true,
                     'constraints' => new DuplicateFilenames(
                         array('uploadManager' => $uploadManager)
                     ),
