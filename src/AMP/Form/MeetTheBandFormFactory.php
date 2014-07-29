@@ -45,8 +45,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
         } else {
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
-                    'choices' => array('photo_nothing' => 'Add Nothing',
-                                       'photo_file' => 'Upload File',
+                    'choices' => array('photo_file' => 'Upload File',
                                        'photo_url' => 'Upload from URL'),
                     'expanded' => false,
                     'label' => 'Photo',

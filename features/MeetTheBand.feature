@@ -40,6 +40,9 @@ Feature: AMP Web Site MeetTheBand Page
     When I fill in "form_first_name" with "Bilbo"
     And I fill in "form_last_name" with "Baggins"
     And I fill in "form_roles" with "Bravest Little Hobbit of Them All"
+    And I select "Upload from URL" from "form_photo_actions"
+    Then I should see an "#form_photo_url" element
+    And I fill in "form_photo_url" with "http://images6.alphacoders.com/391/391246.jpg"
     And I press "Submit"
     Then I should be on "/meettheband/"
     And I should see "Bilbo Baggins"

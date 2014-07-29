@@ -1,3 +1,10 @@
+var isDuplicateFile = null;
+function setDuplicateFileValue(value) {
+    isDuplicateFile = value;
+}
+function getDuplicateFileValue() {
+    return isDuplicateFile;
+}
 function duplicateFileError(filename, divID) {
     $.ajax({
         url: "/images/photos/" + filename,
@@ -8,53 +15,60 @@ function duplicateFileError(filename, divID) {
             }
             $("#form_photo_rename").css("display","block");
             $(divID).css("display","none");
-            return true;
+            setDuplicateFileValue(true);
         },
         error: function(err)
         {
             $("#duplicateError").remove();
             $("#checking").remove();
-            return false;
+            setDuplicateFileValue(false);
         }
     });
+    return getDuplicateFileValue();
 }
 
 $(document).ready(function() {
-    var divID = null;
+    var divID = "#form_photo";
+    function updateDivID(newDivID) {
+        divID = newDivID;
+    }
+    function getDivID() {
+        return divID;
+    }
     $("#form_photo_actions").change(function() {
         $("#form_photo_rename").css("display","none");
         var choice = $(this).val();
         if (choice == "photo_file") {
-            divID = "#form_photo";
             $("#form_photo")[0].style.display='block';
             $("#form_photo").prop('required', true);
             $("#form_photo_url")[0].style.display='none';
             $("#form_photo_url").prop('required', false);
-            $("#form_photo_rename").prop('required', false);
+            divID = "#form_photo";
         } else if (choice == "photo_url") {
-            divID = "#form_photo_url";
             $("#form_photo")[0].style.display='none';
             $("#form_photo").prop('required', false);
             $("#form_photo_url")[0].style.display='block';
             $("#form_photo_url").prop('required', true);
-            $("#form_photo_rename").prop('required', false);
+            divID = "#form_photo_url";
         } else {
             $("#form_photo")[0].style.display='none';
             $("#form_photo").prop('required', false);
             $("#form_photo_url")[0].style.display='none';
             $("#form_photo_url").prop('required', false);
-            $("#form_photo_rename").prop('required', true);
+            divID = null;
         }
+        updateDivID(divID);
     });
     $("#form_submit").click(function() {
         var filename;
+        divID = getDivID();
         if ($('#form_photo_rename').val() != "") {
             filename = $('#form_photo_rename').val();
         } else if (divID == "#form_photo_url"){
             var url = $('#form_photo_url').val();
             filename = url.substr(url.lastIndexOf("/") + 1);
         } else if (divID == "#form_photo"){
-            filename = $(this)[0].files[0].name;
+            filename = $(divID)[0].files[0].name;
         }
         if ($("#checking").length == 0) {
             $(divID).after("<div id=\"checking\">Checking file...</div>");
