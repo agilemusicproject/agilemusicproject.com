@@ -23,7 +23,7 @@ class PhotosFormFactory extends BaseFormFactory
                     'required' => true,
                     'label' => false,
                     'label_attr' => array('class' => 'formLabel'),
-                    'attr' => array('style' => 'display: display'),
+                    'attr' => array('style' => 'display: block'),
                 ))
                 ->add('photo_url', 'text', array(
                     'required' => false,

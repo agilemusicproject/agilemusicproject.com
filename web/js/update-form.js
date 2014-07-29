@@ -7,13 +7,14 @@ function getDuplicateFileValue() {
 }
 function duplicateFileError(filename, divID) {
     $.ajax({
+        async: false,
         url: "/images/photos/" + filename,
         success: function(data) {
             $("#checking").remove();
             if ($("#duplicateError").length == 0) {
                 $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
             }
-            $("#form_photo_rename").css("display","block");
+            $("#form_photo_rename").css("display","block").val('');
             $(divID).css("display","none");
             setDuplicateFileValue(true);
         },

@@ -34,9 +34,9 @@ class MeetTheBandFormFactory extends BaseFormFactory
         if ($isUpdateForm) {
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
-                    'choices' => array('photo_nothing' => 'Do Nothing',
-                                       'photo_file' => 'Upload File',
+                    'choices' => array('photo_file' => 'Upload File',
                                        'photo_url' => 'Upload from URL',
+                                       'photo_nothing' => 'Do Nothing',
                                        'photo_delete' => 'Delete Photo'),
                     'expanded' => false,
                     'label' => 'Photo',
@@ -58,7 +58,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'required' => false,
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
-                'attr' => array('style' => 'display: none'),
+                'attr' => array('style' => 'display: block'),
             ))
             ->add('photo_url', 'text', array(
                 'required' => false,
@@ -78,7 +78,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
                 'attr' => array('placeholder' => 'Bio'),
                 'required' => false,
             ))
-            ->add('submit', 'submit');
+            ->add('submit', 'button');
 
         $this->form = $this->formBuilder->getForm();
     }
