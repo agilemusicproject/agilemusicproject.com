@@ -14,11 +14,12 @@
 
 {% block content %}
 
-<h1 id='emailNotification' value="{{notification}}">
-{% if notification is not null %}
-  {% if notification == true %}
+<h1 id='emailNotification' data-emailWasSent="{{emailWasSent}}">
+<!--TODO is set?-->
+{% if emailWasSent is not null %}
+  {% if emailWasSent == true %}
     Your message was sent successfully.
-  {% elseif notification == false %}
+  {% elseif emailWasSent == false %}
     We were not able to send your message. Please try again.
   {% endif %}
 {% endif %}

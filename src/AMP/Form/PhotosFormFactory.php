@@ -7,7 +7,7 @@ use \AMP\Validator\Constraints\DuplicateFilenames;
 
 class PhotosFormFactory extends BaseFormFactory
 {
-    public function __construct(FormFactory $formService, $uploadManager = null, $isEditForm = false)
+    public function __construct(FormFactory $formService, $isEditForm = false)
     {
         $this->formBuilder = $formService->createBuilder('form');
         if (!$isEditForm) {

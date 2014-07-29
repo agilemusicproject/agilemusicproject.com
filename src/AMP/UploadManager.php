@@ -22,9 +22,6 @@ class UploadManager
     public function uploadPhoto($file, $newFileName = null)
     {
         $filename = is_null($newFileName) ? $this->upload($file) : $this->upload($file, $newFileName);
-        if (!file_exists($this->getThumbnailDirectory())) {
-            mkdir($this->getThumbnailDirectory());
-        }
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
@@ -32,10 +29,7 @@ class UploadManager
     public function uploadPhotoUrl($file, $newFileName = null)
     {
         $filename = is_null($newFileName) ? basename($file) : $newFileName;
-        file_put_contents("$this->uploadDirectory/$filename", file_get_contents($file));
-        if (!file_exists($this->getThumbnailDirectory())) {
-            mkdir($this->getThumbnailDirectory());
-        }
+        file_put_contents($this->uploadDirectory . "/" . $filename, file_get_contents($file));
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
@@ -65,6 +59,9 @@ class UploadManager
 
     public function createThumbnail($filename, $desired_width)
     {
+        if (!file_exists($this->getThumbnailDirectory())) {
+            mkdir($this->getThumbnailDirectory());
+        }
         list($width, $height) = getimagesize($this->getFilepath($filename));
         $percent = $desired_width/$width;
         $desired_height = $height * $percent;

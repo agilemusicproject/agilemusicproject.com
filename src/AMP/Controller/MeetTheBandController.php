@@ -4,8 +4,8 @@ namespace AMP\Controller;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use \AMP\Exception\PhotosOptionsException;
 
-// pull function into class method
 class MeetTheBandController implements ControllerProviderInterface
 {
     public function connect(Application $app)
@@ -23,9 +23,8 @@ class MeetTheBandController implements ControllerProviderInterface
         $controllers->match('/edit/{id}', function ($id, Request $request) use ($app) {
             return $this->editAction($request, $app, $id);
         });
-
-        $controllers->match('/sort', function (Request $request) use ($app) {
-            return $this->sortAction($request, $app);
+        $controllers->match('/reorder', function (Request $request) use ($app) {
+            return $this->reorderAction($request, $app);
         });
 
         return $controllers;
@@ -50,18 +49,26 @@ class MeetTheBandController implements ControllerProviderInterface
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            if ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
-                    $formData['photo'],
-                    $formData['photo_rename']
-                );
-            } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
-                    $formData['photo_url'],
-                    $formData['photo_rename']
-                );
-            } else {
-                throw new \AMP\Exception\PhotosOptionsException();
+            switch ($formData['photo_actions']) {
+                case 'photo_nothing':
+                    $formData['photo'] = null;
+                    $formData['photo_filename'] = null;
+                    break;
+                case 'photo_file':
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                        $formData['photo'],
+                        $formData['photo_rename']
+                    );
+                    break;
+                case 'photo_url':
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                        $formData['photo_url'],
+                        $formData['photo_rename']
+                    );
+                    break;
+                default:
+                    throw new PhotosOptionsException();
+                    break;
             }
             $app['dao.bandMembers']->add($formData);
             return $app->redirect('/meettheband');
@@ -79,28 +86,32 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $bandMemberData = $app['dao.bandMembers']->get($id);
             $original_filename = $bandMemberData['photo_filename'];
-            if ($formData['photo_actions'] == 'photo_delete') {
-                $formData['photo'] = null;
-                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
-                $formData['photo_filename'] = null;
-            } elseif ($formData['photo_actions'] == 'photo_nothing') {
-                $formData['photo_filename'] = $original_filename;
-            } elseif ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
-                    $formData['photo'],
-                    $formData['photo_rename']
-                );
-                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
-            } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
-                    $formData['photo_url'],
-                    $formData['photo_rename']
-                );
-                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
-            } elseif (!is_null($original_filename)) {
-                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
-            } else {
-                throw new \AMP\Exception\PhotosOptionsException();
+            switch ($formData['photo_actions']) {
+                case 'photo_delete':
+                    $formData['photo'] = null;
+                    $formData['photo_filename'] = null;
+                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
+                    break;
+                case 'photo_nothing':
+                    $formData['photo_filename'] = $original_filename;
+                    break;
+                case 'photo_file':
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                        $formData['photo'],
+                        $formData['photo_rename']
+                    );
+                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
+                    break;
+                case 'photo_url':
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                        $formData['photo_url'],
+                        $formData['photo_rename']
+                    );
+                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
+                    break;
+                default:
+                    throw new PhotosOptionsException();
+                    break;
             }
             $app['dao.bandMembers']->update($id, $formData);
             return $app->redirect('/meettheband');
@@ -109,12 +120,12 @@ class MeetTheBandController implements ControllerProviderInterface
                                                                   'title' => 'Edit'));
     }
 
-    private function sortAction(Request $request, Application $app)
+    private function reorderAction(Request $request, Application $app)
     {
         if ($request->isMethod('POST')) {
-            $app['dao.bandMembers']->sortUpdate($request->get('list'));
+            $app['dao.bandMembers']->reorderUpdate($request->get('list'));
         }
         $results = $app['dao.bandMembers']->getAll();
-        return $app['twig']->render('meetTheBand.twig', array('results' => $results, 'title' => 'Sort'));
+        return $app['twig']->render('meetTheBand.twig', array('results' => $results));
     }
 }

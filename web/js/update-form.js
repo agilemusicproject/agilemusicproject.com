@@ -1,12 +1,5 @@
-var isDuplicateFile = null;
-function setDuplicateFileValue(value) {
-    isDuplicateFile = value;
-}
-function getDuplicateFileValue() {
-    return isDuplicateFile;
-}
 function duplicateFileError(filename, divID) {
-    $.ajax({
+    var results = $.ajax({
         async: false,
         url: "/images/photos/" + filename,
         success: function(data) {
@@ -16,36 +9,23 @@ function duplicateFileError(filename, divID) {
             }
             $("#form_photo_rename").css("display","block").val('');
             $(divID).css("display","none");
-            setDuplicateFileValue(true);
         },
-        error: function(err)
+        error: function(err, status)
         {
             $("#duplicateError").remove();
             $("#checking").remove();
-            setDuplicateFileValue(false);
         }
     });
-    return getDuplicateFileValue();
+    if (results.status == "200") {
+        return true;
+    } else {
+        return false;
+    }
 }
-
+//TODO did not submit when upload photo from url
 $(document).ready(function() {
     var divID = "#form_photo";
-    var extension;
-    function updateDivID(newDivID) {
-        divID = newDivID;
-    }
-
-    function getDivID() {
-        return divID;
-    }
-
-    function setFileExtension(e) {
-        extension = e;
-    }
-
-    function getFileExtension() {
-        return extension;
-    }
+    var fileExtension;
     $("#form_photo_actions").change(function() {
         $("#form_photo_rename").css("display","none");
         var choice = $(this).val();
@@ -68,21 +48,21 @@ $(document).ready(function() {
             $("#form_photo_url").prop('required', false);
             divID = null;
         }
-        updateDivID(divID);
+        console.log("updating divID to " + divID);
     });
     $("#form_submit").click(function() {
         var filename;
-        divID = getDivID();
+        console.log("getting divID: " + divID);
         if ($('#form_photo_rename').val()) {
-            filename = $('#form_photo_rename').val() + getFileExtension();
+            filename = $('#form_photo_rename').val() + fileExtension;
             $('#form_photo_rename').val(filename);
         } else if (divID == "#form_photo_url") {
             var url = $('#form_photo_url').val();
             filename = url.substr(url.lastIndexOf("/") + 1);
-            setFileExtension(filename.substr(filename.lastIndexOf('.')));
+            fileExtension = filename.substr(filename.lastIndexOf('.'));
         } else if (divID == "#form_photo") {
             filename = $(divID)[0].files[0].name;
-            setFileExtension(filename.substr(filename.lastIndexOf('.')));
+            fileExtension = filename.substr(filename.lastIndexOf('.'));
         }
         if ($("#checking").length == 0) {
             $(divID).after("<div id=\"checking\">Checking file...</div>");

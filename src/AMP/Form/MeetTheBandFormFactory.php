@@ -8,7 +8,7 @@ use \AMP\Validator\Constraints\DuplicateFilenames;
 class MeetTheBandFormFactory extends BaseFormFactory
 {
     // consider refactoring form into wrapper class
-    public function __construct(FormFactory $formService, $uploadManager = null, $isUpdateForm = false)
+    public function __construct(FormFactory $formService, $isUpdateForm = false)
     {
         $default['photo'] = null;
         $default['photo_actions'] = 'photo_nothing';
@@ -46,7 +46,8 @@ class MeetTheBandFormFactory extends BaseFormFactory
             $this->formBuilder
                 ->add('photo_actions', 'choice', array(
                     'choices' => array('photo_file' => 'Upload File',
-                                       'photo_url' => 'Upload from URL'),
+                                       'photo_url' => 'Upload from URL',
+                                       'photo_nothing' => 'Add Nothing'),
                     'expanded' => false,
                     'label' => 'Photo',
                     'label_attr' => array('class' => 'formLabel'),
