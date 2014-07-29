@@ -55,7 +55,7 @@ class PhotosController implements ControllerProviderInterface
                     );
                     break;
                 case 'photo_url':
-                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
                         $formData['photo_url'],
                         $formData['photo_rename']
                     );

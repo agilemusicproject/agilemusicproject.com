@@ -61,7 +61,7 @@ class MeetTheBandController implements ControllerProviderInterface
                     );
                     break;
                 case 'photo_url':
-                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
                         $formData['photo_url'],
                         $formData['photo_rename']
                     );
@@ -86,11 +86,13 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $bandMemberData = $app['dao.bandMembers']->get($id);
             $original_filename = $bandMemberData['photo_filename'];
+            if (!is_null(original_filename) && ($formData['photo_actions'] != "photo_nothing") {
+                $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
+            }
             switch ($formData['photo_actions']) {
                 case 'photo_delete':
                     $formData['photo'] = null;
                     $formData['photo_filename'] = null;
-                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
                     break;
                 case 'photo_nothing':
                     $formData['photo_filename'] = $original_filename;
@@ -100,14 +102,12 @@ class MeetTheBandController implements ControllerProviderInterface
                         $formData['photo'],
                         $formData['photo_rename']
                     );
-                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
                     break;
                 case 'photo_url':
                     $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
                         $formData['photo_url'],
                         $formData['photo_rename']
                     );
-                    $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
                     break;
                 default:
                     throw new PhotosOptionsException();
