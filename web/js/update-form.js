@@ -65,10 +65,10 @@ $(document).ready(function() {
         divID = getDivID();
         if ($('#form_photo_rename').val() != "") {
             filename = $('#form_photo_rename').val();
-        } else if (divID == "#form_photo_url"){
+        } else if (divID == "#form_photo_url") {
             var url = $('#form_photo_url').val();
             filename = url.substr(url.lastIndexOf("/") + 1);
-        } else if (divID == "#form_photo"){
+        } else if (divID == "#form_photo") {
             filename = $(divID)[0].files[0].name;
         }
         if ($("#checking").length == 0) {
