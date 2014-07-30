@@ -49,13 +49,13 @@ class PhotosController implements ControllerProviderInterface
             //TODO maybe a form handler service
             switch ($formData['photo_actions']) {
                 case 'photo_file':
-                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhoto(
+                    $formData['filename'] = $app['photoUploadManager']->uploadPhoto(
                         $formData['photo'],
                         $formData['photo_rename']
                     );
                     break;
                 case 'photo_url':
-                    $formData['photo_filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                    $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl(
                         $formData['photo_url'],
                         $formData['photo_rename']
                     );
