@@ -1,4 +1,5 @@
 function imageFound(divID) {
+    $("#checking").remove();
     if ($("#duplicateError").length == 0) {
         $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
     }
@@ -9,6 +10,7 @@ function imageFound(divID) {
 
 function imageNotFound() {
     $("#duplicateError").remove();
+    $("#checking").remove();
     return false;
 }
 
