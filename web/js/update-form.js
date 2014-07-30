@@ -14,7 +14,7 @@ function imageNotFound() {
 
 function fileNameExists(filename) {
     var http = new XMLHttpRequest();
-    http.open('POST', "/images/photos/" + filename, false);
+    http.open('GET', "/images/photos/" + filename, false);
     http.send();
     return http.status != 404;
 }
