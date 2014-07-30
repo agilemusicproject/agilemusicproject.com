@@ -14,9 +14,10 @@ function imageNotFound() {
 
 function fileNameExists(filename) {
     var http = new XMLHttpRequest();
-    http.open('GET', "/images/photos/" + filename, false);
-    http.send();
-    return http.status != 404;
+    http.open('POST', "/checkImage", false);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    http.send('filename='+filename);
+    return http.response;
 }
 
 function duplicateFileError(filename, divID) {
@@ -55,6 +56,9 @@ $(document).ready(function() {
     });
     $("#form_submit").click(function() {
         var filename;
+        if ($("#checking").length == 0) {
+            $(divID).after("<div id=\"checking\">Checking file...</div>");
+        }
         if ($('#form_photo_rename').val()) {
             filename = $('#form_photo_rename').val() + fileExtension;
             $('#form_photo_rename').val(filename);
