@@ -409,6 +409,7 @@ div.img a:hover img {
   display: none;
   width: auto;
   height: 300px;
+  max-width: 550px;
 }
 
 #meetTheBandUpdateForm {

@@ -1,5 +1,4 @@
 function imageFound(divID) {
-    $("#checking").remove();
     if ($("#duplicateError").length == 0) {
         $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
     }
@@ -10,16 +9,18 @@ function imageFound(divID) {
 
 function imageNotFound() {
     $("#duplicateError").remove();
-    $("#checking").remove();
     return false;
 }
 
+function fileNameExists(filename) {
+    var http = new XMLHttpRequest();
+    http.open('POST', "/images/photos/" + filename, false);
+    http.send();
+    return http.status != 404;
+}
+
 function duplicateFileError(filename, divID) {
-    var results = $.ajax({
-        async: false,
-        url: "/images/photos/" + filename
-    });
-    if (results.status == "200") {
+    if (fileNameExists(filename)) {
         return imageFound(divID);
     } else {
         return imageNotFound();
@@ -54,7 +55,6 @@ $(document).ready(function() {
     });
     $("#form_submit").click(function() {
         var filename;
-        $(divID).after("<div id=\"checking\">Checking file...</div>");
         if ($('#form_photo_rename').val()) {
             filename = $('#form_photo_rename').val() + fileExtension;
             $('#form_photo_rename').val(filename);
