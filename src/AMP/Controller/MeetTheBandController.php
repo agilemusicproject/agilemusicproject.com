@@ -86,7 +86,7 @@ class MeetTheBandController implements ControllerProviderInterface
             $formData = $form->getData();
             $bandMemberData = $app['dao.bandMembers']->get($id);
             $original_filename = $bandMemberData['photo_filename'];
-            if (!is_null(original_filename) && $formData['photo_actions'] != "photo_nothing") {
+            if (!is_null($original_filename) && $formData['photo_actions'] != "photo_nothing") {
                 $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
             }
             switch ($formData['photo_actions']) {
