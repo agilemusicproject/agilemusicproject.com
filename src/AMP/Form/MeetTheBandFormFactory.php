@@ -56,7 +56,7 @@ class MeetTheBandFormFactory extends BaseFormFactory
 
         $this->formBuilder
             ->add('photo', 'file', array(
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'label_attr' => array('class' => 'formLabel'),
                 'attr' => array('style' => 'display: block'),

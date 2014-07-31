@@ -90,10 +90,9 @@ $app->get('/login', function (Request $request) use ($app) {
                                                     'lastPage' =>  $app['session']->get('lastUrlBeforeClickingLogin')));
 });
 
-$app->post('/checkImage', function (Request $request) use ($app) {
-    $filename = $request->get('filename');
+$app->get('/checkImage/{filename}', function ($filename, Request $request) use ($app) {
     $filepath = $app['photoUploadManager']->getFilePath($filename);
-    return file_exists($filepath);
+    return $app->json(array('fileExists' => file_exists($filepath)));
 });
 
 $app->mount('/meettheband', new AMP\Controller\MeetTheBandController());
