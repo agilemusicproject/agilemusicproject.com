@@ -85,7 +85,7 @@ class UploadManager
             imagejpeg($thumb, $this->getThumbnailFilePath($filename));
         } else {
             imagejpeg($source, $this->getThumbnailFilePath($filename));
-        }        
+        }
 
         imagedestroy($thumb);
         imagedestroy($source);
