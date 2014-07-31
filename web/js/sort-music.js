@@ -5,5 +5,4 @@ $(document).ready(function() {
          $.post('/music/update', {list: sortData}, function(o) {},'json');
       }
    });
-
 });

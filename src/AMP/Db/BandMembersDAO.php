@@ -87,7 +87,7 @@ class BandMembersDAO extends AbstractDAO
         }
     }
 
-    public function sortUpdate($data)
+    public function reorderUpdate($data)
     {
         $dataArray = array();
         $data = parse_str($data, $dataArray);

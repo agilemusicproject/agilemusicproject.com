@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    if ( $('#emailNotification').attr('value') == "1" ) {
-        $(':input','#contactForm')
+    if ($('#emailNotification').attr('data-emailWasSent')) {
+        $(':input', '#contactForm')
         .not(':submit, :hidden')
         .val('');
     }

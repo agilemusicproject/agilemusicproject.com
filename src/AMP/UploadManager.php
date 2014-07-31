@@ -12,30 +12,24 @@ class UploadManager
         $this->uploadDirectory = $uploadDirectory;
     }
 
-    public function upload($file)
+    public function upload($file, $newFileName = null)
     {
-        $filename =  $file->getClientOriginalName();
+        $filename = is_null($newFileName) ? $file->getClientOriginalName() : $newFileName;
         $file->move($this->uploadDirectory, $filename);
         return $filename;
     }
 
-    public function uploadPhoto($file)
+    public function uploadPhoto($file, $newFileName = null)
     {
-        $filename = $this->upload($file);
-        if (!file_exists($this->getThumbnailDirectory())) {
-            mkdir($this->getThumbnailDirectory());
-        }
+        $filename = is_null($newFileName) ? $this->upload($file) : $this->upload($file, $newFileName);
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
 
-    public function uploadPhotoUrl($file)
+    public function uploadPhotoUrl($file, $newFileName = null)
     {
-        $filename = basename($file);
-        file_put_contents("$this->uploadDirectory/$filename", file_get_contents($file));
-        if (!file_exists($this->getThumbnailDirectory())) {
-            mkdir($this->getThumbnailDirectory());
-        }
+        $filename = is_null($newFileName) ? basename($file) : $newFileName;
+        file_put_contents($this->uploadDirectory . "/" . $filename, file_get_contents($file));
         $this->createThumbnail($filename, $this->thumbnailWidth);
         return $filename;
     }
@@ -45,6 +39,12 @@ class UploadManager
         if (file_exists($filename)) {
             unlink($filename);
         }
+    }
+
+    public function deleteFileAndThumbnail($filename)
+    {
+        $this->deleteFile($filename);
+        $this->deleteThumbnail($filename);
     }
 
     public function deleteFile($filename)
@@ -59,6 +59,9 @@ class UploadManager
 
     public function createThumbnail($filename, $desired_width)
     {
+        if (!file_exists($this->getThumbnailDirectory())) {
+            mkdir($this->getThumbnailDirectory());
+        }
         list($width, $height) = getimagesize($this->getFilepath($filename));
         $percent = $desired_width/$width;
         $desired_height = $height * $percent;

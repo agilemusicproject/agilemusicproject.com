@@ -38,16 +38,12 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.meetTheBandAdd'] = function () use ($app) {
-            $formFactory = new \AMP\Form\MeetTheBandFormFactory(
-                $app['form.factory'],
-                $app['photoUploadManager']
-            );
+            $formFactory = new \AMP\Form\MeetTheBandFormFactory($app['form.factory']);
             return $formFactory->getForm();
         };
         $app['forms.meetTheBandEdit'] = function () use ($app) {
             $formFactory = new \AMP\Form\MeetTheBandFormFactory(
                 $app['form.factory'],
-                $app['photoUploadManager'],
                 true
             );
             return $formFactory->getForm();
@@ -61,16 +57,12 @@ class AMPServiceProvider
             return $formFactory->getForm();
         };
         $app['forms.photosAdd'] = function () use ($app) {
-            $formFactory = new \AMP\Form\PhotosFormFactory(
-                $app['form.factory'],
-                $app['photoUploadManager']
-            );
+            $formFactory = new \AMP\Form\PhotosFormFactory($app['form.factory']);
             return $formFactory->getForm();
         };
         $app['forms.photosEdit'] = function () use ($app) {
             $formFactory = new \AMP\Form\PhotosFormFactory(
                 $app['form.factory'],
-                null,
                 true
             );
             return $formFactory->getForm();

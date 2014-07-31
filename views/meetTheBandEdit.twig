@@ -15,8 +15,8 @@
 {% block header %} {{ title }} Band Member {%endblock%}
 
 {% block content %}
-<div id="meetTheBandUpdateForm">
-  <form method="POST" enctype="multipart/form-data">
+<div>
+  <form id="photoEditForm" method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
     {{ form_rest(form) }}

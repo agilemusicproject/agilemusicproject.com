@@ -46,12 +46,23 @@ class PhotosController implements ControllerProviderInterface
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            if ($formData['photo_actions'] == 'photo_file' && !is_null($formData['photo'])) {
-                $formData['filename'] = $app['photoUploadManager']->uploadPhoto($formData['photo']);
-            } elseif ($formData['photo_actions'] == 'photo_url' && !is_null($formData['photo_url'])) {
-                $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl($formData['photo_url']);
-            } else {
-                throw new \AMP\Exception\PhotosOptionsException();
+            //TODO maybe a form handler service
+            switch ($formData['photo_actions']) {
+                case 'photo_file':
+                    $formData['filename'] = $app['photoUploadManager']->uploadPhoto(
+                        $formData['photo'],
+                        $formData['photo_rename']
+                    );
+                    break;
+                case 'photo_url':
+                    $formData['filename'] = $app['photoUploadManager']->uploadPhotoUrl(
+                        $formData['photo_url'],
+                        $formData['photo_rename']
+                    );
+                    break;
+                default:
+                    throw new PhotosOptionsException();
+                    break;
             }
             $app['dao.photos']->add($formData);
             return $app->redirect('/photos');
