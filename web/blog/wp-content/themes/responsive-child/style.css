@@ -17,6 +17,7 @@ body {
 
 #wrapper {
   background:rgba(0,0,0,0);
+  border: none;
 }
 
 .type-post {
@@ -46,6 +47,7 @@ body {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 10px;
+  padding-right: 10px;
   margin: 0 auto 10px;
   position: relative;
   color: #444;

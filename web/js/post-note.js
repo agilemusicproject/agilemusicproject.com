@@ -12,7 +12,7 @@ function drawPostNote(idName, textArray, degrees, filename)
     context.translate(-canvas.width/2, -canvas.height/2);
     imageObj.onload = function() {
         context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
-        context.font = "20pt Calibri";
+        context.font = "20pt Nunito";
         for (i=0; i<textArray.length; i++) {
             context.fillText(textArray[i], canvas.width/3, canvas.height/3 + (i*30));
         }

@@ -5,7 +5,7 @@ class UploadManager
 {
     private $uploadDirectory;
     private $thumbnailsDirectoryName = '/thumbnails';
-    private $thumbnailWidth = 900;
+    private $thumbnailWidth = 450;
 
     public function __construct($uploadDirectory)
     {
@@ -60,12 +60,13 @@ class UploadManager
     public function createThumbnail($filename, $desired_width)
     {
         list($width, $height) = getimagesize($this->getFilepath($filename));
+            
         $percent = $desired_width/$width;
         $desired_height = $height * $percent;
-
+        
         $thumb = imagecreatetruecolor($desired_width, $desired_height);
-
-        $extension = substr($filename, strrpos($filename, '.')+1);
+        
+        $extension = strtolower(substr($filename, strrpos($filename, '.')+1));
         switch($extension) {
             case 'jpeg':
             case 'jpg':
@@ -78,11 +79,16 @@ class UploadManager
                 $source = imagecreatefromgif($this->getFilepath($filename));
                 break;
         }
+        
+        if ($width > $desired_width) {
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+            imagejpeg($thumb, $this->getThumbnailFilePath($filename));
+        } else {
+            imagejpeg($source, $this->getThumbnailFilePath($filename));
+        }        
 
-        imagecopyresized($thumb, $source, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
-
-        imagejpeg($thumb, $this->getThumbnailFilePath($filename));
         imagedestroy($thumb);
+        imagedestroy($source);
     }
 
     public function getThumbnailDirectory()
