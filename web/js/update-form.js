@@ -1,32 +1,3 @@
-function imageFound(divID) {
-    if ($("#duplicateError").length == 0) {
-        $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
-    }
-    $("#form_photo_rename").css("display","block").val('').focus();
-    $(divID).css("display","none");
-    return true;
-}
-
-function imageNotFound() {
-    $("#duplicateError").remove();
-    return false;
-}
-
-function fileNameExists(filename) {
-    var http = new XMLHttpRequest();
-    http.open('POST', "/images/photos/" + filename, false);
-    http.send();
-    return http.status != 404;
-}
-
-function duplicateFileError(filename, divID) {
-    if (fileNameExists(filename)) {
-        return imageFound(divID);
-    } else {
-        return imageNotFound();
-    }
-}
-
 $(document).ready(function() {
     var divID = "#form_photo";
     var fileExtension;
@@ -62,12 +33,26 @@ $(document).ready(function() {
             var url = $('#form_photo_url').val();
             filename = url.substr(url.lastIndexOf("/") + 1);
             fileExtension = filename.substr(filename.lastIndexOf('.'));
-        } else if (divID == "#form_photo") {
+        } else if (divID == "#form_photo" && $(divID)[0].files[0] !== undefined) {
             filename = $(divID)[0].files[0].name;
             fileExtension = filename.substr(filename.lastIndexOf('.'));
         }
-        if (!duplicateFileError(filename, divID)) {
-            $("#photoEditForm").submit();
+        if (filename !== undefined || divID === null) {
+            $(divID).after("<div id=\"checking\">Checking file...</div>");
+            $("#duplicateError").remove();
+            $("#form_submit").attr("disabled", "disabled");
+            $(".cancel_button").attr("disabled", "disabled");
+            $.get('/checkImage/' + filename, function(data) {
+                $('#checking').remove();
+                $("#form_submit").removeAttr("disabled");
+                $(".cancel_button").removeAttr("disabled");
+                if (data.fileExists === false) {
+                    $("#photoEditForm").submit();
+                } else {
+                    $(divID).after("<div id=\"duplicateError\">There is already a file with this name.</div>");
+                    $("#form_photo_rename").css("display","block").val('').focus();
+                }
+            });
         }
     });
 });
