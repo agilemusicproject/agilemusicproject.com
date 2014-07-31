@@ -12,9 +12,9 @@ function drawPostNote(idName, textArray, degrees, filename)
     context.translate(-canvas.width/2, -canvas.height/2);
     imageObj.onload = function() {
         context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
-        context.font = "20pt Nunito";
+        context.font = '20pt Architects Daughter';
         for (i=0; i<textArray.length; i++) {
-            context.fillText(textArray[i], canvas.width/3, canvas.height/3 + (i*30));
+            context.fillText(textArray[i], canvas.width/3.5, canvas.height/3 + (i*30));
         }
         context.textAlign = 'center';
     };
@@ -45,7 +45,7 @@ function drawAgilePostNote()
 
 function drawBandPostNote()
 {
-    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v23.png"); //old version is 12
+    drawPostNote( "meetTheBandpostcard", ["Meet", "the Band"], 15, "sticky-notes_v23.png");
 }
 
 function drawPhotosPostNote()

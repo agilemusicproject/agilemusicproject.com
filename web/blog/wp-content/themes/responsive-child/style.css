@@ -1,4 +1,4 @@
-/*   
+/*
 Theme Name: Responsive Child Theme
 Description: Responsive Child Theme
 Template: responsive
@@ -8,11 +8,13 @@ Version: 1.0
 /* =Start From Here
 -------------------------------------------------------------- */
 
-
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,700);
 
 body {
   background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
+  font-family: 'Merriweather', 'sans-serif';
 }
 
 #wrapper {
@@ -53,7 +55,7 @@ body {
   color: #444;
   line-height: 20px;
   border: 1px solid #d2d2d2;
- 
+
   background: #fff;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
   background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
@@ -61,13 +63,13 @@ body {
   background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
   background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
   background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
- 
+
   -webkit-background-size: 100% 20px;
   -moz-background-size: 100% 20px;
   -ms-background-size: 100% 20px;
   -o-background-size: 100% 20px;
   background-size: 100% 20px;
- 
+
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -81,6 +83,7 @@ body {
   border-bottom: solid;
   border-color: rgba(255,0,0,.3);
   background-color: white;
+  font-family: 'Architects Daughter';
 }
 
 #logocontainer.headernav {
@@ -91,6 +94,10 @@ body {
 #postitcontainer.headernav {
   padding-top: 10px;
   padding-right: 10px;
+}
+
+.menuPostIt {
+  font-family: 'Architects Daughter';
 }
 
 #navLogo {

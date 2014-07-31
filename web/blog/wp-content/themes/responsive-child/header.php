@@ -2,7 +2,7 @@
 
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 /**
@@ -20,39 +20,39 @@ if( !defined( 'ABSPATH' ) ) {
  * @since          available since Release 1.0
  */
 ?>
-	<!doctype html>
-	<!--[if !IE]>
-	<html class="no-js non-ie" <?php language_attributes(); ?>> <![endif]-->
-	<!--[if IE 7 ]>
-	<html class="no-js ie7" <?php language_attributes(); ?>> <![endif]-->
-	<!--[if IE 8 ]>
-	<html class="no-js ie8" <?php language_attributes(); ?>> <![endif]-->
-	<!--[if IE 9 ]>
-	<html class="no-js ie9" <?php language_attributes(); ?>> <![endif]-->
-	<!--[if gt IE 9]><!-->
+    <!doctype html>
+    <!--[if !IE]>
+    <html class="no-js non-ie" <?php language_attributes(); ?>> <![endif]-->
+    <!--[if IE 7 ]>
+    <html class="no-js ie7" <?php language_attributes(); ?>> <![endif]-->
+    <!--[if IE 8 ]>
+    <html class="no-js ie8" <?php language_attributes(); ?>> <![endif]-->
+    <!--[if IE 9 ]>
+    <html class="no-js ie9" <?php language_attributes(); ?>> <![endif]-->
+    <!--[if gt IE 9]><!-->
 <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
-	<head>
+    <head>
 
-		<meta charset="<?php bloginfo( 'charset' ); ?>"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="<?php bloginfo( 'charset' ); ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title><?php wp_title( '&#124;', true, 'right' ); ?></title>
+        <title><?php wp_title( '&#124;', true, 'right' ); ?></title>
 
-		<link rel="profile" href="http://gmpg.org/xfn/11"/>
-		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
-		
-		<script type="text/javascript" src="/js/post-note.js"></script>
-		<?php wp_head(); ?>
-		<script type="text/javascript" src="/js/img-margin.js"></script>
-	</head>
-	
+        <link rel="profile" href="http://gmpg.org/xfn/11"/>
+        <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
+
+        <script type="text/javascript" src="/js/post-note.js"></script>
+        <?php wp_head(); ?>
+        <script type="text/javascript" src="/js/img-margin.js"></script>
+    </head>
+
 <body <?php body_class(); ?> onload="drawBlogPostNote()">
-	
+
 <nav id="blogNav">
   <div class="headernav" id="logocontainer">
-	<a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
+    <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
   </div>
-  <div class="headernav" id="postitcontainer">
+  <div class="headernav menuPostIt" id="postitcontainer">
    <canvas id="blogpostcard" class="postitheader" >Blog</canvas>
   </div>
 </nav>
@@ -63,6 +63,6 @@ if( !defined( 'ABSPATH' ) ) {
 
 
 <?php responsive_wrapper(); // before wrapper container hook ?>
-	<div id="wrapper" class="clearfix">
+    <div id="wrapper" class="clearfix">
 <?php responsive_wrapper_top(); // before wrapper content hook ?>
 <?php responsive_in_wrapper(); // wrapper hook ?>
