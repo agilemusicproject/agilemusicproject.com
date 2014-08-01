@@ -112,11 +112,19 @@ body {
 }
 
 #container {
+  max-width: 1200px;
   display: table;
 }
 
 #wrapper {
-  width: 800px;
+  max-width: 1200px;
+  width: auto;
+  min-width: 800px;
+}
+
+.grid,
+.grid-right {
+  float: left;
 }
 
 @media screen and (max-width: 900px) {
@@ -128,6 +136,11 @@ body {
     max-width: 800px;
     min-width: 100px;
     width: auto;
+  }
+  
+  .grid,
+  .grid-right {
+    float: none;
   }
 }
 
