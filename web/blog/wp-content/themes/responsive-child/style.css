@@ -10,6 +10,7 @@ Version: 1.0
 
 @import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700);
+@import url(http://fonts.googleapis.com/css?family=Questrial);
 
 body {
   background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
@@ -124,6 +125,10 @@ body {
 
 #wrapper {
   width: 800px;
+}
+
+h1, h2, h3, h4, h5, h6, .post-data, .post-meta {
+    font-family: 'Questrial';
 }
 
 @media screen and (max-width: 900px) {
