@@ -2,18 +2,16 @@
 @import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700);
 
-.clearer {
-  clear: both;
+body {
+  background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
+  background-size: cover;
+  min-width: 900px;
+  font-family: 'Merriweather', 'sans-serif';
 }
 
-.hidden {
-  display: none;
-}
-
-.pageText {
-  max-width: 900px;
-  display: table;
-  width: 100%;
+nav {
+  float: left;
+  position: relative;
 }
 
 textarea {
@@ -22,192 +20,40 @@ textarea {
   width: 50%;
 }
 
-a.imageLink {
-  text-decoration: none;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Questrial';
 }
 
-.photoContainer {
+div.img {
   display: inline-block;
-  width: 220px;
-  vertical-align: top;
-  text-align: center;
-}
-
-.caption {
-  display: block;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-top: 5px;
-}
-
-#galleryTab {
-  padding-left: 2px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.filter {
-  padding-right: 10px;
-  padding-left: 10px;
-  text-decoration: none;
-  color: black;
-  border: 1px solid;
-  margin-right: 5px;
-}
-
-.active {
-  background-color: #96CDCD;
-}
-
-.fancyphoto {
-  display: inline;
-  max-width: 200px;
-  padding-right: 3px;
-  padding-left: 3px;
-}
-
-.pageText, .title, .photosPage, .aboutPageText, .pageHeader {
+  margin:5px;
+  padding: 5px;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
-  text-align: left;
-  padding-top: 20px;
 }
 
-.bandMemberEntry {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  padding-top: 0px;
+div.img img {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid #ffffff;
+  height: auto;
+  width: 150px;
 }
 
-.notecard {
-  padding-right: 0px;
-  padding-bottom: 4px;
-  padding-left: 10px;
-  margin: 0 auto 0px;
-  position: relative;
-  color: #444;
-  line-height: 20px;
-  border: 1px solid #d2d2d2;
-
-  background: #fff;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
-  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-
-  -webkit-background-size: 100% 20px;
-  -moz-background-size: 100% 20px;
-  -ms-background-size: 100% 20px;
-  -o-background-size: 100% 20px;
-  background-size: 100% 20px;
-
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  margin-left: 210px;
-
-  background-position: 0px 100px;
+div.img a:hover img {
+  border: 1px solid #0000ff;
 }
 
-.notecard p {
-    margin-top: 0;
-    margin-bottom: 20px;
+.clearer {
+  clear: both;
 }
 
-.bandMemberTitle {
-  margin-top: 0px;
-  margin-bottom: 17px;
-  height: 30px;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: -10px;
-  border-bottom: solid;
-  border-color: rgba(255,0,0,.3);
-  background-color: white;
-  font-weight: normal;
-}
-
-.bandMemberBio {
-  line-height: 20px;
-  padding-right: 6px;
-}
-
-.bioPhoto, .defaultBioPhoto {
-  max-width: 200px;
-  float: left;
-}
-
-.bioWrapper {
-  padding-bottom: 1.5em;
-  overflow: auto;
-}
-
-.passwordText {
-  -webkit-text-security: disc;
-}
-
-.formLabel {
-  display: block;
-}
-
-.aboutPageText {
-  max-width: 900px;
-}
-
-.pageHeader {
-  max-width: 900px;
-  font-size: 20px;
-  text-align: left;
-}
-
-.deleteID {
+.hidden {
   display: none;
 }
 
-#navLogo {
-  max-width: 200px;
-  min-width: 200px;
-}
-
-nav {
-  float: left;
-  position: relative;
-}
-
-#logocontainer.headernav {
-  text-align: left;
-  padding-left: 10px;
-}
-
-#postitcontainer.headernav {
-  padding-top: 10px;
-  padding-right: 10px;
-}
-
-body {
-  background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
-  background-size: cover;
-  min-width: 900px;
-  font-family: 'Merriweather', 'sans-serif';
-}
-
-.photosPage {
-  max-width: 1100px;
-  text-align: left;
-}
-
-.title {
-  text-align: center;
-}
-
-.loginFormField {
-  display: block;
-}
-
+<!--INDEX PAGE AND POST IT-->
 .postitheader {
   width: 200px;
 }
@@ -236,10 +82,6 @@ body {
 
 .menuPostIt {
   font-family: 'Architects Daughter';
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Questrial';
 }
 
 #musicpostcard {
@@ -341,32 +183,244 @@ h1, h2, h3, h4, h5, h6 {
     right: 10%;
   }
 }
+<!--END OF INDEX PAGE AND POST-IT-->
 
-div.img {
-  display: inline-block;
-  margin:5px;
-  padding: 5px;
-  width: auto;
+<!--GENERAL CLASSES-->
+.pageText, .title, .photosPage, .pageHeader {
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
+  padding-top: 20px;
 }
 
-div.img img {
-  display: inline-block;
-  margin: 5px;
-  border: 1px solid #ffffff;
-  height: auto;
-  width: 150px;
+.pageText {
+  max-width: 900px;
+  display: table;
+  width: 100%;
 }
 
-div.img a:hover img {
-  border: 1px solid #0000ff;
+a.imageLink {
+  text-decoration: none;
+}
+
+.passwordText {
+  -webkit-text-security: disc;
+}
+
+.formLabel {
+  display: block;
+}
+
+.pageHeader {
+  max-width: 900px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.deleteID {
+  display: none;
+}
+
+#navLogo {
+  max-width: 200px;
+  min-width: 200px;
+}
+
+#logocontainer.headernav {
+  text-align: left;
+  padding-left: 10px;
+}
+
+#postitcontainer.headernav {
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.photosPage {
+  max-width: 1100px;
+  text-align: left;
+}
+
+.title {
+  text-align: center;
+}
+
+.loginFormField {
+  display: block;
 }
 
 #cke_form_bio, #cke_form_message {
   max-width: 800px;
 }
 
+.newsData {
+  text-align: right;
+  font-size: x-large;
+}
+
+.previewContainer {
+  position: absolute;
+  top: 0px;
+  right: 100px;
+}
+<!--END OF GENERAL CLASSES-->
+
+<!--PHOTOS PAGE-->
+.photoContainer {
+  display: inline-block;
+  width: 220px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.caption {
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+#galleryTab {
+  padding-left: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.filter {
+  padding-right: 10px;
+  padding-left: 10px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid;
+  margin-right: 5px;
+}
+
+.active {
+  background-color: #96CDCD;
+}
+
+.fancyphoto {
+  display: inline;
+  max-width: 200px;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+#previewPhotoPage {
+  display: none;
+  width: auto;
+  height: 300px;
+  max-width: 550px;
+}
+<!--END OF PHOTOS PAGE-->
+
+<!--BAND MEMBER PAGE-->
+.bandMemberEntry {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding-top: 0px;
+}
+
+.notecard {
+  padding-right: 0px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  margin: 0 auto 0px;
+  position: relative;
+  color: #444;
+  line-height: 20px;
+  border: 1px solid #d2d2d2;
+
+  background: #fff;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+  background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+  background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+
+  -webkit-background-size: 100% 20px;
+  -moz-background-size: 100% 20px;
+  -ms-background-size: 100% 20px;
+  -o-background-size: 100% 20px;
+  background-size: 100% 20px;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-left: 210px;
+
+  background-position: 0px 100px;
+}
+
+.notecard p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.bandMemberTitle {
+  margin-top: 0px;
+  margin-bottom: 17px;
+  height: 30px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: -10px;
+  border-bottom: solid;
+  border-color: rgba(255,0,0,.3);
+  background-color: white;
+  font-weight: normal;
+}
+
+.bandMemberBio {
+  line-height: 20px;
+  padding-right: 6px;
+}
+
+.bioPhoto, .defaultBioPhoto {
+  max-width: 200px;
+  float: left;
+}
+
+.bioWrapper {
+  padding-bottom: 1.5em;
+  overflow: auto;
+}
+
+.bioPagetext {
+  list-style-type: none;
+  position: relative;
+}
+
+#sortBios {
+  padding-left: 0px;
+}
+
+#previewBioPhoto {
+  display: none;
+  width: auto;
+  height: 120px;
+}
+
+#photoEditForm {
+  position: relative;
+}
+
+.editButtonMembers {
+  position: absolute;
+  top: 3px;
+  right: 70px;
+}
+
+.deleteBoxMembers {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+<!--END OF BAND MEMBER PAGE-->
+
+<!--MUSIC PAGE-->
 .musicPageText {
   list-style-type: none;
   cursor: move;
@@ -391,59 +445,9 @@ div.img a:hover img {
   border-style: outset;
 }
 
-.newsData {
-  text-align: right;
-  font-size: x-large;
-}
-
 #musicAdd {
   padding-left: 30px;
 }
+<!--END OF MUSIC PAGE-->
 
-.bioPagetext {
-  list-style-type: none;
-  position: relative;
-}
 
-#sortBios {
-  padding-left: 0px;
-}
-
-#previewBioPhoto {
-  display: none;
-  width: auto;
-  height: 120px;
-}
-
-#previewPhotoPage {
-  display: none;
-  width: auto;
-  height: 300px;
-  max-width: 550px;
-}
-
-#meetTheBandUpdateForm {
-  position: relative;
-}
-
-.previewContainer {
-  position: absolute;
-  top: 0px;
-  right: 100px;
-}
-
-#photoEditForm {
-  position: relative;
-}
-
-.editButtonMembers {
-  position: absolute;
-  top: 3px;
-  right: 70px;
-}
-
-.deleteBoxMembers {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-}

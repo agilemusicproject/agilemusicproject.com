@@ -14,7 +14,7 @@
   </form>
 {% endif %}
 {% for row in results %}
-  <p class="agilePageText">{{ row.content|raw }}</p>
+  <p class="pageText">{{ row.content|raw }}</p>
   {% if is_granted('ROLE_ADMIN') %}
     <form>
       <input class="editButton" onclick="location.href='/agile/edit/{{ row.id }}'" type="button" value="Edit"/>
