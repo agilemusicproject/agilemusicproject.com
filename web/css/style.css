@@ -129,6 +129,23 @@ a.imageLink {
   border-color: rgba(255,0,0,.3);
   background-color: white;
   font-weight: normal;
+  font-family: 'Architects Daughter', cursive;
+}
+
+::-webkit-input-placeholder {
+   font-family: sans-serif;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-family: sans-serif;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-family: sans-serif;
+}
+
+:-ms-input-placeholder {
+   font-family: sans-serif;
 }
 
 .bandMemberBio {

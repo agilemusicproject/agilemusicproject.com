@@ -35,7 +35,7 @@
     <img class="defaultBioPhoto" src="/images/question-mark.png" />
     {% endif %}
     <div class="notecard">
-      <h4 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h4>
+      <h3 class="bandMemberTitle">{{ row.roles }}: {{ row.first_name }} {{ row.last_name }}</span></h3>
         {% if not (row.bio is null) %}
           {{ row.bio|raw }}
         {% else %}
