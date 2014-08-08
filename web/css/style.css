@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Questrial);
 @import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700);
 
@@ -192,7 +192,7 @@ body {
   background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
   min-width: 900px;
-  font-family: 'Merriweather', 'sans-serif';
+  font-family: 'Merriweather', serif;
 }
 
 .photosPage {
@@ -235,11 +235,11 @@ body {
 }
 
 .menuPostIt {
-  font-family: 'Architects Daughter';
+  font-family: 'Architects Daughter', cursive;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Questrial';
+  font-family: 'Questrial', sans-serif;
 }
 
 #musicpostcard {
@@ -394,6 +394,7 @@ div.img a:hover img {
 .newsData {
   text-align: right;
   font-size: x-large;
+  font-family: 'Questrial', sans-serif;
 }
 
 #musicAdd {
