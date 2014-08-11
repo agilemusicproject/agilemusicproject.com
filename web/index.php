@@ -2,6 +2,11 @@
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/blog/wp-blog-header.php';
 
+$_POST      = array_map( 'stripslashes_deep', $_POST );
+$_GET       = array_map( 'stripslashes_deep', $_GET );
+$_COOKIE    = array_map( 'stripslashes_deep', $_COOKIE );
+$_REQUEST   = array_map( 'stripslashes_deep', $_REQUEST );
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
