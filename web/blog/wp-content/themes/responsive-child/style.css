@@ -15,7 +15,7 @@ Version: 1.0
 body {
   background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
-  font-family: 'Merriweather', 'sans-serif';
+  font-family: 'Merriweather', serif;
 }
 
 #wrapper {
@@ -84,7 +84,7 @@ body {
   border-bottom: solid;
   border-color: rgba(255,0,0,.3);
   background-color: white;
-  font-family: 'Architects Daughter';
+  font-family: 'Architects Daughter', cursive;
 }
 
 #logocontainer.headernav {
@@ -98,7 +98,7 @@ body {
 }
 
 .menuPostIt {
-  font-family: 'Architects Daughter';
+  font-family: 'Architects Daughter', cursive;
 }
 
 #navLogo {
@@ -136,7 +136,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .post-data, .post-meta {
-    font-family: 'Questrial';
+    font-family: 'Questrial', sans-serif;
 }
 
 @media screen and (max-width: 900px) {
@@ -149,7 +149,7 @@ h1, h2, h3, h4, h5, h6, .post-data, .post-meta {
     min-width: 100px;
     width: auto;
   }
-  
+
   .grid,
   .grid-right {
     float: none;
