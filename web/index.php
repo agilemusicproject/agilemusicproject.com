@@ -89,11 +89,6 @@ $app->get('/', function (Request $request) use ($app) {
 
 $app->get('/login', function (Request $request) use ($app) {
     return $app->redirect('/blog/wp-login.php');
-    if (strpos($request->server->get('HTTP_REFERER'), '/login') === false) {
-        $app['session']->set('lastUrlBeforeClickingLogin', $request->server->get('HTTP_REFERER'));
-    }
-    return $app['twig']->render('login.twig', array('error' => $app['security.last_error']($request),
-                                                    'lastPage' =>  $app['session']->get('lastUrlBeforeClickingLogin')));
 });
 
 $app->get('/checkImage/{filename}', function ($filename, Request $request) use ($app) {

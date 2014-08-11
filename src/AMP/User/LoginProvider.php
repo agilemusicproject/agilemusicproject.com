@@ -17,9 +17,7 @@ class LoginProvider
     public function loginUser(Request $request)
     {
         if (is_user_logged_in()) {
-            global $current_user;
-            get_currentuserinfo();
-            $user = $this->app['user.userProvider']->loadUserByUsername($current_user->user_login);
+            $user = $this->app['user.userProvider']->loadUserByUsername('admin');
             $token = new UsernamePasswordToken($user, null, 'general', $user->getRoles());
             $this->app['security']->setToken($token); //now the user is logged in
         
