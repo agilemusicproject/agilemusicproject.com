@@ -10,4 +10,6 @@ MYSQL_PASSWORD
 MYSQL_DBNAME
 MYSQL_HOST
 
+Automatic Wordpress updates have been disabled, so Wordpress must be udpated manually then pushed.
+
 ![Codeship Status](https://www.codeship.io/projects/8ec68400-c4df-0131-6d9b-120e87d70e60/status)
