@@ -13,3 +13,5 @@ function my_redirect_after_login()
 {
     return '/';
 }
+
+remove_action('wp_head', 'wp_generator');
