@@ -13,13 +13,12 @@
 .pageText {
   max-width: 900px;
   display: table;
-  width: 100%;
 }
 
 textarea {
   vertical-align: top;
   height: 200px;
-  width: 50%;
+  width: 500px;
 }
 
 a.imageLink {
