@@ -15,6 +15,7 @@
 {% block postit %}<canvas id="photospostcard" class="postitheader">Photos</canvas>{% endblock %}
 
 {% block content %}
+<div id="photoGallery">
 {% if is_granted('ROLE_ADMIN') %}
   <form>
     <input class="addButton" onclick="location.href='/photos/add'" type="button" value="Add Photo"/>
@@ -51,5 +52,5 @@
     {% endif %}
   </div>
 {% endfor %}
-
+</div>
 {% endblock %}

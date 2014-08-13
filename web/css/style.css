@@ -15,7 +15,7 @@
   display: table;
 }
 
-#photoEditFormContainer {
+#photoEditFormContainer, #photoGallery {
   width: 900px;
 }
 
