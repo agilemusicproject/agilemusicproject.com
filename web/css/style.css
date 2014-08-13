@@ -15,6 +15,10 @@
   display: table;
 }
 
+#photoEditFormContainer {
+  width: 900px;
+}
+
 textarea {
   vertical-align: top;
   height: 200px;

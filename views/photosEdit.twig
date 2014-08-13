@@ -14,7 +14,7 @@
 {% block header %} {{ title }} Photos {%endblock%}
 
 {% block content %}
-<div>
+<div id="photoEditFormContainer">
   <form id="photoEditForm" method="POST" enctype="multipart/form-data">
     {{ form_errors(form) }}
     {{ form_widget(form) }}
