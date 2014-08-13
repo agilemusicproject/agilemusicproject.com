@@ -420,6 +420,7 @@ div.img a:hover img {
 .bioPagetext {
   list-style-type: none;
   position: relative;
+  width: 900px;
 }
 
 #sortBios {
@@ -427,9 +428,19 @@ div.img a:hover img {
 }
 
 #previewBioPhoto {
-  display: none;
   width: auto;
   height: 120px;
+  display: inline;
+}
+
+#oldBioPhoto {
+  width: auto;
+  height: 120px;
+  display: inline;
+}
+
+#newPreviewLabel {
+  display: none;
 }
 
 #previewPhotoPage {
@@ -447,6 +458,7 @@ div.img a:hover img {
   position: absolute;
   top: 0px;
   right: 100px;
+  display: inline;
 }
 
 #photoEditForm {

@@ -80,11 +80,11 @@ class MeetTheBandController implements ControllerProviderInterface
     private function editAction(Request $request, Application $app, $id)
     {
         $form = $app['forms.meetTheBandEdit'];
-        $form->setData($app['dao.bandMembers']->get($id));
+        $bandMemberData = $app['dao.bandMembers']->get($id);
+        $form->setData($bandMemberData);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $formData = $form->getData();
-            $bandMemberData = $app['dao.bandMembers']->get($id);
             $original_filename = $bandMemberData['photo_filename'];
             if (!is_null($original_filename) && $formData['photo_actions'] != "photo_nothing") {
                 $app['photoUploadManager']->deleteFileAndThumbnail($original_filename);
@@ -117,6 +117,7 @@ class MeetTheBandController implements ControllerProviderInterface
             return $app->redirect('/meettheband');
         }
         return $app['twig']->render('meetTheBandEdit.twig', array('form' => $form->createView(),
+                                                                  'photoName' => $bandMemberData['photo_filename'],
                                                                   'title' => 'Edit'));
     }
 

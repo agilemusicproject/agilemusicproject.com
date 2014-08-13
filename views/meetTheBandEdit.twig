@@ -21,6 +21,11 @@
     {{ form_widget(form) }}
     {{ form_rest(form) }}
     <div class="previewContainer">
+      {% if not photoName is empty %}
+        <label id="oldPreviewLabel">Old:</label>
+        <img id="oldBioPhoto" class="oldPreview" src="/images/photos/thumbnails/thumb_{{ photoName }}" alt="c"/>
+      {% endif %}
+      <label id="newPreviewLabel">New:</label>
       <img id="previewBioPhoto" class="preview" src="#" alt="Cannot find image"/>
     </div>
   </form>
