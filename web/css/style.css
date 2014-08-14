@@ -12,17 +12,18 @@
 
 .pageText {
   max-width: 900px;
+  width: 50%;
   display: table;
 }
 
 #photoEditFormContainer, #photoGallery, #contactForm {
-  width: 900px;
+  width: 100%;
 }
 
 textarea {
   vertical-align: top;
   height: 200px;
-  width: 500px;
+  width: 60%;
 }
 
 a.imageLink {
