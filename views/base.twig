@@ -24,9 +24,11 @@
        {% block postit %}{% endblock %}
       </div>
     </nav>
-    <article class="pageText">
-      <h1 class="title">{% block header %}{% endblock %}</h1>
-      {% block content %} {% endblock %}
-    </article>
+    <div class="pageTextContainer">
+      <article class="pageText">
+        <h1 class="title">{% block header %}{% endblock %}</h1>
+        {% block content %} {% endblock %}
+      </article>
+    </div>
   </body>
 </html>

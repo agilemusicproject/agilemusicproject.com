@@ -10,10 +10,14 @@
   display: none;
 }
 
+.pageTextContainer {
+  width: auto;
+  overflow: hidden;
+}
+
 .pageText {
   max-width: 900px;
   width: 60%;
-  display: table;
 }
 
 #photoEditFormContainer, #photoGallery, #contactForm {
@@ -195,8 +199,9 @@ a.imageLink {
 }
 
 nav {
-  float: left;
   position: relative;
+  display: inline-block;
+  float: left;
 }
 
 #logocontainer.headernav {
