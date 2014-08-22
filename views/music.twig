@@ -1,14 +1,16 @@
 {% extends "base.twig" %}
 
-{% block onload %} drawMusicPostNote() {% endblock %}
-
 {% block title %} Our Music {% endblock %}
 
 {% block javascript %}
 <script src="/js/sort-music.js"></script>
 {% endblock %}
 
-{% block postit %}<canvas id="musicpostcard" class="postitheader">Our Music</canvas>{% endblock %}
+{% block postit %}
+  <div id="musicpostcard" class="postitheader">
+    <div class="postitText">Our Music</div>
+  </div>
+{% endblock %}
 
 {% block header %}Our Music{%endblock%}
 

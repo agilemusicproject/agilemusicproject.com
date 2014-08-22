@@ -235,7 +235,8 @@ body {
 }
 
 .postitheader {
-  width: 200px;
+  width: 175px;
+  height: 131px;
 }
 
 #menu_parent {
@@ -340,9 +341,103 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 247px 185px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1500px) {
+
+  #bgLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20%;
+    min-width: 250px;
+  }
+
+  .postitText {
+    position: absolute;
+    top: 25px;
+    left: 45px;
+    color: black;
+    font-size: 17px;
+  }
+
+  .postit {
+    display: block;
+    width: 175px;
+    height: 131px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  #musicpostcard {
+    top: 110%;
+    left: 40%;
+    transform: translate(-87.5px,-65.5px) rotate(-10deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v16.png);
+    background-size: 175px 131px;
+  }
+
+  #contactuspostcard {
+    top: 30%;
+    right: 3%;
+    transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v25.png);
+    background-size: 175px 131px;
+  }
+
+  #agilepostcard {
+    top:  5%;
+    left: 20%;
+    transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v24.png);
+    background-size: 175px 131px;
+  }
+
+  #meetTheBandpostcard {
+    top: 80%;
+    left: 5%;
+    transform: translate(-87.5px,-65.5px) rotate(15deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v23.png);
+    background-size: 175px 131px;
+  }
+
+  #photospostcard {
+    top: 5%;
+    right: 20%;
+    transform: translate(-87.5px,-65.5px) rotate(4.5deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v21.png);
+    background-size: 175px 131px;
+  }
+
+  #blogpostcard {
+    top: 100%;
+    right: 30%;
+    transform: translate(-87.5px,-65.5px) rotate(4.5deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v14.png);
+    background-size: 175px 131px;
+    margin-left: 2.5%;
+  }
+
+  #newspostcard {
+    top: 120%;
+    left: 23%;
+    transform: translate(-87.5px,-65.5px) rotate(-8deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v15.png);
+    background-size: 175px 131px;
+  }
+
+  #aboutpostcard {
+    top: 130%;
+    right: 12%;
+    transform: translate(-87.5px,-65.5px) rotate(17deg) translate(87.5px,65.5px);
+    background: url(/images/sticky-notes_v10.png);
+    background-size: 175px 131px;
+  }
+}
+
+
+@media screen and (max-width: 1000px) {
   body {
-    min-width: 500px;
+    min-width: 600px;
   }
 
   #bgLogo {
