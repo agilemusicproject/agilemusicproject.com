@@ -266,7 +266,6 @@ body {
   display: inline-block;
   position: absolute;
   top: 0;
-  background-size: 247px 185px;
 }
 
 .menuPostIt {
@@ -370,6 +369,12 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     position: absolute;
     top: 0;
+  }
+
+  #musicpostcard {
+    top: 110%;
+    left: 40%;
+    transform: translate(-77.5px,-58.5px) rotate(-10deg) translate(77.5px,58.5px);
     background: url(/images/sticky-notes_v16.png);
     background-size: 155px 117px;
   }
@@ -377,37 +382,58 @@ h1, h2, h3, h4, h5, h6 {
   #contactuspostcard {
     top: 80%;
     right: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(-7deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v25.png);
+    background-size: 155px 117px;
   }
 
   #agilepostcard {
     top:  -2%;
     left: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(-7deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v24.png);
+    background-size: 155px 117px;
   }
 
   #meetTheBandpostcard {
     top: 80%;
     left: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(15deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v23.png);
+    background-size: 155px 117px;
   }
 
   #photospostcard {
     top: 2%;
     right: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(4.5deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v21.png);
+    background-size: 155px 117px;
   }
 
   #blogpostcard {
     top: 180%;
     left: 35%;
+    transform: translate(-77.5px,-58.5px) rotate(4.5deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v14.png);
+    background-size: 155px 117px;
     margin-left: 2.5%;
   }
 
   #newspostcard {
     top: 180%;
     left: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(-8deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v15.png);
+    background-size: 155px 117px;
   }
 
   #aboutpostcard {
     top: 180%;
     right: 10%;
+    transform: translate(-77.5px,-58.5px) rotate(17deg) translate(77.5px,58.5px);
+    background: url(/images/sticky-notes_v10.png);
+    background-size: 155px 117px;
   }
 }
 
