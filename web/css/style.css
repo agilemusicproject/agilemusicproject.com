@@ -251,13 +251,22 @@ body {
   min-width: 250px;
 }
 
+.postitText {
+  position: absolute;
+  top: 50px;
+  left: 75px;
+  color: black;
+  font-size: 20px;
+}
+
 .postit {
   display: block;
-  width: 15%;
-  min-width: 175px;
+  width: 247px;
+  height: 185px;
   display: inline-block;
   position: absolute;
   top: 0;
+  background-size: 247px 185px;
 }
 
 .menuPostIt {
@@ -271,41 +280,65 @@ h1, h2, h3, h4, h5, h6 {
 #musicpostcard {
   top: 110%;
   left: 40%;
+  transform: translate(-123.5px,-92.5px) rotate(-10deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v16.png);
+  background-size: 247px 185px;
 }
 
 #agilepostcard {
   top: 5%;
   left: 20%;
+  transform: translate(-123.5px,-92.5px) rotate(-7deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v24.png);
+  background-size: 247px 185px;
 }
 
 #meetTheBandpostcard {
   top: 80%;
   left: 5%;
+  transform: translate(-123.5px,-92.5px) rotate(15deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v23.png);
+  background-size: 247px 185px;
 }
 
 #photospostcard {
   top: 5%;
   right: 20%;
+  transform: translate(-123.5px,-92.5px) rotate(4.5deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v21.png);
+  background-size: 247px 185px;
 }
 
 #blogpostcard {
   top: 100%;
   right: 30%;
+  transform: translate(-123.5px,-92.5px) rotate(4.5deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v14.png);
+  background-size: 247px 185px;
 }
 
 #contactuspostcard {
   top: 30%;
   right: 3%;
+  transform: translate(-123.5px,-92.5px) rotate(-7deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v25.png);
+  background-size: 247px 185px;
 }
 
 #newspostcard {
   top: 120%;
   left: 23%;
+  transform: translate(-123.5px,-92.5px) rotate(-8deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v15.png);
+  background-size: 247px 185px;
 }
 
 #aboutpostcard {
   top: 130%;
   right: 12%;
+  transform: translate(-123.5px,-92.5px) rotate(17deg) translate(123.5px,92.5px);
+  background: url(/images/sticky-notes_v10.png);
+  background-size: 247px 185px;
 }
 
 @media screen and (max-width: 900px) {
@@ -322,13 +355,23 @@ h1, h2, h3, h4, h5, h6 {
     top: 10px;
   }
 
+  .postitText {
+    position: absolute;
+    top: 25px;
+    left: 40px;
+    color: black;
+    font-size: 15px;
+  }
+
   .postit {
     display: block;
-    width: 20%;
-    min-width: 150px;
+    width: 155px;
+    height: 117px;
     display: inline-block;
     position: absolute;
     top: 0;
+    background: url(/images/sticky-notes_v16.png);
+    background-size: 155px 117px;
   }
 
   #contactuspostcard {

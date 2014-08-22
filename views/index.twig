@@ -6,8 +6,9 @@
     <title>Index</title>
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/post-note.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   </head>
-  <body onload="drawIndexPage()" id="index_body">
+  <body id="index_body">
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
       <a href="{{ path('admin_logout') }}">Logout</a>
     {% endif %}
@@ -15,29 +16,45 @@
       <img src="images/AMP-Logo.png" alt="AMP Logo" id="bgLogo" />
       <div class="menuPostIt" id="menu">
         <a id="musiclink" href="/music">
-          <canvas id="musicpostcard" class="postit">Our Music</canvas>
+          <div id="musicpostcard" class="postit">
+            <div class="postitText">Our Music</div>
+          </div>
         </a>
         <a id="agilelink" href="/agile">
-          <canvas id="agilepostcard" class="postit">About Agile</canvas>
+          <div id="agilepostcard" class="postit">
+            <div class="postitText">About Agile</div>
+          </div>
         </a>
         <a id="meetTheBandlink" href="/meettheband">
-          <canvas id="meetTheBandpostcard" class="postit">Meet the Band</canvas>
+          <div id="meetTheBandpostcard" class="postit">
+            <div class="postitText">Meet<br> the Band</div>
+          </div>
         </a>
         <a id="photoslink" href="/photos">
-          <canvas id="photospostcard" class="postit">Photos</canvas>
-        </a>
+          <div id="photospostcard" class="postit">
+            <div class="postitText">Photos</div>
+          </div>
+          </a>
         <a id="bloglink" href="/blog">
-          <canvas id="blogpostcard" class="postit">Blog</canvas>
+          <div id="blogpostcard" class="postit">
+            <div class="postitText">Blog</div>
+          </div>
         </a>
         <a id="contactuslink" href="/contactus">
-          <canvas id="contactuspostcard" class="postit">Contact Us</canvas>
-        </a>
+          <div id="contactuspostcard" class="postit">
+            <div class="postitText">Contact Us</div>
+          </div>
+          </a>
         <a id="aboutlink" href="/about">
-          <canvas id="aboutpostcard" class="postit">About Us</canvas>
-        </a>
+          <div id="aboutpostcard" class="postit">
+            <div class="postitText">About Us</div>
+          </div>
+          </a>
         <a id="newslink" href="/news">
-          <canvas id="newspostcard" class="postit">Our News</canvas>
-        </a>
+          <div id="newspostcard" class="postit">
+            <div class="postitText">Our News</div>
+          </div>
+          </a>
       </div>
     </div>
   </body>
