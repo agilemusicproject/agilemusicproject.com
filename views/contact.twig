@@ -4,11 +4,13 @@
   <script src="/js/contact-us.js"></script>
 {% endblock %}
 
-{% block onload %} drawContactPostNote() {% endblock %}
-
 {% block title %} Contact Us {% endblock %}
 
-{% block postit %}<canvas id="contactuspostcard" class="postitheader">Contact Us</canvas>{% endblock %}
+{% block postit %}
+  <div id="contactUsHeader" class="postitheader">
+    <div class="postitHeaderText">Contact Us</div>
+  </div>
+{% endblock %}
 
 {% block header %}Contact AMP{%endblock%}
 

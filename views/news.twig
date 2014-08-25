@@ -1,10 +1,12 @@
 {% extends "base.twig" %}
 
-{% block onload %} drawNewsPostNote() {% endblock %}
-
 {% block title %} Latest News {% endblock %}
 
-{% block postit %}<canvas id="newspostcard" class="postitheader">Our News</canvas>{% endblock %}
+{% block postit %}
+  <div id="newsHeader" class="postitheader">
+    <div class="postitHeaderText">Our News</div>
+  </div>
+{% endblock %}
 
 {% block header %} Latest News {%endblock%}
 

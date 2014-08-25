@@ -1,14 +1,16 @@
 {% extends "base.twig" %}
 
-{% block onload %} drawBandPostNote() {% endblock %}
-
 {% block title %} Meet the Band {% endblock %}
 
 {% block javascript %}
 <script src="/js/sort-bios.js"></script>
 {% endblock %}
 
-{% block postit %}<canvas id="meetTheBandpostcard" class="postitheader">Meet the Band</canvas>{% endblock %}
+{% block postit %}
+  <div id="meetTheBandHeader" class="postitheader">
+    <div class="postitHeaderText">Meet<br>the Band</div>
+  </div>
+{% endblock %}
 
 {% block header %}Meet the Band{%endblock%}
 

@@ -277,6 +277,67 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Questrial', sans-serif;
 }
 
+/*POST-IT HEADERS FOR PAGES THAT ARE NOT THE INDEX PAGE*/
+
+.postitHeaderText {
+    position: absolute;
+    top: 25px;
+    left: 45px;
+    color: black;
+    font-size: 17px;
+}
+
+#musicHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-10deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v16.png);
+  background-size: 175px 131px;
+}
+
+#contactUsHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v25.png);
+  background-size: 175px 131px;
+}
+
+#agileHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v24.png);
+  background-size: 175px 131px;
+}
+
+#meetTheBandHeader {
+  transform: translate(-87.5px,-65.5px) rotate(15deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v23.png);
+  background-size: 175px 131px;
+}
+
+#photoHeader {
+  transform: translate(-87.5px,-65.5px) rotate(4.5deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v21.png);
+  background-size: 175px 131px;
+}
+
+#blogHeader {
+  transform: translate(-87.5px,-65.5px) rotate(4.5deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v14.png);
+  background-size: 175px 131px;
+  margin-left: 2.5%;
+}
+
+#newsHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-8deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v15.png);
+  background-size: 175px 131px;
+}
+
+#aboutHeader {
+  transform: translate(-87.5px,-65.5px) rotate(17deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v10.png);
+  background-size: 175px 131px;
+}
+
+/*POST-IT FOR INDEX PAGE. SCREEN SIZE GREATER THAN 1500px*/
+
 #musicpostcard {
   top: 110%;
   left: 40%;

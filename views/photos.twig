@@ -8,11 +8,13 @@
 <script type="text/javascript" src="/js/photo-gallery.js"></script>
 {% endblock %}
 
-{% block onload %} drawPhotosPostNote() {% endblock %}
-
 {% block title %} Photos {% endblock %}
 
-{% block postit %}<canvas id="photospostcard" class="postitheader">Photos</canvas>{% endblock %}
+{% block postit %}
+  <div id="photoHeader" class="postitheader">
+    <div class="postitHeaderText">Photos</div>
+  </div>
+{% endblock %}
 
 {% block content %}
 <div id="photoGallery">

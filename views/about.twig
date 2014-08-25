@@ -1,10 +1,12 @@
 {% extends "base.twig" %}
 
-{% block onload %} drawAboutPostNote() {% endblock %}
-
 {% block title %} About {% endblock %}
 
-{% block postit %}<canvas id="aboutpostcard" class="postitheader">About Us</canvas>{% endblock %}
+{% block postit %}
+  <div id="aboutHeader" class="postitheader">
+    <div class="postitHeaderText">About Us</div>
+  </div>
+{% endblock %}
 
 {% block header %} The Agile Music Project - AMP {%endblock%}
 
