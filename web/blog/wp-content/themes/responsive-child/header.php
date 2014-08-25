@@ -41,19 +41,20 @@ if( !defined( 'ABSPATH' ) ) {
         <link rel="profile" href="http://gmpg.org/xfn/11"/>
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 
-        <script type="text/javascript" src="/js/post-note.js"></script>
         <?php wp_head(); ?>
         <script type="text/javascript" src="/js/img-margin.js"></script>
     </head>
 
-<body <?php body_class(); ?> onload="drawBlogPostNote()">
+<body <?php body_class(); ?> >
 
 <nav id="blogNav">
   <div class="headernav" id="logocontainer">
     <a href="/"><img src="/images/AMP-Logo.png" alt="Index Page" id="navLogo" /></a>
   </div>
   <div class="headernav menuPostIt" id="postitcontainer">
-   <canvas id="blogpostcard" class="postitheader" >Blog</canvas>
+    <div id="blogHeader" class="postitheader">
+        <div class="postitHeaderText">Blog</div>
+    </div>
   </div>
 </nav>
 
