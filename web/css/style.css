@@ -390,10 +390,18 @@ div.img a:hover img {
   background: url(/images/sticky-notes_v16.png);
 }
 
+<<<<<<< HEAD
 #contactUsHeader {
   transform: rotate(-7deg);
   background: url(/images/sticky-notes_v25.png);
 }
+||||||| merged common ancestors
+#contactUsHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v25.png);
+}
+=======
+>>>>>>> integration
 
 #agileHeader {
   transform: rotate(-7deg);
@@ -415,6 +423,11 @@ div.img a:hover img {
   background: url(/images/sticky-notes_v14.png);
 }
 
+#contactUsHeader {
+  transform: translate(-87.5px,-65.5px) rotate(-7deg) translate(87.5px,65.5px);
+  background: url(/images/sticky-notes_v25.png);
+}
+
 #newsHeader {
   transform: rotate(-8deg);
   background: url(/images/sticky-notes_v15.png);
@@ -423,4 +436,15 @@ div.img a:hover img {
 #aboutHeader {
   transform: rotate(17deg);
   background: url(/images/sticky-notes_v10.png);
+<<<<<<< HEAD
 }
+||||||| merged common ancestors
+}
+=======
+}
+
+#musicHeader, #agileHeader, #meetTheBandHeader, #photoHeader, #blogHeader, #contactUsHeader, #newHeader,
+  #aboutHeader {
+    background-size: 150px 150px;
+}
+>>>>>>> integration

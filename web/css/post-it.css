@@ -74,10 +74,14 @@
   right: 12%;
   transform:  rotate(17deg);
   background: url(/images/sticky-notes_v10.png);
-
 }
 
-@media screen and (max-width: 1300px) {
+#musicpostcard, #agilepostcard, #meetTheBandpostcard, #photospostcard, #blogpostcard, #contactuspostcard, #newspostcard,
+  #aboutpostcard {
+    background-size: 200px 200px;
+}
+
+@media screen and (max-width: 1400px) {
 
   #bgLogo {
     display: block;
@@ -101,7 +105,6 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-size: 150px 150px;
   }
 
   #musicpostcard {
@@ -159,6 +162,12 @@
     transform:  rotate(17deg);
     background: url(/images/sticky-notes_v10.png);
   }
+  
+  #musicpostcard, #agilepostcard, #meetTheBandpostcard, #photospostcard, #blogpostcard, #contactuspostcard, #newspostcard,
+  #aboutpostcard {
+    background-size: 150px 150px;
+  }
+
 }
 
 
@@ -190,7 +199,6 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-size: 125px 125px;
   }
 
   #musicpostcard {
@@ -248,5 +256,10 @@
     right: 10%;
     transform: rotate(17deg);
     background: url(/images/sticky-notes_v10.png);
+  }
+  
+  #musicpostcard, #agilepostcard, #meetTheBandpostcard, #photospostcard, #blogpostcard, #contactuspostcard, #newspostcard,
+  #aboutpostcard {
+    background-size: 125px 125px;
   }
 }
