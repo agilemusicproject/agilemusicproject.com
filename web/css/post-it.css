@@ -1,5 +1,5 @@
 .postitText {
-  padding-top: 40px;
+  padding-top: 20%;
   color: black;
   font-size: 23px;
 }
@@ -92,7 +92,7 @@
   }
 
   .postitText {
-    padding-top: 40px;
+    padding-top: 20%;
     color: black;
     font-size: 20px;
   }
@@ -186,7 +186,7 @@
   }
 
   .postitText {
-    padding-top: 40px;
+    padding-top: 20%;
     color: black;
     font-size: 17px;
   }

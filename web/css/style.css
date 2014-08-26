@@ -373,7 +373,7 @@ div.img a:hover img {
 /*POST-IT HEADERS FOR PAGES THAT ARE NOT THE INDEX PAGE*/
 
 .postitHeaderText {
-    padding-top: 40px;
+    padding-top: 20%;
     color: black;
     font-size: 20px;
     font-family: 'Architects Daughter', cursive;
