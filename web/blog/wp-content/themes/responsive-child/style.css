@@ -129,7 +129,7 @@ body {
 }
 
 #blogHeader {
-  transform: translate(-87.5px,-65.5px) rotate(4.5deg) translate(87.5px,65.5px);
+  transform: rotate(4.5deg);
   background: url(/images/sticky-notes_v14.png);
   background-size: 175px 131px;
 }
