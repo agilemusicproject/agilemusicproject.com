@@ -116,22 +116,21 @@ body {
 }
 
 .postitheader {
-  width: 175px;
-  height: 131px;
+  text-align: center;
+  margin-left: 10px;
+  width: 150px;
+  height: 150px;
 }
 
 .postitHeaderText {
-    position: absolute;
-    top: 25px;
-    left: 45px;
-    color: black;
-    font-size: 17px;
+  padding-top: 40px;
+  color: black;
+  font-size: 20px;
 }
 
 #blogHeader {
   transform: rotate(4.5deg);
   background: url(/images/sticky-notes_v14.png);
-  background-size: 175px 131px;
 }
 
 #container {
