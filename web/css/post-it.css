@@ -162,7 +162,7 @@
     transform:  rotate(17deg);
     background: url(/images/sticky-notes_v10.png);
   }
-  
+
   #musicpostcard, #agilepostcard, #meetTheBandpostcard, #photospostcard, #blogpostcard, #contactuspostcard, #newspostcard,
   #aboutpostcard {
     background-size: 150px 150px;
@@ -257,7 +257,7 @@
     transform: rotate(17deg);
     background: url(/images/sticky-notes_v10.png);
   }
-  
+
   #musicpostcard, #agilepostcard, #meetTheBandpostcard, #photospostcard, #blogpostcard, #contactuspostcard, #newspostcard,
   #aboutpostcard {
     background-size: 125px 125px;
