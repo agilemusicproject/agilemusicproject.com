@@ -1,7 +1,7 @@
 .postitText {
-  padding-top: 20%;
+  padding: 20% 10%;
   color: black;
-  font-size: 23px;
+  font-size: 1.5em;
 }
 
 .postit {
@@ -91,12 +91,6 @@
     min-width: 250px;
   }
 
-  .postitText {
-    padding-top: 20%;
-    color: black;
-    font-size: 20px;
-  }
-
   .postit {
     text-align: center;
     display: block;
@@ -183,12 +177,6 @@
     max-width: 30%;
     min-width: 150px;
     top: 10px;
-  }
-
-  .postitText {
-    padding-top: 20%;
-    color: black;
-    font-size: 17px;
   }
 
   .postit {
