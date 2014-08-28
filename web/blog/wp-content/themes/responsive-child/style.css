@@ -16,6 +16,7 @@ body {
   background: url(/images/whiteboard_v3.png) no-repeat center center fixed;
   background-size: cover;
   font-family: 'Merriweather', serif;
+  min-width: 900px;
 }
 
 #wrapper {
@@ -132,6 +133,12 @@ body {
 #blogHeader {
   transform: rotate(4.5deg);
   background: url(/images/sticky-notes_v14.png);
+}
+
+#dropBelowFix {
+  display: block;
+  width: auto;
+  overflow: hidden;
 }
 
 #container {

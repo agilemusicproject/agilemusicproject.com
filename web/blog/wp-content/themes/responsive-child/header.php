@@ -59,6 +59,7 @@ if( !defined( 'ABSPATH' ) ) {
 </nav>
 
 <?php responsive_container(); // before container hook ?>
+<div id ="dropBelowFix">
 <div id="container" class="hfeed">
 
 
