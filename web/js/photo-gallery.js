@@ -33,7 +33,7 @@ $(document).ready(function() {
                 .not(":visible")
                 .fadeIn()
             : // otherwise
-                $(".fancybox, .caption, .photoCotainer")
+                $(".fancybox, .caption, .photoContainer")
                 .fadeOut(0)
                 .filter(function () {
                     // set data-filter value as the data-rel value of selected tab
