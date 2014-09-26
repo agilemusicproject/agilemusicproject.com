@@ -28,7 +28,7 @@ $(document).ready(function() {
             var $filter = $this.data("rel");
             // if we select view all, return to initial settings and show all
             $filter == 'all' ?
-                $(".fancybox, .caption, .photoCotainer")
+                $(".fancybox, .caption, .photoContainer")
                 .attr("data-fancybox-group", "gallery")
                 .not(":visible")
                 .fadeIn()
