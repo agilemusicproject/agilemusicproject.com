@@ -180,11 +180,11 @@ h1, h2, h3, h4, h5, h6, .post-data, .post-meta {
 
 /* Series list styling*/
 .post-series-list {
-    background: url(/images/blue-sticky.png);
+    background: url(/images/blue-sticky.png) no-repeat;
     font-size: 10px;
     width: 150px;
     height: 116px;
-    display: inline;
+    display: inline-block;
     float: right;
 }
 
