@@ -430,9 +430,3 @@ div.img a:hover img {
   #aboutHeader {
     background-size: 150px 150px;
 }
-
-/* Series list styling*/
-.post-series-list {
-    background-color: gold;
-    font-size: 10px;
-}
