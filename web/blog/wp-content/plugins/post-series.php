@@ -109,4 +109,13 @@ function series_sc($atts) {
 	}
 } add_shortcode('series','series_sc');
 
+function add_series_shortcode_to_series_posts ( $content ) {
+  global $post;
+  if ( is_object_in_term( $post->ID, 'series' ) ) {
+    return '[series]' . $content;
+  } else { 
+    return $content;
+  }
+} add_filter( 'the_content', 'add_series_shortcode_to_series_posts' );
+
 ?>
