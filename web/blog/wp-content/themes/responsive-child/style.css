@@ -186,6 +186,16 @@ h1, h2, h3, h4, h5, h6, .post-data, .post-meta {
     height: 116px;
     display: inline-block;
     float: right;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.post-series-list li {
+    width: 130px;
+}
+
+.clear-both {
+    clear: both;
 }
 
 /*The last 29 days of the month are the hardest."- Nikola Tesla*/

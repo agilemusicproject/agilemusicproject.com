@@ -112,7 +112,7 @@ function series_sc($atts) {
 function add_series_shortcode_to_series_posts ( $content ) {
   global $post;
   if ( is_object_in_term( $post->ID, 'series' ) ) {
-    return '[series]' . $content;
+    return '[series]' . $content . '<div class="clear-both"></div>';
   } else { 
     return $content;
   }
