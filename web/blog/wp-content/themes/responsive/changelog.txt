@@ -8,6 +8,51 @@ Changelog Legend:
 [x] = Deleted
 [!] = Bugs
 
+(10/05/14) - Improvements - Version 1.9.7.5
+[+] - Added new plugin suggestion.
+[!] - Fix on turkish translation.
+
+(10/05/14) - Improvements - Version 1.9.7.5
+
+[*] Minify all backend scripts and styles
+[*] Improve comply to coding standards
+[*] Run css through csscomb
+
+----
+
+(09/20/14) - Improvements - Version 1.9.7.4
+
+[+] Added `get_post_type()` to all `get_template_part()` so that CPT can have a differnt template in the child theme.
+[*] Improve comply to coding standards
+[*] Update Translations
+
+----
+
+(09/06/14) - Improvements - Version 1.9.7.3
+
+[+] Add iFeatured Slider as recommended plugin
+[*] Escape variables to improve security
+[*] Small code improvements
+
+----
+
+(08/24/14) - Improvements - Version 1.9.7.2
+
+[!] Fix stray p tag in activation notice
+[+] Add wrapper for Breadcrumb NavXT
+[+] Define content width depending on page template
+
+----
+
+(08/10/14) - Improvements - Version 1.9.7.1
+
+[*] Improve the organisation of the functions
+[*] Clean up code
+[!] Fix screen reader link
+[+] Add filter `responsive_number_footer_widgets` to change when the `fit` class is added in the footer widgets.
+
+----
+
 (07/25/14) - Improvements - Version 1.9.7.0
 
 [!] Improve Responsive Grid

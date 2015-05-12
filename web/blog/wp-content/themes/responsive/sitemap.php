@@ -1,7 +1,7 @@
 <?php
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) {
+if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -25,9 +25,9 @@ Template Name: Sitemap
 
 <div id="content-sitemap" class="grid col-940">
 
-	<?php get_template_part( 'loop-header' ); ?>
+	<?php get_template_part( 'loop-header', get_post_type() ); ?>
 
-	<?php if( have_posts() ) : ?>
+	<?php if ( have_posts() ) : ?>
 
 		<?php while( have_posts() ) : the_post(); ?>
 
@@ -55,7 +55,7 @@ Template Name: Sitemap
 
 						<div class="grid col-300 fit">
 							<div class="widget-title"><h3><?php _e( 'Pages', 'responsive' ); ?></h3></div>
-							<ul><?php wp_list_pages( "title_li=" ); ?></ul>
+							<ul><?php wp_list_pages( 'title_li=' ); ?></ul>
 						</div><!-- end of .col-300 fit -->
 
 					</div><!-- end of #widgets -->
@@ -68,11 +68,11 @@ Template Name: Sitemap
 		<?php
 		endwhile;
 
-		get_template_part( 'loop-nav' );
+		get_template_part( 'loop-nav', get_post_type() );
 
 	else :
 
-		get_template_part( 'loop-no-posts' );
+		get_template_part( 'loop-no-posts', get_post_type() );
 
 	endif;
 	?>
