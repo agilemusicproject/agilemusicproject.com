@@ -2,4 +2,4 @@
 
 Welcome to the blog!
 
-{% post_url test %}
+[Link to a test page!](test.md)
