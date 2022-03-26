@@ -18,7 +18,7 @@
         "behat/mink-extension": "v1.3.3",
         "behat/mink-goutte-driver": "1.0.9",
         "symfony/dom-crawler": "2.4.4",
-        "squizlabs/php_codesniffer": "1.5.3"
+        "squizlabs/php_codesniffer": "2.8.1"
     },
     "autoload": {
         "psr-4": {"AMP\\": ["src/AMP", "test/AMP"]}
